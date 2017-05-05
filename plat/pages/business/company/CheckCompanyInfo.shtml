@@ -1,0 +1,349 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<!--预加载动画-->
+	<div class="fakeloader"></div>
+	<!--/预加载动画-->
+	<!-- Main content -->
+	<section class="content">
+		<!--头部S-->
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box width_70">
+					<div class="box-header">
+						<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">公司<small>--详情</small></h3>
+						<div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
+							<button class="btn btn-default pull-right" onclick="storeManagementBack()">返回</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--头部E-->
+		<div class="box width_70">
+			<div class="box-body">
+				<form class="bs-example-form form-horizontal formCss" role="form" method="post" novalidate="novalidate" id='companyInfo_addform'>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label' for="">公司全称</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="check_enterpriseFullName" class="form-control" name="enterpriseFullName" aria-describedby="basic-addon1" maxlength='12' required disabled="disabled">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label' for="">公司简称</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="check_enterpriseSimpleName" class="form-control" name="enterpriseSimpleName" aria-describedby="basic-addon1" maxlength='12' required disabled="disabled">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label' for="">公司代码</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="check_enterpriseCode" class="form-control" name="enterpriseCode" aria-describedby="basic-addon1" maxlength='12' required disabled="disabled">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label' for="">公司地址</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 paddding_left_0px">
+								<select class="prov form-control" id="check_prov" name="provinceId" disabled="disabled">
+								</select>
+							</div>
+							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pading_0px">
+								<select class="city form-control" id="check_city"  name="cityId" disabled="disabled">
+								</select>
+							</div>
+							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 paddding_right_0px">
+								<select class="dist form-control" id="check_dist" name="areaId" id="areaIdInfo" disabled="disabled">
+								</select>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label' for="">详细地址</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="check_enterpriseAddress" class="form-control" name="enterpriseAddress" aria-describedby="basic-addon1" required disabled="disabled">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label' for="">企业法人</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="check_enterpriceLicensePerson" class="form-control" name="enterpriceLicensePerson" aria-describedby="basic-addon1" required disabled="disabled">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label' for="">营业执照注册号</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="check_enterpriceLicenseNo" class="form-control" name="enterpriceLicenseNo" aria-describedby="basic-addon1" maxlength='12' required disabled="disabled">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label' for="">联系人</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="check_enterpriseConnEmpName" name='customerInfoName' class="form-control" aria-describedby="basic-addon1" required disabled="disabled">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label' for="">联系电话</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="check_enterpriseConnEmpPhone" name='customerInfoPhone' class="form-control" aria-describedby="basic-addon1" required disabled="disabled">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label' for="">联系邮箱</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="check_enterpriseConnEmpEmail" name='customerInfoEmail' class="form-control" aria-describedby="basic-addon1" required disabled="disabled">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label' for="">身份证号</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="check_enterpriseConnEmpIdCard" name='customerInfoIdentityNumber' class="form-control" aria-describedby="basic-addon1" required disabled="disabled">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label' for="">营业执照图片</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<div class="file-preview">
+								<div class=" file-drop-zone">
+									<div id="check_Licenceimg">
+									</div>
+									<div class="clear"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label' for="">开户许可证图片</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<div class="file-preview">
+								<div class=" file-drop-zone">
+									<div id="check_openingimg">
+									</div>
+									<div class="clear"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="row">
+				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2 user_power_btn">
+					<button type="button" onclick="storeManagementBack()" class="btn btn-default">返回</button>
+				</div>
+			</div>
+		</div>
+	</section>
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<script src="/plat/js/create/httpRequest.js"></script>
+	<script src="/plat/js/create/contentPublic.js"></script>
+	<script src="/plat/js/plugins/fileinput.js"></script>
+	<script src="/plat/js/plugins/fileinput_locale_zh.js"></script>
+	<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			check_companyInfo();
+		})
+		$("#check_Licenceimg >.float_left>.position_absolute").each(function() {
+			$(this).hover(function() {
+				$(this).animate({
+					width: 300,
+					height: 300,
+					top: -10,
+					left: 100
+				}, 500);
+				$(this).css("z-index", 999);
+				$(this).parent().removeClass("store_img_borderdiv ");
+			}, function() {
+				$(this).animate({
+					width: 250,
+					height: 250,
+					top: 0,
+					left: 125
+				}, 500);
+				$(this).css("z-index", 0);
+				$(this).parent().addClass("store_img_borderdiv ");
+			});
+		});
+		$("#check_openingimg >.float_left>.position_absolute").each(function() {
+			$(this).hover(function() {
+				$(this).animate({
+					width: 300,
+					height: 300,
+					top: -10,
+					left: 100
+				}, 500);
+				$(this).css("z-index", 999);
+				$(this).parent().removeClass("store_img_borderdiv ");
+			}, function() {
+				$(this).animate({
+					width: 250,
+					height: 250,
+					top: 0,
+					left: 125
+				}, 500);
+				$(this).css("z-index", 0);
+				$(this).parent().addClass("store_img_borderdiv ");
+			});
+		});
+		//	公司信息回显
+		function check_companyInfo() {
+			var thisURL = document.URL;
+			var getval = thisURL.split('?')[1];
+			var judgeParam = getval.split("=")[1];
+			$('#check_companyinput_hid').val(judgeParam);
+			var param = {
+				"enterpriseId": judgeParam
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(company_getEnterpriseById_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				var check_enterpriseFullName = $('#check_enterpriseFullName').val(reqResult.data.enterpriseFullName);
+				var check_enterpriseSimpleName = $('#check_enterpriseSimpleName').val(reqResult.data.enterpriseSimpleName);
+				var check_enterpriseCode = $('#check_enterpriseCode').val(reqResult.data.enterpriseCode);
+				var check_enterpriceLicenseNo = $('#check_enterpriceLicenseNo').val(reqResult.data.enterpriceLicenseNo);
+				var check_enterpriceLicensePerson = $('#check_enterpriceLicensePerson').val(reqResult.data.enterpriceLicensePerson);
+				var check_enterpriseAddress = $('#check_enterpriseAddress').val(reqResult.data.enterpriseAddress);
+				var check_enterpriseConnEmpName = $('#check_enterpriseConnEmpName').val(reqResult.data.customerInfoName);
+				var check_enterpriseConnEmpPhone = $('#check_enterpriseConnEmpPhone').val(reqResult.data.customerInfoPhone);
+				var check_enterpriseConnEmpEmail = $('#check_enterpriseConnEmpEmail').val(reqResult.data.customerInfoEmail);
+				var check_enterpriseConnEmpIdCard = $('#check_enterpriseConnEmpIdCard').val(reqResult.data.customerInfoIdentityNumber);
+				//初始化省份
+				prov_init();
+				//				定义省份
+				$('#check_prov').val(reqResult.data.provinceId);
+				//				初始化城市
+				prov_city(reqResult.data.provinceId);
+				//				定义城市
+				$('#check_city').val(reqResult.data.cityId);
+				//				初始化区县
+				city_town(reqResult.data.cityId);
+				//				定义区县
+				$('#check_dist').val(reqResult.data.AreaId);
+				if(reqResult.data.enterpriceLicenseImgId != '') {
+					$('#check_Licenceimg').empty();
+					var str_Licence = '';
+					str_Licence = '<div id="' + reqResult.data.enterpriceLicenseImgId + '" class="float_left store_img_borderdiv position_relative"><div class="position_absolute" style="background-image:url(' + platIp + reqResult.data.enterpriseLicenseImgUrl + ');"></div></div>';
+				} else {
+					str_Licence = "<span>" + '无图片上传，可在编辑里上传图片！' + "</span>";
+				}
+				$("#check_Licenceimg").append(str_Licence);
+				if(reqResult.data.enterpriceLicenseOpenImgId != '') {
+					$('#check_openingimg').empty();
+					var str_opening = '';
+					str_opening = '<div id="' + reqResult.data.enterpriceLicenseOpenImgId + '" class="float_left store_img_borderdiv position_relative"><div class="position_absolute" style="background-image:url(' + platIp + reqResult.data.enterpriseLicenseOpenImgUrl + ');"></div></div>';
+				} else {
+					str_opening = "<span>" + '无图片上传，可在编辑里上传图片！' + "</span>";
+				}
+				$("#check_openingimg").append(str_opening);
+
+			} else {
+				alert(reqResult.message);
+			}
+			return false;
+		}
+			//		省市区三级联动
+		// 省级联动 省
+		function prov_init() {
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(getAllProvince_url, null, otype, osync);
+			if(reqResult.result == 0) {
+				var datal = reqResult.data;
+				var provSelect = $('.prov');
+				var html = "<option selected='selected' value=''>全部</option>";
+				if(datal.id != "") {
+					for(var i = 0; i < datal.length; i++) {
+						html += "<option value= '" + datal[i].id + "'>" + datal[i].provinceName + "</option>";
+					}
+					$(".prov").empty().append(html);
+				}
+
+			} else {
+
+				$(".prov").val('');
+			}
+
+			$(".dist").empty();
+			$(".city").empty();
+		}
+		// 省级联动 市
+		$('.prov').on('change', function() {
+			var prov = $(this).val();
+			prov_city(prov);
+		})
+
+		function prov_city(prov) {
+			var param = {
+				'provinceId': prov
+			}
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(getCityByProvinceId_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				var datal = reqResult.data;
+				var citySelect = $('.city');
+				var html = "<option selected='selected' value=''>全部</option>";
+				if(prov != "") {
+
+					if(datal.id != "") {
+						for(var i = 0; i < datal.length; i++) {
+							html += "<option value= '" + datal[i].id + "'>" + datal[i].cityName + "</option>";
+						}
+					}
+				} else {
+
+					$(".city").empty();
+				}
+				citySelect.empty().append(html);
+			} else {
+				$(".city").empty();
+
+			}
+			$(".dist").empty();
+		}
+		// 省级联动 区
+		$('.city').on('change', function() {
+			var town = $(this).val();
+			city_town(town);
+		})
+
+		function city_town(town) {
+			var param = {
+				'cityId': town
+			}
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(getDistrictByCityId_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				var datal = reqResult.data;
+				var distSelect = $('.dist');
+				var html = "<option selected='selected' value=''>全部</option>";
+				if(datal.id != "") {
+					for(var i = 0; i < datal.length; i++) {
+
+						html += "<option value= '" + datal[i].id + "'>" + datal[i].districtName + "</option>";
+					}
+				}
+				distSelect.empty().append(html);
+
+			} else {
+				$('.dist').empty();
+			}
+		}
+	</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

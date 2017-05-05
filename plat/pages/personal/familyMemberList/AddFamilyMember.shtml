@@ -1,0 +1,205 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<div class="fakeloader"></div>
+	<!-- Main content -->
+	<section class="content">
+		<!--头部S-->
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box width_70">
+					<div class="box-header">
+						<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">家庭关系成员<small>--添加</small></h3>
+						<div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
+							<button class="btn btn-default pull-right" onclick="storeManagementBack()">返回</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--头部E-->
+		<div class="box width_70">
+			<div class="box-body">
+				<form class="bs-example-form form-horizontal formCss" role="form" method="post" novalidate="novalidate" id='familyMember_addform'>
+					<input type="hidden" name="customerRegistId" id='add_customerRegistId' />
+					<input type="hidden" name="customerInfoId" id="add_customerInfoId" />
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>姓名</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="add_customerInfoName" class="form-control" name="customerInfoName" aria-describedby="basic-addon1" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="add_customerInfoNameTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>性别</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<select class="form-control" id="add_sexId" name="customerInfoSex">
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="add_sexIdTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>身份证号</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="add_customerInfoIdentityNumber" class="form-control" name="customerInfoIdentityNumber" aria-describedby="basic-addon1" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="add_customerInfoIdentityNumberTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>手机号码</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="add_customerInfoPhone" class="form-control" name="customerInfoPhone" aria-describedby="basic-addon1" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="add_customerInfoPhoneTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>邮箱</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="email" id="add_customerInfoEmail" class="form-control" name="customerInfoEmail" aria-describedby="basic-addon1" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="add_customerInfoEmailTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>关系</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<select name="relationId" id="add_relationshipId" class="relationship input_width_100"></select>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="add_relationshipIdTip"></div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="row">
+				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2 user_power_btn">
+					<button type="submit" class="btn btn-default" id='add_family_btn'>添加</button>
+					<a href="#" class="btn btn-default" onclick="storeManagementBack()">返 回</a>
+				</div>
+			</div>
+		</div>
+	</section>
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<script src="/plat/js/create/httpRequest.js"></script>
+	<script src="/plat/js/create/public.js"></script>
+	<script src="/plat/js/create/AjaxAddr.js"></script>
+	<script src="/plat/js/create/contentPublic.js"></script>
+	<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<!--表单验证-->
+	<script src="/plat/js/plugins/formValidator-4.0.1.js"></script>
+	<script src="/plat/js/plugins/formValidatorRegex.js"></script>
+	<script>
+		$(document).ready(function() {
+				//表单验证
+				$.formValidator.initConfig({
+					submitButtonID: "add_family_btn",
+					debug: true,
+					onSuccess: function() {
+						familyMember();
+					},
+					onError: function() {
+						alert("添加失败，具体错误，请看网页上的提示！")
+					},
+					submitAfterAjaxPrompt: '有数据正在异步验证，请稍等...'
+				});
+				//姓名
+				$("#add_customerInfoName").formValidator({
+						onShow: "请输入姓名",
+						onFocus: "姓名至少2个字符,最多10个字符"
+					}).inputValidator({
+						min: 2,
+						max: 10,
+						onError: "你输入的姓名非法,请确认"
+					})
+					//身份证号
+				$("#add_customerInfoIdentityNumber").formValidator({
+					onShow: "请输入身份证号",
+					onfocus: "请注意你输入的身份证号格式",
+					onCorrect: "输入完成"
+				}).regexValidator({
+					regExp: "idcard",
+					dataType: "enum",
+					onError: "身份证号格式不正确"
+				});
+				//性别
+				$('#add_sexId').on('change', function() {
+						$("#add_sexId").formValidator({
+							onShow: "请选择性别",
+							onFocus: "性别必须选择",
+							onCorrect: "已选择"
+						}).inputValidator({
+							min: 1,
+							onError: "还未选择性别!"
+						});
+					})
+					//手机号
+				$("#add_customerInfoPhone").formValidator({
+					onFocus: "请输入正确格式",
+					onCorrect: "输入格式正确",
+					onEmpty: "你真的不想留手机号码啊？"
+				}).inputValidator({
+					min: 11,
+					max: 11,
+					onError: "手机号码必须是11位的,请确认"
+				}).regexValidator({
+					regExp: "mobile",
+					dataType: "enum",
+					onError: "你输入的手机号码格式不正确"
+				});
+				//邮箱
+				$("#add_customerInfoEmail").formValidator({
+					onShow: "请输入你的email",
+					onfocus: "请注意你输入的email格式，例如:wzmaodong@126.com",
+					onCorrect: "输入完成"
+				}).regexValidator({
+					regExp: "email",
+					dataType: "enum",
+					onError: "email格式不正确"
+				});
+				relationship_info();
+				sex('#add_sexId', '1');
+				var customerInfoId = getParamValue('customerInfoId');
+				$.trim($('#add_customerInfoId').val(customerInfoId));
+				var customerRegistId = getParamValue('customerRegistId');
+				$.trim($('#add_customerRegistId').val(customerRegistId));
+				return false;
+			})
+			//			添加家庭成员信息
+		function familyMember() {
+			var param = $('#familyMember_addform').serialize();
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(familyMember_InsertRelationship_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert("添加成功");
+				var customerInfoId = getParamValue('customerInfoId');
+				var customerRegistId = getParamValue('customerRegistId');
+				window.location.href = '/plat/pages/personal/familyMemberList.shtml?customerInfoId=' + customerInfoId + '&customerRegistId=' + customerRegistId + '';
+			} else {
+				alert(reqResult.message);
+			}
+		}
+	</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

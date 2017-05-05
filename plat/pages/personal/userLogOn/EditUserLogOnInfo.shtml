@@ -1,0 +1,316 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<div class="fakeloader"></div>
+	<section class="content">
+		<!--头部S-->
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box width_70">
+					<div class="box-header">
+						<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">注册用户<small>--编辑</small></h3>
+						<div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
+							<button class="btn btn-default pull-right" onclick="storeManagementBack()">返回</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--头部E-->
+		<div class="box width_70">
+			<div class="box-body">
+				<form class="bs-example-form form-horizontal formCss" role="form" method="post" novalidate="novalidate" id='userLogOnInfo_editform'>
+					<input type="hidden" name="customerInfoId" id="edit_customerInfoId" />
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>用户姓名</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="edit_customerInfoName" class="form-control" name="customerInfoName" aria-describedby="basic-editon1" required/>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="edit_customerInfoNameTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>用户性别</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<select name="customerInfoSex" class="form-control" id='edit_customerInfoSex' class="form-control selectpicker" aria-describedby="basic-addon1" required>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="edit_customerInfoSexTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>用户身份证号</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="edit_customerInfoIdentityNumber" class="form-control" name="customerInfoIdentityNumber" aria-describedby="basic-editon1" required />
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="edit_customerInfoIdentityNumberTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>用户手机号</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="edit_customerInfoPhone" class="form-control" name="customerInfoPhone" aria-describedby="basic-editon1" required/>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="edit_customerInfoPhoneTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>用户邮箱</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="email" id="edit_customerInfoEmail" class="form-control" name="customerInfoEmail" aria-describedby="basic-editon1" required/>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="edit_customerInfoEmailTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>详细地址</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="edit_customerInfoAddress" class="form-control" name="customerInfoAddress" aria-describedby="basic-editon1" required/>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="edit_customerInfoAddressTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>用户状态</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8' id='edit_customerInfoStatus'>
+							<input type="radio" name="customerInfoStatus" aria-describedby="basic-addon1" required checked="checked" value="0" />启用
+							<input type="radio" name="customerInfoStatus" aria-describedby="basic-addon1" required value="1" />禁用
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>用户头像</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<div class="file-preview img_border">
+								<div id="edit_customerInfo"></div>
+								<div class="clear"></div>
+							</div>
+							<input id="edit_customerInfoHeadImg_picture" class="file" type="file" name="file" multiple data-min-file-count="1" />
+							<input type="hidden" name="customerInfoHeadImg" id="edit_customerInfoHeadImg" value="" />
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="edit_customerInfoHeadImgTip"></div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="row">
+				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2 user_power_btn">
+					<button type="submit" class="btn btn-default" id='edit_userLogOnInfo_btn'>保存</button>
+					<a href="#" class="btn btn-default" onclick="storeManagementBack()">返 回</a>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->
+<script src="/plat/js/create/contentPublic.js"></script>
+<script src="/plat/js/plugins/fileinput.js"></script>
+<script src="/plat/js/plugins/fileinput_locale_zh.js"></script>
+<!--动画js-->
+<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+<script>
+	$(document).ready(function() {
+			//		表单验证
+			$.formValidator.initConfig({
+				submitButtonID: "edit_userLogOnInfo_btn",
+				debug: true,
+				onSuccess: function() {
+					editUserLoginOnInfo();
+				},
+				onError: function() {
+					alert("添加失败，具体错误，请看网页上的提示！")
+				},
+				submitAfterAjaxPrompt: '有数据正在异步验证，请稍等...'
+			});
+			//姓名
+			$('#edit_customerInfoName').on('change', function() {
+				$("#edit_customerInfoName").formValidator({
+					onShow: "请输入姓名",
+					onFocus: "姓名至少2个字符,最多10个字符"
+				}).inputValidator({
+					min: 2,
+					max: 10,
+					onError: "你输入的姓名非法,请确认"
+				})
+			})
+
+			//身份证号
+			$('#edit_customerInfoIdentityNumber').on('change', function() {
+					$("#edit_customerInfoIdentityNumber").formValidator({
+						onShow: "请输入身份证号",
+						onfocus: "请注意你输入的身份证号格式",
+						onCorrect: "输入完成"
+					}).regexValidator({
+						regExp: "idcard",
+						dataType: "enum",
+						onError: "身份证号格式不正确"
+					});
+				})
+				//用户性别
+			$('#edit_customerInfoSex').on('change', function() {
+					$('#edit_customerInfoSex').formValidator({
+						onShow: "请选择性别",
+						onFocus: "性别必须选择",
+						onCorrect: "已选择"
+					}).inputValidator({
+						min: 1,
+						onError: "还未选择性别!"
+					});
+				})
+				//手机号
+			$('#edit_customerInfoPhone').on('change', function() {
+				$("#edit_customerInfoPhone").formValidator({
+					onFocus: "请输入正确格式",
+					onCorrect: "输入格式正确",
+					onEmpty: "你真的不想留手机号码啊？"
+				}).inputValidator({
+					min: 11,
+					max: 11,
+					onError: "手机号码必须是11位的,请确认"
+				}).regexValidator({
+					regExp: "mobile",
+					dataType: "enum",
+					onError: "你输入的手机号码格式不正确"
+				});
+			})
+
+			//邮箱
+			$('#edit_customerInfoEmail').on('change', function() {
+				$("#edit_customerInfoEmail").formValidator({
+					onShow: "请输入你的email",
+					onfocus: "请注意你输入的email格式，例如:wzmaodong@126.com",
+					onCorrect: "输入完成"
+				}).regexValidator({
+					regExp: "email",
+					dataType: "enum",
+					onError: "email格式不正确"
+				});
+			})
+
+			//详细地址
+			$('#edit_customerInfoAddress').on('change', function() {
+				$("#edit_customerInfoAddress").formValidator({
+					onShow: "请输入详细地址",
+					onFocus: "详细地址至少2个字符,最多50个字符"
+				}).inputValidator({
+					min: 2,
+					max: 50,
+					onError: "你输入的详细地址非法,请确认"
+				})
+			})
+
+			edit_userLogOnInfo();
+			$(".img_border > #edit_customerInfoHeadImg >.float_left>.position_absolute").each(function() {
+				$(this).hover(function() {
+					$(this).animate({
+						width: 300,
+						height: 300,
+						top: -10,
+						left: 100
+					}, 500);
+					$(this).css("z-index", 999);
+					$(this).parent().removeClass("store_img_borderdiv ");
+				}, function() {
+					$(this).animate({
+						width: 250,
+						height: 250,
+						top: 0,
+						left: 125
+					}, 500);
+					$(this).css("z-index", 0);
+					$(this).parent().addClass("store_img_borderdiv ");
+				});
+			});
+		})
+		//	用户信息回显
+	function edit_userLogOnInfo() {
+		var thisURL = document.URL;
+		var getval = thisURL.split('?')[1];
+		var judgeParam = getval.split("=")[1];
+		$('#edit_storeinput_hid').val(judgeParam);
+		var param = {
+			"customerRegistId": judgeParam
+		};
+		var otype = "get";
+		var osync = false;
+		var reqResult = httpRequest(userLogOnInfo_getCustomerRegistById_url, param, otype, osync);
+		if(reqResult.result == 0) {
+			$('#edit_customerInfoId').val(reqResult.data.customerInfoId);
+			$('#edit_customerInfoName').val(reqResult.data.customerInfoName);
+			sex('#edit_customerInfoSex', '1');
+			$('#edit_customerInfoSex').val(reqResult.data.customerInfoSex);
+			$('#edit_customerInfoIdentityNumber').val(reqResult.data.customerInfoIdentityNumber);
+			if(reqResult.data.customerInfoHeadImg != '') {
+				$('#edit_customerInfo').empty();
+				var str_Img = '';
+				str_Img = '<div id="' + reqResult.data.customerInfoHeadImg + '" class="float_left store_img_borderdiv position_relative"><div class="position_absolute" style="background-image:url(' + platIp + reqResult.data.customerInfoHeadImg + ');"><a href="javascript:removeLicenceImg(' + reqResult.data.customerInfoHeadImg + ')" class="fa fa-close fa_red pull-right"></a></div></div>';
+			}
+			$("#edit_customerInfo").append(str_Img);
+			$('#edit_customerInfoHeadImg').val(reqResult.data.customerInfoHeadImg);
+			$('#edit_customerInfoPhone').val(reqResult.data.customerInfoPhone);
+			$('#edit_customerInfoEmail').val(reqResult.data.customerInfoEmail);
+			$('#edit_customerInfoAddress').val(reqResult.data.customerInfoAddress);
+			if(reqResult.data.customerInfoStatus == 0) {
+				$('#edit_customerInfoStatus input')[0].checked = 'checked';
+			} else {
+				$('#edit_customerInfoStatus input')[1].checked = 'checked';
+			}
+		} else {
+			alert(reqResult.message);
+		}
+		return false;
+	}
+	//		编辑修改保存信息	
+	function editUserLoginOnInfo() {
+		var param = $('#userLogOnInfo_editform').serialize();
+		var otype = "post";
+		var osync = false;
+		var reqResult = httpRequest(userLogOnInfo_updateCustomerRegist_url, param, otype, osync);
+		if(reqResult.result == 0) {
+			alert('编辑成功');
+			window.location.href = '/plat/pages/personal/userLogOn.shtml';
+		} else {
+			alert('编辑失败!');
+		}
+	}
+	//图片上传
+	$("#edit_customerInfoHeadImg_picture").fileinput({
+		uploadUrl: uploadImagesUrl, // you must set a valid URL here else you will get an error
+		allowedFileExtensions: ['jpg', 'png', 'gif', 'jpeg', 'bmp'],
+		overwriteInitial: false,
+		maxFileSize: 100000,
+		maxFilesNum: 10,
+		//allowedFileTypes: ['image', 'video', 'flash'],
+		slugCallback: function(filename) {
+			return filename.replace('(', '_').replace(']', '_');
+		}
+	})
+	$("#edit_customerInfoHeadImg_picture").on("fileuploaded", function(event, data, previewId, index) {
+		var upload_imgs = [];
+		if($('#edit_customerInfoHeadImg').val()) {
+			upload_imgs = $('#edit_customerInfoHeadImg').val().split(",");
+		}
+		upload_imgs.push(data.response.imgId);
+		$('#edit_customerInfoHeadImg').val(upload_imgs.join(","));
+	});
+</script>

@@ -1,0 +1,29 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        500 页面错误
+      </h1>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="error-page">
+        <h2 class="headline text-yellow"> 500</h2>
+        <div class="error-content">
+            <br><h3><i class="fa fa-warning text-yellow"></i>哇哦，页面出了一些错误。</h3>
+           <p>我们会尽快修复这个问题。同时，你可以转回<a href="index.shtml">首页</a> 或者尝试使用搜索框。</p>
+        </div>
+        <!-- /.error-content -->
+      </div>
+      <!-- /.error-page -->
+       <div class="error-page center-block" >
+        <img src="../img/error2.png" class="img-responsive" alt="Responsive image">
+       </div>
+    </section>
+    
+    <!-- /.content -->
+  </div>
+ <!--#include file="/plat/pages/system/footer.html"-->
+

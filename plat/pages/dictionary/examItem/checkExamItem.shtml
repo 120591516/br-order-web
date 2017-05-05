@@ -1,0 +1,294 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Main content -->
+	<div class="fakeloader"></div>
+	<section class="content">
+		<!--头部S-->
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box width_70">
+					<div class="box-header">
+						<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">检查项<small>--查看</small></h3>
+						<div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
+							<button class="btn btn-default pull-right" onclick="storeManagementBack()">返回</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--头部E-->
+		<div class="box width_70">
+			<div class="box-body">
+				<form class="bs-example-form form-horizontal formCss" role="form" id="addExamItemForm">
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>检查项名称</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="examItemName" id="checkExamItemName" disabled="true">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>检查项简称</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="examItemNameAbr" id="checkExamItemNameAbr" disabled="true">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>英文名称</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="examItemNameEng" id="checkExamItemNameEng" disabled="true">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>英文缩写</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="examItemCode" id="checkExamItemNameEngAbr" disabled="true">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>打印名称</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="examItemNamePrn" id="checkExamItemNamePrn" disabled="true">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>项目代码</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="examItemCode" id="checkExamItemCode" disabled="true">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>项目类型</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<select class="form-control getEitemId" id="checkExamItemTypeId" name="examItemTypeId" disabled="true">
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>值类型</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="examItemValueType" id="checkExamItemValueType" disabled="true">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>值单位</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="examItemValueUnit" id="checkExamItemValueUnit" disabled="true">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>数值型增量</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="examItemIncrement" id="checkExamItemIncrement" disabled="true">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>精度</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="examItemNumPrecision" id="checkExamItemNumPrecision" disabled="true">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>应用范围</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="fUseAppMaxMin" id="checkfUseAppMaxMin" disabled="true">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>含低值</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="fIncludeMin" id="checkfIncludeMin" disabled="true">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>含高值</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="fIncludeMax" id="checkfIncludeMax" disabled="true">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>表达式</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="examItemExpression" id="checkExamItemExpression" disabled="true">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>男性缺省值</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="maleValueDef" id="checkMaleValueDef" disabled="true">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>男性下限</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="maleValueMin" id="checkMaleValueMin" disabled="true">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>男性上限</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="maleValueMax" id="checkMaleValueMax" disabled="true">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>男性生命值下限</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="maleValueServerDown" id="checkMaleValueServerDown" disabled="true">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>男性生命值上限</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="maleValueSeverUp" id="checkMaleValueSeverUp" disabled="true">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>女性缺省值</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="femaleValueDef" id="checkfemaleValueDef" disabled="true">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>女性下限</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="femaleValueMin" id="checkfemaleValueMin" disabled="true">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>女性上限</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" id="checkfemaleValueMax" name="femaleValueMax" disabled="true">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>女性生命值下限</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="femaleValueServerDown" id="checkfemaleValueServerDown" disabled="true">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>女性生命值上限</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="femaleValueServerUp" id="checkfemaleValueServerUp" disabled="true">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>适用性别</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px' id="checkSex">
+							<input type="checkbox" name='fMale' aria-describedby="basic-addon1" disabled="disabled" />男性
+							<input type="checkbox" name='fFemale' aria-describedby="basic-addon1" disabled="disabled" />女性
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>小结级别</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="examItemConclusionLevel" id="checkExamItemConclusionLevel" disabled="true">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>小结标题</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="examItemConclusionTitle" id="checkExamItemConclusionTitle" disabled="true">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>备注</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="examItemNote" id="checkExamItemNote" disabled="true">
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="row">
+				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2 user_power_btn">
+					<a href="#" class="btn btn-default" onclick="storeManagementBack()">返 回</a>
+				</div>
+			</div>
+		</div>
+	</section>
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<script src="/plat/js/create/httpRequest.js"></script>
+	<script src="/plat/js/create/contentPublic.js"></script>
+	<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			var param = {
+				"orgExamItemId": getParamValue('id')
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(getOrgExamItemByIdUrl, param, otype, osync);
+			if(reqResult.result == 0) {
+				//初始化体检机构
+				getExamItemType();
+				$('#checkExamItemTypeId').val(reqResult.data.examItemTypeId);
+				$('#checkExamItemName').val(reqResult.data.examItemName);
+				$('#checkExamItemNameAbr').val(reqResult.data.examItemNameAbr);
+				$('#checkExamItemNamePrn').val(reqResult.data.examItemNamePrn);
+				$('#checkExamItemNameEng').val(reqResult.data.examItemNameEng);
+				$('#checkExamItemNameEngAbr').val(reqResult.data.examItemNameEngAbr);
+				$('#checkExamItemCode').val(reqResult.data.examItemCode);
+				$('#checkExamItemValueType').val(reqResult.data.examItemValueType);
+				$('#checkExamItemValueUnit').val(reqResult.data.examItemValueUnit);
+				$('#checkExamItemConclusionLevel').val(reqResult.data.examItemConclusionLevel);
+				$('#checkExamItemConclusionTitle').val(reqResult.data.examItemConclusionTitle);
+				$('#checkExamItemIncrement').val(reqResult.data.examItemIncrement);
+				$('#checkExamItemNumPrecision').val(reqResult.data.examItemNumPrecision);
+				$('#checkfUseAppMaxMin').val(reqResult.data.fUseAppMaxMin);
+				$('#checkfIncludeMin').val(reqResult.data.fIncludeMin);
+				$('#checkfIncludeMax').val(reqResult.data.fIncludeMax);
+				$('#checkExamItemExpression').val(reqResult.data.examItemExpression);
+				$('#checkMaleValueDef').val(reqResult.data.maleValueDef);
+				$('#checkMaleValueMin').val(reqResult.data.maleValueMin);
+				$('#checkMaleValueMax').val(reqResult.data.maleValueMax);
+				$('#checkMaleValueServerDown').val(reqResult.data.maleValueServerDown);
+				$('#checkMaleValueSeverUp').val(reqResult.data.maleValueSeverUp);
+				$('#checkfemaleValueDef').val(reqResult.data.femaleValueDef);
+				$('#checkfemaleValueMin').val(reqResult.data.femaleValueMin);
+				$('#checkfemaleValueMax').val(reqResult.data.femaleValueMax);
+				$('#checkfemaleValueServerDown').val(reqResult.data.femaleValueServerDown);
+				$('#checkfemaleValueServerUp').val(reqResult.data.femaleValueServerUp);
+				$('#checkExamItemNote').val(reqResult.data.examItemNote);
+				var checkSex = $('#checkSex input');
+				if(reqResult.data.fMale == 0 && reqResult.data.fFemale == 0) {
+					checkSex[0].checked = "checked";
+					checkSex[1].checked = "checked";
+				} else if(reqResult.data.fMale == 1 && reqResult.data.fFemale == 1) {
+					checkSex[0].checked = "";
+					checkSex[1].checked = "";
+				} else if(reqResult.data.fMale == 0 && reqResult.data.fFemale == 1) {
+					checkSex[0].checked = "checked";
+					checkSex[1].checked = "";
+				} else {
+					checkSex[0].checked = "";
+					checkSex[1].checked = "checked";
+				}
+			}
+		})
+	</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

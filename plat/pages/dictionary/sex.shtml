@@ -1,0 +1,412 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<div class="fakeloader"></div>
+	<section class="content-header">
+		<div class="margin-bottom">
+			<h2><small>性别</small></h2>
+		</div>
+		<ol class="breadcrumb">
+			<li>
+				<a href="#">字典维护</a>
+			</li>
+			<li class="active">性别</li>
+		</ol>
+	</section>
+	<!-- /Content Header (Page header) -->
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<div class="box container-fluid no-margin">
+						<div class="box-header">
+							<div class="row margin-bottom">
+								<div class="col-md-12">
+									<div class="col-md-4">
+										<h3 class="box-title">列表</h3>
+									</div>
+									<div class="col-md-1 col-md-offset-7">
+										<a href="#addSex" data-toggle="modal" class="btn btn-default" id="addConTypeDic">添加</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="box-body">
+						<table class="table formCss">
+							<thead>
+								<tr>
+									<th>操作</th>
+									<th>性别名称</th>
+									<th>性别编码</th>
+									<th>输入码</th>
+									<th>创建时间</th>
+									<th>状态</th>
+								</tr>
+							</thead>
+							<tbody id="tbodySex">
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="row">
+							<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /Main content -->
+	<!--模态框添加-->
+	<div class="modal fade" id="addSex" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">性别信息</h4>
+				</div>
+				<div class="modal-body">
+					<form class="bs-example bs-example-form" role="form" method="post" novalidate="novalidate" id='addSex_news'>
+						<div class="input-group">
+							<span class="input-group-addon">性别名称</span>
+							<input type="text" id="add_sexName" class="form-control" name="sexName" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">性别编码</span>
+							<input type="text" id="add_sexCode" class="form-control" name="sexCode" aria-describedby="basic-addon1" required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">输入码</span>
+							<input type="text" id="add_inputCode" class="form-control" name="inputCode" aria-describedby="basic-addon1" required>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="submit" class="btn btn-primary" data-dismiss="modal" id="addSex_btn">提交</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--模态框查看-->
+	<div class="modal fade" id="checkSex" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">性别信息</h4>
+				</div>
+				<div class="modal-body">
+					<form class="bs-example bs-example-form" role="form" method="post" novalidate="novalidate" id='addSex_news'>
+						<div class="input-group">
+							<span class="input-group-addon">性别名称</span>
+							<input type="text" id="check_sexName" class="form-control" name="sexName" aria-describedby="basic-addon1" maxlength='12' disabled="disabled">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">性别编码</span>
+							<input type="text" id="check_sexCode" class="form-control" name="sexCode" aria-describedby="basic-addon1" disabled="disabled">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">输入码</span>
+							<input type="text" id="check_inputCode" class="form-control" name="inputCode" aria-describedby="basic-addon1" disabled="disabled">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">创建时间</span>
+							<input type="text" id="check_sexCreatetime" class="form-control" name="sexCreatetime" aria-describedby="basic-addon1" disabled="disabled">
+						</div>
+						<div class="input-group" id='check_sexStatus'>
+							<span class="input-group-addon">状 态</span>
+							<input type="radio" name='sexStatus' value="0" class="userlist_statusinput_vertical" disabled="disabled" />启用
+							<input type="radio" name='sexStatus' value="1" class="userlist_statusinput_vertical" disabled="disabled" />禁用
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--模态框编辑-->
+	<div class="modal fade" id="editSex" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">性别信息</h4>
+				</div>
+				<div class="modal-body">
+					<form class="bs-example bs-example-form" role="form" method="post" novalidate="novalidate" id='editSex_news'>
+						<input type="hidden" name="idSex" id="edit_idSex" />
+						<div class="input-group">
+							<span class="input-group-addon">性别名称</span>
+							<input type="text" id="edit_sexName" class="form-control" name="sexName" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">性别编码</span>
+							<input type="text" id="edit_sexCode" class="form-control" name="sexCode" aria-describedby="basic-addon1" required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">输入码</span>
+							<input type="text" id="edit_inputCode" class="form-control" name="inputCode" aria-describedby="basic-addon1" required>
+						</div>
+						<div class="input-group" id='edit_sexStatus'>
+							<span class="input-group-addon">状 态</span>
+							<input type="radio" name='sexStatus' value="0" class="userlist_statusinput_vertical" />启用
+							<input type="radio" name='sexStatus' value="1" class="userlist_statusinput_vertical" />禁用
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" id='editSex_btn'>保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<script src="/plat/js/create/httpRequest.js"></script>
+	<script src="/plat/js/create/contentPublic.js"></script>
+	<script src="/plat/js/plugins/extendPagination.js"></script>
+	<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<script>
+		//  分页
+		init_page();
+
+		function init_page() {
+			$('#tbodySex').empty();
+			page_curr = 1;
+			init_list();
+			init_pager();
+		}
+
+		function init_list() {
+			$('#tbodySex').empty();
+			var otype = "post";
+			var osync = false;
+			var param = {
+				"page": page_curr,
+				"rows": count_curr
+			};
+			var reqResult = httpRequest(sex_getDictSexList_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				total_count = reqResult.data.total;
+				createTable(page_curr, limit, total_count, reqResult);
+			}
+			return false;
+		}
+		//  初始化分页信息
+		function init_pager() {
+			$('#callBackPager').extendPagination({
+				totalCount: total_count,
+				showCount: count_curr,
+				limit: limit,
+				callback: function(curr, limit, totalCount) {
+					page_curr = curr;
+					total_count = totalCount;
+					init_list();
+				}
+			});
+		}
+		//  获取列表
+		function createTable(currPage, limit, total, dataBack) {
+			var showNum = limit;
+			if(total - (currPage * limit) < 0) showNum = total - ((currPage - 1) * limit);
+			for(var i = 0; i < showNum; i++) {
+				var Tbody = document.getElementById('tbodySex');
+				var lRow = Tbody.insertRow(); //创建行
+				var sexStatus = (dataBack.data.list[i].sexStatus === 0) ? "启用" : "禁用";
+				var operationByRole = dataBack.operationList; //获取操作类型
+				var operationByRoleAdd = document.getElementById('addConTypeDic'); //获取添加按钮
+				//				判断操作类型
+				(operationByRole.dictsex_insert === false) ? operationByRoleAdd.style.display = 'none': operationByRoleAdd.style.display = ''; //1为添加
+				//创建列
+				var firstColumn = lRow.insertCell();
+				var secondColumn = lRow.insertCell();
+				var thirdColumn = lRow.insertCell();
+				var forthColumn = lRow.insertCell();
+				var fifthColumn = lRow.insertCell();
+				var sixthColumn = lRow.insertCell();
+				firstColumn.setAttribute('sexId', dataBack.data.list[i].idSex); //给td添加属性
+				//添加第一列内容
+				//创建查看标签
+				var aCheck = document.createElement("a");
+				var iElement = document.createElement("i");
+				(operationByRole.dictsex_detail===true)?iElement.className = "fa fa-eye":'';//4为查看
+				aCheck.appendChild(iElement);
+				aCheck.setAttribute("href", "#checkSex");
+				aCheck.setAttribute("data-toggle", "modal");
+				aCheck.style.marginLeft = "5px";
+				aCheck.onclick = function() {
+					check_sexNews(this)
+				};
+				firstColumn.appendChild(aCheck);
+				//创建编辑标签
+				var aEdit = document.createElement("a");
+				var iElement = document.createElement("i");
+				(operationByRole.dictsex_update===true)?iElement.className = "fa fa-pencil":'';//3为更新
+				aEdit.appendChild(iElement);
+				aEdit.setAttribute("href", "#editSex");
+				aEdit.setAttribute("data-toggle", "modal");
+				aEdit.style.marginLeft = "5px";
+				aEdit.onclick = function() {
+					edit_sexNews(this)
+				};
+				firstColumn.appendChild(aEdit);
+				//创建删除标签
+				var aDelete = document.createElement("a");
+				var iElement = document.createElement("i");
+				(operationByRole.dictsex_delete===true)?iElement.className = "fa fa-trash-o":'';//2为删除
+				aDelete.appendChild(iElement);
+				aDelete.style.marginLeft = "5px";
+				aDelete.onclick = function() {
+					del_sexNews(this)
+				};
+				firstColumn.appendChild(aDelete);
+				//添加第二列内容	
+				secondColumn.innerText = dataBack.data.list[i].sexName;
+				//添加第三列内容	
+				thirdColumn.innerText = dataBack.data.list[i].sexCode;
+				//添加第四列内容	
+				forthColumn.innerText = dataBack.data.list[i].inputCode;
+				//添加第五列内容	
+				fifthColumn.innerText = getLocalTime(dataBack.data.list[i].sexCreatetime);
+				//添加第六列内容	
+				sixthColumn.innerText = sexStatus;
+			}
+			return false;
+		}
+		//	添加信息
+		$('#addSex_btn').on('click', function() {
+			add_sexNews();
+		})
+
+		function add_sexNews() {
+			var add_sexName = $('#add_sexName').val();
+			var add_sexCode = $('#add_sexCode').val();
+			var add_inputCode = $('#add_inputCode').val();
+			if(add_sexName == '' || add_sexCode == '' || add_inputCode == '') {
+				alert('请输入完整信息后添加！');
+				return false;
+			} else {
+				var param = $('#addSex_news').serialize();
+				var otype = "post";
+				var osync = false;
+				var reqResult = httpRequest(sex_addDictSexLIST_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert('添加成功！');
+					window.location.reload();
+				} else {
+					alert("error");
+				}
+			}
+		}
+		//	删除信息
+		function del_sexNews(del_id) {
+			if(confirm("确认禁用该性別吗？")) {
+				var del_sex_id = $(del_id).parent().attr("sexId");
+				var param = {
+					"pid": del_sex_id
+				};
+				var otype = "get";
+				var osync = false;
+				var reqResult = httpRequest(sex_deleteDictSex_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert("禁用成功");
+					window.location.reload();
+				} else {
+					alert(reqResult.message);
+				}
+			}
+		}
+		//	查看信息
+		function check_sexNews(check) {
+			var check_sex_id = $(check).parent().attr("sexId");
+			var param = {
+				"pid": check_sex_id
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(sex_getDictSexById_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				var check_sexName = $('#check_sexName');
+				var check_sexCode = $('#check_sexCode');
+				var check_inputCode = $('#check_inputCode');
+				var check_sexCreatetime = $('#check_sexCreatetime');
+				var check_sexCreatetime = $('#check_sexCreatetime');
+				var check_sexStatus = $('#check_sexStatus input');
+				check_sexName.val(reqResult.data.sexName);
+				check_sexCode.val(reqResult.data.sexCode);
+				check_inputCode.val(reqResult.data.inputCode);
+				check_sexStatus.val(reqResult.data.sexStatus);
+				check_sexCreatetime.val(getLocalTime(reqResult.data.sexCreatetime));
+				if(reqResult.data.sexStatus == 0) {
+					check_sexStatus[0].checked = "checked";
+				} else {
+					check_sexStatus[1].checked = "checked";
+				}
+			} else {
+				alert(reqResult.message);
+			}
+		}
+		//	编辑回显信息
+		function edit_sexNews(edit) {
+			var edit_sex_id = $(edit).parent().attr("sexId");
+			var param = {
+				"pid": edit_sex_id
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(sex_getDictSexById_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				var edit_sexName = $('#edit_sexName');
+				var edit_sexCode = $('#edit_sexCode');
+				var edit_inputCode = $('#edit_inputCode');
+				var edit_sexStatus = $('#edit_sexStatus input');
+				$('#edit_idSex').val(reqResult.data.idSex);
+				edit_sexName.val(reqResult.data.sexName);
+				edit_sexCode.val(reqResult.data.sexCode);
+				edit_inputCode.val(reqResult.data.inputCode);
+				if(reqResult.data.sexStatus == 0) {
+					edit_sexStatus[0].checked = "checked";
+				} else {
+					edit_sexStatus[1].checked = "checked";
+				}
+			} else {
+				alert(reqResult.message);
+			}
+		}
+		//  编辑保存信息
+		$('#editSex_btn').on('click', function() {
+			var edit_sexName = $('#edit_sexName').val();
+			var edit_sexCode = $('#edit_sexCode').val();
+			var edit_inputCode = $('#edit_inputCode').val();
+			var edit_sexStatus = $('#edit_sexStatus input').val();
+			if(edit_sexName == '' || edit_sexCode == '' || edit_inputCode == '' || edit_sexStatus == '') {
+				alert('请输入完整信息！');
+				return false;
+			} else {
+				var param = $('#editSex_news').serialize();
+				var otype = "post";
+				var osync = false;
+				var reqResult = httpRequest(sex_updateDictSex_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert('编辑成功');
+					window.location.reload();
+				} else {
+					alert(reqResult.message);
+				}
+			}
+		})
+	</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

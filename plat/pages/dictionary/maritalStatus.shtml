@@ -1,0 +1,410 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<div class="fakeloader"></div>
+	<section class="content-header">
+		<div class="margin-bottom">
+			<h2><small>婚姻状况</small></h2>
+		</div>
+		<ol class="breadcrumb">
+			<li>
+				<a href="#">字典维护</a>
+			</li>
+			<li class="active">婚姻状况</li>
+		</ol>
+	</section>
+	<!-- /Content Header (Page header) -->
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<div class="box-header">
+						<div class="row">
+							<div class="col-md-8">
+								<h3 class="box-title margin">列表</h3>
+							</div>
+							<div class="col-md-4">
+								<div class="row">
+									<div class="col-md-4 col-md-offset-8">
+										<a href="#add_marriage" data-toggle="modal" class="btn btn-default margin" id="addConTypeDic">添加</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="box-body">
+						<table class="table formCss">
+							<thead>
+								<tr>
+									<th>操作</th>
+									<th>婚姻状况名称</th>
+									<th>婚姻状况代码</th>
+									<th>输入码</th>
+									<th>创建时间</th>
+									<th>状态</th>
+								</tr>
+								<tr class="warning no-result">
+									<td colspan="7"><i class="fa fa-warning"></i>没有任何搜索结果!</td>
+								</tr>
+							</thead>
+							<tbody id="marriage_tbody_main">
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="row">
+							<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /Main content -->
+	<!--模态框添加-->
+	<div class="modal fade" id="add_marriage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">婚姻状况</h4>
+				</div>
+				<div class="modal-body">
+					<form class="bs-example bs-example-form" role="form" id="add_marriage_formNews">
+						<div class="input-group">
+							<span class="input-group-addon">婚姻状况名称</span>
+							<input type="text" id="add_marriage_name" class="form-control" name="marriageName" aria-describedby="basic-addon1" maxlength='5' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">婚姻状况代码</span>
+							<input type="text" id="add_marriage_code" class="form-control check_userloginname_validate" name="marriageCode" aria-describedby="basic-addon1" maxlength='5' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_30">输入码</span>
+							<input type="text" id="add_marriage_input_code" class="form-control check_userphone_validate" name="inputCode" aria-describedby="basic-addon1" maxlength='5' required>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="submit" class="btn btn-primary" data-dismiss="modal" id="add_marriage_btn">提交</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--模态框修改-->
+	<div class="modal fade" id="edit_marriage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">婚姻状况</h4>
+				</div>
+				<div class="modal-body">
+					<form class="bs-example bs-example-form" role="form" id="edit_marriage_formNews">
+						<input type="hidden" name="idMarriage" id="edit_idMarriage_hidden" />
+
+						<div class="input-group">
+							<span class="input-group-addon">婚姻状况名称</span>
+							<input type="text" id="edit_marriage_name" class="form-control" name="marriageName" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">婚姻状况代码</span>
+							<input type="text" id="edit_marriage_code" class="form-control check_userloginname_validate" name="marriageCode" aria-describedby="basic-addon1" maxlength='10' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">输入码</span>
+							<input type="text" id="edit_marriage_input_code" class="form-control check_userphone_validate" name="inputCode" aria-describedby="basic-addon1" required>
+						</div>
+						<div class="input-group" id='edit_marriage_marriageStatus'>
+							<span class="input-group-addon userlist_marriageStatus_right_border">状 态</span>
+							<input type="radio" name='marriageStatus' value="0" class="userlist_marriageStatusinput_vertical" />启用
+							<input type="radio" name='marriageStatus' value="1" class="userlist_marriageStatusinput_vertical" />禁用
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" id='edit_marriage_save'>保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--模态框查看-->
+	<div class="modal fade" id="check_marriage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">婚姻状况</h4>
+				</div>
+				<div class="modal-body">
+					<form class="bs-example bs-example-form" role="form" id="check_marriage_formNews">
+						<div class="input-group">
+							<span class="input-group-addon">婚姻状况名称</span>
+							<input type="text" id="check_marriage_name" class="form-control" name="marriageName" aria-describedby="basic-addon1" disabled="disabled">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">婚姻状况代码</span>
+							<input type="text" id="check_marriage_code" class="form-control check_userloginname_validate" name="marriageCode" aria-describedby="basic-addon1" disabled="disabled">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">输入码</span>
+							<input type="text" id="check_marriage_input_code" class="form-control check_userphone_validate" name="inputCode" aria-describedby="basic-addon1" disabled="disabled">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">创建时间</span>
+							<input type="text" id="check_marriage_create_time" class="form-control" name="marriageCreatetime" aria-describedby="basic-addon1" disabled="disabled">
+						</div>
+						<div class="input-group" id='check_marriage_marriageStatus'>
+							<span class="input-group-addon userlist_marriageStatus_right_border">状 态</span>
+							<input type="radio" name='marriageStatus' value="0" class="userlist_marriageStatusinput_vertical" disabled="disabled" />启用
+							<input type="radio" name='marriageStatus' value="1" class="userlist_marriageStatusinput_vertical" disabled="disabled" />禁用
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<script src="/plat/js/create/httpRequest.js"></script>
+	<script src="/plat/js/create/contentPublic.js"></script>
+	<script src="/plat/js/plugins/extendPagination.js"></script>
+	<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<script>
+		init_page();
+
+		function init_page() {
+			$('#marriage_tbody_main').empty();
+			page_curr = 1;
+			init_list();
+			init_pager();
+		}
+
+		function init_list() {
+			$('#marriage_tbody_main').empty();
+			var otype = "post";
+			var osync = false;
+			var param = {
+				"page": page_curr,
+				"rows": count_curr
+			};
+			var reqResult = httpRequest(maritalStatus_getMarriageList_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				total_count = reqResult.data.total;
+				createTable(page_curr, limit, total_count, reqResult);
+			}
+			return false;
+		}
+		// 初始化分页信息
+		function init_pager() {
+			$('#callBackPager').extendPagination({
+				totalCount: total_count,
+				showCount: count_curr,
+				limit: limit,
+				callback: function(curr, limit, totalCount) {
+					page_curr = curr;
+					total_count = totalCount;
+					init_list();
+				}
+			});
+		}
+		//  列表展示
+		function createTable(currPage, limit, total, dataBack) {
+			var showNum = limit;
+			if(total - (currPage * limit) < 0) showNum = total - ((currPage - 1) * limit);
+			for(var i = 0; i < showNum; i++) {
+				var Tbody = document.getElementById('marriage_tbody_main');
+				var lRow = Tbody.insertRow(); //创建行
+				var marriageStatus = (dataBack.data.list[i].marriageStatus === 0) ? "启用" : "禁用";
+				var operationByRole = dataBack.operationList; //获取操作类型
+				var operationByRoleAdd = document.getElementById('addConTypeDic'); //获取添加按钮
+				//				判断操作类型
+				(operationByRole.marriageManage_insert === false) ? operationByRoleAdd.style.display = 'none': operationByRoleAdd.style.display = ''; //1为添加
+				//创建列
+				var firstColumn = lRow.insertCell();
+				var secondColumn = lRow.insertCell();
+				var thirdColumn = lRow.insertCell();
+				var forthColumn = lRow.insertCell();
+				var fifthColumn = lRow.insertCell();
+				var sixthColumn = lRow.insertCell();
+				firstColumn.setAttribute('marriageid', dataBack.data.list[i].idMarriage); //给td添加属性
+				//添加第一列内容
+				//创建查看标签
+				var aCheck = document.createElement("a");
+				var iElement = document.createElement("i");
+				(operationByRole.marriageManage_detail === true) ? iElement.className = "fa fa-eye": ''; //4为查看
+				aCheck.appendChild(iElement);
+				aCheck.setAttribute("href", "#check_marriage");
+				aCheck.setAttribute("data-toggle", "modal");
+				aCheck.style.marginLeft = "5px";
+				aCheck.onclick = function() {
+					check_marriage(this)
+				};
+				firstColumn.appendChild(aCheck);
+				//创建编辑标签
+				var aEdit = document.createElement("a");
+				var iElement = document.createElement("i");
+				(operationByRole.marriageManage_update === true) ? iElement.className = "fa fa-pencil": ''; //3为更新
+				aEdit.appendChild(iElement);
+				aEdit.setAttribute("href", "#edit_marriage");
+				aEdit.setAttribute("data-toggle", "modal");
+				aEdit.style.marginLeft = "5px";
+				aEdit.onclick = function() {
+					edit_marriage(this)
+				};
+				firstColumn.appendChild(aEdit);
+				//创建删除标签
+				var aDelete = document.createElement("a");
+				var iElement = document.createElement("i");
+				(operationByRole.marriageManage_delete === true) ? iElement.className = "fa fa-trash-o": ''; //2为删除
+				aDelete.appendChild(iElement);
+				aDelete.style.marginLeft = "5px";
+				aDelete.onclick = function() {
+					del_marriage(this)
+				};
+				firstColumn.appendChild(aDelete);
+				//添加第二列内容	
+				secondColumn.innerText = dataBack.data.list[i].marriageName;
+				//添加第三列内容	
+				thirdColumn.innerText = dataBack.data.list[i].marriageCode;
+				//添加第四列内容	
+				forthColumn.innerText = dataBack.data.list[i].inputCode;
+				//添加第五列内容	
+				fifthColumn.innerText = getLocalTime(dataBack.data.list[i].marriageCreatetime);
+				//添加第六列内容	
+				sixthColumn.innerText = marriageStatus;
+			}
+			return false;
+		}
+		//  添加信息
+		$('#add_marriage_btn').on('click', function() {
+				var marriage_name = $('#add_marriage_name').val();
+				var marriage_code = $('#add_marriage_code').val();
+				var marriage_inputcode = $('#add_marriage_input_code').val();
+				if(marriage_name == '' || marriage_code == '' || marriage_inputcode == '') {
+					return false;
+				} else {
+					var param = $('#add_marriage_formNews').serialize();
+					var otype = "post";
+					var osync = false;
+					var reqResult = httpRequest(maritalStatus_addMarriage_url, param, otype, osync);
+					if(reqResult.result == 0) {
+						alert("添加成功");
+						window.location.reload();
+					} else {
+						alert(reqResult.message);
+					}
+				}
+			})
+			//	查看回显信息
+		function check_marriage(check) {
+			var edit_marriage_id = $(check).parent().attr("marriageid");
+			var param = {
+				"idMarriage": edit_marriage_id
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(maritalStatus_getMarriageById_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				var marriageName = $('#check_marriage_name');
+				var marriageCode = $('#check_marriage_code');
+				var marriageInputcode = $('#check_marriage_input_code');
+				var marriageCreatetime = $('#check_marriage_create_time');
+				var marriageStatus = $('#check_marriage_marriageStatus input');
+				marriageName.val(reqResult.data.marriageName);
+				marriageCode.val(reqResult.data.marriageCode);
+				marriageInputcode.val(reqResult.data.inputCode);
+				marriageCreatetime.val(getLocalTime(reqResult.data.marriageCreatetime));
+				if(reqResult.data.marriageStatus == 0) {
+					marriageStatus[0].checked = "checked";
+				} else {
+					marriageStatus[1].checked = "checked";
+				}
+			} else {
+				alert(reqResult.message);
+			}
+		}
+		//  删除信息
+		function del_marriage(del_li) {
+			if(confirm("确认禁用该婚姻状况吗？")) {
+				var del_marriage_id = $(del_li).parent().attr("marriageid");
+				var param = {
+					"idMarriage": del_marriage_id
+				};
+				var otype = "get";
+				var osync = false;
+				var reqResult = httpRequest(maritalStatus_deleteMarriage_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert("禁用成功！");
+					window.location.reload();
+				} else {
+					alert(reqResult.message);
+				}
+			}
+		}
+		//  编辑回显信息
+		function edit_marriage(edit_li) {
+			var edit_marriage_id = $(edit_li).parent().attr("marriageid");
+			var param = {
+				"idMarriage": edit_marriage_id
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(maritalStatus_getMarriageById_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				$('#edit_idMarriage_hidden').val(reqResult.data.idMarriage); //回显
+				var marriageName = $('#edit_marriage_name');
+				var marriageCode = $('#edit_marriage_code');
+				var marriageInputcode = $('#edit_marriage_input_code');
+				var marriageStatus = $('#edit_marriage_marriageStatus input');
+				marriageName.val(reqResult.data.marriageName);
+				marriageCode.val(reqResult.data.marriageCode);
+				marriageInputcode.val(reqResult.data.inputCode);
+				if(reqResult.data.marriageStatus == 0) {
+					marriageStatus[0].checked = "checked";
+				} else {
+					marriageStatus[1].checked = "checked";
+				}
+			} else {
+				alert(reqResult.message);
+			}
+		}
+		//  编辑保存信息
+		$('#edit_marriage_save').on('click', function() {
+			var editmarriage_name = $('#edit_marriage_name').val();
+			var editmarriage_code = $('#edit_marriage_code').val();
+			var editmarriage_inputcode = $('#edit_marriage_input_code').val();
+			var editmarriage_marriageStatus = $('#edit_marriage_marriageStatus input').val();
+			if(editmarriage_name == '' || editmarriage_code == '' || editmarriage_inputcode == '' || editmarriage_marriageStatus == '') {
+				alert('请输入完整信息！');
+				return false;
+			} else {
+				var param = $('#edit_marriage_formNews').serialize();
+				var otype = "post";
+				var osync = false;
+				var reqResult = httpRequest(maritalStatus_updateMarriage_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert('编辑成功!');
+					window.location.reload();
+				} else {
+					alert(reqResult.message);
+				}
+			}
+		})
+	</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

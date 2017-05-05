@@ -1,0 +1,1003 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<div class="fakeloader"></div>
+	<section class="content-header">
+		<div class="margin-bottom">
+			<h2><small>图片展示</small></h2>
+		</div>
+		<ol class="breadcrumb">
+			<li>
+				<a href="#">首页展示</a>
+			</li>
+			<li class="active">图片展示</li>
+		</ol>
+		<div class="box" id="detailInfo">
+			<div class="box-body">
+				<form class="form-box padding_l42px" role="form">
+					<div class="row margin-bottom">
+						<div class="col-md-1">
+							<label class="box-title control-label ">套餐图片</label>
+							<input name='firstdatashowDataType' value="1" type="hidden" id="suitType" />
+						</div>
+
+						<div class="col-md-3">
+							<div class="input-group">
+								<span class="input-group-addon">机构名称</span>
+								<select class="form-control selectpicker" id="addSuitOrgId" name="orgId">
+								</select>
+							</div>
+						</div>
+
+						<div class="col-md-3">
+							<div class="input-group">
+								<span class="input-group-addon">套餐</span>
+								<select class="form-control selectpicker" id="addSuitId" name="examSuiteId">
+								</select>
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="input-group">
+								<a data-toggle='modal' id="choseSuitPicture" href="#addSuitPictureModel" class="btn btn-default">选取套餐图片</a>
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="input-group">
+								<a data-toggle='modal' href="#addSuitPicturePositionModel" class="btn btn-default" id="suitPosition">选择套餐图片位置</a>
+							</div>
+						</div>
+						<div class="col-md-1">
+							<a href="#" id="addSuitInfo" class="btn btn-default">添加</a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-1">
+							<label class="box-title control-label">门店图片</label>
+							<input name='firstdatashowDataType' value="0" type="hidden" id="storeType" />
+						</div>
+						<div class="col-md-3" id="hidOrgId">
+							<div class="input-group">
+								<span class="input-group-addon">机构名称</span>
+								<select class="form-control selectpicker" id="addStoreOrgId" name="orgId">
+								</select>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="input-group">
+								<span class="input-group-addon">门店</span>
+								<select class="form-control selectpicker" id="addStoreBranchId" name="branchId">
+								</select>
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="input-group">
+								<a data-toggle='modal' id="choseStorePicture" href="#addStorePictureModel" class="btn btn-default">选取门店图片</a>
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="input-group">
+								<a data-toggle='modal' href="#addStorePicturePositionModel" class="btn btn-default" id="storePosition">选择门店图片位置</a>
+							</div>
+						</div>
+						<div class="col-md-1">
+							<a href="#" id="addBranchInfo" class="btn btn-default">添加</a>
+						</div>
+					</div>
+				</form>
+				<!-- /.box-header -->
+			</div>
+		</div>
+	</section>
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<div class="box-header">
+						<h3 class="box-title col-lg-9 col-md-9 col-sm-9 col-xs-9">列表</h3>
+					</div>
+					<div class="box-body">
+						<table class="table formCss">
+							<thead>
+								<tr>
+									<th>编辑</th>
+									<th>机构名称</th>
+									<th>门店/套餐名称</th>
+									<th>图片</th>
+									<th>图片位置</th>
+									<th>创建时间</th>
+									<th>状态</th>
+								</tr>
+								<tr class="warning no-result">
+									<td colspan="7"><i class="fa fa-warning"></i>没有任何搜索结果!</td>
+								</tr>
+							</thead>
+							<tbody id="pictureShowTbody">
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--选取添加套餐图片-->
+	<div class="modal fade" id="addSuitPictureModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">选择套餐图片</h4>
+				</div>
+				<div class="modal-body">
+					<dl>
+						<dt>套餐图片</dt>
+						<dd>
+							<ul class="SuitPicture picture" id="addSuitPictureShowId">
+							</ul>
+						</dd>
+					</dl>
+				</div>
+				<div class="clear"></div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" id="suitImgCave">保存</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--选取添加门店图片模态框图片-->
+	<div class="modal fade" id="addStorePictureModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">选择门店图片</h4>
+				</div>
+				<div class="modal-body">
+					<dl>
+						<dt>门店图片</dt>
+						<dd>
+							<ul class="branchPicture picture" id="addStorePictureShowId">
+							</ul>
+						</dd>
+					</dl>
+				</div>
+				<div class="clear"></div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" id="storeImgCave">保存</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--选取添加套餐图片的位置-->
+	<div class="modal fade" id="addSuitPicturePositionModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">选择套餐图片位置</h4>
+				</div>
+				<div class="modal-body">
+					<dl>
+						<dt>套餐图片位置</dt>
+						<dd>
+							<ul id="addSuitPicturePositionId" class="imgIndex">
+								<li>
+									<input type="checkbox" name="index" id="" value="1" />一号位置
+								</li>
+								<li>
+									<input type="checkbox" name="index" id="" value="2" />二号位置
+								</li>
+								<li>
+									<input type="checkbox" name="index" id="" value="3" />三号位置
+								</li>
+								<li>
+									<input type="checkbox" name="index" id="" value="4" />四号位置
+								</li>
+								<li>
+									<input type="checkbox" name="index" id="" value="5" />五号位置
+								</li>
+								<li>
+									<input type="checkbox" name="index" id="" value="6" />六号位置
+								</li>
+							</ul>
+						</dd>
+					</dl>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" id="suitImgPositionCave">保存</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--选取添加门店图片的位置-->
+	<div class="modal fade" id="addStorePicturePositionModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">选择门店图片位置</h4>
+				</div>
+				<div class="modal-body">
+					<dl>
+						<dt>门店图片位置</dt>
+						<dd>
+							<ul id="addStorePicturePositionId" class="imgIndex">
+								<li>
+									<input type="checkbox" name="index" id="" value="1" />一号位置
+								</li>
+								<li>
+									<input type="checkbox" name="index" id="" value="2" />二号位置
+								</li>
+								<li>
+									<input type="checkbox" name="index" id="" value="3" />三号位置
+								</li>
+								<li>
+									<input type="checkbox" name="index" id="" value="4" />四号位置
+								</li>
+								<li>
+									<input type="checkbox" name="index" id="" value="5" />五号位置
+								</li>
+								<li>
+									<input type="checkbox" name="index" id="" value="6" />六号位置
+								</li>
+							</ul>
+						</dd>
+					</dl>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" id="storeImgPositionCave">保存</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--查看图片信息-->
+	<div class="modal fade" id="checkPicture" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="box">
+					<div class="box-body">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4><i class="fa fa-paperclip"></i>图片展示<small>--查看</small></h4>
+						</div>
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+									<form class="bs-example-form form-horizontal formCss" role="form" method="post" novalidate="novalidate" id='check_form'>
+										<div class="form-group">
+											<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>机构名称</label>
+											<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+												<select class="form-control selectpicker" id="checkOrgId" name="orgId" disabled="disabled">
+												</select>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label personal_save_btn' id="branchName">门店名称</label>
+											<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label personal_save_btn' id="suitName">套餐名称</label>
+											<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+												<select class="form-control selectpicker personal_save_btn" id="checkBranchId" name="branchId" disabled="disabled">
+												</select>
+												<select class="form-control selectpicker personal_save_btn" id="checkSuitId" name="examSuiteId" disabled="disabled">
+												</select>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>图片展示</label>
+											<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+												<div id="check_firstimgshowImgId"></div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>图片标题</label>
+											<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+												<input type="text" class="form-control" name="firstimgshowTitle" id="check_firstimgshowTitle" value="" disabled="disabled" />
+											</div>
+										</div>
+										<div class="form-group">
+											<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>图片位置</label>
+											<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+												<ul id="check_firstimgshowIndex" class="imgIndex">
+													<li>
+														<input type="checkbox" name="firstimgshowIndex" value="1" disabled="disabled" />一号位置
+													</li>
+													<li>
+														<input type="checkbox" name="firstimgshowIndex" value="2" disabled="disabled" />二号位置
+													</li>
+													<li>
+														<input type="checkbox" name="firstimgshowIndex" value="3" disabled="disabled" />三号位置
+													</li>
+													<li>
+														<input type="checkbox" name="firstimgshowIndex" value="4" disabled="disabled" />四号位置
+													</li>
+													<li>
+														<input type="checkbox" name="firstimgshowIndex" value="5" disabled="disabled" />五号位置
+													</li>
+													<li>
+														<input type="checkbox" name="firstimgshowIndex" value="6" disabled="disabled" />六号位置
+													</li>
+												</ul>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>图片内容</label>
+											<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+												<textarea name="firstimgshowContent" class="form-control" rows="2" cols="10" id="check_firstimgshowContent" disabled="disabled"></textarea>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>标题描述</label>
+											<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+												<textarea name="firstimgshowTitleDesc" class="form-control" id="check_firstimgshowTitleDesc" rows="2" cols="10" disabled="disabled"></textarea>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>状 态</label>
+											<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px' id="check_firstimgshowStatus">
+												<input type="radio" name='firstimgshowStatus' value="0" aria-describedby="basic-addon1" disabled="disabled" />启用
+												<input type="radio" name='firstimgshowStatus' value="1" aria-describedby="basic-addon1" disabled="disabled" />禁用
+											</div>
+										</div>
+										<div class="form-group">
+											<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>创建时间</label>
+											<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+												<input type="text" name="firstimgshowCreated" class="form-control" id="check_firstimgshowCreated" value="" disabled="disabled" />
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--/查看图片的详细信息-->
+	<!--编辑图片的详细信息-->
+	<div class="modal fade" id="editPicture" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="box">
+					<div class="box-body">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4><i class="fa fa-paperclip"></i>图片展示<small>--编辑</small></h4>
+						</div>
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+									<form class="bs-example-form form-horizontal formCss" role="form" method="post" novalidate="novalidate" id='updataImgInfo'>
+										<div class="form-group">
+											<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>机构名称</label>
+											<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+												<select class="form-control selectpicker" id="editOrgId" name="orgId">
+												</select>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label personal_save_btn' id="editBranchName">门店名称</label>
+											<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label personal_save_btn' id="editSuitName">套餐名称</label>
+											<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+												<select class="form-control selectpicker personal_save_btn" id="editBranchId" name="branchId">
+												</select>
+												<select class="form-control selectpicker personal_save_btn" id="editSuitId" name="examSuiteId">
+												</select>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>图片展示</label>
+											<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+												<div id="edit_firstimgshowImgId"></div>
+												<!--<ul id="edit_imgList"></ul>-->
+											</div>
+										</div>
+										<div class="form-group">
+											<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>图片标题</label>
+											<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+												<input type="text" class="form-control" name="firstimgshowTitle" id="edit_firstimgshowTitle" value="" />
+											</div>
+										</div>
+										<div class="form-group">
+											<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>图片位置</label>
+											<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+												<ul id="edit_firstimgshowIndex" class="imgIndex">
+													<li>
+														<input type="checkbox" name="firstimgshowIndex" value="1" />一号位置
+													</li>
+													<li>
+														<input type="checkbox" name="firstimgshowIndex" value="2" />二号位置
+													</li>
+													<li>
+														<input type="checkbox" name="firstimgshowIndex" value="3" />三号位置
+													</li>
+													<li>
+														<input type="checkbox" name="firstimgshowIndex" value="4" />四号位置
+													</li>
+													<li>
+														<input type="checkbox" name="firstimgshowIndex" value="5" />五号位置
+													</li>
+													<li>
+														<input type="checkbox" name="firstimgshowIndex" value="6" />六号位置
+													</li>
+												</ul>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>图片内容</label>
+											<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+												<textarea name="firstimgshowContent" class="form-control" id="check_firstimgshowContent"></textarea>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>标题描述</label>
+											<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+												<textarea name="firstimgshowTitleDesc" class="form-control" id="edit_firstimgshowTitleDesc"></textarea>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>状 态</label>
+											<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px' id="edit_firstimgshowStatus">
+												<input type="radio" name='firstimgshowStatus' value="0" aria-describedby="basic-addon1" />启用
+												<input type="radio" name='firstimgshowStatus' value="1" aria-describedby="basic-addon1" />禁用
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-default" data-dismiss="modal" onclick="updata_picture()">保存</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--/编辑门店图片的详细信息-->
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<script src="/plat/js/create/httpRequest.js"></script>
+	<script src="/plat/js/create/AjaxAddr.js"></script>
+	<script src="/plat/js/create/contentPublic.js"></script>
+	<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<script>
+		//机构下拉框回显
+		getOrganization('#addSuitOrgId,#addStoreOrgId');
+		//添加套餐信息下拉框回显
+		$('#addSuitOrgId').change(function() {
+				getSuiteByOrg('#addSuitOrgId', '#addSuitId');
+			})
+			//添加门店信息下拉框回显
+		$('#addStoreOrgId').change(function() {
+			getBranchByOrg('#addStoreOrgId', '#addStoreBranchId');
+		})
+
+		//选取门店图片
+		$('#addStoreBranchId').change(function() {
+			choseStoreImg();
+		})
+
+		function choseStoreImg() {
+			var addStoreOrgId = $('#addStoreOrgId').val();
+			var addStoreBranchId = $('#addStoreBranchId').val();
+			if(addStoreOrgId == '-1' || addStoreBranchId == '-1' || addStoreBranchId == null) {
+				alert('请输入完整信息！');
+				return false;
+			} else {
+				branchSuitPicture($("#addStoreBranchId").val(), '1');
+			}
+		}
+
+		//选取套餐图片
+		$('#addSuitId').change(function() {
+			choseSuitImg();
+		})
+
+		function choseSuitImg() {
+			var addSuitOrgId = $('#addSuitOrgId').val();
+			//			var addSuitBranchId = $('#addSuitBranchId').val();
+			var addSuitId = $('#addSuitId').val();
+			if(addSuitOrgId == '-1' || addSuitId == '-1') {
+				alert('请输入完整信息！');
+				return false;
+			} else {
+				branchSuitPicture($("#addSuitId").val(), '2');
+			}
+		}
+
+		//		图片动画
+		$('#addStorePictureShowId,#addSuitPictureShowId').on('click', 'li', function() {
+			if(!$(this).attr('value')) {
+				$(this).addClass('liOtherCss').removeClass('liCss').siblings().removeClass('liOtherCss').addClass('liCss');
+				$(this).attr('value');
+			} else {
+				$(this).addClass('liCss');
+				$(this).removeAttrttr('value');
+			}
+			return false;
+		})
+
+		//选择门店图片的位置
+		$('#storePosition').on('click', function() {
+				getImgIndex(1);
+			})
+			//选择套餐图片的位置
+		$('#suitPosition').on('click', function() {
+			getImgIndex(2);
+		})
+
+		function getImgIndex(num) {
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(pictureShow_getImgIndex_url, null, otype, osync);
+			if(reqResult.result == 0) {
+				if(reqResult.data != '') {
+					for(var i = 0; i < reqResult.data.length; i++) {
+						if(num == 1) {
+							switch(reqResult.data[i].index) {
+								case '1':
+									$($('#addStorePicturePositionId li').find('input')[0]).attr({
+										'checked': 'checked',
+										'disabled': 'disabled'
+									});
+									break;
+								case '2':
+									$($('#addStorePicturePositionId li').find('input')[1]).attr({
+										'checked': 'checked',
+										'disabled': 'disabled'
+									});
+									break;
+								case '3':
+									$($('#addStorePicturePositionId li').find('input')[2]).attr({
+										'checked': 'checked',
+										'disabled': 'disabled'
+									});
+									break;
+								case '4':
+									$($('#addStorePicturePositionId li').find('input')[3]).attr({
+										'checked': 'checked',
+										'disabled': 'disabled'
+									});
+									break;
+								case '5':
+									$($('#addStorePicturePositionId li').find('input')[4]).attr({
+										'checked': 'checked',
+										'disabled': 'disabled'
+									});
+									break;
+								case '6':
+									$($('#addStorePicturePositionId li').find('input')[5]).attr({
+										'checked': 'checked',
+										'disabled': 'disabled'
+									});
+									break;
+							}
+						} else {
+							switch(reqResult.data[i].index) {
+								case '1':
+									$($('#addSuitPicturePositionId li').find('input')[0]).attr({
+										'checked': 'checked',
+										'disabled': 'disabled'
+									});
+									break;
+								case '2':
+									$($('#addSuitPicturePositionId li').find('input')[1]).attr({
+										'checked': 'checked',
+										'disabled': 'disabled'
+									});
+									break;
+								case '3':
+									$($('#addSuitPicturePositionId li').find('input')[2]).attr({
+										'checked': 'checked',
+										'disabled': 'disabled'
+									});
+									break;
+								case '4':
+									$($('#addSuitPicturePositionId li').find('input')[3]).attr({
+										'checked': 'checked',
+										'disabled': 'disabled'
+									});
+									break;
+								case '5':
+									$($('#addSuitPicturePositionId li').find('input')[4]).attr({
+										'checked': 'checked',
+										'disabled': 'disabled'
+									});
+									break;
+								case '6':
+									$($('#addSuitPicturePositionId li').find('input')[5]).attr({
+										'checked': 'checked',
+										'disabled': 'disabled'
+									});
+									break;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		//		添加时   图片位置只能选取一个
+		$('#addSuitPicturePositionId,#addStorePicturePositionId').on('click', 'li', function() {
+				$(this).siblings().find("input").not('input[disabled="disabled"]').removeAttr('checked');
+			})
+			
+		//		编辑时   图片位置只能选取一个
+		$('#edit_firstimgshowIndex').on('click', 'li', function() {
+				$(this).siblings().find("input").not('input[disabled="disabled"]').removeAttr('checked');
+		})
+			//  列表信息
+		init_list();
+		//  列表展示
+		function init_list() {
+			$('#pictureShowTbody').empty();
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(pictureShow_showFirstImgDataList_url, null, otype, osync);
+			if(reqResult.result == 0) {
+				var showNum = reqResult.data.length;
+				if(reqResult.data != '') {
+					for(var i = 0; i < showNum; i++) {
+						var Tbody = document.getElementById('pictureShowTbody');
+						var lRow = Tbody.insertRow(); //创建行
+						var operationList = reqResult.operationList; //获取操作类型
+						var detailInfo = document.getElementById('detailInfo'); //获取添加按钮
+						//				判断操作类型
+						(operationList.firstImg_insert === false) ? detailInfo.style.display = 'none': detailInfo.style.display = ''; //1为添加
+						var firstimgshowStatus = (reqResult.data[i].firstimgshowStatus === 0) ? "启用" : "禁用";
+						//创建列
+						var firstColumn = lRow.insertCell();
+						var secondColumn = lRow.insertCell();
+						var thirdColumn = lRow.insertCell();
+						var forthColumn = lRow.insertCell();
+						var fifthColumn = lRow.insertCell();
+						var sixthColumn = lRow.insertCell();
+						var seventhColumn = lRow.insertCell();
+						firstColumn.setAttribute('firstimgshowId', reqResult.data[i].firstimgshowId); //给td添加属性
+						//添加第一列内容
+						//创建查看标签
+						var aCheck = document.createElement("a");
+						var iElement = document.createElement("i");
+						(operationList.firstImg_detail === true) ? iElement.className = "fa fa-eye": ''; //4为查看
+						aCheck.appendChild(iElement);
+						aCheck.setAttribute("href", "#checkPicture");
+						aCheck.setAttribute("data-toggle", "modal");
+						aCheck.setAttribute("title", "查看图片信息");
+						aCheck.style.marginLeft = "5px";
+						aCheck.onclick = function() {
+							check_picture(this)
+						};
+						firstColumn.appendChild(aCheck);
+
+						//创建编辑标签
+						var aEdit = document.createElement("a");
+						var iElement = document.createElement("i");
+						(operationList.firstImg_update === true) ? iElement.className = "fa fa-pencil": ''; //3为更新
+						aEdit.appendChild(iElement);
+						aEdit.setAttribute("href", "#editPicture");
+						aEdit.setAttribute("data-toggle", "modal");
+						aEdit.setAttribute("title", "编辑图片信息");
+						aEdit.style.marginLeft = "5px";
+						aEdit.onclick = function() {
+							edit_picture(this)
+						};
+						firstColumn.appendChild(aEdit);
+
+						//创建删除标签
+						var aDelete = document.createElement("a");
+						var iElement = document.createElement("i");
+						(operationList.firstImg_delete === true) ? iElement.className = "fa fa-trash-o": ''; //2为删除
+						aDelete.appendChild(iElement);
+						aDelete.setAttribute("title", "删除图片信息");
+						aDelete.style.marginLeft = "5px";
+						aDelete.onclick = function() {
+							del_picture(this)
+						};
+						firstColumn.appendChild(aDelete);
+						//添加第二列内容	
+						secondColumn.innerText = nullformat(reqResult.data[i].orgName);
+						//添加第三列内容	
+						thirdColumn.innerText = nullformat(reqResult.data[i].dataTypeName);
+						//添加第四列内容	
+						var imgNode = document.createElement("img");
+						imgNode.setAttribute('src', nullformat(reqResult.data[i].firstimgshowImgUrl));
+						imgNode.setAttribute('width', '40px');
+						imgNode.setAttribute('height', '40px');
+						forthColumn.appendChild(imgNode);
+						fifthColumn.innerText = nullformat(reqResult.data[i].firstimgshowIndex) + '号位';
+						//添加第五列内容
+						sixthColumn.innerText = getLocalTime(nullformat(reqResult.data[i].firstimgshowCreated));
+						//				添加第六列内容	
+						seventhColumn.innerText = firstimgshowStatus;
+
+					}
+				}
+			}
+			return false;
+		}
+		//添加门店
+		$('#addBranchInfo').on('click', function() {
+			var addStoreOrgId = $('#addStoreOrgId').val();
+			var addStoreBranchId = $('#addStoreBranchId').val();
+			var addStorePictureShowId = $('#addStorePictureShowId').find("li").length;
+			var addStorePicturePositionId = $('#addStorePicturePositionId li').find('input[type="checkbox"]:checked').not('input[disabled="disabled"]').length;
+			if(addStoreOrgId == '-1' || addStoreBranchId == '-1' || addStoreBranchId == null || addStorePictureShowId == 0 || addStorePicturePositionId == 0) {
+				alert('请输入完整信息！');
+				return false;
+			} else {
+				editStoreImg();
+			}
+		})
+
+		function editStoreImg() {
+			var firstimgshowDataOrgId = $('#addStoreOrgId').val();
+			var firstimgshowDataType = $('#addStoreBranchId').val();
+			var firstimgshowImgId = $('#addStorePictureShowId').find('li[class="liOtherCss"]').find('img').attr('id');
+			var firstimgshowImgUrl = $('#addStorePictureShowId').find('li[class="liOtherCss"]').find('img').attr('src');
+			var firstimgshowIndex = $('#addStorePicturePositionId li').find('input[type="checkbox"]:checked').not('input[disabled="disabled"]').val();
+			var param = {
+				"firstimgshowDataType": '1',
+				"firstimgshowDataId": firstimgshowDataType,
+				"firstimgshowDataOrgId": firstimgshowDataOrgId,
+				"firstimgshowImgId": firstimgshowImgId,
+				"firstimgshowImgUrl": firstimgshowImgUrl,
+				"firstimgshowIndex": firstimgshowIndex
+			};
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(pictureShow_addFirstImgData_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert('添加门店图片成功');
+				window.location.reload();
+			} else {
+				alert('添加门店图片失败!');
+			}
+		}
+		//添加套餐
+		$('#addSuitInfo').on('click', function() {
+			var addSuitOrgId = $('#addSuitOrgId').val();
+			//			var addSuitBranchId = $('#addSuitBranchId').val();
+			var addSuitId = $('#addSuitId').val();
+			var addSuitPictureShowId = $('#addSuitPictureShowId').find("li").length;
+			var addSuitPicturePositionId = $('#addSuitPicturePositionId li').find('input[type="checkbox"]:checked').not('input[disabled="disabled"]').length;
+			if(addSuitOrgId == '-1' || addSuitId == '-1' || addSuitPictureShowId == 0 || addSuitPicturePositionId == 0) {
+				alert('请输入完整信息！');
+				return false;
+			} else {
+				editSuitImg();
+			}
+		})
+
+		function editSuitImg() {
+			var firstimgshowDataOrgId = $('#addSuitOrgId').val();
+			var firstimgshowDataType = $('#addSuitId').val();
+			var firstimgshowImgId = $('#addSuitPictureShowId').find('li[class="liOtherCss"]').find('img').attr('id');
+			var firstimgshowImgUrl = $('#addSuitPictureShowId').find('li[class="liOtherCss"]').find('img').attr('src');
+			var firstimgshowIndex = $('#addSuitPicturePositionId li').find('input[type="checkbox"]:checked').not('input[disabled="disabled"]').val();
+			var param = {
+				"firstimgshowDataType": '2',
+				"firstimgshowDataId": firstimgshowDataType,
+				"firstimgshowDataOrgId": firstimgshowDataOrgId,
+				"firstimgshowImgId": firstimgshowImgId,
+				"firstimgshowImgUrl": firstimgshowImgUrl,
+				"firstimgshowIndex": firstimgshowIndex
+			};
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(pictureShow_addFirstImgData_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert('添加套餐图片成功');
+				window.location.reload();
+			} else {
+				alert('添加套餐图片失败!');
+			}
+
+		}
+		//	查看图片信息
+		function check_picture(id) {
+			var firstimgshowId = $(id).parent().attr('firstimgshowId');
+			var param = {
+				"firstimgshowId": firstimgshowId
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(pictureShow_getFirstImgDataById_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				//				回显机构
+				getOrganization('#checkOrgId');
+				$('#checkOrgId').val(reqResult.data.firstimgshowDataOrgId);
+				if(reqResult.data.firstimgshowDataType == 1) {
+					//				回显门店	
+					$('#branchName').show();
+					$('#suitName').hide();
+					$('#checkBranchId').show();
+					$('#checkSuitId').hide();
+					getBranchByOrg('#checkOrgId', '#checkBranchId');
+					$('#checkBranchId').val(reqResult.data.firstimgshowDataId);
+				} else {
+					//				回显套餐	
+					$('#branchName').hide();
+					$('#suitName').show();
+					$('#checkBranchId').hide();
+					$('#checkSuitId').show();
+					suitInfo($('#checkOrgId').val(), '#checkSuitId');
+					$('#checkSuitId').val(reqResult.data.firstimgshowDataId);
+				}
+				//回显图片
+				$('#check_firstimgshowImgId').empty().append('<img src="' + reqResult.data.firstimgshowImgUrl + '" class="width_100" id="' + reqResult.data.firstimgshowImgId + '"/>');
+				//回显图片标题
+				$('#check_firstimgshowTitle').val(nullformat(reqResult.data.firstimgshowTitle));
+				//回显图片标题描述
+				$('#check_firstimgshowTitleDesc').val(nullformat(reqResult.data.firstimgshowTitleDesc));
+				//回显图片位置
+				switch(nullformat(reqResult.data.firstimgshowIndex)) {
+					case 1:
+						$($('#check_firstimgshowIndex li').find('input')[0]).attr('checked', 'checked');
+						break;
+					case 2:
+						$($('#check_firstimgshowIndex li').find('input')[1]).attr('checked', 'checked');
+						break;
+					case 3:
+						$($('#check_firstimgshowIndex li').find('input')[2]).attr('checked', 'checked');
+						break;
+					case 4:
+						$($('#check_firstimgshowIndex li').find('input')[3]).attr('checked', 'checked');
+						break;
+					case 5:
+						$($('#check_firstimgshowIndex li').find('input')[4]).attr('checked', 'checked');
+						break;
+					case 6:
+						$($('#check_firstimgshowIndex li').find('input')[5]).attr('checked', 'checked');
+						break;
+				}
+				// 回显状态
+				if(reqResult.data.firstimgshowStatus == 0) {
+					$('#check_firstimgshowStatus input')[0].checked = 'checked';
+				} else {
+					$('#check_firstimgshowStatus input')[1].checked = 'checked';
+				}
+				//					回显时间
+				$('#check_firstimgshowCreated').val(getLocalTime(reqResult.data.firstimgshowCreated));
+			}
+		}
+
+		function edit_picture(id) {
+			var firstimgshowId = $(id).parent().attr('firstimgshowId');
+			var param = {
+				"firstimgshowId": firstimgshowId
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(pictureShow_getFirstImgDataById_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				//				回显机构
+				getOrganization('#editOrgId');
+				$('#editOrgId').val(reqResult.data.firstimgshowDataOrgId);
+				if(reqResult.data.firstimgshowDataType == 1) {
+					//				回显门店	
+					$('#editBranchName').show();
+					$('#editSuitName').hide();
+					$('#editBranchId').show();
+					$('#editSuitId').hide();
+					getBranchByOrg('#editOrgId', '#editBranchId');
+					$('#editBranchId').val(reqResult.data.firstimgshowDataId);
+				} else {
+					//				回显套餐	
+					$('#editBranchName').hide();
+					$('#editSuitName').show();
+					$('#editBranchId').hide();
+					$('#editSuitId').show();
+					suitInfo($('#editOrgId').val(), '#editSuitId');
+					$('#editSuitId').val(reqResult.data.firstimgshowDataId);
+				}
+				//回显图片
+				$('#edit_firstimgshowImgId').empty().append('<img src="' + reqResult.data.firstimgshowImgUrl + '" class="width_100" id="' + reqResult.data.firstimgshowImgId + '"/>');
+//				if(reqResult.data.imgList!=''){
+//					var str='';
+//					for(var i=0;i<reqResult.data.imgList.length;i++ ){
+//						str+='<li><img src="http://192.168.1.200'+reqResult.data.imgList[i].imgLocation+'" id="'+reqResult.data.imgList[i].imgId+'"/></li>';
+//					}
+//					$('#edit_imgList').empty().append(str);
+//				}
+				//回显图片标题
+				$('#edit_firstimgshowTitle').val(nullformat(reqResult.data.firstimgshowTitle));
+				//回显图片标题描述
+				$('#edit_firstimgshowTitleDesc').val(nullformat(reqResult.data.firstimgshowTitleDesc));
+				//回显图片位置
+				switch(nullformat(reqResult.data.firstimgshowIndex)) {
+					case 1:
+						$($('#edit_firstimgshowIndex li').find('input')[0]).attr({
+							'checked': 'checked',
+							'disabled': 'disabled'
+						});
+						break;
+					case 2:
+						$($('#edit_firstimgshowIndex li').find('input')[1]).attr({
+							'checked': 'checked',
+							'disabled': 'disabled'
+						});
+						break;
+					case 3:
+						$($('#edit_firstimgshowIndex li').find('input')[2]).attr({
+							'checked': 'checked',
+							'disabled': 'disabled'
+						});
+						break;
+					case 4:
+						$($('#edit_firstimgshowIndex li').find('input')[3]).attr({
+							'checked': 'checked',
+							'disabled': 'disabled'
+						});
+						break;
+					case 5:
+						$($('#edit_firstimgshowIndex li').find('input')[4]).attr({
+							'checked': 'checked',
+							'disabled': 'disabled'
+						});
+						break;
+					case 6:
+						$($('#edit_firstimgshowIndex li').find('input')[5]).attr({
+							'checked': 'checked',
+							'disabled': 'disabled'
+						});
+						break;
+				}
+				// 回显状态
+				if(reqResult.data.firstimgshowStatus == 0) {
+					$('#edit_firstimgshowStatus input')[0].checked = 'checked';
+				} else {
+					$('#edit_firstimgshowStatus input')[1].checked = 'checked';
+				}
+				//					回显时间
+				$('#edit_firstimgshowCreated').val(getLocalTime(reqResult.data.firstimgshowCreated));
+			}
+		}
+		//		保存修改内容
+		function updata_picture() {
+			var param = $('#updataImgInfo').serialize();
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(pictureShow_updateFirstImgData_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert('修改图片信息成功！');
+				window.location.reload();
+			}
+		}
+
+		//  删除信息
+		function del_picture(id) {
+			if(confirm("确认删除图片信息吗？")) {
+				var delInfo = $(id).parent().attr("firstimgshowId");
+				var param = {
+					"firstimgshowId": delInfo
+				};
+				var otype = "get";
+				var osync = false;
+				var reqResult = httpRequest(pictureShow_deleteFirstImgData_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert("删除成功！");
+					window.location.reload();
+				} else {
+					alert(reqResult.message);
+				}
+			}
+		}
+	</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

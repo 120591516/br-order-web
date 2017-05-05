@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		
+		<title>标软体检管理平台</title>
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<link rel="stylesheet" href="/plat/css/plugins/bootstrap.min.css">
+		<link rel="stylesheet" href="/plat/css/plugins/font-awesome.css">
+		<link rel="stylesheet" href="/plat/css/plugins/ionicons.min.css">
+		<link rel="stylesheet" href="/plat/css/plugins/AdminLTE.min.css">
+		<!--logo图标-->
+		<link rel="shortcut icon" href="/plat/img/logo.ico">
+		<!-- 换肤样式 -->
+		<link rel="stylesheet" href="/plat/css/plugins/_all-skins.min.css">
+		<!-- DataTables -->
+		<link rel="stylesheet" href="/plat/css/plugins/dataTables.bootstrap.css">
+		<link rel="stylesheet" href="/plat/css/styleLocalChange.css" />
+		<!--权限树样式-->
+		<link rel="stylesheet" href="/plat/css/plugins/zTreeStyle.css" />
+		<!--上传图片样式-->
+		<link rel="stylesheet" href="/plat/css/plugins/default.css" />
+		<link rel="stylesheet" href="/plat/css/plugins/fileinput.css" />
+		<!--form验证-->
+		<link rel="stylesheet" type="text/css" href="/plat/css/plugins/validator.css" />
+		<!--switch-->
+		<link rel="stylesheet" type="text/css" href="/plat/css/plugins/bootstrap-switch.css" />
+		<!--动画样式-->
+		<link rel="stylesheet" href="/plat/css/plugins/fakeLoader.css" />
+	</head>
+
+	<body class="hold-transition sidebar-mini skin-green">
+		<div class="wrapper">
+			<header class="main-header">
+				<!-- Logo -->
+				<a href="/plat/pages/system/index.shtml" class="logo">
+					<!-- mini logo 用于 sidebar mini 50x50px -->
+					<span class="logo-mini">管理平台</span>
+					<!-- 此logo 用于 正常状态和手机设备 -->
+					<span class="logo-lg">体检管理平台</span>
+				</a>
+				<!-- 头部导航条: 样式在 header.less -->
+				<nav class="navbar navbar-static-top">
+					<!-- 侧边栏切换按钮-->
+					<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+						<span class="sr-only">Toggle navigation</span>
+					</a>
+					<!--右上方导航条菜单-->
+					<div class="navbar-custom-menu">
+						<ul class="nav navbar-nav">
+							<!-- User Account: style can be found in dropdown.less -->
+							<li class="dropdown user user-menu">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									<img src="/plat/img/user2-160x160.jpg" class="user-image" alt="User Image">
+									<span class="hidden-xs" id="top-name"></span>
+								</a>
+								<ul class="dropdown-menu">
+									<!-- User image -->
+									<li class="user-header">
+										<img src="/plat/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+
+										<p id="top-text">
+											IT部 - 项目经理
+											<small>北京标软信息技术有限公司</small>
+										</p>
+									</li>
+									<!-- Menu Body -->
+									<!-- Menu Footer-->
+									<li class="user-footer">
+										<div class="pull-left">
+											<a href="/plat/pages/personSettings/personalInformation.shtml" class="btn btn-default btn-flat">个人信息</a>
+										</div>
+										<div class="pull-right">
+											<a class="btn btn-default btn-flat" onclick="logout()">退 出</a>
+										</div> 
+									</li>
+								</ul>
+							</li>
+							<!-- Control Sidebar Toggle Button 皮肤颜色修改-->
+							<!--<li>
+								<a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+							</li>-->
+						</ul>
+					</div>
+				</nav>
+			</header>
+			<!-- 左侧边栏内容 -->
+			<aside class="main-sidebar skin6">
+				<!-- 左侧边栏内容 -->
+				<section class="sidebar">
+					<!-- sidebar menu: : style can be found in sidebar.less -->
+					<ul class="sidebar-menu" id="left_ul">
+						<li class="treeview">
+							<a href="#">
+								<span></span>
+							</a>
+							<ul class="treeview-menu" id="second_ul">
+								<li>
+									<a href="#"></a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+			</aside>

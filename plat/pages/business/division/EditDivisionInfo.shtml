@@ -1,0 +1,157 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<div class="fakeloader"></div>
+	<!-- /Content Header (Page header) -->
+	<!-- Main content -->
+	<section class="content">
+		<!--头部S-->
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box width_70">
+					<div class="box-header">
+						<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">部门<small>--编辑</small></h3>
+						<div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
+							<button class="btn btn-default pull-right" onclick="storeManagementBack()">返回</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--头部E-->
+		<div class="box width_70">
+			<div class="box-body">
+				<form class="bs-example-form form-horizontal formCss" role="form" method="post" novalidate="novalidate" id='departmentInfo_editform'>
+					<input type="hidden" name="enterpriseDepId" id="edit_divisioninput_hid" value="" />
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>部门名称</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="edit_enterpriseDepName" class="form-control" name="enterpriseDepName" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="edit_enterpriseDepNameTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>部门等级</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<select name="enterpriseDepLevel" class="form-control" id='edit_enterpriseDepLevel'>
+								<option value="">全部</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="edit_enterpriseDepLevelTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>部门状态</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8' id="edit_enterpriseDepStatus">
+							<input type="radio" name="enterpriseDepStatus" aria-describedby="basic-addon1" maxlength='12' required value="0" checked="checked">启用
+							<input type="radio" name="enterpriseDepStatus" aria-describedby="basic-addon1" maxlength='12' required value='1'>禁用
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="row">
+				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2 user_power_btn">
+					<button type="submit" class="btn btn-default" id='edit_department_btn'>保存</button>
+					<a href="#" class="btn btn-default" onclick="storeManagementBack()">返 回</a>
+				</div>
+			</div>
+		</div>
+	</section>
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<script src="/plat/js/create/httpRequest.js"></script>
+	<script src="/plat/js/create/contentPublic.js"></script>
+	<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<script>
+		$(document).ready(function() {
+				edit_departInfo();
+				//				表单验证
+				$.formValidator.initConfig({
+					submitButtonID: "edit_department_btn",
+					debug: true,
+					onSuccess: function() {
+						editDivisionInfo();
+					},
+					onError: function() {
+						alert("添加失败，具体错误，请看网页上的提示！")
+					}
+				});
+
+				//部门名称
+				$('#edit_enterpriseDepName').on('change', function() {
+					$('#edit_enterpriseDepName').formValidator({
+						onShow: "请输入至少3字符的部门名称!",
+						onFocus: "请输入至少3字符的部门名称!",
+						onCorrect: "输入正确!"
+					}).inputValidator({
+						min: 3,
+						max: 20,
+						onError: "输入有误,请确认!"
+					})
+				})
+
+				//部门等级
+				$("#edit_enterpriseDepLevel").on('change', function() {
+					$("#edit_enterpriseDepLevel").formValidator({
+						onShow: "请选择部门等级",
+						onFocus: "部门等级必须选择",
+						onCorrect: "已选择"
+					}).inputValidator({
+						min: 1,
+						onError: "还未选择部门等级!"
+					});
+				})
+			})
+			//	部门信息回显
+		function edit_departInfo() {
+			var thisURL = document.URL;
+			var getval = thisURL.split('?')[1];
+			var judgeParam = getval.split("=")[1];
+			$('#edit_divisioninput_hid').val(judgeParam);
+			var param = {
+				"enterpriseDepId": judgeParam
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(department_getEnterpriseById_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				var check_enterpriseDepName = $('#edit_enterpriseDepName').val(reqResult.data.enterpriseDepName);
+				var check_enterpriseDepLevel = $('#edit_enterpriseDepLevel').val(reqResult.data.enterpriseDepLevel);
+				if(reqResult.data.enterpriseDepStatus == 0) {
+					$('#edit_enterpriseDepStatus input')[0].checked = "checked";
+				} else {
+					$('#edit_enterpriseDepStatus input')[1].checked = "checked";
+				}
+
+			} else {
+				alert(reqResult.message);
+			}
+			return false;
+		}
+		//		编辑修改保存信息	
+		function editDivisionInfo() {
+			var param = $('#departmentInfo_editform').serialize();
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(department_updateEnterpriseDep_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert('编辑成功');
+				window.location.href = '/plat/pages/business/division.shtml';
+				return false;
+			} else {
+				alert('编辑失败!');
+			}
+		}
+	</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

@@ -1,0 +1,752 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<div class="fakeloader"></div>
+	<section class="content-header">
+		<div class="margin-bottom">
+			<h2><small>支付方式</small></h2>
+		</div>
+		<ol class="breadcrumb">
+			<li>
+				<a href="#">字典维护</a>
+			</li>
+			<li class="active">支付方式</li>
+		</ol>
+	</section>
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<div class="box-header">
+						<div class="row">
+							<div class="col-md-8">
+								<h3 class="box-title margin">列表</h3>
+							</div>
+							<div class="col-md-4">
+								<div class="row">
+									<div class="col-md-4 col-md-offset-8">
+										<a href="#add_payway" data-toggle="modal" class="btn btn-default margin" id="addConTypeDic">添加</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="box-body">
+						<table class="table formCss">
+							<thead>
+								<tr>
+									<th>操作</th>
+									<th>支付方式名称</th>
+									<th>支付方式代码</th>
+									<th>输入码</th>
+									<th>支付方式拼音</th>
+									<th>备注</th>
+									<th>创建时间</th>
+									<th>状态</th>
+								</tr>
+								<tr class="warning no-result">
+									<td colspan="7"><i class="fa fa-warning"></i>没有任何搜索结果!</td>
+								</tr>
+							</thead>
+							<tbody id="payway_tbody_main">
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="row">
+							<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--模态框添加-->
+	<div class="modal fade" id="add_payway" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">支付方式</h4>
+				</div>
+				<div class="modal-body">
+					<form class="bs-example bs-example-form" role="form" id="add_payway_formNews">
+						<div class="input-group">
+							<span class="input-group-addon">支付方式名称</span>
+							<input type="text" id="add_payway_name" class="form-control" name="paywayName" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">支付方式代码</span>
+							<input type="text" id="add_payway_code" class="form-control check_userloginname_validate" name="paywayCode" aria-describedby="basic-addon1" maxlength='10' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_30">输入码</span>
+							<input type="text" id="add_payway_input_code" class="form-control check_userphone_validate" name="inputCode" aria-describedby="basic-addon1" required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">支付方式拼音</span>
+							<input type="text" id="add_keypayway" class="form-control check_userphone_validate" name="keypayway" aria-describedby="basic-addon1" required>
+						</div>
+                        <div class="input-group">
+							<span class="input-group-addon">备&nbsp;&nbsp;注</span>
+							<input type="text" id="add_note" class="form-control check_userphone_validate" name="note" aria-describedby="basic-addon1" required>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group inputs" id='add_payway_fIscash'>
+									<label class="control-label">使用现金</label>
+									<input type="checkbox" name='fIscash' value="0" class="userlist_statusinput_vertical" />是
+									<input type="checkbox" name='fIscash' value="1" class="userlist_statusinput_vertical" />否
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="input-group inputs" id='add_payway_fApplytoaccountonly'>
+									<label class="control-label">财务专用</label>
+									<input type="checkbox" name='fApplytoaccountonly' value="0" class="userlist_statusinput_vertical" />是
+									<input type="checkbox" name='fApplytoaccountonly' value="1" class="userlist_statusinput_vertical" />否
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6">
+								<div class="input-group inputs" id='add_payway_fApplytoOutp'>
+									<label class="control-label">用于门诊</label>
+									<input type="checkbox" name='fApplytoOutp' value="0" class="userlist_statusinput_vertical" />是
+									<input type="checkbox" name='fApplytoOutp' value="1" class="userlist_statusinput_vertical" />否
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="input-group inputs" id='add_payway_fApplytoInp'>
+									<label class="control-label">用于住院</label>
+									<input type="checkbox" name='fApplytoInp' value="0" class="userlist_statusinput_vertical" />是
+									<input type="checkbox" name='fApplytoInp' value="1" class="userlist_statusinput_vertical" />否
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6">
+								<div class="input-group inputs" id='add_payway_fApplytoOrg'>
+									<label class="control-label">用于团检</label>
+									<input type="checkbox" name='fApplytoOrg' value="0" class="userlist_statusinput_vertical" />是
+									<input type="checkbox" name='fApplytoOrg' value="1" class="userlist_statusinput_vertical" />否
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="input-group inputs" id='add_payway_fApplytoPerson'>
+									<label class="control-label">用于个人</label>
+									<input type="checkbox" name='fApplytoPerson' value="0" class="userlist_statusinput_vertical" />是
+									<input type="checkbox" name='fApplytoPerson' value="1" class="userlist_statusinput_vertical" />否
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6">
+								<div class="input-group inputs" id='add_payway_fReturntocash'>
+									<label class="control-label">可退现金</label>
+									<input type="checkbox" name='fReturntocash' value="0" class="userlist_statusinput_vertical" />是
+									<input type="checkbox" name='fReturntocash' value="1" class="userlist_statusinput_vertical" />否
+								</div>
+							</div>
+						</div>
+
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="submit" class="btn btn-primary" data-dismiss="modal" id="add_payway_btn">提交</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--模态框修改-->
+	<div class="modal fade" id="edit_payway" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">支付方式</h4>
+				</div>
+				<div class="modal-body">
+					<form class="bs-example bs-example-form" role="form" id="edit_payway_formNews">
+						<input type="hidden" name="idPayway" id="edit_idPayway_hidden" />
+
+						<div class="input-group">
+							<span class="input-group-addon">支付方式名称</span>
+							<input type="text" id="edit_payway_name" class="form-control" name="paywayName" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">支付方式代码</span>
+							<input type="text" id="edit_payway_code" class="form-control check_userloginname_validate" name="paywayCode" aria-describedby="basic-addon1" maxlength='10' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">输入码</span>
+							<input type="text" id="edit_payway_input_code" class="form-control check_userphone_validate" name="inputCode" aria-describedby="basic-addon1" required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">支付方式拼音</span>
+							<input type="text" id="edit_keypayway" class="form-control check_userphone_validate" name="keypayway" aria-describedby="basic-addon1" required>
+						</div>
+                        <div class="input-group">
+							<span class="input-group-addon">备&nbsp;&nbsp;注</span>
+							<input type="text" id="edit_payway_note" class="form-control check_userphone_validate" name="note" aria-describedby="basic-addon1" required>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group inputs" id='edit_payway_fIscash'>
+									<label class="control-label">使用现金</label>
+									<input type="checkbox" name='fIscash' value="0" class="userlist_statusinput_vertical" />是
+									<input type="checkbox" name='fIscash' value="1" class="userlist_statusinput_vertical" />否
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="input-group inputs" id='edit_payway_fApplytoaccountonly'>
+									<label class="control-label">财务专用</label>
+									<input type="checkbox" name='fApplytoaccountonly' value="0" class="userlist_statusinput_vertical" />是
+									<input type="checkbox" name='fApplytoaccountonly' value="1" class="userlist_statusinput_vertical" />否
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6">
+								<div class="input-group inputs" id='edit_payway_fApplytoOutp'>
+									<label class="control-label">用于门诊</label>
+									<input type="checkbox" name='fApplytoOutp' value="0" class="userlist_statusinput_vertical" />是
+									<input type="checkbox" name='fApplytoOutp' value="1" class="userlist_statusinput_vertical" />否
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="input-group inputs" id='edit_payway_fApplytoInp'>
+									<label class="control-label">用于住院</label>
+									<input type="checkbox" name='fApplytoInp' value="0" class="userlist_statusinput_vertical" />是
+									<input type="checkbox" name='fApplytoInp' value="1" class="userlist_statusinput_vertical" />否
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6">
+								<div class="input-group inputs" id='edit_payway_fApplytoOrg'>
+									<label class="control-label">用于团检</label>
+									<input type="checkbox" name='fApplytoOrg' value="0" class="userlist_statusinput_vertical" />是
+									<input type="checkbox" name='fApplytoOrg' value="1" class="userlist_statusinput_vertical" />否
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="input-group inputs" id='edit_payway_fApplytoPerson'>
+									<label class="control-label">用于个人</label>
+									<input type="checkbox" name='fApplytoPerson' value="0" class="userlist_statusinput_vertical" />是
+									<input type="checkbox" name='fApplytoPerson' value="1" class="userlist_statusinput_vertical" />否
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6">
+								<div class="input-group inputs" id='edit_payway_fReturntocash'>
+									<label class="control-label">可退现金</label>
+									<input type="checkbox" name='fReturntocash' value="0" class="userlist_statusinput_vertical" />是
+									<input type="checkbox" name='fReturntocash' value="1" class="userlist_statusinput_vertical" />否
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="input-group" id='edit_payway_fDisabled'>
+									<label class="control-label">状 &nbsp;&nbsp;&nbsp;&nbsp;态</label>
+									<input type="radio" name='fDisabled' value="0" class="userlist_statusinput_vertical" />启用
+									<input type="radio" name='fDisabled' value="1" class="userlist_statusinput_vertical" />禁用
+								</div>
+							</div>
+						</div>
+
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" id='edit_payway_save'>保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--模态框查看-->
+	<div class="modal fade" id="check_payway" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">支付方式</h4>
+				</div>
+				<div class="modal-body">
+					<form class="bs-example bs-example-form" role="form" id="check_payway_formNews">
+						<div class="input-group">
+							<span class="input-group-addon">支付方式名称</span>
+							<input type="text" id="check_payway_name" class="form-control" name="paywayName" aria-describedby="basic-addon1" disabled="disabled">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">支付方式代码</span>
+							<input type="text" id="check_payway_code" class="form-control check_userloginname_validate" name="paywayCode" aria-describedby="basic-addon1" disabled="disabled">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">输入码</span>
+							<input type="text" id="check_payway_input_code" class="form-control check_userphone_validate" name="inputCode" aria-describedby="basic-addon1" disabled="disabled">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">支付方式拼音</span>
+							<input type="text" id="check_keypayway" class="form-control check_userphone_validate" name="keypayway" aria-describedby="basic-addon1" disabled="disabled">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">备&nbsp;&nbsp;注</span>
+							<input type="text" id="check_payway_note" class="form-control check_userphone_validate" name="note" aria-describedby="basic-addon1" disabled="disabled">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">创建时间</span>
+							<input type="text" id="check_payway_create_time" class="form-control" name="createTime" aria-describedby="basic-addon1" disabled="disabled">
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group inputs" id='check_payway_fIscash'>
+									<label class="control-label">使用现金</label>
+									<input type="checkbox" name='fIscash' value="0" class="userlist_statusinput_vertical" disabled="disabled" />是
+									<input type="checkbox" name='fIscash' value="1" class="userlist_statusinput_vertical" disabled="disabled" />否
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="input-group inputs" id='check_payway_fApplytoaccountonly'>
+									<label class="control-label">财务专用</label>
+									<input type="checkbox" name='fApplytoaccountonly' value="0" class="userlist_statusinput_vertical" disabled="disabled" />是
+									<input type="checkbox" name='fApplytoaccountonly' value="1" class="userlist_statusinput_vertical" disabled="disabled" />否
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6">
+								<div class="input-group inputs" id='check_payway_fApplytoOutp'>
+									<label class="control-label">用于门诊</label>
+									<input type="checkbox" name='fApplytoOutp' value="0" class="userlist_statusinput_vertical" disabled="disabled" />是
+									<input type="checkbox" name='fApplytoOutp' value="1" class="userlist_statusinput_vertical" disabled="disabled" />否
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="input-group inputs" id='check_payway_fApplytoInp'>
+									<label class="control-label">用于住院</label>
+									<input type="checkbox" name='fApplytoInp' value="0" class="userlist_statusinput_vertical" disabled="disabled" />是
+									<input type="checkbox" name='fApplytoInp' value="1" class="userlist_statusinput_vertical" disabled="disabled" />否
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6">
+								<div class="input-group inputs" id='check_payway_fApplytoOrg'>
+									<label class="control-label">用于团检</label>
+									<input type="checkbox" name='fApplytoOrg' value="0" class="userlist_statusinput_vertical" disabled="disabled" />是
+									<input type="checkbox" name='fApplytoOrg' value="1" class="userlist_statusinput_vertical" disabled="disabled" />否
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="input-group inputs" id='check_payway_fApplytoPerson'>
+									<label class="control-label">用于个人</label>
+									<input type="checkbox" name='fApplytoPerson' value="0" class="userlist_statusinput_vertical" disabled="disabled" />是
+									<input type="checkbox" name='fApplytoPerson' value="1" class="userlist_statusinput_vertical" disabled="disabled" />否
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6">
+								<div class="input-group inputs" id='check_payway_fReturntocash'>
+									<label class="control-label">可退现金</label>
+									<input type="checkbox" name='fReturntocash' value="0" class="userlist_statusinput_vertical" disabled="disabled" />是
+									<input type="checkbox" name='fReturntocash' value="1" class="userlist_statusinput_vertical" disabled="disabled" />否
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="input-group" id='check_payway_fDisabled'>
+									<label class="control-label">状 &nbsp;&nbsp;&nbsp;&nbsp;态</label>
+									<input type="radio" name='fDisabled' value="0" class="userlist_statusinput_vertical" disabled="disabled" />启用
+									<input type="radio" name='fDisabled' value="1" class="userlist_statusinput_vertical" disabled="disabled" />禁用
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<script src="/plat/js/create/httpRequest.js"></script>
+	<script src="/plat/js/create/contentPublic.js"></script>
+	<script src="/plat/js/plugins/extendPagination.js"></script>
+							<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<script>
+	    //  checkbox单选方法
+	    $('.inputs').children('input[type=checkbox]').click(function(){
+            if($(this).is(':checked')){
+                $(this).attr('checked',true).siblings().attr('checked',false);
+            }else{
+                $(this).attr('checked',false).siblings().attr('checked',false);
+            }
+        })
+		//  分页
+		init_page();
+		function init_page() {
+			$('#payway_tbody_main').empty();
+			page_curr = 1;
+			init_list();
+			init_pager();
+		}
+		function init_list() {
+			$('#payway_tbody_main').empty();
+			var otype = "post";
+			var osync = false;
+			var param = {
+				"page": page_curr,
+				"rows": count_curr
+			};
+			var reqResult = httpRequest(payWay_getDictpaywayList_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				total_count = reqResult.data.total;
+				createTable(page_curr, limit, total_count, reqResult);
+			}
+			return false;
+		}
+		//  初始化分页信息
+		function init_pager() {
+			$('#callBackPager').extendPagination({
+				totalCount: total_count,
+				showCount: count_curr,
+				limit: limit,
+				callback: function(curr, limit, totalCount) {
+					page_curr = curr;
+					total_count = totalCount;
+					init_list();
+				}
+			});
+		}
+		//  展示列表信息
+		function createTable(currPage, limit, total, dataBack) {
+			var showNum = limit;
+			if(total - (currPage * limit) < 0) showNum = total - ((currPage - 1) * limit);
+			for(var i = 0; i < showNum; i++) {
+				var Tbody = document.getElementById('payway_tbody_main');
+				var lRow = Tbody.insertRow(); //创建行
+				var fDisabled = (dataBack.data.list[i].fDisabled === 0) ? "启用" : "禁用";
+				var operationByRole = dataBack.operationList; //获取操作类型
+				var operationByRoleAdd = document.getElementById('addConTypeDic'); //获取添加按钮
+				//				判断操作类型
+				(operationByRole.dictpayway_insert === false) ? operationByRoleAdd.style.display = 'none': operationByRoleAdd.style.display = ''; //1为添加
+				//创建列
+				var firstColumn = lRow.insertCell();
+				var secondColumn = lRow.insertCell();
+				var thirdColumn = lRow.insertCell();
+				var forthColumn = lRow.insertCell();
+				var fifthColumn = lRow.insertCell();
+				var sixthColumn = lRow.insertCell();
+				var seventhColumn = lRow.insertCell();
+				var eighthColumn = lRow.insertCell();
+				firstColumn.setAttribute('paywayid', dataBack.data.list[i].idPayway); //给td添加属性
+				//添加第一列内容
+				//创建查看标签
+				var aCheck = document.createElement("a");
+				var iElement = document.createElement("i");
+				(operationByRole.dictpayway_detail === true) ? iElement.className = "fa fa-eye":''; //4为查看
+				aCheck.appendChild(iElement);
+				aCheck.setAttribute("href", "#check_payway");
+				aCheck.setAttribute("data-toggle", "modal");
+				aCheck.style.marginLeft = "5px";
+				aCheck.onclick = function() {
+					check_payway(this)
+				};
+				firstColumn.appendChild(aCheck);
+				//创建编辑标签
+				var aEdit = document.createElement("a");
+				var iElement = document.createElement("i");
+				(operationByRole.dictpayway_update === true) ? iElement.className = "fa fa-pencil":''; //3为更新
+				aEdit.appendChild(iElement);
+				aEdit.setAttribute("href", "#edit_payway");
+				aEdit.setAttribute("data-toggle", "modal");
+				aEdit.style.marginLeft = "5px";
+				aEdit.onclick = function() {
+					edit_payway(this)
+				};
+				firstColumn.appendChild(aEdit);
+				//创建删除标签
+				var aDelete = document.createElement("a");
+				var iElement = document.createElement("i");
+				(operationByRole.dictpayway_delete === true) ? iElement.className = "fa fa-trash-o":''; //2为删除
+				aDelete.appendChild(iElement);
+				aDelete.style.marginLeft = "5px";
+				aDelete.onclick = function() {
+					del_payway(this)
+				};
+				firstColumn.appendChild(aDelete);
+				//添加第二列内容	
+				secondColumn.innerText = dataBack.data.list[i].paywayName;
+				//添加第三列内容	
+				thirdColumn.innerText = dataBack.data.list[i].paywayCode;
+				//添加第四列内容	
+				forthColumn.innerText = dataBack.data.list[i].inputCode;
+				//添加第五列内容	
+				fifthColumn.innerText = dataBack.data.list[i].keypayway;
+				//添加第六列内容	
+				sixthColumn.innerText = dataBack.data.list[i].note;
+				//添加第七列内容	
+				seventhColumn.innerText = getLocalTime(dataBack.data.list[i].createTime);
+				//添加第八列内容	
+				eighthColumn.innerText = fDisabled;
+			}
+			return false;
+		}
+		//  添加信息
+		$('#add_payway_btn').on('click', function() {
+				var payway_name = $('#add_payway_name').val();
+				var payway_code = $('#add_payway_code').val();
+				var keypayway = $('#add_keypayway').val();
+				var payway_note = $('#add_note').val();
+				var payway_inputcode = $('#add_payway_input_code').val();
+				var payway_fIscash = $('#edit_payway_fIscash input').val();
+				var payway_fApplytoaccountonly = $('#edit_payway_fApplytoaccountonly input').val();
+				var payway_fApplytoOutp = $('#edit_payway_fApplytoOutp input').val();
+				var payway_fApplytoInp = $('#edit_payway_fApplytoInp input').val();
+				var payway_fApplytoOrg = $('#edit_payway_fApplytoOrg input').val();
+				var payway_fApplytoPerson = $('#edit_payway_fApplytoPerson input').val();
+				var payway_fReturntocash = $('#edit_payway_fReturntocash input').val();
+				if(payway_name == '' || payway_code == '' || payway_inputcode == '' || keypayway == ''|| payway_note == '' ||
+				payway_fIscash == '' || payway_fApplytoaccountonly == '' || payway_fApplytoOutp == '' || payway_fApplytoInp == '' ||
+				payway_fApplytoOrg == '' || payway_fApplytoPerson == '' || payway_fReturntocash == '') {
+					alert('请输入完整信息');
+					return false;
+				} else {
+					var param = $('#add_payway_formNews').serialize();
+					var otype = "post";
+					var osync = false;
+					var reqResult = httpRequest(payWay_addDictpayway_url, param, otype, osync);
+					if(reqResult.result == 0) {
+						alert("添加成功");
+						window.location.reload();
+					} else {
+						alert(reqResult.message);
+					}
+				}
+			})
+		//	查看回显信息
+		function check_payway(check) {
+			var edit_payway_id = $(check).parent().attr("paywayid");
+			var param = {
+				"pid": edit_payway_id
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(payWay_getDictpaywayById_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				var paywayName = $('#check_payway_name');
+				var paywayCode = $('#check_payway_code');
+				var paywayInputcode = $('#check_payway_input_code');
+				var keypayway = $('#check_keypayway');
+				var note = $('#check_payway_note');
+				var fIscash = $('#check_payway_fIscash input');
+				var fApplytoInp = $('#check_payway_fApplytoInp input');
+				var fApplytoaccountonly = $('#check_payway_fApplytoaccountonly input');
+				var fApplytoOutp = $('#check_payway_fApplytoOutp input');
+				var fApplytoOrg = $('#check_payway_fApplytoOrg input');
+				var fApplytoPerson = $('#check_payway_fApplytoPerson input');
+				var fReturntocash = $('#check_payway_fReturntocash input');
+				var paywayCreatetime = $('#check_payway_create_time');
+				var fDisabled = $('#check_payway_fDisabled input');
+				paywayName.val(reqResult.data.paywayName);
+				note.val(reqResult.data.note);
+				paywayCode.val(reqResult.data.paywayCode);
+				paywayInputcode.val(reqResult.data.inputCode);
+				keypayway.val(reqResult.data.keypayway);
+				paywayCreatetime.val(getLocalTime(reqResult.data.createTime));
+				if(reqResult.data.fIscash == 0) {
+					fIscash[0].checked = "checked";
+				} else {
+					fIscash[1].checked = "checked";
+				}
+
+				if(reqResult.data.fApplytoInp == 0) {
+					fApplytoInp[0].checked = "checked";
+				} else {
+					fApplytoInp[1].checked = "checked";
+				}
+
+				if(reqResult.data.fApplytoaccountonly == 0) {
+					fApplytoaccountonly[0].checked = "checked";
+				} else {
+					fApplytoaccountonly[1].checked = "checked";
+				}
+
+				if(reqResult.data.fApplytoOutp == 0) {
+					fApplytoOutp[0].checked = "checked";
+				} else {
+					fApplytoOutp[1].checked = "checked";
+				}
+
+				if(reqResult.data.fApplytoOrg == 0) {
+					fApplytoOrg[0].checked = "checked";
+				} else {
+					fApplytoOrg[1].checked = "checked";
+				}
+
+				if(reqResult.data.fApplytoPerson == 0) {
+					fApplytoPerson[0].checked = "checked";
+				} else {
+					fApplytoPerson[1].checked = "checked";
+				}
+
+				if(reqResult.data.fReturntocash == 0) {
+					fReturntocash[0].checked = "checked";
+				} else {
+					fReturntocash[1].checked = "checked";
+				}
+
+				if(reqResult.data.fDisabled == 0) {
+					fDisabled[0].checked = "checked";
+				} else {
+					fDisabled[1].checked = "checked";
+				}
+			} else {
+				alert(reqResult.message);
+			}
+		}
+		//  删除信息
+		function del_payway(del_li) {
+			if(confirm("确认禁用该支付方式吗？")) {
+				var del_user_id = $(del_li).parent().attr("paywayid");
+				var param = {
+					"pid": del_user_id
+				};
+				var otype = "get";
+				var osync = false;
+				var reqResult = httpRequest(payWay_deleteDictpayway_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert("禁用成功！");
+					window.location.reload();
+				} else {
+					alert(reqResult.message);
+				}
+			}
+		}
+		//	編輯回显信息
+		function edit_payway(edit_li) {
+			var edit_payway_id = $(edit_li).parent().attr("paywayid");
+			var param = {
+				"pid": edit_payway_id
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(payWay_getDictpaywayById_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				$('#edit_idPayway_hidden').val(reqResult.data.idPayway); //回显
+				var paywayName = $('#edit_payway_name');
+				var paywayCode = $('#edit_payway_code');
+				var note = $('#edit_payway_code');
+				var keypayway = $('#edit_keypayway');
+				var paywayInputcode = $('#edit_payway_input_code');
+				var fDisabled = $('#edit_payway_fDisabled input');
+				var fIscash = $('#edit_payway_fIscash input');
+				var fApplytoaccountonly = $('#edit_payway_fApplytoaccountonly input');
+				var fApplytoOutp = $('#edit_payway_fApplytoOutp input');
+				var fApplytoInp = $('#edit_payway_fApplytoInp input');
+				var fApplytoOrg = $('#edit_payway_fApplytoOrg input');
+				var fApplytoPerson = $('#edit_payway_fApplytoPerson input');
+				var fReturntocash = $('#edit_payway_fReturntocash input');
+				paywayName.val(reqResult.data.paywayName);
+				note.val(reqResult.data.note);
+				paywayCode.val(reqResult.data.paywayCode);
+				keypayway.val(reqResult.data.keypayway);
+				paywayInputcode.val(reqResult.data.inputCode);
+				if(reqResult.data.fDisabled == 0) {
+					fDisabled[0].checked = "checked";
+				} else {
+					fDisabled[1].checked = "checked";
+				}
+				if(reqResult.data.fIscash == 0) {
+					fIscash[0].checked = "checked";
+				} else {
+					fIscash[1].checked = "checked";
+				}
+				if(reqResult.data.fApplytoaccountonly == 0) {
+					fApplytoaccountonly[0].checked = "checked";
+				} else {
+					fApplytoaccountonly[1].checked = "checked";
+				}
+				if(reqResult.data.fApplytoOutp == 0) {
+					fApplytoOutp[0].checked = "checked";
+				} else {
+					fApplytoOutp[1].checked = "checked";
+				}
+				if(reqResult.data.fApplytoInp == 0) {
+					fApplytoInp[0].checked = "checked";
+				} else {
+					fApplytoInp[1].checked = "checked";
+				}
+				if(reqResult.data.fApplytoOrg == 0) {
+					fApplytoOrg[0].checked = "checked";
+				} else {
+					fApplytoOrg[1].checked = "checked";
+				}
+				if(reqResult.data.fApplytoPerson == 0) {
+					fApplytoPerson[0].checked = "checked";
+				} else {
+					fApplytoPerson[1].checked = "checked";
+				}
+				if(reqResult.data.fReturntocash == 0) {
+					fReturntocash[0].checked = "checked";
+				} else {
+					fReturntocash[1].checked = "checked";
+				}
+			} else {
+				alert(reqResult.message);
+			}
+		}
+		//  编辑修改保存信息
+		$('#edit_payway_save').on('click', function() {
+			var editpayway_name = $('#edit_payway_name').val();
+			var editpayway_code = $('#edit_payway_code').val();
+			var editpayway_inputcode = $('#edit_payway_input_code').val();
+			var editpayway_fDisabled = $('#edit_payway_fDisabled input').val();
+			var editpayway_fIscash = $('#edit_payway_fIscash input').val();
+			var editpayway_fApplytoaccountonly = $('#edit_payway_fApplytoaccountonly input').val();
+			var editpayway_fApplytoOutp = $('#edit_payway_fApplytoOutp input').val();
+			var editpayway_fApplytoInp = $('#edit_payway_fApplytoInp input').val();
+			var editpayway_fApplytoOrg = $('#edit_payway_fApplytoOrg input').val();
+			var editpayway_fApplytoPerson = $('#edit_payway_fApplytoPerson input').val();
+			var editpayway_fReturntocash = $('#edit_payway_fReturntocash input').val();
+			if(editpayway_name == '' || editpayway_code == '' || editpayway_inputcode == '' || editpayway_fDisabled == '' ||
+				editpayway_fIscash == '' || editpayway_fApplytoaccountonly == '' || editpayway_fApplytoOutp == '' || editpayway_fApplytoInp == '' ||
+				editpayway_fApplytoOrg == '' || editpayway_fApplytoPerson == '' || editpayway_fReturntocash == '') {
+				alert('请输入完整信息！');
+				return false;
+			} else {
+				var param = $('#edit_payway_formNews').serialize();
+				var otype = "post";
+				var osync = false;
+				var reqResult = httpRequest(payWay_updateDictpayway_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert('编辑成功!');
+					window.location.reload();
+				} else {
+					alert(reqResult.message);
+				}
+			}
+		})
+	</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

@@ -1,0 +1,452 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<div class="fakeloader"></div>
+	<section class="content-header">
+		<div class="margin-bottom">
+			<h2><small>发票类型</small></h2>
+		</div>
+		<ol class="breadcrumb">
+			<li>
+				<a href="#">字典维护</a>
+			</li>
+			<li class="active">发票类型</li>
+		</ol>
+	</section>
+	<!-- /Content Header (Page header) -->
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<div class="box container-fluid no-margin">
+						<div class="box-header">
+							<div class="row margin-bottom">
+								<div class="col-md-2">
+									<h3 class="box-title">列表</h3>
+								</div>
+								<div class="col-md-1 col-md-offset-9">
+									<a href="#addReceipt" data-toggle="modal" class="btn btn-default" id="addConTypeDic">添加</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="box-body">
+						<table class="table formCss" id="tabReceipt">
+							<thead>
+								<tr>
+									<th>操作</th>
+									<th>发票类型名称</th>
+									<th>发票类型编码</th>
+									<th>发票类型输出</th>
+									<th>输入码</th>
+									<th>备注</th>
+									<th>创建时间</th>
+									<th>状态</th>
+								</tr>
+							</thead>
+							<tbody id="tbody_receipttype">
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="row">
+							<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /Main content -->
+	<!--模态框添加-->
+	<div class="modal fade" id="addReceipt" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">发票信息</h4>
+				</div>
+				<div class="modal-body">
+					<form class="bs-example bs-example-form" role="form" method="post" novalidate="novalidate" id='addReceipt_news'>
+						<div class="input-group">
+							<span class="input-group-addon">发票名称</span>
+							<input type="text" id="add_receipttypeName" class="form-control" name="receipttypeName" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">发票编码</span>
+							<input type="text" id="add_receipttypeCode" class="form-control" name="receipttypeCode" aria-describedby="basic-addon1" required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">发票类型</span>
+							<input type="text" id="add_receipttypeOutput" class="form-control" name="receipttypeOutput" aria-describedby="basic-addon1" required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">输入码</span>
+							<input type="text" id="add_inputCode" class="form-control" name="inputCode" aria-describedby="basic-addon1" required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">备注</span>
+							<input type="text" id="add_note" class="form-control" name="note" aria-describedby="basic-addon1" required>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="submit" class="btn btn-primary" data-dismiss="modal" id="addReceipt_btn">提交</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--模态框查看-->
+	<div class="modal fade" id="checkReceipt" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">发票信息</h4>
+				</div>
+				<div class="modal-body">
+					<form class="bs-example bs-example-form" role="form" method="post" novalidate="novalidate" id='addReceipt_news'>
+						<div class="input-group">
+							<span class="input-group-addon">发票名称</span>
+							<input type="text" id="check_receipttypeName" class="form-control" name="receipttypeName" aria-describedby="basic-addon1" maxlength='12' disabled="disabled">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">发票编码</span>
+							<input type="text" id="check_receipttypeCode" class="form-control" name="receipttypeCode" aria-describedby="basic-addon1" disabled="disabled">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">发票类型</span>
+							<input type="text" id="check_receipttypeOutput" class="form-control" name="receipttypeOutput" aria-describedby="basic-addon1" disabled="disabled">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">输入码</span>
+							<input type="text" id="check_inputCode" class="form-control" name="inputCode" aria-describedby="basic-addon1" disabled="disabled">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">备注</span>
+							<input type="text" id="check_note" class="form-control" name="note" aria-describedby="basic-addon1" disabled="disabled">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">创建时间</span>
+							<input type="text" id="check_receipttypeCreatetime" class="form-control" name="receipttypeCreatetime" aria-describedby="basic-addon1" disabled="disabled">
+						</div>
+						<div class="input-group" id='check_receipttypeStatus'>
+							<span class="input-group-addon">状 态</span>
+							<input type="radio" name='receipttypeStatus' value="0" class="userlist_statusinput_vertical" disabled="disabled" />启用
+							<input type="radio" name='receipttypeStatus' value="1" class="userlist_statusinput_vertical" disabled="disabled" />禁用
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--模态框编辑-->
+	<div class="modal fade" id="editReceipt" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">性别信息</h4>
+				</div>
+				<div class="modal-body">
+					<form class="bs-example bs-example-form" role="form" method="post" novalidate="novalidate" id='editReceipt_news'>
+						<input type="hidden" name="idReceipttype" id="edit_idReceipttype" value="" />
+						<div class="input-group">
+							<span class="input-group-addon">发票名称</span>
+							<input type="text" id="edit_receipttypeName" class="form-control" name="receipttypeName" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">发票编码</span>
+							<input type="text" id="edit_receipttypeCode" class="form-control" name="receipttypeCode" aria-describedby="basic-addon1" required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">发票类型</span>
+							<input type="text" id="edit_receipttypeOutput" class="form-control" name="receipttypeOutput" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">输入码</span>
+							<input type="text" id="edit_inputCode" class="form-control" name="inputCode" aria-describedby="basic-addon1" required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">备注</span>
+							<input type="text" id="edit_note" class="form-control" name="note" aria-describedby="basic-addon1" required>
+						</div>
+						<div class="input-group" id='edit_receipttypeStatus'>
+							<span class="input-group-addon">状 态</span>
+							<input type="radio" name='receipttypeStatus' value="0" class="userlist_statusinput_vertical" />启用
+							<input type="radio" name='receipttypeStatus' value="1" class="userlist_statusinput_vertical" />禁用
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" id='editReceiptTypeStatus_btn'>保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<script src="/plat/js/create/httpRequest.js"></script>
+	<script src="/plat/js/create/contentPublic.js"></script>
+	<script src="/plat/js/plugins/extendPagination.js"></script>
+							<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<script>
+		//  显示页面信息 
+		init_page();
+		function init_page() {
+			$('#tbody_receipttype').empty();
+			page_curr = 1;
+			init_list();
+			init_pager();
+		}
+		function init_list() {
+			$('#tbody_receipttype').empty();
+			var otype = "post";
+			var osync = false;
+			var param = {
+				"page": page_curr,
+				"rows": count_curr
+			};
+			var reqResult = httpRequest(receiptType_getDictreceipttypeList_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				total_count = reqResult.data.total;
+				createTable(page_curr, limit, total_count, reqResult);
+			}
+			return false;
+		}
+		// 初始化分页信息
+		function init_pager() {
+			$('#callBackPager').extendPagination({
+				totalCount: total_count,
+				showCount: count_curr,
+				limit: limit,
+				callback: function(curr, limit, totalCount) {
+					page_curr = curr;
+					total_count = totalCount;
+					init_list();
+				}
+			});
+		}
+		//  展示列表信息
+		function createTable(currPage, limit, total, dataBack) {
+			var showNum = limit;
+			if(total - (currPage * limit) < 0) showNum = total - ((currPage - 1) * limit);
+			for(var i = 0; i < showNum; i++) {
+				var Tbody = document.getElementById('tbody_receipttype');
+				var lRow = Tbody.insertRow(); //创建行
+				var receipttypeStatus = (dataBack.data.list[i].receipttypeStatus === 0) ? "启用" : "禁用";
+				var operationByRole = dataBack.operationList; //获取操作类型
+				var operationByRoleAdd = document.getElementById('addConTypeDic'); //获取添加按钮
+				//				判断操作类型
+				(operationByRole.dictreceipttype_insert === false) ? operationByRoleAdd.style.display = 'none': operationByRoleAdd.style.display = ''; //1为添加
+				//创建列
+				var firstColumn = lRow.insertCell();
+				var secondColumn = lRow.insertCell();
+				var thirdColumn = lRow.insertCell();
+				var forthColumn = lRow.insertCell();
+				var fifthColumn = lRow.insertCell();
+				var sixthColumn = lRow.insertCell();
+				var seventhColumn = lRow.insertCell();
+				var eighthColumn = lRow.insertCell();
+				firstColumn.setAttribute('receiptId', dataBack.data.list[i].idReceipttype); //给td添加属性
+				//添加第一列内容
+				//创建查看标签
+				var aCheck = document.createElement("a");
+				var iElement = document.createElement("i");
+				(operationByRole.dictreceipttype_detail === true) ? iElement.className = "fa fa-eye": ''; //4为查看
+				aCheck.appendChild(iElement);
+				aCheck.setAttribute("href", "#checkReceipt");
+				aCheck.setAttribute("data-toggle", "modal");
+				aCheck.style.marginLeft = "5px";
+				aCheck.onclick = function() {
+					check_receiptNews(this)
+				};
+				firstColumn.appendChild(aCheck);
+				//创建编辑标签
+				var aEdit = document.createElement("a");
+				var iElement = document.createElement("i");
+				(operationByRole.dictreceipttype_update === true) ? iElement.className = "fa fa-pencil": ''; //3为更新
+				aEdit.appendChild(iElement);
+				aEdit.setAttribute("href", "#editReceipt");
+				aEdit.setAttribute("data-toggle", "modal");
+				aEdit.style.marginLeft = "5px";
+				aEdit.onclick = function() {
+					edit_receiptNews(this)
+				};
+				firstColumn.appendChild(aEdit);
+				//创建删除标签
+				var aDelete = document.createElement("a");
+				var iElement = document.createElement("i");
+				(operationByRole.dictreceipttype_delete === true) ? iElement.className = "fa fa-trash-o": ''; //2为删除
+				aDelete.appendChild(iElement);
+				aDelete.style.marginLeft = "5px";
+				aDelete.onclick = function() {
+					del_receiptNews(this)
+				};
+				firstColumn.appendChild(aDelete);
+				//添加第二列内容	
+				secondColumn.innerText = dataBack.data.list[i].receipttypeName;
+				//添加第三列内容	
+				thirdColumn.innerText = dataBack.data.list[i].receipttypeCode;
+				//添加第四列内容	
+				forthColumn.innerText = dataBack.data.list[i].receipttypeOutput;
+				//添加第五列内容
+				fifthColumn.innerText = dataBack.data.list[i].inputCode;
+				//添加第六列内容
+				sixthColumn.innerText = dataBack.data.list[i].note;
+				//添加第七列内容	
+				seventhColumn.innerText = getLocalTime(dataBack.data.list[i].receipttypeCreatetime);
+				//添加第八列内容	
+				eighthColumn.innerText = receipttypeStatus;
+			}
+			return false;
+		}
+		//	添加信息
+		$('#addReceipt_btn').on('click', function() {
+			add_receiptNews();
+		})
+		function add_receiptNews() {
+			var add_receipttypeName = $('#add_receipttypeName').val();
+			var add_receipttypeCode = $('#add_receipttypeCode').val();
+			var add_inputCode = $('#add_inputCode').val();
+			var add_note = $('#add_note').val();
+			var add_receipttypeOutput = $('#add_receipttypeOutput').val();
+			if(add_receipttypeName == '' || add_receipttypeCode == '' || add_inputCode == ''||add_note == ''||add_receipttypeOutput == '') {
+				alert('请输入完整信息后添加！');
+				return false;
+			} else {
+				var param = $('#addReceipt_news').serialize();
+				var otype = "post";
+				var osync = false;
+				var reqResult = httpRequest(receiptType_addDictreceipttype_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert('添加成功！');
+					window.location.reload();
+				} else {
+					alert("error");
+				}
+			}
+		}
+		//	删除信息
+		function del_receiptNews(del_id) {
+			if(confirm("确认禁用该发票类型吗？")) {
+				var del_id = $(del_id).parent().attr("receiptId");
+				var param = {
+					"pid": del_id
+				};
+				var otype = "get";
+				var osync = false;
+				var reqResult = httpRequest(receiptType_deleteDictreceipttype_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert("禁用成功");
+					window.location.reload();
+				} else {
+					alert(reqResult.message);
+				}
+			}
+		}
+		//	查看回显信息
+		function check_receiptNews(check) {
+			var check_receiptid = $(check).parent().attr("receiptId");
+			var param = {
+				"pid": check_receiptid
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(receiptType_getDictreceipttypeById_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				var check_receipttypeName = $('#check_receipttypeName');
+				var check_receipttypeCode = $('#check_receipttypeCode');
+				var check_inputCode = $('#check_inputCode');
+				var check_receipttypeOutput = $('#check_receipttypeOutput');
+				var check_note = $('#check_note');
+				var check_receipttypeCreatetime = $('#check_receipttypeCreatetime');
+				var check_receipttypeStatus = $('#check_receipttypeStatus input');
+				check_receipttypeName.val(reqResult.data.receipttypeName);
+				check_receipttypeOutput.val(reqResult.data.receipttypeOutput);
+				check_note.val(reqResult.data.note);
+				check_receipttypeCode.val(reqResult.data.receipttypeCode);
+				check_inputCode.val(reqResult.data.inputCode);
+				check_receipttypeStatus.val(reqResult.data.receipttypeStatus);
+				check_receipttypeCreatetime.val(getLocalTime(reqResult.data.receipttypeCreatetime));
+				if(reqResult.data.receipttypeStatus == 0) {
+					check_receipttypeStatus[0].checked = "checked";
+				} else {
+					check_receipttypeStatus[1].checked = "checked";
+				}
+			} else {
+				alert(reqResult.message);
+			}
+		}
+		//	编辑回显信息
+		function edit_receiptNews(edit) {
+			var edit_user_id = $(edit).parent().attr("receiptId");
+			var param = {
+				"pid": edit_user_id
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(receiptType_getDictreceipttypeById_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				var edit_receipttypeName = $('#edit_receipttypeName');
+				var edit_receipttypeCode = $('#edit_receipttypeCode');
+				var edit_inputCode = $('#edit_inputCode');
+				var edit_receipttypeStatus = $('#edit_receipttypeStatus input');
+				var edit_receipttypeOutput = $('#edit_receipttypeOutput');
+				var edit_note = $('#edit_note');
+				$('#edit_idReceipttype').val(reqResult.data.idReceipttype);
+				edit_receipttypeName.val(reqResult.data.receipttypeName);
+				edit_receipttypeCode.val(reqResult.data.receipttypeCode);
+				edit_receipttypeOutput.val(reqResult.data.receipttypeOutput);
+				edit_note.val(reqResult.data.note);
+				edit_inputCode.val(reqResult.data.inputCode);
+				if(reqResult.data.receipttypeStatus == 0) {
+					edit_receipttypeStatus[0].checked = "checked";
+				} else {
+					edit_receipttypeStatus[1].checked = "checked";
+				}
+			} else {
+				alert(reqResult.message);
+			}
+		}
+		//  编辑保存信息
+		$('#editReceiptTypeStatus_btn').on('click', function() {
+			var edit_receipttypeName = $('#edit_receipttypeName').val();
+			var edit_receipttypeCode = $('#edit_receipttypeCode').val();
+			var edit_inputCode = $('#edit_inputCode').val();
+			var edit_receipttypeOutput = $('#edit_receipttypeOutput').val();
+			var edit_note = $('#edit_note').val();
+			var edit_receipttypeStatus = $('#edit_receipttypeStatus input').val();
+			if(edit_receipttypeName == '' || edit_receipttypeCode == '' || edit_inputCode == '' || edit_receipttypeStatus == ''||edit_receipttypeOutput == ''||edit_note == '') {
+				alert('请输入完整信息！');
+				return false;
+			} else {
+				var param = $('#editReceipt_news').serialize();
+				var otype = "post";
+				var osync = false;
+				var reqResult = httpRequest(receiptType_updateDictreceipttype_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert('编辑成功');
+					window.location.reload();
+				} else {
+					alert(reqResult.message);
+				}
+			}
+		})
+	</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

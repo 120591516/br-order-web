@@ -1,0 +1,171 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<div class="fakeloader"></div>
+	<section class="content-header">
+		<div class="margin-bottom">
+			<h2>
+				<small>绑定检查项</small>
+			</h2>
+		</div>
+		<ol class="breadcrumb">
+			<li>
+				<a href="#">体检中心</a>
+			</li>
+			<li>
+				<a href="#">收费项</a>
+			</li>
+			<li class="active">绑定检查项</li>
+		</ol>
+	</section>
+	<!-- /Content Header (Page header) -->
+	<!-- Main content -->
+	<section class="content">
+		<div class="box">
+			<div class="box-header">
+				<h3 class="box-title col-lg-6 col-md-6 col-sm-6 col-xs-6">列表</h3>
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 txt_r">
+					<a onclick="orgParam()" class="btn btn-default">添加</a>
+					<button type="button" onclick="storeManagementBack()" class="btn btn-default">返回</button>
+				</div>
+			</div>
+			<div class="box-body">
+				<table class="table formCss">
+					<thead>
+						<tr>
+							<th>操作</th>
+							<th>检查名称</th>
+							<th>适用性别</th>
+							<th>医生名称</th>
+							<th>所属科室</th>
+							<th>所属门店</th>
+							<th>所属机构</th>
+						</tr>
+						<tr class="warning no-result">
+							<td colspan="7"><i class="fa fa-warning"></i>没有任何搜索结果!</td>
+						</tr>
+					</thead>
+					<tbody id="ExamItemTbody">
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td class="getEitemId"></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="row">
+					<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<!-- Bootstrap 3.3.6 -->
+	<script src="/plat/js/plugins/bootstrap.min.js"></script>
+	<script src="/plat/js/create/httpRequest.js"></script>
+	<script src="/plat/js/create/public.js"></script>
+	<script src="/plat/js/create/AjaxAddr.js"></script>
+	<script src="/plat/js/plugins/extendPagination.js"></script>
+	<script src="/plat/js/create/contentPublic.js"></script>
+	<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<script>
+		function orgParam() {
+			window.location.href = 'addExamItemByFeeItem.shtml?id=' + getParamValue("id") + '&&orgId=' + getParamValue("orgId");
+		}
+		createTable();
+		getExamItemType();
+		//  列表展示
+		function createTable() {
+			var param = {
+				"page": page_curr,
+				"rows": count_curr,
+				"feeItemId": getParamValue('id')
+			};
+			$("#ExamItemTbody").empty();
+			var showNum = limit;
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(getOrgExamItemByFeeItemUrl, param, otype, osync);
+			if(reqResult.result == 0);
+			var str = '';
+			var datal = reqResult.data.list;
+			for(var i = 0; i < datal.length; i++) {
+				var Tbody = document.getElementById('ExamItemTbody');
+				var lRow = Tbody.insertRow(); //创建行
+				var sexName = (datal[i].fMale == 0 && datal[i].fFemale == 0) ? "通用" :
+					datal[i].fFemale == 0 && datal[i].fMale != 0 ? "女性" :
+					datal[i].fFemale != 0 && datal[i].fMale == 0 ? "男性" : "";
+				//创建列 
+				var firstColumn = lRow.insertCell();
+				var fifthColumn = lRow.insertCell();
+				var sixthColumn = lRow.insertCell();
+				var sevenColumn = lRow.insertCell();
+				var forthColumn = lRow.insertCell();
+				var thirdColumn = lRow.insertCell();
+				var secondColumn = lRow.insertCell();
+
+				firstColumn.setAttribute('examItemId', datal[i].examItemId);
+				firstColumn.setAttribute('examFeeItemDetailId', datal[i].examFeeItemDetailId); //给td添加属性
+				//添加第一列内容
+
+				//创建查看标签
+				var aCheck = document.createElement("a");
+				var iElement = document.createElement("i");
+				iElement.className = "fa fa-eye";
+				aCheck.appendChild(iElement);
+				aCheck.setAttribute("href", "/plat/pages/examination/charges/checkExamItem.shtml?organizationExamItemId=" + datal[i].organizationExamItemId);
+				aCheck.setAttribute("title", "查看信息");
+				aCheck.className = "suite-check";
+				aCheck.style.marginLeft = "5px";
+				firstColumn.appendChild(aCheck);
+
+				//创建删除标签
+				var aDelete = document.createElement("a");
+				var iElement = document.createElement("i");
+				iElement.className = "fa fa-trash-o";
+				aDelete.appendChild(iElement);
+				aDelete.style.marginLeft = "5px";
+				aDelete.onclick = function() {
+					delExamInfo(this)
+				};
+				firstColumn.appendChild(aDelete);
+				//添加第二列内容	
+				secondColumn.innerText = datal[i].orgName;
+				//添加第三列内容	
+				thirdColumn.innerText = datal[i].branchName;
+				//添加第四列内容	
+				forthColumn.innerText = datal[i].deptName;
+				//添加第五列内容	
+				fifthColumn.innerText = datal[i].examItemName;
+				//添加第六列内容	
+				sevenColumn.innerText = datal[i].userName;
+
+				sixthColumn.innerText = sexName;
+			}
+			return false;
+		}
+		//  删除
+		function delExamInfo(del_li) {
+			if(confirm("确认禁用该检查项吗？")) {
+				var delExam = $(del_li).parent().attr("examFeeItemDetailId");
+				var param = {
+					"examFeeItemDetailId": delExam
+				};
+				var otype = "get";
+				var osync = false;
+				var reqResult = httpRequest(org_exam_feeItem_detail_delete, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert("禁用成功！");
+					window.location.reload();
+				} else {
+					alert(reqResult.message);
+				}
+			}
+		}
+	</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

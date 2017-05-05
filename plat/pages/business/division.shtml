@@ -1,0 +1,273 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<div class="fakeloader"></div>
+	<section class="content-header">
+		<div class="margin-bottom">
+			<h2><small>部门</small></h2></div>
+		<ol class="breadcrumb">
+			<li>
+				<a href="#">企业</a>
+			</li>
+			<li class="active">部门</li>
+		</ol>
+		<div class="box">
+			<!--box-headerS -->
+			<div class="box-header">
+				<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">搜索</h3>
+				<div class="col-lg-2 col-md-3 col-sm-3 col-xs-3 txt_r">
+					<a href="/plat/pages/business/division/AddDivisionInfo.shtml" id="add_departmentInfo" class="btn btn-default">添加</a>
+					<button type="button" onclick="storeManagementBack()" class="btn btn-default">返回</button>
+				</div>
+			</div>
+			<!--box-headerE -->
+			<!--box-header -->
+			<div class="box-body">
+				<form class="bs-example-form padding_l42px" role="form">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon">公司全称</span>
+									<select name="enterpriseId" class="form-control" id="search_enterpriseId"></select>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon">公司代码</span>
+									<input type="text" class="form-control departmentInfo_search_form" name="enterpriseCode" id="search_enterpriseCode" aria-describedby="basic-addon1" maxlength='12' required>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon">部门名称</span>
+									<input type="text" class="form-control departmentInfo_search_form" name="enterpriseDepName" id="search_enterpriseDepName" aria-describedby="basic-addon1" maxlength='12' required>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon">部门等级</span>
+									<select name="enterpriseDepLevel" class="form-control" id="search_enterpriseDepLevel">
+										<option value="">全部</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-12 txt_r">
+								<div class="input-group float_right">
+									<input type="button" class="btn btn-default" id="search_departmentInfo_btn" value="搜索" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+
+			<!-- /.box-header -->
+		</div>
+	</section>
+	<!-- /Content Header (Page header) -->
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<!--box-header -->
+					<div class="box-header">
+						<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">列表</h3>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+						<table class="table formCss">
+							<thead>
+								<tr>
+									<th>编辑</th>
+									<th>公司全称</th>
+									<th>公司简称</th>
+									<th>公司代码</th>
+									<th>部门名称</th>
+									<th>部门等级</th>
+									<th>部门状态</th>
+									<th>创建时间</th>
+								</tr>
+								<tr class="warning no-result">
+									<td colspan="7"><i class="fa fa-warning"></i>没有任何搜索结果!</td>
+								</tr>
+							</thead>
+							<tbody id="departmentInfo_tbody">
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="row">
+							<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /Main content -->
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<script src="/plat/js/create/httpRequest.js"></script>
+	<script src="/plat/js/create/contentPublic.js"></script>
+	<script src="/plat/js/plugins/extendPagination.js"></script>
+	<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<script>
+		init_page();
+
+		function init_page() {
+			$('#departmentInfo_tbody').empty();
+			company_info('#search_enterpriseId', '0');
+			var thisURL = document.URL;
+			if(thisURL.indexOf("?") != -1) {
+				var getval = thisURL.split('?')[1];
+				var showval = getval.split("=")[1];
+				$("#search_enterpriseId").val(showval);
+			}
+			departmentInfoSearch();
+			//2.初始化分页信息
+			init_pager();
+		}
+
+		function departmentInfoSearch() {
+			var param = initParam();
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(department_getEnterpriseDep_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				//4.展示数据
+				total_count = reqResult.data.total;
+				createTable(page_curr, limit, total_count, reqResult);
+			}
+			return false;
+		}
+
+		// 初始化分页信息
+		function init_pager() {
+			$('#callBackPager').extendPagination({
+				totalCount: total_count,
+				showCount: count_curr,
+				limit: limit,
+				callback: function(curr, limit, totalCount) {
+					page_curr = curr;
+					total_count = totalCount;
+					departmentInfoSearch();
+				}
+			});
+		}
+
+		//初始化参数信息
+		function initParam() {
+			$('#departmentInfo_tbody').empty();
+			var enterpriseId = $("#search_enterpriseId").val();
+			var enterpriseCode = $("#search_enterpriseCode").val();
+			var enterpriseDepName = $("#search_enterpriseDepName").val();
+			var enterpriseDepLevel = $('#search_enterpriseDepLevel').val();
+			//抓取分页信息
+			var param = {
+				"page": page_curr,
+				"rows": count_curr
+			};
+			if(enterpriseId) {
+				param.enterpriseId = enterpriseId;
+			}
+			if(enterpriseCode) {
+				param.enterpriseCode = enterpriseCode;
+			}
+			if(enterpriseDepName) {
+				param.enterpriseDepName = enterpriseDepName;
+			}
+			if(enterpriseDepLevel) {
+				param.enterpriseDepLevel = enterpriseDepLevel;
+			}
+			return param;
+		}
+
+		function createTable(currPage, limit, total, dataBack) {
+			var showNum = limit;
+			if(total - (currPage * limit) < 0) showNum = total - ((currPage - 1) * limit);
+			var datal = dataBack.data.list;
+			//获取操作类型
+			var operationList = dataBack.operationList;
+			//			判断添加按钮
+			if(operationList.enterpriseDept_insert == true) {
+				$('#add_departmentInfo').show();
+			} else {
+				$('#add_departmentInfo').hide();
+			}
+			var str = '';
+			for(var i = 0; i < showNum; i++) {
+				str += "<tr><td enterpriseDepId='" + datal[i].enterpriseDepId + "' enterpriseId='" + datal[i].enterpriseId + "'>";
+				if(operationList.enterpriseDept_detail == true) {
+					str += "<a href='/plat/pages/business/division/CheckDivisionInfo.shtml?id=" + datal[i].enterpriseDepId + "' class='padding_4px' title='查看部门信息'><i class='fa fa-eye'></i></a> ";
+				}
+				if(operationList.enterpriseDept_update == true) {
+					str += "<a href='/plat/pages/business/division/EditDivisionInfo.shtml?id=" + datal[i].enterpriseDepId + "' class='padding_4px' title='编辑部门信息'><i class='fa fa-pencil'></i></a> ";
+				}
+				if(operationList.enterpriseDept_delete == true) {
+					str += "<a href='#' title='删除部门信息' class='padding_4px' onclick='del_departmentInfo(this)'><i class='fa fa-trash-o'></i></a>";
+				}
+				if(operationList.enterpriseDept_to_enterpriseEmp == true) {
+					str += "<a href='/plat/pages/business/employee.shtml?enterpriseId=" + datal[i].enterpriseId + "&enterpriseDepId=" + datal[i].enterpriseDepId + "' title='查看员工信息' class='padding_4px'><i class='fa fa-group'></i></a>";
+				}
+				str += "</td>";
+				str += "<td>" + nullformat(datal[i].enterpriseFullName) + "</td>";
+				str += "<td>" + nullformat(datal[i].enterpriseSimpleName) + "</td>";
+				str += "<td>" + nullformat(datal[i].enterpriseCode) + "</td>";
+				str += "<td>" + nullformat(datal[i].enterpriseDepName) + "</td>";
+				str += "<td>" + nullformat(datal[i].enterpriseDepLevel) + "</td>";
+				if(datal[i].enterpriseDepStatus == 0) {
+					str += "<td>" + '启用' + "</td>";
+				} else {
+					str += "<td>" + '禁用' + "</td>";
+				}
+				str += "<td>" + getLocalTime(datal[i].enterpriseDepCreateTime) + "</td>";
+				str += '</tr>';
+			}
+			$("#departmentInfo_tbody").append(str);
+			return false;
+		}
+		$('#search_departmentInfo_btn').on('click', function() {
+			departmentInfoSearch();
+			return false;
+		})
+		$('.departmentInfo_search_form').on('keydown', function(e) {
+			if(e && e.keyCode == 13) {
+				departmentInfoSearch();
+				return false;
+			}
+		})
+
+		function del_departmentInfo(del_li) {
+			if(confirm("确认删除该部门吗？")) {
+				var del_user_id = $(del_li).parent().attr("enterpriseDepId");
+				var param = {
+					"enterpriseDepId": del_user_id
+				};
+				var otype = "get";
+				var osync = false;
+				var reqResult = httpRequest(department_deleteEnterpriseDep_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert("删除成功");
+					window.location.reload();
+				} else {
+					alert(reqResult.message);
+				}
+			}
+		}
+	</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

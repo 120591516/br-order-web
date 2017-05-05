@@ -1,0 +1,428 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<div class="fakeloader"></div>
+	<section class="content-header">
+		<div class="margin-bottom">
+			<h2><small>科室</small></h2>
+		</div>
+		<ol class="breadcrumb">
+			<li>
+				<a href="#">字典维护</a>
+			</li>
+			<li class="active">科室</li>
+		</ol>
+	</section>
+	<!-- /Content Header (Page header) -->
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<!--box-header -->
+					<div class="box-header">
+						<div class="row">
+							<div class="col-md-8">
+								<h3 class="box-title">列表</h3>
+							</div>
+							<div class="col-md-2 txt_r">
+								<div class="input-group">
+									<input type="text" class="form-control" id="departmentType_search" placeholder="搜索" value="">
+									<span class="input-group-addon" id="departmentType_search_btn"><a href="" class="fa fa-search"></a></span>
+								</div>
+							</div>
+							<div class="col-md-2 txt_r">
+								<a href="#add_departmentType" id="addDeptDic" data-toggle="modal" class="btn btn-default">添加</a>
+							</div>
+						</div>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+						<table class="table formCss">
+							<thead>
+								<tr>
+									<th>编辑</th>
+									<th>科室姓名</th>
+									<th>创建时间</th>
+								</tr>
+								<tr class="warning no-result">
+									<td colspan="7"><i class="fa fa-warning"></i>没有任何搜索结果!</td>
+								</tr>
+							</thead>
+							<tbody id="departmentType_tbody_main">
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="row">
+							<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /Main content -->
+	<!--模态框添加-->
+	<div class="modal fade" id="add_departmentType" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="box">
+					<div class="box-body">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel">科室<small>--添加</small></h4>
+						</div>
+						<div class="modal-body">
+							<form class="bs-example-form form-horizontal formCss" role="form" id="add_departmentType_formNews">
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>科室名称</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px'>
+										<input type="text" id="add_dictDeptTypeName" class="form-control" name="dictDeptTypeName" aria-describedby="basic-addon1" maxlength='12' required>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3'>
+										<div id="add_dictDeptTypeNameTip"></div>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-defalut" data-dismiss="modal" id="add_departmentType_btn">提交</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--模态框修改-->
+	<div class="modal fade" id="edit_departmentType" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="box">
+					<div class="box-body">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title">科室<small>--编辑</small></h4>
+						</div>
+						<div class="modal-body">
+							<form class="bs-example-form form-horizontal formCss" role="form" id="edit_departmentType_formNews">
+								<input type="hidden" name="dictDeptTypeId" id="dictDeptTypeId" />
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>科室名称</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px'>
+										<input type="text" id="edit_dictDeptTypeName" class="form-control" name="dictDeptTypeName" aria-describedby="basic-addon1" maxlength='12' required>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3'>
+										<div id="edit_dictDeptTypeNameTip"></div>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-defalut" data-dismiss="modal" id='edit_departmentType_save'>保存</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--模态框查看-->
+	<div class="modal fade" id="check_dictDeptTypeName" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="box">
+					<div class="box-body">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title">科室<small>--查看</small></h4>
+						</div>
+						<div class="modal-body">
+							<form class="bs-example-form form-horizontal formCss" role="form" id="check_dictDeptTypeName_formNews">
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>科室名称</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px'>
+										<input type="text" id="check_dictDeptTypeNameInfo" class="form-control" name="dictDeptTypeName" aria-describedby="basic-addon1" disabled="disabled">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>创建时间</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px'>
+										<input type="text" id="check_dictDeptTypeCreateTime" class="form-control" name="dictDeptTypeCreateTime" aria-describedby="basic-addon1" disabled="disabled">
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<script src="/plat/js/create/httpRequest.js"></script>
+	<script src="/plat/js/create/contentPublic.js"></script>
+	<script src="/plat/js/plugins/extendPagination.js"></script>
+	<!--表单验证-->
+	<script src="/plat/js/plugins/formValidator-4.0.1.js"></script>
+	<script src="/plat/js/plugins/formValidatorRegex.js"></script>
+	<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<script>
+		//  分页
+		init_page();
+
+		function init_page() {
+			page_curr = 1;
+			$('#departmentType_tbody_main').empty();
+			//1.请求后端信息并展示
+			departmentTypeSearch();
+			init_pager();
+		}
+		//  初始化分页信息
+		function init_pager() {
+			$('#callBackPager').extendPagination({
+				totalCount: total_count,
+				showCount: count_curr,
+				limit: limit,
+				callback: function(curr, limit, totalCount) {
+					page_curr = curr;
+					total_count = totalCount;
+					departmentTypeSearch();
+				}
+			});
+		}
+		//	搜索科室
+		function departmentTypeSearch() {
+			var departmentTypeSearchValue = $('#departmentType_search').val().trim();
+			$('#departmentType_tbody_main').empty();
+			var param = {
+				"page": page_curr,
+				"rows": count_curr
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(departmentType_selectDeptTypeList_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				//4.展示数据
+				total_count = reqResult.data.total;
+				createTable(page_curr, limit, total_count, reqResult);
+			}
+			return false;
+		}
+		$('#departmentType_search_btn').on('click', function() {
+			departmentTypeSearch();
+			return false;
+		})
+		$('#departmentType_search').on('keydown', function(e) {
+				if(e && e.keyCode == 13) {
+					departmentTypeSearch();
+					return false;
+				}
+			})
+			//  显示列表信息
+		function createTable(currPage, limit, total, dataBack) {
+			var showNum = limit;
+			if(total - (currPage * limit) < 0) showNum = total - ((currPage - 1) * limit);
+			for(var i = 0; i < showNum; i++) {
+				var Tbody = document.getElementById('departmentType_tbody_main');
+				var lRow = Tbody.insertRow(); //创建行
+				var countryStatus = (dataBack.data.list[i].countryStatus === 0) ? "启用" : "禁用";
+				//				var operationByRole=dataBack.operationList;//获取操作类型
+				//				var operationByRoleAdd=document.getElementById('addDeptDic');//获取添加按钮
+				//				判断操作类型
+				//				(operationByRole.dictDeptType_insert===false)? operationByRoleAdd.style.display='none':operationByRoleAdd.style.display='';//1为添加
+				//创建列
+				var firstColumn = lRow.insertCell();
+				var secondColumn = lRow.insertCell();
+				var thirdColumn = lRow.insertCell();
+				firstColumn.setAttribute('dictDeptTypeId', dataBack.data.list[i].dictDeptTypeId); //给td添加属性
+				//添加第一列内容
+				//创建查看标签
+				var aCheck = document.createElement("a");
+				var iElement = document.createElement("i");
+				iElement.className = "fa fa-eye";
+				//				(operationByRole.dictDeptType_detail===true)?iElement.className = "fa fa-eye":'';//4为查看
+				aCheck.appendChild(iElement);
+				aCheck.setAttribute("href", "#check_dictDeptTypeName");
+				aCheck.setAttribute("data-toggle", "modal");
+				aCheck.style.marginLeft = "5px";
+				aCheck.onclick = function() {
+					check_dictDeptType(this)
+				};
+				firstColumn.appendChild(aCheck);
+				//创建编辑标签
+				var aEdit = document.createElement("a");
+				var iElement = document.createElement("i");
+				iElement.className = "fa fa-pencil";
+				//				(operationByRole.dictDeptType_update===true)?iElement.className = "fa fa-pencil":'';//3为更新
+				aEdit.appendChild(iElement);
+				aEdit.setAttribute("href", "#edit_departmentType");
+				aEdit.setAttribute("data-toggle", "modal");
+				aEdit.style.marginLeft = "5px";
+				aEdit.onclick = function() {
+					edit_dictDeptType(this)
+				};
+				firstColumn.appendChild(aEdit);
+				//创建删除标签
+				var aDelete = document.createElement("a");
+				var iElement = document.createElement("i");
+				iElement.className = "fa fa-trash-o";
+				//				(operationByRole.dictDeptType_delete===true)?iElement.className = "fa fa-trash-o":'';//2为删除
+				aDelete.appendChild(iElement);
+				aDelete.style.marginLeft = "5px";
+				aDelete.onclick = function() {
+					del_dictDeptType(this)
+				};
+				firstColumn.appendChild(aDelete);
+				//添加第二列内容	
+				secondColumn.innerText = dataBack.data.list[i].dictDeptTypeName;
+				//添加第四列内容	
+				thirdColumn.innerText = getLocalTime(dataBack.data.list[i].dictDeptTypeCreateTime);
+			}
+			return false;
+		}
+		//  添加信息	
+		//		表单验证
+		$('#addDeptDic').on('click', function() {
+			$.formValidator.initConfig({
+				submitButtonID: "add_departmentType_btn",
+				debug: true,
+				onSuccess: function() {
+					add_departmentTypeInfo();
+				},
+				onError: function() {
+					alert("添加失败，具体错误，请看网页上的提示！")
+				},
+				submitAfterAjaxPrompt: '有数据正在异步验证，请稍等...'
+			});
+			//科室名称
+			$("#add_dictDeptTypeName").formValidator({
+				onShow: "请输入科室名称!",
+				onFocus: "请输入不少于2字符的科室名称!"
+			}).inputValidator({
+				min: 2,
+				max: 30,
+				onError: "你输入的科室名称格式错误,请确认！"
+			})
+		})
+
+		function add_departmentTypeInfo() {
+			var add_dictDeptTypeName = $('#add_dictDeptTypeName').val();
+			if(add_dictDeptTypeName != '') {
+				var param = $('#add_departmentType_formNews').serialize();
+				var otype = "post";
+				var osync = false;
+				var reqResult = httpRequest(departmentType_addDeptType_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert("添加成功");
+					window.location.reload();
+				} else {
+					alert(reqResult.message);
+				}
+				return false;
+			}
+		}
+
+		//	查看用户信息
+		function check_dictDeptType(check) {
+			var check_dictDeptTypeId = $(check).parent().attr("dictDeptTypeId");
+			var param = {
+				"dictDeptTypeId": check_dictDeptTypeId
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(departmentType_getDeptTypeById_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				$('#check_dictDeptTypeNameInfo').val(reqResult.data.dictDeptTypeName);
+				$('#check_dictDeptTypeCreateTime').val(getLocalTime(reqResult.data.dictDeptTypeCreateTime));
+			} else {
+				alert(reqResult.message);
+			}
+		}
+		//  删除信息
+		function del_dictDeptType(del_li) {
+			if(confirm("确认删除该科室吗？")) {
+				var del_dictDeptTypeId = $(del_li).parent().attr("dictDeptTypeId");
+				var param = {
+					"dictDeptTypeId": del_dictDeptTypeId
+				};
+				var otype = "get";
+				var osync = false;
+				var reqResult = httpRequest(departmentType_deleteDeptType_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert("删除成功！");
+					window.location.reload();
+				} else {
+					alert(reqResult.message);
+				}
+			}
+		}
+		//	編輯回显信息
+		//		编辑时表单验证
+		$('a[href="#edit_departmentType"]').on('click', function() {
+			$.formValidator.initConfig({
+				submitButtonID: "edit_departmentType_save",
+				debug: true,
+				onSuccess: function() {
+					edit_dictDeptTypeInfo();
+				},
+				onError: function() {
+					alert("添加失败，具体错误，请看网页上的提示！")
+				},
+				submitAfterAjaxPrompt: '有数据正在异步验证，请稍等...'
+			});
+			//科室名称
+			$("#edit_dictDeptTypeName").on('change', function() {
+				$("#edit_dictDeptTypeName").formValidator({
+					onShow: "请输入科室名称!",
+					onFocus: "请输入不少于2字符的科室名称!"
+				}).inputValidator({
+					min: 2,
+					max: 30,
+					onError: "你输入的科室名称格式错误,请确认！"
+				})
+			})
+		})
+
+		function edit_dictDeptType(edit_li) {
+			var edit_dictDeptTypeId = $(edit_li).parent().attr("dictDeptTypeId");
+			var param = {
+				"dictDeptTypeId": edit_dictDeptTypeId
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(departmentType_getDeptTypeById_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				$('#dictDeptTypeId').val(reqResult.data.dictDeptTypeId);
+				$('#edit_dictDeptTypeName').val(reqResult.data.dictDeptTypeName);
+			} else {
+				alert(reqResult.message);
+			}
+		}
+		//  编辑保存信息
+		function edit_dictDeptTypeInfo() {
+			var param = $('#edit_departmentType_formNews').serialize();
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(departmentType_updateDeptType_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert('编辑成功!');
+				window.location.reload();
+			} else {
+				alert(reqResult.message);
+			}
+		}
+	</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

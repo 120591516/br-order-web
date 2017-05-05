@@ -1,0 +1,414 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<div class="fakeloader"></div>
+	<section class="content-header">
+		<div class="margin-bottom">
+			<h2><small>血型信息</small></h2>
+		</div>
+		<ol class="breadcrumb">
+			<li>
+				<a href="#">字典维护</a>
+			</li>
+			<li class="active">血型信息</li>
+		</ol>
+	</section>
+	<!-- /Content Header (Page header) -->
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<div class="box-header">
+						<div class="row">
+							<div class="col-md-8">
+								<h3 class="box-title col-md-11 margin">列表</h3>
+							</div>
+							<div class="col-md-4">
+								<div class="row">
+									<div class="col-md-8">
+										<form class="bs-example" role="form">
+											<div class="input-group">
+												<input type="text" class="form-control" name="" id="blood_search" placeholder="搜索" value="">
+												<span class="input-group-addon" id="blood_search_btn"><a href="" class="fa fa-search"></a></span>
+											</div>
+										</form>
+									</div>
+									<div class="col-md-4">
+										<a href="#add_blood_modal" data-toggle="modal" class="btn btn-default margin" id="addConTypeDic">添加</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="box-body">
+						<table class="table formCss">
+							<thead>
+								<tr>
+									<th>编辑</th>
+									<th>血型名称</th>
+									<th>血型编码</th>
+									<th>输入码</th>
+									<th>血型备注</th>
+									<th>创建时间</th>
+									<th>状态</th>
+								</tr>
+								<tr class="warning no-result">
+									<td colspan="7"><i class="fa fa-warning"></i>没有任何搜索结果!</td>
+								</tr>
+							</thead>
+							<tbody id="blood_tbody_main">
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /Main content -->
+	<!--模态框-->
+	<div class="modal fade" id="add_blood_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">血型信息</h4>
+				</div>
+				<div class="modal-body">
+					<form class="bs-example bs-example-form" role="form" method="post" novalidate="novalidate" id='add_bloodNews'>
+						<div class="input-group">
+							<span class="input-group-addon">血型名称</span>
+							<input type="text" id="add_bloodtypeName" class="form-control" name="bloodtypeName" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">血型编码</span>
+							<input type="text" id="add_bloodtypeCode" class="form-control" name="bloodtypeCode" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">输入码</span>
+							<input type="text" id="add_inputCode" class="form-control" name="inputCode" aria-describedby="basic-addon1" required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">血型备注</span>
+							<input type="text" id="add_note" class="form-control" name="note" aria-describedby="basic-addon1" required>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="submit" class="btn btn-primary" data-dismiss="modal" id="add_bloodType_btn">提交</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--模态框查看-->
+	<div class="modal fade" id="check_blood_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">血型信息</h4>
+				</div>
+				<div class="modal-body">
+					<form class="bs-example bs-example-form" role="form" id="check_bloodNews">
+						<div class="input-group">
+							<span class="input-group-addon">血型名称</span>
+							<input type="text" id="check_bloodtypeName" class="form-control" name="bloodtypeName" aria-describedby="basic-addon1" disabled="disabled">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">血型编码</span>
+							<input type="text" id="check_bloodtypeCode" class="form-control" name="bloodtypeCode" aria-describedby="basic-addon1" disabled="disabled">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">输入码</span>
+							<input type="text" id="check_inputCode" class="form-control" name="inputCode" aria-describedby="basic-addon1" disabled="disabled">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">血型备注</span>
+							<input type="text" id="check_note" class="form-control" name="note" aria-describedby="basic-addon1" disabled="disabled">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">创建时间</span>
+							<input type="text" id="check_bloodtypeCreatetime" class="form-control" name="bloodtypeCreatetime" aria-describedby="basic-addon1" disabled="disabled">
+						</div>
+						<div class="input-group" id='check_bloodtypeStatus'>
+							<span class="input-group-addon">状 态</span>
+							<input type="radio" name='bloodtypeStatus' value="0" class="userlist_statusinput_vertical" disabled="disabled" />启用
+							<input type="radio" name='bloodtypeStatus' value="1" class="userlist_statusinput_vertical" disabled="disabled" />禁用
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--模态框修改-->
+	<div class="modal fade" id="edit_blood_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel_edit">血型信息</h4>
+				</div>
+				<div class="modal-body">
+					<form class="bs-example bs-example-form" role="form" id="edit_bloodNews">
+						<input type="hidden" name="idBloodtype" id="edit_idBloodtype" value="" />
+						<div class="input-group">
+							<span class="input-group-addon">血型名称</span>
+							<input type="text" id="edit_bloodtypeName" class="form-control" name="bloodtypeName" aria-describedby="basic-addon1">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">血型编码</span>
+							<input type="text" id="edit_bloodtypeCode" class="form-control" name="bloodtypeCode" aria-describedby="basic-addon1">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">输入码</span>
+							<input type="text" id="edit_inputCode" class="form-control" name="inputCode" aria-describedby="basic-addon1">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">血型备注</span>
+							<input type="text" id="edit_note" class="form-control" name="note" aria-describedby="basic-addon1">
+						</div>
+						<div class="input-group" id='edit_bloodtypeStatus'>
+							<span class="input-group-addon">状 态</span>
+							<input type="radio" name='bloodtypeStatus' value="0" class="userlist_statusinput_vertical" />启用
+							<input type="radio" name='bloodtypeStatus' value="1" class="userlist_statusinput_vertical" />禁用
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" id='edit_bloodType_btn'>保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<script src="/plat/js/create/httpRequest.js"></script>
+	<script src="/plat/js/create/contentPublic.js"></script>
+	<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<script>
+		//  展示列表信息
+		$(document).ready(function() {
+			bloodTable();
+		})
+
+		function bloodTable() {
+			$("#blood_tbody_main").empty();
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(bloodType_getAllBloodType_url, null, otype, osync);
+			if(reqResult.result == 0) {
+				var str = '';
+				var datal = reqResult.data;
+				for(var i = 0; i < datal.length; i++) {
+					var Tbody = document.getElementById('blood_tbody_main');
+					var lRow = Tbody.insertRow(); //创建行
+					var bloodtypeStatus = (datal[i].bloodtypeStatus === 0) ? "启用" : "禁用";
+					var operationByRole = reqResult.operationList; //获取操作类型
+					var operationByRoleAdd = document.getElementById('addConTypeDic'); //获取添加按钮
+					//				判断操作类型
+					(operationByRole.bloodTypeManage_insert === false) ? operationByRoleAdd.style.display = 'none': operationByRoleAdd.style.display = ''; //1为添加
+					//创建列
+					var firstColumn = lRow.insertCell();
+					var secondColumn = lRow.insertCell();
+					var thirdColumn = lRow.insertCell();
+					var forthColumn = lRow.insertCell();
+					var fifthColumn = lRow.insertCell();
+					var sixthColumn = lRow.insertCell();
+					var seventhColumn = lRow.insertCell();
+					firstColumn.setAttribute('booldId', datal[i].idBloodtype); //给td添加属性
+					//添加第一列内容
+					//创建查看标签
+					var aCheck = document.createElement("a");
+					var iElement = document.createElement("i");
+					(operationByRole.bloodTypeManage_detail===true)?iElement.className = "fa fa-eye":'';//4为查看
+					aCheck.appendChild(iElement);
+					aCheck.setAttribute("href", "#check_blood_modal");
+					aCheck.setAttribute("data-toggle", "modal");
+					aCheck.style.marginLeft = "5px";
+					aCheck.onclick = function() {
+						check_bloodNews(this)
+					};
+					firstColumn.appendChild(aCheck);
+					//创建编辑标签
+					var aEdit = document.createElement("a");
+					var iElement = document.createElement("i");
+					(operationByRole.bloodTypeManage_update===true)?iElement.className = "fa fa-pencil":'';//3为更新
+					aEdit.appendChild(iElement);
+					aEdit.setAttribute("href", "#edit_blood_modal");
+					aEdit.setAttribute("data-toggle", "modal");
+					aEdit.style.marginLeft = "5px";
+					aEdit.onclick = function() {
+						edit_bloodNews(this)
+					};
+					firstColumn.appendChild(aEdit);
+					//创建删除标签
+					var aDelete = document.createElement("a");
+					var iElement = document.createElement("i");
+					(operationByRole.bloodTypeManage_delete===true)?iElement.className = "fa fa-trash-o":'';//2为删除
+					aDelete.appendChild(iElement);
+					aDelete.style.marginLeft = "5px";
+					aDelete.onclick = function() {
+						del_bloodNews(this)
+					};
+					firstColumn.appendChild(aDelete);
+					//添加第二列内容	
+					secondColumn.innerText = datal[i].bloodtypeName;
+					//添加第三列内容	
+					thirdColumn.innerText = datal[i].bloodtypeCode;
+					//添加第四列内容	
+					forthColumn.innerText = datal[i].inputCode;
+					//添加第五列内容	
+					fifthColumn.innerText = datal[i].note;
+					//添加第六列内容	
+					sixthColumn.innerText = getLocalTime(datal[i].bloodtypeCreatetime);
+					//添加第七列内容	
+					seventhColumn.innerText = bloodtypeStatus;
+				}
+				return false;
+			}
+		}
+		//	添加血型信息
+		$('#add_bloodType_btn').on('click', function() {
+			add_bloodNews();
+		})
+
+		function add_bloodNews() {
+			var add_bloodtypeName = $('#add_bloodtypeName').val();
+			var add_bloodtypeCode = $('#add_bloodtypeCode').val();
+			var add_inputCode = $('#add_inputCode').val();
+			var add_note = $('#add_note').val();
+			if(add_bloodtypeName == '' || add_bloodtypeCode == '' || add_inputCode == '' || add_note == '') {
+				alert('请输入完整信息后添加！');
+				return false;
+			} else {
+				var param = $('#add_bloodNews').serialize();
+				var otype = "post";
+				var osync = false;
+				var reqResult = httpRequest(bloodType_addBloodType_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert('添加成功！');
+					window.location.reload();
+				} else {
+					alert("error");
+				}
+			}
+		}
+		//	删除血型信息
+		function del_bloodNews(del_li) {
+			if(confirm("确认删除该血型吗？")) {
+				var del_blood_id = $(del_li).parent().attr("booldId");
+				var param = {
+					"idBloodtype": del_blood_id
+				};
+				var otype = "get";
+				var osync = false;
+				var reqResult = httpRequest(bloodType_deleteBloodType_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert("删除成功");
+					window.location.reload();
+				} else {
+					alert(reqResult.message);
+				}
+			}
+		}
+		//	查看血型信息
+		function check_bloodNews(check) {
+			var check_bloodid = $(check).parent().attr("booldId");
+			var param = {
+				"idBloodtype": check_bloodid
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(bloodType_getBloodTypeById_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				var check_bloodtypeName = $('#check_bloodtypeName');
+				var check_bloodtypeCode = $('#check_bloodtypeCode');
+				var check_inputCode = $('#check_inputCode');
+				var check_note = $('#check_note');
+				var check_bloodtypeCreatetime = $('#check_bloodtypeCreatetime');
+				var check_bloodtypeStatus = $('#check_bloodtypeStatus input');
+				check_bloodtypeName.val(reqResult.data.bloodtypeName);
+				check_bloodtypeCode.val(reqResult.data.bloodtypeCode);
+				check_inputCode.val(reqResult.data.inputCode);
+				check_note.val(reqResult.data.note);
+				check_bloodtypeCreatetime.val(getLocalTime(reqResult.data.bloodtypeCreatetime));
+				if(reqResult.data.bloodtypeStatus == 0) {
+					check_bloodtypeStatus[0].checked = "checked";
+				} else {
+					check_bloodtypeStatus[1].checked = "checked";
+				}
+			} else {
+				alert(reqResult.message);
+			}
+		}
+		//	编辑回显血型信息
+		function edit_bloodNews(edit) {
+			var edit_blood_id = $(edit).parent().attr("booldId");
+			var param = {
+				"idBloodtype": edit_blood_id
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(bloodType_getBloodTypeById_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				var edit_bloodtypeName = $('#edit_bloodtypeName');
+				var edit_bloodtypeCode = $('#edit_bloodtypeCode');
+				var edit_inputCode = $('#edit_inputCode');
+				var edit_note = $('#edit_note');
+				var edit_bloodtypeCreatetime = $('#edit_bloodtypeCreatetime');
+				var edit_bloodtypeStatus = $('#edit_bloodtypeStatus input');
+				$('#edit_idBloodtype').val(reqResult.data.idBloodtype);
+				edit_bloodtypeName.val(reqResult.data.bloodtypeName);
+				edit_bloodtypeCode.val(reqResult.data.bloodtypeCode);
+				edit_inputCode.val(reqResult.data.inputCode);
+				edit_note.val(reqResult.data.note);
+				edit_bloodtypeCreatetime.val(getLocalTime(reqResult.data.bloodtypeCreatetime));
+				if(reqResult.data.bloodtypeStatus == 0) {
+					edit_bloodtypeStatus[0].checked = "checked";
+				} else {
+					edit_bloodtypeStatus[1].checked = "checked";
+				}
+			} else {
+				alert(reqResult.message);
+			}
+		}
+		//  编辑保存信息
+		$('#edit_bloodType_btn').on('click', function() {
+			var edit_bloodtypeName = $('#edit_bloodtypeName').val();
+			var edit_bloodtypeCode = $('#edit_bloodtypeCode').val();
+			var edit_inputCode = $('#edit_inputCode').val();
+			var edit_note = $('#edit_note').val();
+			var edit_bloodtypeStatus = $('#edit_bloodtypeStatus input').val();
+			if(edit_bloodtypeName == '' || edit_bloodtypeCode == '' || edit_inputCode == '' || edit_note == '' || edit_bloodtypeStatus == '') {
+				alert('请输入完整信息！');
+				return false;
+			} else {
+				var param = $('#edit_bloodNews').serialize();
+				var otype = "post";
+				var osync = false;
+				var reqResult = httpRequest(bloodType_updateBloodType_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert('编辑成功');
+					window.location.reload();
+				} else {
+					alert(reqResult.message);
+				}
+			}
+		})
+	</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

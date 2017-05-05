@@ -1,0 +1,733 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<div class="fakeloader"></div>
+	<section class="content-header">
+		<div class="margin-bottom">
+			<h2><small>权限管理</small></h2>
+		</div>
+		<ol class="breadcrumb">
+			<li>
+				<a href="#">系统设置</a>
+			</li>
+			<li class="active">权限管理</li>
+		</ol>
+	</section>
+	<section class="content">
+		<div class='row'>
+			<div class="col-lg-12">
+				<div class="box">
+					<!--box-header -->
+					<div class="box-header">
+						<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">权限设置</h3>
+						<div class='col-lg-2 col-md-3 col-sm-3 col-xs-3 row'>
+							<button type='button' class='col-lg-4 col-md-4 col-xs-4 col-sm-4 node_name' id='user_power_addbtn'>新增</button>
+						</div>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body zTreeDemoBackground left row">
+						<div class="col-lg-1"></div>
+						<ul id="treeDemo" class="ztree col-lg-3"></ul>
+						<div class="col-lg-6" id='user_edit_function'>
+							<div class="row">
+								<ul class="nav nav-tabs nav-justified" id='user_add_nav'>
+									<li role="presentation" class="active" id='user_function_basic_li'>
+										<a href="#">基本信息</a>
+									</li>
+									<li role="presentation" id='user_operation_list_li'>
+										<a href="#">功能列表</a>
+									</li>
+								</ul>
+							</div>
+							<div class="row">
+								<div id="user_power_edit">
+									<form action="" id="form_power_permission" role="form" method="post" novalidate="novalidate">
+										<input type="hidden" id="permissionId" name="permissionId" />
+										<div class='row margin-bottom'>
+											<label for="user_power_name" class='col-lg-3 col-md-3 col-xs-3 col-sm-3'>名称：</label>
+											<input type="text" id='user_power_name' name="permissionName" class='col-lg-6 col-md-6 col-xs-6 col-sm-6 userAdmin_height_40' />
+										</div>
+										<div class='row margin-bottom'>
+											<label for="user_power_menu" class='col-lg-3 col-md-3 col-xs-3 col-sm-3'>上级菜单：</label>
+											<select name="permissionParentId" id="user_power_menu" class='col-lg-6 col-md-6 col-xs-6 col-sm-6 userAdmin_height_40'>
+												<option value="0">无</option>
+											</select>
+										</div>
+										<div class='row margin-bottom'>
+											<label for="user_power_link" class='col-lg-3 col-md-3 col-xs-3 col-sm-3'>链接地址：</label>
+											<input type="text" id='user_power_link' name="permissionUrl" class='col-lg-6 col-md-6 col-xs-6 col-sm-6 userAdmin_height_40' />
+										</div>
+										<div class='row margin-bottom'>
+											<label for="user_power_level" class='col-lg-3 col-md-3 col-xs-3 col-sm-3'>等级：</label>
+											<select name="permissionLevel" id="user_power_level" class='col-lg-6 col-md-6 col-xs-6 col-sm-6 userAdmin_height_40'>
+												<option value="0">无</option>
+												<option value="1">一级</option>
+												<option value="2">二级</option>
+												<option value="3">三级</option>
+												<option value="4">四级</option>
+												<option value="5">五级</option>
+											</select>
+										</div>
+										<div class='row margin-bottom'>
+											<label for="user_power_describle" class='col-lg-3 col-md-3 col-xs-3 col-sm-3'>描述：</label>
+											<textarea name="permissionDescribe" id="user_power_describle" rows="" cols="" class='col-lg-6 col-md-6 col-xs-6 col-sm-6 userAdmin_height_40'></textarea>
+										</div>
+										<div class='row margin-bottom'>
+											<label for="user_power_status_yes" class='col-lg-3 col-md-3 col-xs-3 col-sm-3'>状态：</label>
+											<div class='col-lg-3 col-md-3 col-xs-3 col-sm-3'>
+												<input type="radio" id='user_power_status_yes' name='permissionStatus' class='col-lg-3 col-md-3 col-xs-3 col-sm-3' value="0" checked="checked" />
+												<span>正常</span>
+											</div>
+											<div class='col-lg-3 col-md-3 col-xs-3 col-sm-3'>
+												<input type="radio" id='user_power_status_no' name='permissionStatus' class='col-lg-3 col-md-3 col-xs-3 col-sm-3' value="1" />
+												<span>禁用</span>
+											</div>
+										</div>
+										<div class="row user_power_btn">
+											<!--0是添加-->
+											<!--1是保存-->
+											<input type="hidden" id="hiddenInfo" value="0" />
+											<button type="submit" id='user_power_save' class='btn btn-default col-lg-2 col-lg-push-5'>保存</button>
+										</div>
+									</form>
+								</div>
+							</div>
+							<div class="row">
+								<table class="table formCss" id="table_power_permission_list">
+									<thead>
+										<tr>
+											<td colspan="4">
+												<input type="submit" data-toggle="modal" id='function_list_add' class="btn btn-default form-control" value="添加" />
+											</td>
+										</tr>
+										<tr>
+											<th>编辑功能</th>
+											<th>功能名称</th>
+											<th>功能描述</th>
+											<th>功能状态</th>
+										</tr>
+									</thead>
+									<tbody id="user_power_operation_table_list">
+										<tr>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--权限-->
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<!-- Bootstrap 3.3.6 -->
+	<script src="/plat/js/plugins/bootstrap.min.js"></script>
+	<script src="/plat/js/create/httpRequest.js"></script>
+	<script src="/plat/js/create/public.js"></script>
+	<script src="/plat/js/create/AjaxAddr.js"></script>
+	<script src="/plat/js/plugins/extendPagination.js"></script>
+	<script src="/plat/js/create/contentPublic.js"></script>
+	<!--z-tree插件-->
+	<script src="/plat/js/plugins/jquery.ztree.all.min.js"></script>
+	<script src="/plat/js/plugins/jquery.ztree.core.js"></script>
+	<!--表单验证-->
+	<script src="/plat/js/plugins/formValidator-4.0.1.js"></script>
+	<script src="/plat/js/plugins/formValidatorRegex.js"></script>
+	<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<script>
+		$('#user_edit_function').hide();
+		$('#table_power_permission_list').hide();
+		var setting = {
+			view: {
+				selectedMulti: false
+			},
+			data: {
+				key: {
+					title: "t"
+				},
+				simpleData: {
+					enable: true
+				}
+			},
+			callback: {
+				beforeClick: beforeClick,
+				beforeCollapse: beforeCollapse,
+				beforeExpand: beforeExpand,
+				onCollapse: onCollapse,
+				onExpand: onExpand
+			}
+		};
+		var otype = "post";
+		var osync = false;
+		var reqResult = httpRequest(userPower_getPermissionList_url, null, otype, osync);
+		if(reqResult.result == 0) {
+			var zNodes = [];
+			var datalist = reqResult.data.all;
+			for(var i = 0; i < datalist.length; i++) {
+				if(datalist[i].permissionParentId == 0) {
+					if(datalist[i].childrens) {
+						zNodes.push({
+							'id': datalist[i].permissionId,
+							'pId': datalist[i].permissionParentId,
+							'name': datalist[i].permissionName,
+							'open': true
+						});
+						var perChild = datalist[i].childrens;
+						for(var j = 0; j < perChild.length; j++) {
+							zNodes.push({
+								'id': perChild[j].permissionId,
+								'pId': perChild[j].permissionParentId,
+								'name': perChild[j].permissionName
+							});
+						}
+					}
+				} else {
+					zNodes.push({
+						'id': datalist[i].permissionId,
+						'pId': datalist[i].permissionParentId,
+						'name': datalist[i].permissionName
+					});
+				}
+			}
+			var toplist = reqResult.data.top;
+			var topSelect = $("#user_power_menu");
+			for(var i = 0; i < toplist.length; i++) {
+				topSelect.append("<option value='" + toplist[i].permissionId + "'>" + toplist[i].permissionName + "</option>");
+			}
+			$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+		} else {
+			alert(reqResult.message);
+		}
+		var log, className = "dark";
+		/**
+		 * 根据权限ID获取权限信息并展示
+		 * @param {Object} treeId
+		 * @param {Object} treeNode
+		 */
+		function beforeClick(treeId, treeNode) {
+			$('#user_power_operation_table_list').empty();
+			$('#user_edit_function').fadeIn();
+			$('#permissionId').val(treeNode.id);
+			$('#user_power_name').val(treeNode.name);
+			if(treeNode.pId) {
+				$('#user_power_menu').val(treeNode.pId);
+			} else {
+				$('#user_power_menu').val(0);
+			}
+			init_permission_basic_function(treeNode.id);
+			init_user_power_operation_list_data(treeNode.id);
+		}
+
+		function beforeCollapse(treeId, treeNode) {
+			className = (className === "dark" ? "" : "dark");
+			showLog("[ " + getTime() + " beforeCollapse ]&nbsp;&nbsp;&nbsp;&nbsp;" + treeNode.name);
+			return(treeNode.collapse !== false);
+		}
+
+		function onCollapse(event, treeId, treeNode) {
+			showLog("[ " + getTime() + " onCollapse ]&nbsp;&nbsp;&nbsp;&nbsp;" + treeNode.name);
+		}
+
+		function beforeExpand(treeId, treeNode) {
+			className = (className === "dark" ? "" : "dark");
+			showLog("[ " + getTime() + " beforeExpand ]&nbsp;&nbsp;&nbsp;&nbsp;" + treeNode.name);
+			return(treeNode.expand !== false);
+		}
+
+		function onExpand(event, treeId, treeNode) {
+			showLog("[ " + getTime() + " onExpand ]&nbsp;&nbsp;&nbsp;&nbsp;" + treeNode.name);
+		}
+
+		function showLog(str) {
+			if(!log) log = $("#log");
+			log.append("<li class='" + className + "'>" + str + "</li>");
+			if(log.children("li").length > 8) {
+				log.get(0).removeChild(log.children("li")[0]);
+			}
+		}
+
+		function getTime() {
+			var now = new Date(),
+				h = now.getHours(),
+				m = now.getMinutes(),
+				s = now.getSeconds(),
+				ms = now.getMilliseconds();
+			return(h + ":" + m + ":" + s + " " + ms);
+		}
+
+		function expandNode(e) {
+			var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+				type = e.data.type,
+				nodes = zTree.getSelectedNodes();
+			if(type.indexOf("All") < 0 && nodes.length == 0) {
+				alert("请先选择一个父节点");
+			}
+
+			if(type == "expandAll") {
+				zTree.expandAll(true);
+			} else if(type == "collapseAll") {
+				zTree.expandAll(false);
+			} else {
+				var callbackFlag = $("#callbackTrigger").attr("checked");
+				for(var i = 0, l = nodes.length; i < l; i++) {
+					zTree.setting.view.fontCss = {};
+					if(type == "expand") {
+						zTree.expandNode(nodes[i], true, null, null, callbackFlag);
+					} else if(type == "collapse") {
+						zTree.expandNode(nodes[i], false, null, null, callbackFlag);
+					} else if(type == "toggle") {
+						zTree.expandNode(nodes[i], null, null, null, callbackFlag);
+					} else if(type == "expandSon") {
+						zTree.expandNode(nodes[i], true, true, null, callbackFlag);
+					} else if(type == "collapseSon") {
+						zTree.expandNode(nodes[i], false, true, null, callbackFlag);
+					}
+				}
+			}
+		}
+		//	表单验证
+
+		//		功能列表添加模态框弹出
+		$('#function_list_add').on('click', function() {
+			$('#add_power_modal').modal();
+			//				添加时表单验证	
+			//	添加时验证
+			$.formValidator.initConfig({
+				submitButtonID: "add_power_operation_btn",
+				debug: true,
+				onSuccess: function() {
+					add_power_operationInfo();
+				},
+				onError: function() {
+					alert("添加失败，具体错误，请看网页上的提示！")
+				},
+				submitAfterAjaxPrompt: '有数据正在异步验证，请稍等...'
+			});
+			//新增功能名称
+			$("#add_power_function").formValidator({
+					onShow: "请输入新增功能名称",
+					onFocus: "新增功能名称至少2个字符,最多20个字符"
+				}).inputValidator({
+					min: 2,
+					max: 20,
+					onError: "你输入的新增功能名称非法,请确认"
+				})
+				//新增功能描述 
+			$("#add_power_function_describe").formValidator({
+					onShow: "请输入新增功能描述",
+					onFocus: "新增功能描述至少2个字符"
+				}).inputValidator({
+					min: 2,
+					onError: "你输入的新增功能描述非法,请确认"
+				})
+				//操作类型  
+			$("#addOperationType").formValidator({
+				onShow: "请输入操作类型",
+				onFocus: "操作类型至少2个字符"
+			}).inputValidator({
+				min: 2,
+				onError: "你输入的操作类型非法,请确认"
+			})
+		})
+
+		//编辑时验证
+		$('a[href="#edit_userpower_operation"]').on('click', function() {
+				$.formValidator.initConfig({
+					submitButtonID: "edit_power_save",
+					debug: true,
+					onSuccess: function() {
+						edit_power_saveInfo();
+					},
+					onError: function() {
+						alert("添加失败，具体错误，请看网页上的提示！")
+					},
+					submitAfterAjaxPrompt: '有数据正在异步验证，请稍等...'
+				});
+				//功能名称
+				$("#function_name").on('change', function() {
+						$("#function_name").formValidator({
+							onShow: "请输入功能名称",
+							onFocus: "功能名称至少2个字符,最多20个字符"
+						}).inputValidator({
+							min: 2,
+							max: 20,
+							onError: "你输入的功能名称非法,请确认"
+						})
+					})
+					//功能描述
+				$('#function_describe').on('change', function() {
+					$("#function_describe").formValidator({
+						onShow: "请输入功能描述",
+						onFocus: "功能描述至少2个字符"
+					}).inputValidator({
+						min: 2,
+						onError: "你输入的功能描述非法,请确认"
+					})
+				})
+
+				//操作类型
+				$('#editOperationType').on('change', function() {
+					$("#editOperationType").formValidator({
+						onShow: "请输入操作类型",
+						onFocus: "操作类型至少2个字符"
+					}).inputValidator({
+						min: 2,
+						onError: "你输入的操作类型非法,请确认"
+					})
+				})
+			})
+			//		校验新增内容是否为空
+			//		新增功能列表选项
+		function add_power_operationInfo() {
+			var addname = $('#add_power_function').val();
+			var add_describe = $('#add_power_function_describe').val();
+			var user_power_status_add = $('#user_power_status_add input').val();
+			if(addname == '') {
+				alert('新增内容不能为空！');
+			}
+			var param = $('#new_add').serialize();
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(userPower_addBrOperation_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert("添加成功");
+				init_user_power_operation_list_data($("#permissionId").val());
+			} else {
+				alert(reqResult.message);
+			}
+		}
+		//		功能列表删除权限功能
+		//		function del_function(del){
+		//			if(confirm("确认删除该用户吗？")) {
+		//				var del_user_id = $(del).parent().attr("power_addid");
+		//				var param = 
+		//				var ourl = "";
+		//				var otype = "post";
+		//				var osync = false;
+		//				var reqResult = httpRequest(ourl, param, otype, osync);
+		//				if(reqResult.result == 0) {
+		//					alert("删除成功");
+		//					window.location.reload();
+		//				} else {
+		//					alert(reqResult.message);
+		//				}
+		//			}
+		//		}
+		//		功能列表编辑
+		function edit_function(edit) {
+			var edit_user_id = $(edit).parent().attr("power_addid");
+			$('#form_userpower_rowid').val(edit_user_id);
+			var param = {
+				operationId: edit_user_id
+			}
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(userPower_getBrOperation_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				$('#function_name').val(reqResult.data.operationName);
+				$('#function_describe').val(reqResult.data.operationDescribe);
+				if(reqResult.data.operationStatus == 0) {
+					$('#function_status input')[0].checked = "checked";
+				} else {
+					$('#function_status input')[1].checked = "checked";
+				}
+				$('#editOperationType').val(reqResult.data.operationType);
+				return false;
+			} else {
+				alert(reqResult.message);
+			}
+		}
+
+		function init_permission_basic_function(function_id) {
+			var param = {
+				"id": function_id
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(userPower_getBrPermission_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				$('#user_power_hid').val(reqResult.data.brPermission.permissionId);
+				$('#form_userpower_id').val(reqResult.data.brPermission.permissionId);
+				$('#user_power_link').val(reqResult.data.brPermission.permissionUrl);
+				$('#user_power_level').val(reqResult.data.brPermission.permissionLevel);
+				$('#user_power_describle').text(reqResult.data.brPermission.permissionDescribe);
+				if(reqResult.data.brPermission.permissionStatus == 0) {
+					$('#user_power_status_yes').prop('checked', true);
+				} else {
+					$('#user_power_status_no').prop('checked', true);
+				}
+			} else {
+				alert(reqResult.message);
+			}
+		}
+		//	点击添加时功能列表显示
+		function clean_user_power_form() {
+			$('#user_edit_function').fadeIn();
+			$("#table_power_permission_list tbody").html("");
+			$("#user_power_name").val("");
+			$("#user_power_link").val("");
+			$("#form_power_permission textarea").val("");
+			$("#form_power_permission select").val("0");
+			$('#permissionId').val('');
+			$('#hiddenInfo').val('0');
+			return false;
+		}
+		$('#user_power_addbtn').on('click', function() {
+			clean_user_power_form();
+		})
+		$('.node_name').on('click', function() {
+				$('#hiddenInfo').val('1');
+			})
+			//	判断tbody下的td是否有id属性值
+		$('#user_operation_list_li').on('click', function() {
+			if("" == $('#permissionId').val()) {
+				alert("请先新增权限点");
+				init_user_function_basic_div();
+			} else {
+				init_user_power_operation_list_data($('#permissionId').val());
+				$('#user_function_basic_li').removeClass('active');
+				$('#user_operation_list_li').addClass('active');
+				$('#user_power_edit').hide();
+				$('#table_power_permission_list').fadeIn();
+			}
+			return false;
+		})
+
+		function init_user_power_operation_list_data(permission_id) {
+			$("#user_power_operation_table_list").empty();
+			var param = {
+				"permissionId": permission_id
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(userPower_getBrOperationList_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				var operationList = reqResult.data;
+				var str = '';
+				if(operationList.length > 0) {
+					for(var i = 0; i < operationList.length; i++) {
+						str += "<tr><td power_addid='" + operationList[i].operationId + "'>";
+						str += "<a href='#edit_userpower_operation' data-toggle='modal' onclick='edit_function(this)'><i class='fa fa-pencil'></i></a> ";
+						str += "</td>";
+						str += "<td>" + operationList[i].operationName + "</td>";
+						str += "<td>" + operationList[i].operationDescribe + "</td>";
+						if(operationList[i].operationStatus == 0) {
+							str += "<td>" + '启用 ' + "</td>";
+						} else {
+							str += "<td>" + '禁用' + "</td>";
+						}
+						str += '</tr>';
+					}
+				} else {
+					str += "<tr>";
+					str += "<td colspan='4' class='noacess'>无任何数据显示！</td>";
+					str += '</tr>';
+				}
+				$("#user_power_operation_table_list").append(str);
+			} else {
+				alert(reqResult.message);
+			}
+			return false;
+		}
+		//		编辑保存
+		function edit_power_saveInfo() {
+			var param = $('#edit_power_form').serialize();
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(userPower_updateBrOperation_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				if(reqResult.data == 1) {
+					alert('编辑成功');
+					$('#edit_userpower_operation').fadeOut();
+					init_user_power_operation_list_data($("#form_userpower_id").val());
+				} else {
+					alert(reqResult.message);
+				}
+			} else {
+				alert('编辑失败!');
+			}
+		}
+		//		功能列表新增和保存
+		$('#user_power_save').on('click', function() {
+			var hiddenInfo = $('#hiddenInfo').val();
+			if(hiddenInfo == 0) {
+				var param = $('#form_power_permission').serialize();
+				var otype = "post";
+				var osync = false;
+				var reqResult = httpRequest(userPower_insertPermission_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert('添加成功！');
+					window.location.reload();
+					return false;
+				} else {
+					alert(reqResult.message);
+				}
+			} else {
+				var param = $('#form_power_permission').serialize();
+				var otype = "post";
+				var osync = false;
+				var reqResult = httpRequest(userPower_updatePermission_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert('保存成功！');
+					window.location.reload();
+					return false;
+				} else {
+					alert(reqResult.message);
+				}
+			}
+
+		})
+			//		导航切换
+		$('#user_function_basic_li').on('click', function() {
+			init_user_function_basic_div();
+		})
+
+		function init_user_function_basic_div() {
+			$('#user_operation_list_li').removeClass('active');
+			$('#user_function_basic_li').addClass('active');
+			$('#table_power_permission_list').hide();
+			$('#user_power_edit').fadeIn();
+
+		}
+	</script>
+
+	<!--模态框新增功能按钮-->
+	<div class="modal fade" id="add_power_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="box">
+					<div class="box-body">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel">
+								权限设置
+								<small>新增功能</small>
+							</h4>
+						</div>
+						<div class="modal-body">
+							<form class="bs-example-form form-horizontal formCss" id='new_add' role="form" method="post" novalidate="novalidate" id='add_power_form'>
+								<input type="hidden" id="user_power_hid" name="permissionId" />
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>新增功能名称</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px'>
+										<input type="text" id="add_power_function" class="form-control" name="operationName" aria-describedby="basic-addon1" required>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3'>
+										<div id="add_power_functionTip"></div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>新增功能描述</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px'>
+										<textarea name="operationDescribe" class="form-control" id="add_power_function_describe"></textarea>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3'>
+										<div id="add_power_function_describeTip"></div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>功能状态</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px'>
+										<input type="radio" name='operationStatus' value="0" checked="checked" />启用
+										<input type="radio" name='operationStatus' value="1" />禁用
+									</div>
+								</div>
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>操作类型</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px'>
+										<input type="text" name="operationType" class="form-control" id="addOperationType" />
+									</div>
+								</div>
+								<div class="form-group">
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3'>
+										<div id="addOperationTypeTip"></div>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-default" data-dismiss="modal" id="add_power_operation_btn">添加</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--模态框修改-->
+	<div class="modal fade" id="edit_userpower_operation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="box">
+					<div class="box-body">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel_edit">功能<small>--编辑</small></h4>
+						</div>
+						<div class="modal-body">
+							<form class="bs-example-form form-horizontal formCss" role="form" id="edit_power_form">
+								<input type="hidden" name="permissionId" id="form_userpower_id" />
+								<input type="hidden" name="operationId" id="form_userpower_rowid" />
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>功能名称</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px'>
+										<input type="text" id="function_name" name="operationName" class="form-control" aria-describedby="basic-addon1" value="">
+									</div>
+								</div>
+								<div class="form-group">
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3'>
+										<div id="function_nameTip"></div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>功能描述</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px'>
+										<input type="text" id="function_describe" name="operationDescribe" class="form-control" aria-describedby="basic-addon1" value="">
+									</div>
+								</div>
+								<div class="form-group">
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3'>
+										<div id="function_describeTip"></div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>功能状态</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px' id="function_status">
+										<input type="radio" name='operationStatus' value="0" class="userlist_statusinput_vertical" />启用
+										<input type="radio" name='operationStatus' value="1" class="userlist_statusinput_vertical" />禁用
+									</div>
+								</div>
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>操作类型</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px'>
+										<input type="text" name="operationType" class="form-control" id="editOperationType" value="" />
+									</div>
+								</div>
+								<div class="form-group">
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3'>
+										<div id="editOperationTypeTip"></div>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-default" data-dismiss="modal" id='edit_power_save'>保存</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

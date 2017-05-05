@@ -1,0 +1,737 @@
+/*状态按钮样式*/
+
+*,
+*:before,
+*:after {
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.buttonw {
+	display: block;
+	width: 80px;
+	height: 33px;
+	-webkit-transform: translate(0%, 0%);
+	-ms-transform: translate(0%, 0%);
+	transform: translate(0%, 0%);
+	cursor: pointer;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.buttonw span {
+	position: absolute;
+	display: block;
+}
+
+.buttonw span:first-of-type {
+	z-index: 100;
+	top: 4px;
+	right: 4px;
+	width: 40px;
+	height: 25px;
+	background: -webkit-linear-gradient(top, #d4d6d8 0%, #ecf0f5 100%);
+	background: linear-gradient(to bottom, #d4d6d8 0%, #ecf0f5 100%);
+	border-radius: 8px;
+	-webkit-transition: right 400ms cubic-bezier(1, 0, 0, 1), box-shadow 400ms ease;
+	transition: right 400ms cubic-bezier(1, 0, 0, 1), box-shadow 400ms ease;
+}
+
+.buttonw span:nth-last-of-type(-n+2) {
+	z-index: 10;
+	top: 4px;
+	width: 36px;
+	height: 25px;
+	-webkit-transition: opacity 800ms ease 100ms;
+	transition: opacity 800ms ease 100ms;
+}
+
+.buttonw span:nth-last-of-type(-n+2):after {
+	position: absolute;
+	top: 7px;
+	line-height: 1;
+	font-weight: normal;
+	font-size: 12px;
+	color: white;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 0 20px #ffffff;
+}
+
+.buttonw span:nth-of-type(2) {
+	left: 4px;
+	background: -webkit-linear-gradient(top, #c0392b 0%, #d65548 100%);
+	background: linear-gradient(to bottom, #c0392b 0%, #d65548 100%);
+	border-top-left-radius: 8px;
+	border-bottom-left-radius: 8px;
+}
+
+.buttonw span:nth-of-type(2):after {
+	content: "禁用";
+	left: 6px;
+}
+
+.buttonw span:last-of-type {
+	right: 4px;
+	background: -webkit-linear-gradient(top, #2ecc71 0%, #49a971 100%);
+	background: linear-gradient(to bottom, #2ecc71 0%, #49a971 100%);
+	border-top-right-radius: 8px;
+	border-bottom-right-radius: 8px;
+	opacity: 0.5;
+}
+
+.buttonw span:last-of-type:after {
+	content: "启用";
+	right: 7px;
+}
+
+.buttonw input[type="checkbox"] {
+	display: none;
+}
+
+.buttonw input[type="checkbox"]:checked~ span:first-of-type {
+	right: 38px;
+}
+
+.buttonw input[type="checkbox"]:checked~ span:nth-of-type(2) {
+	opacity: 0.2;
+}
+
+.buttonw input[type="checkbox"]:checked~ span:last-of-type {
+	opacity: 1;
+}
+
+
+/*****************************/
+
+ul li {
+	list-style: none;
+}
+
+.daohang {
+	height: 15px;
+	width: 5px;
+	border-left-width: 5px;
+	border-left-style: solid;
+	border-left-color: #036;
+	margin-top: 12px;
+	margin-left: 15px;
+}
+
+.user_bg {
+	background-color: rgb(248, 248, 248);
+	height: 40px;
+	line-height: 40px;
+	margin-bottom: 15px;
+	vertical-align: middle;
+	width: 100%;
+}
+
+.user_mar {
+	float: right;
+	margin: 6px;
+	padding: 0.2em 0.8em!important;
+	line-height: 2!important;
+}
+
+#example1 thead tr th:first-child {
+	width: 20%;
+}
+
+#example1 tbody tr td:first-child {
+	width: 20%;
+}
+
+#example1 thead tr th:nth-child(2) {
+	width: 15%;
+}
+
+#example1 tbody tr td:nth-child(2) {
+	width: 15%;
+}
+
+#example1 thead tr th:nth-child(3) {
+	width: 15%;
+}
+
+#example1 tbody tr td:nth-child(3) {
+	width: 15%;
+}
+
+#example1 thead tr th:nth-child(4) {
+	width: 15%;
+}
+
+#example1 tbody tr td:nth-child(4) {
+	width: 15%;
+}
+
+#example1 thead tr th:nth-child(5) {
+	width: 15%;
+}
+
+#example1 tbody tr td:nth-child(5) {
+	width: 15%;
+}
+
+#example1 thead tr th:nth-child(6) {
+	width: 10%;
+}
+
+#example1 tbody tr td:nth-child(6) {
+	width: 10%;
+}
+
+#example1 thead tr th:last-child {
+	width: 10%;
+}
+
+#example1 tbody tr td:last-child {
+	width: 10%;
+}
+
+.results tr[visible='false'],
+.no-result {
+	display: none;
+}
+
+.results tr[visible='true'] {
+	display: table-row;
+}
+
+.counter {
+	padding: 8px;
+	color: #ccc;
+}
+
+.lef_css {
+	padding: 0 30px;
+}
+
+
+/*userlist*/
+
+.userlist_status_right_border {
+	border-right: 1px solid #d2d6de!important;
+}
+
+.userlist_statusinput_vertical {
+	margin: 0 5px!important;
+	vertical-align: middle;
+}
+
+
+/*userPower*/
+
+#user_tree,
+#user_tree ul {
+	list-style: none;
+}
+
+#form_power_permission {
+	/*line-height: 40px;*/
+	border: 1px solid #000;
+	border-radius: 3px;
+	/*height: 600px;*/
+	padding: 30px 20px;
+}
+
+#form_power_permission div input,
+textarea,
+button,
+select {
+	border-radius: 3px;
+}
+
+
+/*权限编辑功能表单样式*/
+
+label {
+	text-align: right;
+}
+
+#user_power_edit h2 {
+	text-align: center;
+}
+
+#user_power_edit {
+	line-height: 20px;
+	padding: 10px;
+}
+
+.bs-example div {
+	border-radius: 10px;
+	/*margin-top:10px;*/
+	margin-left: 0px!important;
+	margin-right: 0px!important;
+	vertical-align: middle;
+}
+
+.user_power_btn {
+	text-align: center;
+}
+
+#user_add_nav {
+	padding: 0 10px;
+	margin-bottom: -12px;
+}
+
+#table_power_permission_list {
+	margin-top: 10px;
+}
+
+#form_power_permission_list div input,
+textarea,
+button,
+select {
+	border-radius: 3px;
+}
+
+.userAdmin_height_40 {
+	height: 40px;
+}
+
+
+/*权限无数据时提示样式*/
+
+.noacess {
+	text-align: center;
+}
+
+
+/*修改密码*/
+
+.letter_spacing_100 {
+	letter-spacing: 1em;
+}
+
+.letter_spacing_67 {
+	letter-spacing: 0.67em;
+}
+
+.letter_spacing_72 {
+	letter-spacing: 0.72em;
+}
+
+.letter_spacing_55 {
+	letter-spacing: 0.55em;
+}
+
+.letter_spacing_50 {
+	letter-spacing: 0.5em;
+}
+
+.letter_spacing_30 {
+	letter-spacing: 0.3em;
+}
+
+.margin_top_15 {
+	margin-top: 100px;
+}
+
+.margin_left_20px {
+	margin-left: 20px!important;
+}
+
+.vertical_position_sub {
+	vertical-align: sub;
+}
+
+
+/*个人信息设置*/
+
+#personal_form label {
+	border: 0;
+}
+
+#personal_form input {
+	border: 0;
+}
+
+#personal_save_btn {
+	display: none;
+}
+
+.padding_4px {
+	padding: 4px;
+}
+
+.store_form_border {
+	border: 1px solid #d2d6de;
+	border-radius: 1%;
+	padding: 20px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.none_cursor {
+	cursor: default;
+}
+
+.a_hover:hover {
+	font-size: larger;
+	border-radius: 50%;
+}
+
+.store_img_css {
+	position: absolute;
+	width: 100%;
+	height: 220px!important;
+	vertical-align: middle;
+	border: 0;
+	display: table;
+	margin: 8px;
+	padding: 6px;
+	float: left;
+	text-align: center;
+}
+
+.fa_red {
+	color: red;
+	border: 1px solid #ccc;
+	border-radius: 20%;
+}
+
+.store_img_borderdiv {
+	border: 0;
+	display: table;
+	padding: 6px;
+}
+
+.position_absolute {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	margin-left: -110px;
+	margin-top: 0px;
+	width: 250px;
+	height: 250px;
+	padding: 5px;
+	box-shadow: 1px 1px 5px 0px #a2958a;
+	background-size: 100% 100%;
+}
+
+.position_relative {
+	position: relative;
+	width: 250px;
+	height: 250px;
+}
+
+.float_left {
+	float: left;
+}
+
+.clear {
+	clear: both;
+}
+
+.input_width_100 {
+	width: 100%;
+}
+
+
+/*图片展示页面（pictureShow）*/
+
+.imgCss {
+	width: 150px;
+}
+.picture{
+	float: left;
+	text-align: center;
+}
+.picture li {
+	width: 154px;
+	height: 192px;
+	float:left;
+	margin-right: 5px;
+	margin-bottom: 10px;
+}
+
+.liCss {
+	border: 2px solid black;
+}
+
+.liOtherCss {
+	border: 2px solid red;
+}
+
+.imgIndex li {
+	float: left;
+	margin-right: 5px;
+}
+
+
+/*高度*/
+
+.height_34px {
+	height: 34px!important;
+}
+
+
+/*input框*/
+
+.input_modal {
+	display: inline-block;
+	height: 33px;
+	padding: 4px 6px;
+	margin-bottom: 10px;
+	font-size: 14px;
+	line-height: 20px;
+	color: #555555;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	vertical-align: middle;
+}
+
+@media (min-width: 1200px) #search_storenews {
+	width: 100%!important;
+}
+
+@media (min-width: 992px) #search_storenews {
+	width: 100%!important;
+}
+
+@media (min-width: 768px) #search_storenews {
+	width: 100%!important;
+}
+
+
+/*开关样式*/
+
+.div-outside {
+	width: 98px;
+	display: inline-block;
+	direction: ltr;
+	cursor: pointer;
+	border-radius: 4px;
+	border: 1px solid;
+	border-color: #cccccc;
+	position: relative;
+	text-align: left;
+	overflow: hidden;
+	line-height: 8px;
+	z-index: 0;
+}
+
+.div-inner {
+	width: 144px;
+	margin-left: 0px;
+	display: inline-block;
+	top: 0;
+	border-radius: 4px;
+}
+
+.span-on {
+	text-align: center;
+	z-index: 1;
+	box-sizing: border-box;
+	padding: 6px 12px;
+	line-height: 20px;
+	height: 100%;
+	font-size: 14px;
+	cursor: pointer;
+	display: inline-block !important;
+	width: 48px;
+	border-top-left-radius: 3px;
+	border-bottom-left-radius: 3px;
+	background: #337ab7;
+	color: #fff;
+}
+
+.span-blank {
+	text-align: center;
+	z-index: 1;
+	box-sizing: border-box;
+	padding: 6px 21px;
+	line-height: 20px;
+	height: 100%;
+	font-size: 14px;
+	cursor: pointer;
+	color: #333333;
+	background: #ffffff;
+}
+
+.span-off {
+	color: #000;
+	background: #eeeeee;
+	border-bottom-right-radius: 3px;
+	border-top-right-radius: 3px;
+	text-align: center;
+	z-index: 1;
+	box-sizing: border-box;
+	padding: 6px 12px;
+	line-height: 20px;
+	height: 100%;
+	font-size: 14px;
+	cursor: pointer;
+	display: inline-block !important;
+	width: 48px;
+}
+
+
+/*字体*/
+
+.font_16px {
+	font: 16px;
+}
+
+
+/*颜色样式*/
+
+.red_col {
+	color: red;
+}
+
+.sucess_col {
+	color: #000!important;
+}
+
+.col_555 {
+	color: #555;
+}
+
+
+/*外边距*/
+
+.margin-left {
+	margin-left: -48px;
+}
+
+.margin_left_10px {
+	margin-left: 10px!important;
+}
+
+.margin_top_20px {
+	margin: 20px 0;
+}
+
+.margin_r_30px {
+	margin: 0 30px;
+}
+
+.margin_top_7px {
+	margin-top: 7px;
+}
+
+
+/*对齐方式*/
+
+.txt_r {
+	text-align: right;
+}
+
+.verMid {
+	vertical-align: middle!important;
+}
+
+
+/*浮动*/
+
+.float_right {
+	float: right;
+}
+
+
+/*box宽度*/
+
+.width_70 {
+	width: 75%!important;
+	margin: 0 auto;
+}
+
+.width_100 {
+	width: 100%;
+}
+
+
+/** 内边距*/
+
+.padding_top {
+	padding: 30px 10px 0px!important;
+}
+
+.paddding_right_0px {
+	padding-right: 0px!important;
+}
+
+.paddding_left_0px {
+	padding-left: 0px!important;
+}
+
+.pading_0px {
+	padding: 0px!important;
+}
+
+.padding_l42px {
+	padding: 0 0 0 42px;
+}
+
+
+/*行块*/
+
+.dis_inBlock {
+	display: inline-block!important;
+}
+
+
+/*列表样式*/
+
+.table>thead>tr {
+	background-color: #e8e8e8;
+}
+
+.table>tbody>tr:nth-of-type(even) {
+	background-color: #f1f1f1;
+}
+
+.table>tbody>tr>td,
+.table>thead>tr>th {
+	border: none;
+	text-align: center;
+}
+
+
+/*文本框获得焦点时边框颜色设置*/
+
+input[type=email]:focus,
+input[type=text]:focus,
+input[type=password]:focus {
+	border: 1px solid #00A65A;
+}
+
+
+/*数据导出按钮*/
+
+.exportInfoBtn:before {
+	background-color: green;
+	content: url(/plat/img/exportImg/ixls.png);
+	margin-right: 10px;
+	padding: 12px;
+	box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+
+/*form/table表单样式*/
+
+.formCss {
+	box-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+	padding: 25px;
+	background: rgba(255, 255, 255, 0.5);
+}
+
+
+/*按钮样式*/
+
+.btnSuccess {
+	color: #000!important;
+	box-shadow: 0 3px 5px 0px rgba(0, 0, 0, 0.3);
+}
+
+h2>small,
+h3 {
+	font-weight: 800;
+	color: ##000;
+}
+
+.table>tbody>tr>td:first-child,
+.table>thead>tr>th:first-child {
+	text-align: left;
+}

@@ -1,0 +1,271 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<!-- Content Header (Page header) -->
+<div class="content-wrapper" id="content-wrapper">
+	<div class="fakeloader"></div>
+	<section class="content-header">
+		<div class="margin-bottom">
+			<h2>
+				<small>支付</small>
+			</h2>
+		</div>
+		<ol class="breadcrumb">
+			<li>
+				<a href="#">支付</a>
+			</li>
+			<li class="active">消费记录</li>
+		</ol>
+		<div class="box">
+			<div class="box-header">
+				<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">搜索</h3>
+			</div>
+			<!--box-header -->
+			<div class="box-body">
+				<form id="checkRecordsFormInfo" class="bs-example-form padding_l42px" role="form">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon">开始日期</span>
+									<input id="d4311" class="Wdate form-control height_34px" type="text" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'d4312\')||\'2020-10-01\'}'})" name="StartTime" />
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon">结束日期</span>
+									<input id="d4312" class="Wdate form-control height_34px" type="text" onFocus="WdatePicker({minDate:'#F{$dp.$D(\'d4311\')}',maxDate:'2020-10-01'})" name="EndTime" />
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon">订单号</span>
+									<input type="text" name="orderNo" class="form-control" id="search_orderNo" />
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="input-group float_right">
+									<input type="submit" class="btn btn-default" id="search_recordsOfConsumptionList_btn" value="搜索" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</section>
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<!--box-header -->
+					<div class="box-header">
+						<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">列表</h3>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+						<table class="table formCss">
+							<thead>
+								<tr>
+									<th>编辑</th>
+									<th>订单号</th>
+									<th>订单金额</th>
+									<th>缴费方式</th>
+									<th>创建时间</th>
+								</tr>
+							</thead>
+							<tbody id="recordsOfConsumptionListInfoTbody"></tbody>
+						</table>
+						<div class="row">
+							<div class="col-xs-6 col-md-6" id="callBackPager"></div>
+							<div class="col-xs-6 col-md-6 ctr margin_top_20px txt_r">
+								<button type="button" class="btn btn-default exportInfoBtn" onclick="exportInfo()">excle导出</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--查看详情-->
+	<div class="modal fade displayCssNo" id="checkOrderInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="box">
+					<div class="box-body">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+								&times;
+							</button>
+							<h4 class="modal-title" id="myModalLabel">
+								消费记录
+								<span>
+									<small>--详情</small>
+								</span>
+							</h4>
+						</div>
+						<div class="modal-body">
+							<form class="bs-example-form form-horizontal formCss" role="form" id="checkOrderFormInfo">
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>订单号</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+										<input type="text" class="form-control" id='check_orderNo' name="orderNo" disabled="disabled" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>订单金额</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+										<input type="text" class="form-control" id='check_orderPayAmount' name="orderPayAmount" disabled="disabled" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>缴费方式</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+										<input type="text" name="payWayName" class="form-control" id="check_payWayName" value="" disabled="disabled" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>创建时间</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+										<input type="text" class="form-control" id='check_customerOrderPayInfoCreateTime' name="customerOrderPayInfoCreateTime" disabled="disabled" />
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--/查看详情-->
+	<!-- jQuery 2.2.0 -->
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<script src="/plat/js/create/httpRequest.js"></script>
+	<script src="/plat/js/create/contentPublic.js"></script>
+	<script src="/plat/js/plugins/extendPagination.js"></script>
+	<!--日期控件-->
+	<script src="/plat/My97DatePicker/WdatePicker.js"></script>
+	<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<script type="text/javascript">
+		//分页展示员工信息
+		//  分页
+		init_page();
+
+		function init_page() {
+			page_curr = 1;
+			$('#recordsOfConsumptionListInfoTbody').empty();
+			//1.请求后端信息并展示
+			recordsOfConsumptionSearch();
+			//2.初始化分页信息
+			init_pager();
+		}
+		// 初始化分页信息
+		function init_pager() {
+			$('#callBackPager').extendPagination({
+				totalCount: total_count,
+				showCount: count_curr,
+				limit: limit,
+				callback: function(curr, limit, totalCount) {
+					page_curr = curr;
+					total_count = totalCount;
+					recordsOfConsumptionSearch();
+				}
+			});
+		}
+		//消费记录信息搜索
+		function recordsOfConsumptionSearch() {
+			var param = initParam();
+			var otype = "POST";
+			var osync = false;
+			var reqResult = httpRequest(recordsOfConsumption_getCustomerOrderPayInfoByPage_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				//4.展示数据
+				total_count = reqResult.data.total;
+				createTable(page_curr, limit, total_count, reqResult);
+				return false;
+			}
+		}
+
+		//初始化参数信息
+		function initParam() {
+			var StartTime = $("#d4311").val();
+			var EndTime = $("#d4312").val();
+			var orderNo = $("#search_orderNo").val();
+			$('#recordsOfConsumptionListInfoTbody').empty();
+			//抓取分页信息
+			var param = {
+				"page": page_curr,
+				"rows": count_curr
+			};
+			if(StartTime) {
+				param.StartTime = StartTime;
+			}
+			if(EndTime) {
+				param.EndTime = EndTime;
+			}
+			if(orderNo) {
+				param.orderNo = orderNo;
+			}
+			return param;
+		}
+		$('#search_recordsOfConsumptionList_btn').on('click', function() {
+				recordsOfConsumptionSearch();
+				init_pager();
+				return false;
+			})
+			//		消费记录信息列表展示
+		function createTable(currPage, limit, total, dataBack) {
+			var showNum = limit;
+			if(total - (currPage * limit) < 0) showNum = total - ((currPage - 1) * limit);
+			var datal = dataBack.data.list;
+			//获取操作类型
+			//			var operationList=dataBack.operationList;
+			var str = '';
+			for(var i = 0; i < showNum; i++) {
+				str += "<tr><td customerOrderPayInfoId='" + nullformat(datal[i].customerOrderPayInfoId) + "'>";
+				//				if(operationList.select===1){
+				str += "<a href='#checkOrderInfo' data-toggle='modal' class='padding_4px' title='查看消费记录详细信息' onclick='checkRecordsOfConsumptionInfo(this)'><i class='fa fa-eye'></i></a> ";
+				//				}
+				str += "</td>";
+				str += "<td>" + nullformat(datal[i].orderNo) + "</td>";
+				str += "<td>" + nullformat(datal[i].orderPayAmount) + "</td>";
+				str += "<td>" + nullformat(datal[i].payWayName) + "</td>";
+				str += "<td>" + getDate(nullformat(datal[i].customerOrderPayInfoCreateTime)) + "</td>";
+				str += '</tr>';
+			}
+			$('#recordsOfConsumptionListInfoTbody').empty().append(str);
+			return false;
+		}
+
+		//	查看
+		//查看消费记录详细信息
+		function checkRecordsOfConsumptionInfo(id) {
+			var customerOrderPayInfoId = $(id).parent().attr('customerOrderPayInfoId');
+			var otype = "get";
+			var osync = false;
+			var param = {
+				'customerOrderPayInfoId': customerOrderPayInfoId
+
+			};
+			var reqResult = httpRequest(recordsOfConsumption_getCustomerOrderPayInfo_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				var dataInfo = reqResult.data;
+				//			订单号
+				$('#check_orderNo').val(nullformat(dataInfo.orderNo));
+				//			订单金额
+				$('#check_orderPayAmount').val(nullformat(dataInfo.orderPayAmount));
+				//			缴费方式
+				$('#check_payWayName').val(nullformat(dataInfo.payWayName));
+				//				创建时间
+				$('#check_customerOrderPayInfoCreateTime').val(getDate(nullformat(dataInfo.customerOrderPayInfoCreateTime)));
+			}
+		}
+		//		订单导出
+		function exportInfo() {
+			self.location = recordsOfConsumption_export_url;
+		}
+	</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

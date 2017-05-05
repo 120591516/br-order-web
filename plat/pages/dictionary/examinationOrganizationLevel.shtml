@@ -1,0 +1,414 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<div class="fakeloader"></div>
+	<section class="content-header">
+		<div class="margin-bottom">
+			<h2><small>体检机构等级</small></h2>
+		</div>
+		<ol class="breadcrumb">
+			<li>
+				<a href="#">字典维护</a>
+			</li>
+			<li class="active">体检机构等级</li>
+		</ol>
+	</section>
+	<!-- /Content Header (Page header) -->
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<div class="box-header">
+						<div class="row">
+							<div class="col-md-8">
+								<h3 class="box-title">列表</h3>
+							</div>
+							<div class="col-md-4 txt_r">
+								<a href="#add_organizationLevel_modal" data-toggle="modal" class="btn btn-default" id="addLevel">添加</a>
+							</div>
+						</div>
+					</div>
+					<div class="box-body">
+						<table class="table formCss">
+							<thead>
+								<tr>
+									<th>编辑</th>
+									<th>等级名称</th>
+									<th>创建时间</th>
+									<th>等级状态</th>
+								</tr>
+								<tr class="warning no-result">
+									<td colspan="7"><i class="fa fa-warning"></i>没有任何搜索结果!</td>
+								</tr>
+							</thead>
+							<tbody id="orgnizationLevel_tbody_main">
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /Main content -->
+	<!--模态框-->
+	<div class="modal fade" id="add_organizationLevel_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="box">
+					<div class="box-body">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title">机构等级<small>--添加</small></h4>
+						</div>
+						<div class="modal-body">
+							<form class="bs-example-form form-horizontal formCss" role="form" method="post" novalidate="novalidate" id='add_orgLevel'>
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>等级名称</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px'>
+										<input type="text" id="add_orgLevelName" class="form-control" name="orgLevelName" aria-describedby="basic-addon1" maxlength='12' required>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3'>
+										<div id="add_orgLevelNameTip"></div>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-default" data-dismiss="modal" id="add_orgnizationLevel_btn">提交</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--模态框查看-->
+	<div class="modal fade" id="check_organizationLevel_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="box">
+					<div class="box-body">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title">机构等级<small>--详情</small></h4>
+						</div>
+						<div class="modal-body">
+							<form class="bs-example-form form-horizontal formCss" role="form" id="check_orgLevel">
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>机构等级名称</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px'>
+										<input type="text" id="check_orgLevelName" class="form-control" name="orgLevelName" aria-describedby="basic-addon1" disabled="disabled">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>创建时间</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px'>
+										<input type="text" id="check_orgLevelCreatetime" class="form-control" name="orgLevelCreatetime" aria-describedby="basic-addon1" disabled="disabled">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>等级状态</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px' id="check_orgLevelStatus">
+										<input type="radio" name='orgLevelStatus' value="0" class="userlist_statusinput_vertical" disabled="disabled" />启用
+										<input type="radio" name='orgLevelStatus' value="1" class="userlist_statusinput_vertical" disabled="disabled" />禁用
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--模态框修改-->
+	<div class="modal fade" id="edit_organizationLevel_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="box">
+					<div class="box-body">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel_edit">机构等级<small>--编辑</small></h4>
+						</div>
+						<div class="modal-body">
+							<form class="bs-example-form form-horizontal formCss" role="form" id="edit_orgLevel">
+								<input type="hidden" name="orgLevelId" id="edit_orgLevelId" value="" />
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>等级名称</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px'>
+										<input type="text" id="edit_orgLevelName" class="form-control" name="orgLevelName" aria-describedby="basic-addon1">
+									</div>
+								</div>
+								<div class="form-group">
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3'>
+										<div id="edit_orgLevelNameTip"></div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>等级状态</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px' id="edit_orgLevelStatus">
+										<input type="radio" name='orgLevelStatus' value="0" class="userlist_statusinput_vertical" />启用
+										<input type="radio" name='orgLevelStatus' value="1" class="userlist_statusinput_vertical" />禁用
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal" id='edit_orgLevelStatus_btn'>保存</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<!-- Bootstrap 3.3.6 -->
+	<script src="/plat/js/plugins/bootstrap.min.js"></script>
+	<script src="/plat/js/create/httpRequest.js"></script>
+	<script src="/plat/js/create/public.js"></script>
+	<script src="/plat/js/create/AjaxAddr.js"></script>
+	<script src="/plat/js/plugins/extendPagination.js"></script>
+	<script src="/plat/js/create/contentPublic.js"></script>
+	<!--表单验证-->
+	<script src="/plat/js/plugins/formValidator-4.0.1.js"></script>
+	<script src="/plat/js/plugins/formValidatorRegex.js"></script>
+	<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<script>
+		//  展示列表信息
+		$(document).ready(function() {
+				orgnizationLevel();
+			})
+			//		机构等级列表展示
+		function orgnizationLevel() {
+			$("#orgnizationLevel_tbody_main").empty();
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(examinationOrganizationLevel_getAllOrgLevel_url, null, otype, osync);
+			if(reqResult.result == 0) {
+				var str = '';
+				var datal = reqResult.data;
+				for(var i = 0; i < datal.length; i++) {
+					var Tbody = document.getElementById('orgnizationLevel_tbody_main');
+					var lRow = Tbody.insertRow(); //创建行
+					var operationByRole = reqResult.operationList; //获取操作类型
+					var operationByRoleAdd = document.getElementById('addLevel'); //获取添加按钮
+					//				判断操作类型
+					(operationByRole.orgLevel_insert === false) ? operationByRoleAdd.style.display = 'none': operationByRoleAdd.style.display = ''; //1为添加
+					var orgnizationLevelStatus = (datal[i].orgLevelStatus === 0) ? "启用" : "禁用";
+					//创建列
+					var firstColumn = lRow.insertCell();
+					var secondColumn = lRow.insertCell();
+					var thirdColumn = lRow.insertCell();
+					var forthColumn = lRow.insertCell();
+					firstColumn.setAttribute('orgLevelId', datal[i].orgLevelId); //给td添加属性
+					//添加第一列内容
+					//创建查看标签
+					var aCheck = document.createElement("a");
+					var iElement = document.createElement("i");
+					(operationByRole.orgLevel_detail === true) ? iElement.className = "fa fa-eye": ''; //4为查看
+					aCheck.appendChild(iElement);
+					aCheck.setAttribute("href", "#check_organizationLevel_modal");
+					aCheck.setAttribute("data-toggle", "modal");
+					aCheck.style.marginLeft = "5px";
+					aCheck.onclick = function() {
+						check_orgnizationLevelInfo(this)
+					};
+					firstColumn.appendChild(aCheck);
+					//创建编辑标签
+					var aEdit = document.createElement("a");
+					var iElement = document.createElement("i");
+					(operationByRole.orgLevel_update === true) ? iElement.className = "fa fa-pencil": ''; //3为更新
+					aEdit.appendChild(iElement);
+					aEdit.setAttribute("href", "#edit_organizationLevel_modal");
+					aEdit.setAttribute("data-toggle", "modal");
+					aEdit.style.marginLeft = "5px";
+					aEdit.onclick = function() {
+						edit_orgnizationLevelInfo(this)
+					};
+					firstColumn.appendChild(aEdit);
+					//创建删除标签
+					var aDelete = document.createElement("a");
+					var iElement = document.createElement("i");
+					(operationByRole.orgLevel_delete === true) ? iElement.className = "fa fa-trash-o": ''; //2为删除
+					aDelete.appendChild(iElement);
+					aDelete.style.marginLeft = "5px";
+					aDelete.onclick = function() {
+						del_orgnizationLevelInfo(this)
+					};
+					firstColumn.appendChild(aDelete);
+					//添加第二列内容	
+					secondColumn.innerText = datal[i].orgLevelName;
+					//添加第三列内容	
+					thirdColumn.innerText = getLocalTime(datal[i].orgLevelCreatetime);
+					//添加第四列内容	
+					forthColumn.innerText = orgnizationLevelStatus;
+				}
+				return false;
+			}
+		}
+		//	添加机构等级
+		$('#addLevel').on('click', function() {
+			//				表单验证
+			$.formValidator.initConfig({
+				submitButtonID: "add_orgnizationLevel_btn",
+				debug: true,
+				onSuccess: function() {
+					add_orgnizationLevelInfo();
+				},
+				onError: function() {
+					alert("添加失败，具体错误，请看网页上的提示！")
+				},
+				submitAfterAjaxPrompt: '有数据正在异步验证，请稍等...'
+			});
+			//等级名称
+			$("#add_orgLevelName").formValidator({
+				onShow: "请输入等级名称",
+				onFocus: "请输入不少于2字符的等级名称!"
+			}).inputValidator({
+				min: 1,
+				max: 30,
+				onError: "你输入的等级名称格式错误,请确认！"
+			})
+		})
+
+		function add_orgnizationLevelInfo() {
+			var add_orgLevelName = $('#add_orgLevelName').val();
+			if(add_orgLevelName == '') {
+				alert('请输入完整信息后添加！');
+				return false;
+			} else {
+				var param = $('#add_orgLevel').serialize();
+				var otype = "post";
+				var osync = false;
+				var reqResult = httpRequest(examinationOrganizationLevel_insertOrgLevel_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert('添加成功！');
+					window.location.reload();
+				} else {
+					alert("error");
+				}
+			}
+		}
+		//	删除血型信息
+		function del_orgnizationLevelInfo(del_li) {
+			if(confirm("确认删除该等级吗？")) {
+				var del_blood_id = $(del_li).parent().attr("orgLevelId");
+				var param = {
+					"orgLevelId": del_blood_id
+				};
+				var otype = "get";
+				var osync = false;
+				var reqResult = httpRequest(examinationOrganizationLevel_deleteOrgLevel_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert("删除成功");
+					window.location.reload();
+				} else {
+					alert(reqResult.message);
+				}
+			}
+		}
+		//	查看机构等级
+		function check_orgnizationLevelInfo(check) {
+			var check_bloodid = $(check).parent().attr("orgLevelId");
+			var param = {
+				"orgLevelId": check_bloodid
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(examinationOrganizationLevel_geOrgLevelById_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				$('#check_orgLevelName').val(reqResult.data.orgLevelName);
+				$('#check_orgLevelCreatetime').val(reqResult.data.orgLevelCreatetime);
+				if(reqResult.data.orgLevelStatus == 0) {
+					$('#check_orgLevelStatus input')[0].checked = "checked";
+				} else {
+					$('#check_orgLevelStatus input')[1].checked = "checked";
+				}
+			} else {
+				alert(reqResult.message);
+			}
+		}
+		//	编辑回显体检机构
+		$('a[href="#edit_organizationLevel_modal"]').on('click', function() {
+			//				表单验证
+			$.formValidator.initConfig({
+				submitButtonID: "edit_orgLevelStatus_btn",
+				debug: true,
+				onSuccess: function() {
+					edit_orgLevelStatusInfo();
+				},
+				onError: function() {
+					alert("添加失败，具体错误，请看网页上的提示！")
+				},
+				submitAfterAjaxPrompt: '有数据正在异步验证，请稍等...'
+			});
+			//等级名称
+			$('#edit_orgLevelName').on('click', function() {
+				$("#edit_orgLevelName").formValidator({
+					onShow: "请输入等级名称",
+					onFocus: "请输入不少于2字符的等级名称!"
+				}).inputValidator({
+					min: 1,
+					max: 30,
+					onError: "你输入的等级名称格式错误,请确认！"
+				})
+			})
+		})
+
+		function edit_orgnizationLevelInfo(edit) {
+			var edit_blood_id = $(edit).parent().attr("orgLevelId");
+			var param = {
+				"orgLevelId": edit_blood_id
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(examinationOrganizationLevel_geOrgLevelById_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				$('#edit_orgLevelId').val(reqResult.data.orgLevelId);
+				$('#edit_orgLevelName').val(reqResult.data.orgLevelName);
+				if(reqResult.data.orgLevelStatus == 0) {
+					$('#edit_orgLevelStatus input')[0].checked = "checked";
+				} else {
+					$('#edit_orgLevelStatus input')[1].checked = "checked";
+				}
+			} else {
+				alert(reqResult.message);
+			}
+		}
+		//  编辑保存信息
+		function edit_orgLevelStatusInfo() {
+			var edit_orgLevelName = $('#edit_orgLevelName').val();
+			var edit_bloodtypeCode = $('#edit_bloodtypeCode').val();
+			if(edit_orgLevelName == '') {
+				alert('请输入完整信息！');
+				return false;
+			} else {
+				var param = $('#edit_orgLevel').serialize();
+				var otype = "post";
+				var osync = false;
+				var reqResult = httpRequest(examinationOrganizationLevel_updateOrgLevel_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert('编辑成功');
+					window.location.reload();
+				} else {
+					alert(reqResult.message);
+				}
+			}
+		}
+	</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

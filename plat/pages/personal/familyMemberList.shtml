@@ -1,0 +1,300 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<div class="fakeloader"></div>
+	<section class="content-header">
+		<div class="margin-bottom">
+			<h2><small>家庭成员</small></h2></div>
+		<ol class="breadcrumb">
+			<li>
+				<a href="#">个人</a>
+			</li>
+			<li class="active">家庭成员</li>
+		</ol>
+		<div class="box container-fluid no-margin">
+			<!--box-header -->
+			<div class="box-header">
+				<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">搜索</h3>
+				<div class="col-lg-2 col-md-3 col-sm-3 col-xs-3 txt_r">
+					<a href="/plat/pages/personal/familyMemberList/AddFamilyMember.shtml" id="addFamilyNum" class="btn btn-default">添加</a>
+					<button type="button" onclick="storeManagementBack()" class="btn btn-default">返回</button>
+				</div>
+			</div>
+			<div class="box-body">
+				<form class="bs-example-form padding_l42px" role="form">
+					<input type="hidden" id='customerInfoId' name="customerInfoId" />
+					<input type="hidden" name="customerRegistId" id="customerRegistId" />
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">名 称</span>
+									<input type="text" class="form-control family_search_form" name="customerInfoName" id="searchFamily_customerInfoName" aria-describedby="basic-addon1" maxlength='12' required>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">性 别</span>
+									<select name="idSex" id='searchFamily_sex' class="form-control input_width_100 selectpicker" aria-describedby="basic-addon1" maxlength='12' required>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">身份证号</span>
+									<input type="text" class="form-control family_search_form" name="customerInfoIdentityNumber" id="searchFamily_customerInfoIdentityNumber" aria-describedby="basic-addon1" maxlength='18' required>
+								</div>
+							</div>
+						</div>
+						</div>
+						<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">邮 箱</span>
+									<input type="email" class="form-control selectpicker family_search_form" id='searchFamily_customerInfoEmail' name="customerInfoEmail" aria-describedby="basic-addon1" maxlength='10' required>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">手机号码</span>
+									<input type="text" class="form-control selectpicker family_search_form" id='searchFamily_customerInfoPhone' name="customerInfoPhone" aria-describedby="basic-addon1" maxlength='10' required>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group pull-right">
+									<input type="button" class="btn btn-default" id="search_family_btn" value="搜索" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<!-- /.box-header -->
+		</div>
+	</section>
+	<!-- /Content Header (Page header) -->
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<!--box-header -->
+					<div class="box-header">
+						<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">列表</h3>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+						<table class="table formCss">
+							<thead>
+								<tr>
+									<th>编辑</th>
+									<th>姓名</th>
+									<th>性别</th>
+									<th>身份证号</th>
+									<th>手机号码</th>
+									<th>邮箱</th>
+									<th>关系</th>
+									<th>状态</th>
+									<th>创建时间</th>
+								</tr>
+								<tr class="warning no-result">
+									<td colspan="7"><i class="fa fa-warning"></i>没有任何搜索结果!</td>
+								</tr>
+							</thead>
+							<tbody id="familyMember_tbody">
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="row">
+							<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /Main content -->
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<script src="/plat/js/create/httpRequest.js"></script>
+	<script src="/plat/js/create/contentPublic.js"></script>
+	<script src="/plat/js/plugins/extendPagination.js"></script>
+	<script src="/plat/js/plugins/jquery.cityselect.js"></script>
+	<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<script>
+		init_page();
+
+		function init_page() {
+			$('#familyMember_tbody').empty();
+			//1.请求后端信息并展示
+			sex('#searchFamily_sex', '0');
+			familyMemberSearch();
+			init_pager();
+		}
+
+		function familyMemberSearch() {
+			var param = initParam();
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(userLogOnInfo_getCustomerInfoByPage_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				//4.展示数据
+				total_count = reqResult.data.total;
+				createTable(page_curr, limit, total_count, reqResult);
+			}
+			return false;
+		}
+
+		// 初始化分页信息
+		function init_pager() {
+			$('#callBackPager').extendPagination({
+				totalCount: total_count,
+				showCount: count_curr,
+				limit: limit,
+				callback: function(curr, limit, totalCount) {
+					page_curr = curr;
+					total_count = totalCount;
+					familyMemberSearch();
+				}
+			});
+		}
+
+		//初始化参数信息
+		function initParam() {
+			$('#familyMember_tbody').empty();
+			var thisURL = document.URL;
+			if(thisURL.indexOf("?") != -1) {
+				var customerInfoId = getParamValue('customerInfoId');
+				var customerRegistId = getParamValue('customerRegistId');
+				$('#customerInfoId').val(customerInfoId);
+				$('#customerRegistId').val(customerRegistId);
+				var customerInfoName = $("#searchFamily_customerInfoName").val();
+				var sex = $("#searchFamily_sex").val();
+				var customerInfoIdentityNumber = $("#searchFamily_customerInfoIdentityNumber").val();
+				var customerInfoPhone = $('#searchFamily_customerInfoPhone').val();
+				var customerInfoEmail = $("#searchFamily_customerInfoEmail").val();
+
+				//抓取分页信息
+				var param = {
+					"page": page_curr,
+					"rows": count_curr
+				};
+				if($('#customerInfoId').val()) {
+					param.customerInfoId = $('#customerInfoId').val();
+				}
+				if(customerInfoName) {
+					param.customerInfoName = customerInfoName;
+				}
+				if(sex) {
+					param.sex = sex;
+				}
+				if(customerInfoIdentityNumber) {
+					param.customerInfoIdentityNumber = customerInfoIdentityNumber;
+				}
+				if(customerInfoPhone) {
+					param.customerInfoPhone = customerInfoPhone;
+				}
+				if(customerInfoEmail) {
+					param.customerInfoEmail = customerInfoEmail;
+				}
+				return param;
+			}
+		}
+
+		function createTable(currPage, limit, total, dataBack) {
+			var showNum = limit;
+			if(total - (currPage * limit) < 0) showNum = total - ((currPage - 1) * limit);
+			var datal = dataBack.data.list;
+			//			//获取操作类型
+			var operationList = dataBack.operationList;
+			//			判断添加按钮
+			if(operationList.relationship_insert == true) {
+				$('#addFamilyNum').show();
+			} else {
+				$('#addFamilyNum').hide();
+			}
+			var str = '';
+			for(var i = 0; i < showNum; i++) {
+				str += "<tr><td relationshipId='" + datal[i].relationshipId + "'>";
+				if(operationList.relationship_detail == true) {
+					str += "<a href='/plat/pages/personal/familyMemberList/CheckFamilyMember.shtml?id=" + datal[i].relationshipId + "' class='padding_4px' title='查看家庭成员信息'><i class='fa fa-eye'></i></a> ";
+				}
+				if(operationList.relationship_update == true) {
+					str += "<a href='/plat/pages/personal/familyMemberList/EditFamilyMember.shtml?id=" + datal[i].relationshipId + "&&customerInfoId=" + datal[i].customerInfoId + "' class='padding_4px' title='编辑家庭成员信息'><i class='fa fa-pencil'></i></a> ";
+				}
+				if(operationList.relationship_delete == true) {
+					str += "<a href='#' title='删除家庭成员信息' class='padding_4px' onclick='del_familyMember(this)'><i class='fa fa-trash-o'></i></a>";
+				}
+				str += "</td>";
+				str += "<td>" + datal[i].customerInfoName + "</td>";
+				if(datal[i].sex == 1) {
+					str += "<td>" + '男' + "</td>";
+				} else if(datal[i].sex == 2) {
+					str += "<td>" + '女' + "</td>";
+				} else {
+					str += "<td>" + '通用' + "</td>";
+				}
+				str += "<td>" + datal[i].customerInfoIdentityNumber + "</td>";
+				str += "<td>" + datal[i].customerInfoPhone + "</td>";
+				str += "<td>" + datal[i].customerInfoEmail + "</td>";
+				str += "<td>" + datal[i].relation + "</td>";
+				if(datal[i].status == 0) {
+					str += "<td>" + '启用' + "</td>";
+				} else {
+					str += "<td>" + '禁用' + "</td>";
+				}
+				str += "<td>" + getLocalTime(nullformat(datal[i].createtime)) + "</td>";
+				str += '</tr>';
+			}
+			$("#familyMember_tbody").append(str);
+			return false;
+		}
+
+		$('#search_family_btn').on('click', function() {
+			familyMemberSearch();
+			return false;
+		})
+		$('.family_search_form').on('keydown', function(e) {
+			if(e && e.keyCode == 13) {
+				familyMemberSearch();
+				return false;
+			}
+		})
+		$('#add_familyMember').on('click', function() {
+			var customerInfoId = getParamValue('customerInfoId');
+			var customerRegistId = getParamValue('customerRegistId');
+			window.location.href = '/plat/pages/personal/familyMemberList/AddFamilyMember.shtml?customerInfoId=' + customerInfoId + '&&customerRegistId=' + customerRegistId;
+		})
+
+		function del_familyMember(del_li) {
+			if(confirm("确认删除该成员吗？")) {
+				var del_user_id = $(del_li).parent().attr("relationshipId");
+				var param = {
+					"relationshipId": del_user_id
+				};
+				var otype = "get";
+				var osync = false;
+				var reqResult = httpRequest(familyMember_deleteRelationship_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert("删除成功");
+					var customerInfoId = $('#customerInfoId').val();
+					var customerRegistId = $('#customerRegistId').val();
+					window.location.href = '/plat/pages/personal/familyMemberList.shtml?customerInfoId=' + customerInfoId + '&&customerRegistId=' + customerRegistId;
+				} else {
+					alert(reqResult.message);
+				}
+			}
+		}
+	</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

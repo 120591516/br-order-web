@@ -1,0 +1,458 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<div class="fakeloader"></div>
+	<section class="content-header">
+		<div class="margin-bottom">
+			<h2>体检中心<small>检查项</small></h2></div>
+		<ol class="breadcrumb">
+			<li>
+				<a href="#"><i class="fa fa-dashboard"></i> 首页</a>
+			</li>
+			<li>
+				<a href="#">体检中心</a>
+			</li>
+			<li class="active">检查项</li>
+		</ol>
+		<div class="box container-fluid no-margin">
+			<!--box-header -->
+			<div class="box-header">
+				<div class="row margin-bottom">
+					<div class="col-xs-12 col-md-8">
+						<h3 class="box-title">检查项列表</h3></div>
+					<div class="col-md-1 col-md-offset-9">
+						<a href="#add_ageunit" data-toggle="modal" class="btn btn-default">添加</a>
+					</div>
+				</div>
+				<div class="row margin-bottom">
+					<form class="form-group container-fluid">
+						<div class="row margin-bottom">
+							<div class="col-md-12">
+								<div class="col-md-6">
+									<div class="col-md-6">
+										<div class="input-group">
+											<span class="input-group-addon">体征词名称</span>
+											<input type="text" class="form-control" id="examItemValueName_query" placeholder="名称">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="input-group">
+											<span class="input-group-addon">体征词编码</span>
+											<input type="text" class="form-control" id="examItemValueCode_query" placeholder="编码">
+										</div>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="col-md-6">
+										<div class="input-group">
+											<span class="input-group-addon">输入码</span>
+											<input type="text" class="form-control" id="examItemValueInputCode_query" placeholder="输入码">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="input-group">
+											<button class="btn btn-primary fa fa-search" id="mecSearch">搜 索</button>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+					</form>
+				</div>
+			</div>
+
+			<!-- /.box-header -->
+		</div>
+	</section>
+
+	<!-- /Content Header (Page header) -->
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<div class="box-body">
+						<table class="table formCss" id="example3">
+							<thead>
+								<tr>
+									<th>操作</th>
+									<th>检查项目名称</th>
+									<th>体征词名称</th>
+									<th>体征词编码</th>
+									<th>输入码</th>
+									<th>重症级别</th>
+									<th>问卷式分数</th>
+									<th>创建时间</th>
+									<th>状态</th>
+								</tr>
+							</thead>
+							<tbody id="itemContent">
+							</tbody>
+						</table>
+					</div>
+					<div class="row">
+						<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /Main content -->
+</div>
+<!--模态框添加-->
+<div class="modal fade" id="add_ageunit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">检查项信息</h4>
+			</div>
+			<div class="modal-body">
+				<form class="bs-example bs-example-form" role="form" method="post" novalidate="novalidate" id='add_ageunit_formnews'>
+					<input type="hidden" name="examItemId" id="examItemId" />
+					<div class="input-group">
+						<span class="input-group-addon">体征词名称</span>
+						<input type="text" id="examItemValueName" class="form-control" name="examItemValueName" aria-describedby="basic-addon1" required>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">体征词编码</span>
+						<input type="text" id="examItemValueCode" class="form-control" name="examItemValueCode" aria-describedby="basic-addon1" required>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">输入码</span>
+						<input type="text" id="examItemValueInputCode" class="form-control" name="examItemValueInputCode" aria-describedby="basic-addon1" required>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">重症级别</span>
+						<input maxlength="11" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" type="text" id="examItemValueServerDegree" class="form-control" name="examItemValueServerDegree" aria-describedby="basic-addon1"
+							required>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">问卷式分数</span>
+						<input maxlength="11" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" type="text" id="examItemValueAskscore" class="form-control" name="examItemValueAskscore" aria-describedby="basic-addon1" required>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="submit" class="btn btn-primary" data-dismiss="modal" id="add_ageunit_btn">提交</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--模态框查看-->
+<div class="modal fade" id="check_ageunit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">检查项信息</h4>
+			</div>
+			<div class="modal-body">
+				<form class="bs-example bs-example-form" role="form" method="post" novalidate="novalidate" id='add_ageunit_formnews'>
+					<input type="hidden" name="ageunitId" id="ageunitId" />
+					<div class="input-group">
+						<span class="input-group-addon">体检项目</span>
+						<select class="form-control selectpicker" id="examItemId_check" name="examItemId">
+							
+						</select>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">体征词名称</span>
+						<input type="text" id="examItemValueName_check" class="form-control" name="examItemValueName" aria-describedby="basic-addon1" required>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">体征词编码</span>
+						<input type="text" id="examItemValueCode_check" class="form-control" name="examItemValueCode" aria-describedby="basic-addon1" required>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">输入码</span>
+						<input type="text" id="examItemValueInputCode_check" class="form-control" name="examItemValueInputCode" aria-describedby="basic-addon1" required>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">重症级别</span>
+						<input maxlength="11" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" type="text" id="examItemValueServerDegree_check" class="form-control" name="examItemValueServerDegree" aria-describedby="basic-addon1"
+							required>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">问卷式分数</span>
+						<input maxlength="11" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" type="text" id="examItemValueAskscore_check" class="form-control" name="examItemValueAskscore" aria-describedby="basic-addon1"
+							required>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--模态框修改-->
+<div class="modal fade" id="edit_ageunit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">检查项信息</h4>
+			</div>
+			<div class="modal-body">
+				<form class="bs-example bs-example-form" role="form" method="post" novalidate="novalidate" id='edit_ageunit_formnews'>
+					<input type="hidden" name="examItemValueId" id="examItemValueId" />
+					<div class="input-group">
+						<span class="input-group-addon">体征词名称</span>
+						<input type="text" id="examItemValueName_update" class="form-control" name="examItemValueName" aria-describedby="basic-addon1" required>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">体征词编码</span>
+						<input type="text" id="examItemValueCode_update" class="form-control" name="examItemValueCode" aria-describedby="basic-addon1" required>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">输入码</span>
+						<input type="text" id="examItemValueInputCode_update" class="form-control" name="examItemValueInputCode" aria-describedby="basic-addon1" required>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">重症级别</span>
+						<input maxlength="11" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" type="text" id="examItemValueServerDegree_update" class="form-control" name="examItemValueServerDegree" required>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">问卷式分数</span>
+						<input maxlength="11" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" type="text" id="examItemValueAskscore_update" class="form-control" name="examItemValueAskscore" required>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="submit" class="btn btn-primary" data-dismiss="modal" id="edit_ageunit_save">修改</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--#include file="/plat/pages/system/footer.html"-->
+			<!--动画js-->
+<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+<script>
+	$(document).ready(function() {
+			initSelect("#examItemId");
+			initSelect("#examItemId_query");
+			seach();
+
+		})
+		//增  添加
+	$('#add_ageunit_btn').on('click', function() {
+		add_ageunitnews();
+	})
+
+	function seach() {
+		var id = document.URL.split("=")[1];
+		var examItemValueName_query = $("#examItemValueName_query").val();
+		var examItemValueCode_query = $("#examItemValueCode_query").val();
+		var examItemValueInputCode_query = $("#examItemValueInputCode_query").val();
+		var param = {
+			"page": 1,
+			"rows": 10,
+			"examItemId": id,
+			"examItemValueName": examItemValueName_query,
+			"examItemValueCode": examItemValueCode_query,
+			"examItemValueInputCode": examItemValueInputCode_query
+		};
+		var otype = "get";
+		var osync = false;
+		var reqResult = httpRequest(item_getOrgExamItemValueByPage_url, param, otype, osync);
+		if (reqResult.result == 0) {
+			callBackPagination(reqResult);
+			return false;
+		} else {
+			alert("error");
+		}
+	}
+	//初始化下拉框
+	function initSelect(id) {
+		var reqResult = httpRequest(item_list_url, null, "get", false);
+		if (reqResult.result == 0) {
+			var str = '<option value="-1">全部</option>';
+			var datal = reqResult.data;
+			for (var i = 0; i < datal.length; i++) {
+				str += '<option value="' + datal[i].examItemId + '">' + datal[i].examItemName + '</option>';
+			}
+			$(id).append(str);
+		}
+
+	}
+	//下拉框回显
+	function checkSelect(id, checkId) {
+		$(id).empty();
+		var reqResult = httpRequest(item_list_url, null, "get", false);
+		if (reqResult.result == 0) {
+			var str = '<option value="-1">全部</option>';
+			var datal = reqResult.data;
+			for (var i = 0; i < datal.length; i++) {
+				if (datal[i].examItemId == checkId) {
+					str += '<option selected="selected" value="' + datal[i].examItemId + '">' + datal[i].examItemName + '</option>';
+				} else {
+					str += '<option value="' + datal[i].examItemId + '">' + datal[i].examItemName + '</option>';
+				}
+
+			}
+			$(id).append(str);
+		}
+
+	}
+	$("#mecSearch").click(function() {
+		seach();
+		return false;
+	});
+	//从后台获取全部内容
+	function createTable(curr, limit, totalCount, dataBack) {
+			var str = '';
+			var datal = dataBack.data.list;
+			for (var i = 0; i < datal.length; i++) {
+				str += "<tr><td deptSelectId='" + datal[i].examItemId + "' ageunitid='" + datal[i].examItemValueId + "'>";
+				str += "<a href='#check_ageunit' title='查看体征词信息' data-toggle='modal' onclick='check_Ageunit(this)'><i class='fa fa-eye'></i></a> ";
+				str += "<a href='#edit_ageunit' title='编辑体征词信息' data-toggle='modal' onclick='update_Ageunit(this)'><i class='fa fa-pencil'></i></a> ";
+				str += "<a href='#' title='删除体征词信息' onclick='del_Ageunit(this)'><i class='fa fa-trash-o'></i></a>";
+				str += "</td>";
+				str += "<td>" + nullformat(datal[i].examItemName) + "</td>";
+				str += "<td>" + nullformat(datal[i].examItemValueName) + "</td>";
+				str += "<td>" + nullformat(datal[i].examItemValueCode) + "</td>";
+				str += "<td>" + nullformat(datal[i].examItemValueInputCode) + "</td>";
+				str += "<td>" + nullformat(datal[i].examItemValueServerDegree) + "</td>";
+				str += "<td>" + nullformat(datal[i].examItemValueAskscore) + "</td>";
+				str += "<td>" + getLocalTime(nullformat(datal[i].examItemValueCreateTime)) + "</td>";
+				if (datal[i].examItemValueStatus == 0) {
+					str += "<td>" + '启用 ' + "</td>";
+				} else {
+					str += "<td>" + '禁用' + "</td>";
+				}
+				str += '</tr>';
+			}
+			$("#itemContent").append(str);
+			return false;
+	}
+
+	function add_ageunitnews() {
+		var examItemId = document.URL.split("=")[1];
+		var examItemValueName = $('#examItemValueName').val();
+		var examItemValueCode = $('#examItemValueCode').val();
+		var examItemValueInputCode = $('#examItemValueInputCode').val();
+		var examItemValueServerDegree = $('#examItemValueServerDegree').val();
+		var examItemValueAskscore = $('#examItemValueAskscore').val();
+		if (examItemId == -1 || examItemValueName == '' || examItemValueCode == '' || examItemValueInputCode == '' || examItemValueServerDegree == '' || examItemValueAskscore == '') {
+			alert('请输入完整信息！');
+			return false;
+		} else {
+			var param = {
+				"examItemId": examItemId,
+				"examItemValueName": examItemValueName,
+				"examItemValueCode": examItemValueCode,
+				"examItemValueInputCode": examItemValueInputCode,
+				"examItemValueServerDegree": examItemValueServerDegree,
+				"examItemValueAskscore": examItemValueAskscore
+			}
+
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(item_insertOrgExamItemValue_url, param, otype, osync);
+			if (reqResult.result == 0) {
+				alert("添加成功");
+				window.location.reload();
+			} else {
+				alert(error);
+			}
+		}
+	}
+
+	//	查看用户信息
+	function check_Ageunit(check) {
+		var check_ageunit_id = $(check).parent().attr("ageunitid");
+		var deptSelectId = $(check).parent().attr("deptSelectId");
+		var param = {
+			"orgExamItemValueId": check_ageunit_id
+		};
+		var otype = "get";
+		var osync = false;
+		var reqResult = httpRequest(item_getOrgExamItemValueById_url, param, otype, osync);
+		if (reqResult.result == 0) {
+			var datal = reqResult.data;
+			checkSelect("#examItemId_check", deptSelectId);
+			$('#examItemValueName_check').val(datal.examItemValueName);
+			$('#examItemValueCode_check').val(datal.examItemValueCode);
+			$('#examItemValueInputCode_check').val(datal.examItemValueInputCode);
+			$('#examItemValueServerDegree_check').val(datal.examItemValueServerDegree);
+			$('#examItemValueAskscore_check').val(datal.examItemValueAskscore);
+
+		} else {
+			alert(reqResult.message);
+		}
+	}
+	//	修改用户信息
+	function update_Ageunit(check) {
+		var check_ageunit_id = $(check).parent().attr("ageunitid");
+		var deptSelectId = $(check).parent().attr("deptSelectId");
+		var param = {
+			"orgExamItemValueId": check_ageunit_id
+		};
+		var otype = "get";
+		var osync = false;
+		var reqResult = httpRequest(item_getOrgExamItemValueById_url, param, otype, osync);
+		if (reqResult.result == 0) {
+			var datal = reqResult.data;
+			checkSelect("#examItemId_update", deptSelectId);
+
+			$('#examItemValueId').val(datal.examItemValueId);
+			$('#examItemValueName_update').val(datal.examItemValueName);
+			$('#examItemValueCode_update').val(datal.examItemValueCode);
+			$('#examItemValueInputCode_update').val(datal.examItemValueInputCode);
+			$('#examItemValueServerDegree_update').val(datal.examItemValueServerDegree);
+			$('#examItemValueAskscore_update').val(datal.examItemValueAskscore);
+		} else {
+			alert(reqResult.message);
+		}
+	}
+	//  删除用户信息
+	function del_Ageunit(del_li) {
+		if (confirm("确认禁用该体征词吗？")) {
+			var del_user_id = $(del_li).parent().attr("ageunitid");
+			var param = {
+				"orgExamItemValueId": del_user_id
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(item_deleteOrgExamItemValue_url, param, otype, osync);
+			if (reqResult.result == 0) {
+				alert("禁用成功！");
+				window.location.reload();
+			} else {
+				alert(reqResult.message);
+			}
+		}
+	}
+
+	//修改
+	$('#edit_ageunit_save').on('click', function() {
+		var examItemId = $("#examItemId_update option:selected").val();
+		var examItemValueName = $('#examItemValueName_update').val();
+		var examItemValueCode = $('#examItemValueCode_update').val();
+		var examItemValueInputCode = $('#examItemValueInputCode_update').val();
+		var examItemValueServerDegree = $('#examItemValueServerDegree_update').val();
+		var examItemValueAskscore = $('#examItemValueAskscore_update').val();
+		if (examItemId == -1 || examItemValueName == '' || examItemValueCode == '' || examItemValueInputCode == '' || examItemValueServerDegree == '' || examItemValueAskscore == '') {
+			alert('请输入完整信息！');
+			return false;
+		} else {
+			var param = $('#edit_ageunit_formnews').serialize();
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(item_updateOrgExamItemValue_url, param, otype, osync);
+			if (reqResult.result == 0) {
+				alert('编辑成功!');
+				window.location.reload();
+			} else {
+				alert(reqResult.message);
+			}
+		}
+	})
+</script>

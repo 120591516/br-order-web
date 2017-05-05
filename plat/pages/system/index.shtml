@@ -1,0 +1,13 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+	</section>
+	<!-- Main content -->
+	<section class="content">
+		<!-- Small boxes (Stat box) -->
+		<!-- /.row -->
+	</section>
+	<!-- /.content -->
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

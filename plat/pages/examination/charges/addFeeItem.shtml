@@ -1,0 +1,494 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Main content -->
+	<div class="fakeloader"></div>
+	<section class="content">
+		<!--头部S-->
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box width_70">
+					<div class="box-header">
+						<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">收费项<small>--添加</small></h3>
+						<div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
+							<button class="btn btn-default pull-right" onclick="storeManagementBack()">返回</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--头部E-->
+		<div class="box width_70">
+			<div class="box-body">
+				<form class="bs-example-form form-horizontal formCss" role="form" id="addFeeItemForm">
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>收费项名称</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="examFeeItemName" id="addExamFeeItemName">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="addExamFeeItemNameTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>收费项简称</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="examFeeItemNameAbr" id="addExamFeeItemNameAbr">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="addExamFeeItemNameAbrTip"></div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>英文名称</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="examFeeItemNameEng" id="addExamFeeItemNameEng">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="addExamFeeItemNameEngTip"></div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>英文简称</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="examFeeItemNameEngAbr" id="addExamFeeItemNameEngAbr">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="addExamFeeItemNameEngAbrTip"></div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>项目代码</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="examFeeItemCode" id="addExamFeeItemCode">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="addExamFeeItemCodeTip"></div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>收费代码</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="examFeeItemFeeCode" id="addExamFeeItemFeeCode">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="addExamFeeItemFeeCodeTip"></div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>HIS名称</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="examFeeItemHisName" id="addExamFeeItemHisName">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="addExamFeeItemHisNameTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>单价</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<div class="input-group">
+								<input type="text" class="form-control" name="examFeeItemUnitPrice" id="addExamFeeItemUnitPrice">
+								<span class="input-group-addon"><a class="fa fa-cny none_cursor"></a></span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="addExamFeeItemUnitPriceTip"></div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>成本价</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<div class="input-group">
+								<input type="text" class="form-control" name="examFeeItemCostPrice" id="addExamFeeItemCostPrice">
+								<span class="input-group-addon"><a class="fa fa-cny none_cursor"></a></span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="addExamFeeItemCostPriceTip"></div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>外送价</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<div class="input-group">
+								<input type="text" class="form-control" name="examFeeItemCoopPrice" id="addExamFeeItemCoopPrice">
+								<span class="input-group-addon"><a class="fa fa-cny none_cursor"></a></span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="addExamFeeItemCoopPriceTip"></div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>耗材价</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<div class="input-group">
+								<input type="text" class="form-control" name="examFeeItemMaterialPrice" id="addExamFeeItemMaterialPrice">
+								<span class="input-group-addon"><a class="fa fa-cny none_cursor"></a></span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="addExamFeeItemMaterialPriceTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>套餐内价格</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<div class="input-group">
+								<input type="text" class="form-control" name="examFeeItemSuitePrice" id="addExamFeeItemSuitePrice">
+								<span class="input-group-addon"><a class="fa fa-cny none_cursor"></a></span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="addExamFeeItemSuitePriceTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>适用性别</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px'>
+							<input type="checkbox" name="sex" value="1" id="addfMale"> 适用男
+							<input type="hidden" name='fMale' value="1" id="addfMaleHidden">
+							<input type="checkbox" name="sex" value="1" id="addfFemale" id="examSuiteFemale"> 适用女
+							<input type="hidden" name='fFemale' value="1" id="addfFemaleHidden">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="checkboxTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>机构名称</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<select class="form-control selectpicker orgN" id="organization" name="orgId">
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="organizationTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>门店</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<select class="form-control selectpicker brands" id="branch" name="organizationBranchId">
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="branchTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>上级科室</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<select class="form-control selectpicker departPs SuperiorDepartment" id="dept" name="departmentId">
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="deptTip"></div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>说明</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<textarea name="note" class="form-control" id="addNote"></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="addNoteTip"></div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="row">
+				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2 user_power_btn">
+					<button type="button" class="btn btn-default" id='addFeeItemSave'>保存</button>
+					<a href="#" class="btn btn-default" onclick="storeManagementBack()">返 回</a>
+				</div>
+			</div>
+		</div>
+
+	</section>
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<script src="/plat/js/create/AjaxAddr.js"></script>
+	<script src="/plat/js/create/httpRequest.js"></script>
+	<script src="/plat/js/create/contentPublic.js"></script>
+	<!--表单验证-->
+	<script src="/plat/js/plugins/formValidator-4.0.1.js"></script>
+	<script src="/plat/js/plugins/formValidatorRegex.js"></script>
+	<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			//表单验证
+			$.formValidator.initConfig({
+				submitButtonID: "addFeeItemSave",
+				debug: true,
+				onSuccess: function() {
+					addSuitItem();
+				},
+				onError: function() {
+					alert("添加失败，具体错误，请看网页上的提示！")
+				},
+				submitAfterAjaxPrompt: '有数据正在异步验证，请稍等...'
+			});
+			//收费项名称
+			$("#addExamFeeItemName").formValidator({
+				onShow: "请输入收费项名称",
+				onFocus: "收费项名称不少于3个字符",
+				onCorrect: "输入正确"
+			}).inputValidator({
+				min: 3,
+				onError: "输入错误"
+			});
+			//收费项简称
+			$("#addExamFeeItemNameAbr").formValidator({
+				onShow: "请输入收费项简称",
+				onFocus: "收费项简称不少于1个字符",
+				onCorrect: "输入正确"
+			}).inputValidator({
+				min: 1,
+				max: 10,
+				onError: "输入错误"
+			});
+			//英文名称
+			$("#addExamFeeItemNameEng").formValidator({
+				onShow: "请输入英文名称",
+				onFocus: "英文名称仅可用英文表示",
+				onCorrect: "输入正确"
+			}).regexValidator({
+				regExp: "username",
+				dataType: "enum",
+				onError: "输入错误"
+			});
+			//英文简称
+			$("#addExamFeeItemNameEngAbr").formValidator({
+				onShow: "请输入英文简称",
+				onFocus: "英文简称仅可用英文表示",
+				onCorrect: "输入正确"
+			}).regexValidator({
+				regExp: "username",
+				dataType: "enum",
+				onError: "输入错误"
+			});
+			//项目代码
+			$("#addExamFeeItemCode").formValidator({
+				onShow: "请输入项目代码",
+				onFocus: "请输入项目代码",
+				onCorrect: "输入正确"
+			}).regexValidator({
+				regExp: "username",
+				dataType: "enum",
+				onError: "输入错误"
+			});
+			//收费代码
+			$("#addExamFeeItemFeeCode").formValidator({
+				onShow: "请输入收费代码",
+				onFocus: "请输入收费代码",
+				onCorrect: "输入正确"
+			}).regexValidator({
+				regExp: "username",
+				dataType: "enum",
+				onError: "输入错误"
+			});
+			//HIS名称
+			$("#addExamFeeItemHisName").formValidator({
+				onShow: "请输入HIS名称",
+				onFocus: "请输入HIS名称",
+				onCorrect: "输入正确"
+			}).regexValidator({
+				regExp: "username",
+				dataType: "enum",
+				onError: "输入错误"
+			});
+			//机构名称
+			$("#organization").formValidator({
+				onShow: "请选择所属机构",
+				onFocus: "所属机构必须选择",
+				onCorrect: "已选择"
+			}).inputValidator({
+				min: 1,
+				onError: "还未选择所属机构!"
+			});
+			//门店
+			$("#branch").formValidator({
+				onShow: "请选择所属门店",
+				onFocus: "所属门店必须选择",
+				onCorrect: "已选择"
+			}).inputValidator({
+				min: 1,
+				onError: "还未选择所属门店!"
+			});
+			//上级科室
+			$("#dept").formValidator({
+				onShow: "请选择上级科室",
+				onFocus: "上级科室必须选择",
+				onCorrect: "已选择"
+			}).inputValidator({
+				min: 1,
+				onError: "还未选择上级科室!"
+			});
+			//单价
+			$("#addExamFeeItemUnitPrice").formValidator({
+				onShow: "请输入单价",
+				onFocus: "请输入单价",
+				onCorrect: "输入正确"
+			}).regexValidator({
+				regExp: "num",
+				dataType: "enum",
+				onError: "输入错误"
+			});
+			//成本价
+			$("#addExamFeeItemCostPrice").formValidator({
+				onShow: "请输入成本价",
+				onFocus: "请输入成本价",
+				onCorrect: "输入正确"
+			}).regexValidator({
+				regExp: "num",
+				dataType: "enum",
+				onError: "输入错误"
+			});
+			//外送价
+			$("#addExamFeeItemCoopPrice").formValidator({
+				onShow: "请输入外送价",
+				onFocus: "请输入外送价",
+				onCorrect: "输入正确"
+			}).regexValidator({
+				regExp: "num",
+				dataType: "enum",
+				onError: "输入错误"
+			});
+			//耗材价
+			$("#addExamFeeItemMaterialPrice").formValidator({
+				onShow: "请输入耗材价",
+				onFocus: "请输入耗材价",
+				onCorrect: "输入正确"
+			}).regexValidator({
+				regExp: "num",
+				dataType: "enum",
+				onError: "输入错误"
+			});
+			//套餐内价格
+			$("#addExamFeeItemSuitePrice").formValidator({
+				onShow: "请输入套餐内价格",
+				onFocus: "请输入套餐内价格",
+				onCorrect: "输入正确"
+			}).regexValidator({
+				regExp: "num",
+				dataType: "enum",
+				onError: "输入错误"
+			});
+			//说明
+			$("#addNote").formValidator({
+				onShow: "请输入收费项说明",
+				onFocus: "请输入收费项说明",
+				onCorrect: "输入正确"
+			}).inputValidator({
+				min: 2,
+				onError: "收费项说明不低于2个字符"
+			});
+			//适用性别
+			$(":checkbox[name='sex']").formValidator({
+				tipID: "checkboxTip",
+				onShow: "请选择适用性别(至少选择1个)",
+				onFocus: "你至少选择1个",
+				onCorrect: "已选择"
+			}).inputValidator({
+				min: 1,
+				onError: "适用性别至少选择一项"
+			});
+		})
+		getOrgList('#organization');
+		$('#DeptTboody').empty();
+		$('#organization').change(function() {
+			getBranch('#organization', '#branch', '#dept');
+		})
+		$('#branch').change(function() {
+			SuperiorDepartment($('#branch').val(), "#dept")
+		})
+ 
+		//  编辑保存信息
+		function addSuitItem() {
+			if($('#addfMale').is(':checked')) {
+				$("#addfMaleHidden").val("0");
+			}
+			if($('#addfFemale').is(':checked')) {
+				$("#addfFemaleHidden").val("0");
+			}
+			var organization = $('#organization').val();
+			var branch = $('#branch').val();
+			var dept = $('#dept').val();
+			var deptText = $("#dept").find("option:selected").text();
+			var addExamFeeItemSuitePrice = $('#addExamFeeItemSuitePrice').val();
+			var addExamItemName = $('#addExamFeeItemName').val();
+			var addExamFeeItemNameAbr = $('#addExamFeeItemNameAbr').val();
+			var addExamFeeItemNameEng = $('#addExamFeeItemNameEng').val();
+			var addExamFeeItemNameEngAbr = $('#addExamFeeItemNameEngAbr').val();
+			var addExamFeeItemCode = $('#addExamFeeItemCode').val();
+			var addExamFeeItemFeeCode = $('#addExamFeeItemFeeCode').val();
+			var addExamFeeItemHisName = $('#addExamFeeItemHisName').val();
+			var addExamFeeItemUnitPrice = $('#addExamFeeItemUnitPrice').val();
+			var addExamFeeItemCostPrice = $('#addExamFeeItemCostPrice').val();
+			var addExamFeeItemMaterialPrice = $('#addExamFeeItemMaterialPrice').val();
+			var addExamFeeItemCoopPrice = $('#addExamFeeItemCoopPrice').val();
+			var addNote = $('#addNote').val();
+			if(organization == '' || branch == '' || dept == '' || addExamItemName == '' || addExamFeeItemNameAbr == '' || addExamFeeItemNameAbr == '' || addExamFeeItemNameEngAbr == '' || addExamFeeItemCode == '' ||
+				addExamFeeItemFeeCode == '' || addExamFeeItemHisName == '' || addExamFeeItemUnitPrice == '' || addExamFeeItemCostPrice == '' ||
+				addExamFeeItemMaterialPrice == '' || addExamFeeItemCoopPrice == '' || addNote == '') {
+				alert('请输入完整信息！');
+				return false;
+			} else {
+				var param = $('#addFeeItemForm').serialize();
+				var otype = "post";
+				var osync = false;
+				var reqResult = httpRequest(insertOrgExamFeeItemUrl, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert('添加成功!');
+					window.location.href = '/plat/pages/examination/charges/feeItem.shtml';
+				} else {
+					alert(reqResult.message);
+				}
+			}
+		}
+	</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

@@ -1,0 +1,314 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<div class="fakeloader"></div>
+	<section class="content-header">
+		<div class="margin-bottom">
+			<h2>
+				<small>门店套餐管理</small>
+			</h2>
+		</div>	
+		<ol class="breadcrumb">
+			<li>
+				<a>体检中心</a>
+			</li>
+			<li class="active">门店套餐管理</li>
+		</ol>
+		<div class="box container-fluid no-margin">
+			<!--box-header -->
+			<div class="box-header">
+				<div class="row margin-bottom">
+					<div class="col-xs-12 col-md-8">
+						<h3 class="box-title">搜索</h3></div>
+					<div class="col-xs-6 col-md-4  text-right">
+						<a class="btn btn-default"  href="" id="addSuites">添 加</a>
+						<a href="#" class="btn pull-right" onclick="storeManagementBack()">返回</a></div>
+				</div>
+				<div class="row margin-bottom">
+					<form class="form-group container-fluid">
+						<div class="row margin-bottom">
+							<div class="col-md-6">
+								<div class="col-md-6">
+									<div class="input-group">
+										<span class="input-group-addon">名称</span>
+										<input type="text" class="form-control" id="examSuiteName" placeholder="名称">
+									</div>
+								</div>
+                                <div class="col-md-6">
+									<div class="input-group">
+										<span class="input-group-addon">代码</span>
+										<input type="text" class="form-control" id="examSuiteCode" placeholder="代码">
+									</div>
+								</div>
+								
+							</div>
+							<div class="col-md-6">
+								<div class="col-md-6">
+									<div class="input-group">
+										<span class="input-group-addon">性别</span>
+										<select class="form-control selectpicker" id="examSuiteSex">
+											<option value="please">请选择</option>
+											<option value="0">通用</option>
+											<option value="1">男</option>
+											<option value="2">女</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="input-group">
+										<span class="input-group-addon">输入码</span>
+										<input type="text" class="form-control" id="inputCode" placeholder="名称">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="col-md-6">
+									<div class="input-group">
+										<span class="input-group-addon">价格区间</span>
+										<input type="text" class="form-control" id="priceStart" placeholder="￥">
+										<span class="input-group-btn">
+									        <span class="btn" type="button">-</span>
+									    </span>
+						                <input type="text" class="form-control" id="priceEnd" placeholder="￥">
+									</div>
+								</div>	
+								<div class="col-md-6">
+									<div class="input-group">
+										<span class="input-group-addon">类型</span>
+										<select class="form-control selectpicker" id="suiteTypeId">
+											
+										</select>
+									</div>
+								</div>					
+							</div>
+	                        <div class="col-md-6">	                        	
+                                <div class="col-md-6">
+									<div class="input-group">
+										<a class="btn btn-primary fa fa-search" onclick="searchAll()">搜 索</a>
+									</div>
+								</div>					
+							</div>
+						</div>
+
+					</form>
+				</div>
+			</div>
+
+			<!-- /.box-header -->
+		</div>
+	</section>
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<div class="box-header">
+						<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">列表</h3>
+					</div>
+					<div class="box-body">
+						<table class="table formCss" id="example3">
+							<thead>
+								<tr>
+									<th>操作</th>
+									<th>机构名称</th>
+									<th>名称</th>
+									<th>代码</th>
+									<th>英文名称</th>
+									<th>价格</th>
+									<th>输入码</th>
+									<th>适用性别</th>
+									<th>类型</th>
+								</tr>
+							</thead>
+							<tbody id="mainContent">
+							</tbody>
+						</table>
+					</div>
+					<div class="row">
+						<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /Main content -->
+<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+<script src="/plat/js/create/httpRequest.js"></script>
+<script src="/plat/js/create/contentPublic.js"></script>
+<script src="/plat/js/plugins/extendPagination.js"></script>
+	<!--动画js-->
+<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+<script>
+		init_page();
+		function init_page() {
+			page_curr=1;
+			$('#mainContent').children('tbody').empty();
+			//prov_init();
+			init_suite_type_info_data("#suiteTypeId"); 
+			//1.请求后端信息并展示
+			branchSuiteSearch();
+		
+			init_pager();
+		}
+		//搜索请求
+		function searchAll(){
+			branchSuiteSearch();
+			init_pager();
+		}
+		
+		//请求后端信息并展示
+		function branchSuiteSearch() {
+			//1.采集参数数据
+			var param = initParam();
+			//2.请求后台
+			var otype = "GET";
+			var osync = false;
+			var reqResult = httpRequest(StorePack_init_show, param, otype, osync);
+			if (reqResult.result == 0) {
+				//4.展示数据
+				total_count = reqResult.data.total;
+				createTable(page_curr, limit, total_count, reqResult);
+			}
+			return false;
+		}
+		// 初始化分页信息
+		function init_pager() {
+			$('#callBackPager').extendPagination({
+				totalCount : total_count,
+				showCount : count_curr,
+				limit : limit,
+				callback : function(curr, limit, totalCount) {
+					page_curr = curr;
+					total_count = totalCount;
+					branchSuiteSearch();
+				}
+			});
+		}
+		//初始化参数信息
+		function initParam() {
+			var thisURL = document.URL;
+			var getval = thisURL.split('?')[1];
+			var branchId = getval.split("=")[1];
+			document.getElementById("addSuites").href="SelectPackage.shtml?param="+branchId;
+			$('#mainContent').empty(); 
+			var examSuiteName=$('#examSuiteName').val().trim();
+			var examSuiteCode=$('#examSuiteCode').val().trim();
+			var examSuiteSex=$('#examSuiteSex').val().trim();
+			var inputCode=$('#inputCode').val().trim();
+			var priceStart=$('#priceStart').val().trim();
+			var priceEnd=$('#priceEnd').val().trim();
+			var orgId=$('#store_orgName').val();
+			var suiteTypeId=$('#suiteTypeId').val();
+			var param = {
+				"page" : page_curr,
+				"rows" : count_curr
+			};	
+			if(branchId!=null&&branchId!=''){
+				param.branchId=branchId;
+			}
+		    if(orgId!=-1&&orgId!=""&&orgId!=''&&orgId!=null){
+				param.orgId=orgId;
+			}
+			if(examSuiteName){
+				param.examSuiteName=examSuiteName;
+			}
+			if(examSuiteCode){
+				param.examSuiteCode=examSuiteCode;
+			}
+			if(inputCode){
+				param.inputCode=inputCode;
+			}
+			if(priceStart){
+				param.priceStart=priceStart;
+			}
+			if(priceEnd){
+				param.priceEnd=priceEnd;
+			}
+			if(examSuiteSex!='please'&&examSuiteSex!=null){
+				param.examSuiteSex=examSuiteSex;
+			}
+			if(suiteTypeId!='please'&&suiteTypeId!=null){
+				param.suiteTypeId=suiteTypeId;
+			} 
+			return param;
+		} 
+		//展示数据
+		function createTable(currPage, limit, total, dataBack) {
+			var showNum = limit;
+			if (total - (currPage * limit) < 0) showNum = total - ((currPage - 1) * limit);
+			for (var i = 0; i < showNum; i++) {
+				var statuWord = "";
+				var Tbody=document.getElementById('mainContent');
+				var lRow=Tbody.insertRow();//创建行		
+				//创建列
+				var firstColumn=lRow.insertCell();
+				var secondColumn=lRow.insertCell();
+				var thirdColumn=lRow.insertCell();
+				var forthColumn=lRow.insertCell(); 
+				var fifthColumn=lRow.insertCell(); 
+				var sixthColumn=lRow.insertCell(); 
+				var seventhColumn=lRow.insertCell();
+				var eightColumn=lRow.insertCell();
+				var nineColumn=lRow.insertCell();
+				var id=dataBack.data.list[i].branchSuiteId;
+				firstColumn.setAttribute('branchSuiteId',dataBack.data.list[i].branchSuiteId);//给td添加属性
+				//添加第一列内容
+				    //创建查看标签
+		    		var aCheck = document.createElement("a");
+		    		var iElement=document.createElement("i");
+		    		iElement.className="fa fa-eye";
+				    aCheck.appendChild(iElement);
+				    aCheck.setAttribute("href","/plat/pages/examination/package/viewOrgExamSuite.shtml?param="+dataBack.data.list[i].examSuiteId);					    
+				    aCheck.setAttribute("title","查看信息");
+				    aCheck.className="branch_suite-check";
+				    aCheck.style.marginLeft="5px";
+				    firstColumn.appendChild(aCheck); 
+				    
+				    //创建删除标签
+		    		var aDelete = document.createElement("a");
+		    		var iElement=document.createElement("i");
+		    		iElement.className="fa fa-trash-o";
+				    aDelete.appendChild(iElement);
+				    aDelete.setAttribute("title","删除信息");
+				    aDelete.style.marginLeft="5px";
+				    aDelete.onclick=function(){delBranchSuite(id)};
+				    firstColumn.appendChild(aDelete);				    				    
+				    
+			    //添加第二列内容	
+			    secondColumn.innerText=dataBack.data.list[i].orgName;
+			    //添加第三列内容	
+			    thirdColumn.innerText=dataBack.data.list[i].examSuiteName;
+			    //添加第四列内容	
+			    forthColumn.innerText=dataBack.data.list[i].examSuiteCode;
+			    //添加第五列内容	
+			    fifthColumn.innerText=dataBack.data.list[i].examSuiteNameEng;
+			    //添加第六列内容	
+			    sixthColumn.innerText=dataBack.data.list[i].examSuitePrice;
+			    //添加第七列内容	
+			    seventhColumn.innerText=dataBack.data.list[i].examSuiteInputCode;
+			    //添加第七列内容	
+			    eightColumn.innerText=dataBack.data.list[i].orgExamSuiteSex;
+			    //添加第七列内容	
+			    nineColumn.innerText=dataBack.data.list[i].typeNameList;
+			}
+			return false;
+		} 
+	function delBranchSuite(del_li) {
+		if(confirm("确认删除该套餐吗？")) { 
+			var param = {
+				"orgBranchSuiteId": del_li
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(packAge_DelePackage, param, otype, osync);
+			if(reqResult.data > 0) {
+				alert("删除成功");
+				window.location.reload();
+				return false;
+			}
+		}
+	} 
+</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

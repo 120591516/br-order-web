@@ -1,0 +1,366 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<div class="fakeloader"></div>
+	<section class="content-header">
+		<div class="margin-bottom">
+			<h2><small>用户角色管理</small></h2>
+		</div>
+		<ol class="breadcrumb">
+			<li>
+				<a href="#">系统设置</a>
+			</li>
+			<li class="active">角色管理</li>
+		</ol>
+	</section>
+
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<div class="box-header">
+						<div class="row">
+							<div class="col-xs-12 col-md-8">
+								<h3 class="box-title">列表</h3></div>
+							<div class="col-xs-6 col-md-4  text-right">
+								<a href="#myModal" id="addUserActor" class="btn btn-default" data-toggle="modal">添 加</a>
+							</div>
+						</div>
+
+					</div>
+					<div class="box-body">
+						<table class="table formCss" id="actor">
+							<thead>
+								<tr>
+									<th>编辑</th>
+									<th>用户名</th>
+									<th>状态</th>
+									<th>权限</th>
+								</tr>
+							</thead>
+							<tbody id="mainContent">
+							</tbody>
+						</table>
+					</div>
+					<div class="row">
+						<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!--模态框-->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="box">
+					<div class="box-body">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel">员工信息<small>--添加</small></h4>
+						</div>
+						<div class="modal-body">
+							<form class="bs-example-form form-horizontal formCss" role="form" id="addTJ">
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>角色名称</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px'>
+										<input type="text" id="user_add" class="form-control" name="roleName" aria-describedby="basic-addon1">
+									</div>
+								</div>
+								<div class="form-group">
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3'>
+										<div id="user_addTip"></div>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal" id="postTJ">提交</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+
+	<!--模态框修改-->
+	<div class="modal fade" id="myModal_edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="box">
+					<div class="box-body">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel_edit">员工信息<small>--编辑</small></h4>
+						</div>
+						<div class="modal-body">
+							<form class="bs-example-form form-horizontal formCss" role="form" id="form_edit">
+								<input type="hidden" name="roleId" id="roleId" value="" />
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>角色名称</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px'>
+										<input type="text" id="form_user" name="roleName" class="form-control" aria-describedby="basic-addon1" value="">
+									</div>
+								</div>
+								<div class="form-group">
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3'>
+										<div id="form_userTip"></div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>状 态</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px' id="form_state">
+										<input type="radio" name='roleStatus' value="0" checked>启用
+										<input type="radio" name='roleStatus' value="1">禁用
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal" id='user_save'>保存</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<script src="/plat/js/create/httpRequest.js"></script>
+	<script src="/plat/js/create/contentPublic.js"></script>
+	<script src="/plat/js/plugins/extendPagination.js"></script>
+	<!--表单验证-->
+	<script src="/plat/js/plugins/formValidator-4.0.1.js"></script>
+	<script src="/plat/js/plugins/formValidatorRegex.js"></script>
+	<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<script>
+		init_page();
+
+		function init_page() {
+			$('#actor').children('tbody').empty();
+			page_curr = 1;
+			init_list();
+			init_pager();
+		}
+
+		function init_list() {
+			//初始化表格
+			$('#actor').children('tbody').empty();
+			var otype = "post";
+			var param = {
+				"page": 1,
+				"rows": 10
+			};
+			var osync = false;
+			var reqResult = httpRequest(userActorList, param, otype, osync);
+			if(reqResult.result == 0) {
+				callBackPagination(reqResult);
+			}
+			return false;
+		}
+		// 初始化分页信息
+		function init_pager() {
+			$('#callBackPager').extendPagination({
+				totalCount: total_count,
+				showCount: count_curr,
+				limit: limit,
+				callback: function(curr, limit, totalCount) {
+					page_curr = curr;
+					total_count = totalCount;
+					init_list();
+				}
+			});
+		}
+
+		//创建表格
+		function createTable(currPage, limit, total, dataBack) {
+			var showNum = limit;
+			if(total - (currPage * limit) < 0) showNum = total - ((currPage - 1) * limit);
+			var Tbody = document.getElementById('mainContent');
+			for(var i = 0; i < showNum; i++) {
+				var lRow = Tbody.insertRow(); //创建行			        
+				var statuWord = (dataBack.data.list[i].roleStatus === 0) ? "启用" : "禁用";
+				var operationByRole = dataBack.operationList; //获取操作类型
+				var operationByRoleAdd = document.getElementById('addUserActor'); //获取添加按钮
+				//				判断操作类型
+				(operationByRole.roleManage_insert === false) ? operationByRoleAdd.style.display = 'none': operationByRoleAdd.style.display = ''; //1为添加
+				//创建列
+				var firstColumn = lRow.insertCell();
+				var secondColumn = lRow.insertCell();
+				var thirdColumn = lRow.insertCell();
+				var forthColumn = lRow.insertCell();
+				firstColumn.setAttribute('roleId', dataBack.data.list[i].roleId); //给td添加属性
+				//添加第一列内容
+				//创建编辑标签
+				var aEdit = document.createElement("a");
+				var iElement = document.createElement("i");
+				(operationByRole.roleManage_update === true) ? iElement.className = "fa fa-pencil": ''; //3为更新
+				aEdit.appendChild(iElement);
+				aEdit.setAttribute("href", "#myModal_edit");
+				aEdit.setAttribute("data-toggle", "modal");
+				aEdit.style.marginLeft = "5px";
+				aEdit.onclick = function() {
+					editActor(this)
+				};
+				firstColumn.appendChild(aEdit);
+
+				//创建删除标签
+				var aDelete = document.createElement("a");
+				var iElement = document.createElement("i");
+				(operationByRole.roleManage_delete === true) ? iElement.className = "fa fa-trash-o": ''; //2为删除
+				aDelete.appendChild(iElement);
+				aDelete.style.marginLeft = "5px";
+				aDelete.onclick = function() {
+					del_role(this)
+				};
+				firstColumn.appendChild(aDelete);
+
+				//添加第二列内容			        		
+				secondColumn.innerText = dataBack.data.list[i].roleName;
+
+				//添加第三列内容		        		
+				thirdColumn.innerText = statuWord;
+
+				//添加第四列内容
+				if(operationByRole.roleManage_to_role_insert === true) {
+					var aPower = document.createElement("a");
+					aPower.innerText = "权限";
+					aPower.setAttribute("href", "/plat/pages/settings/power/actorPower.shtml?roleId=" + dataBack.data.list[i].roleId);
+					aPower.className = "btn btn-default"; //2为删除
+					forthColumn.appendChild(aPower);
+				}
+			}
+			return false;
+		}
+		//		角色添加
+		$('#addUserActor').on('click', function() {
+			//			表单验证
+			$.formValidator.initConfig({
+				submitButtonID: "postTJ",
+				debug: true,
+				onSuccess: function() {
+					userActorInfo();
+				},
+				onError: function() {
+					alert("添加失败，具体错误，请看网页上的提示！")
+				},
+				submitAfterAjaxPrompt: '有数据正在异步验证，请稍等...'
+			});
+			//角色名称
+			$("#user_add").formValidator({
+				onShow: "请输入角色名",
+				onFocus: "角色名至少2个字符,最多20个字符"
+			}).inputValidator({
+				min: 2,
+				max: 20,
+				onError: "你输入的角色名非法,请确认"
+			})
+		})
+
+		//提交添加内容
+		function userActorInfo() {
+			var otype = "post"
+			var osync = false;
+			var userName = $('#user_add').val();
+			var param = $('#addTJ').serialize();
+			var reqResult = httpRequest(user_actor_postTJ, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert('添加成功');
+				window.location.reload();
+
+			} else {
+				alert(reqResult.message);
+			}
+		}
+		//删除角色
+		function del_role(del_li) {
+			if(confirm("确认删除该角色吗？")) {
+				var del_role_id = $(del_li).parent().attr("roleId");
+				var otype = "get"
+				var osync = false;
+				var param = {
+					"roleId": del_role_id
+				};
+				var reqResult = httpRequest(user_actor_delete, param, otype, osync);
+				if(reqResult.result == 0) {
+					window.location.reload();
+				} else {
+					alert(reqResult.message);
+				}
+
+			}
+		}
+
+		//编辑回显角色列表内容
+		$('a[href="#myModal_edit"]').on('click', function() {
+			//			表单验证
+			//角色名称
+			$.formValidator.initConfig({
+				submitButtonID: "user_save",
+				debug: true,
+				onSuccess: function() {
+					editUserActorInfo();
+				},
+				onError: function() {
+					alert("添加失败，具体错误，请看网页上的提示！")
+				},
+				submitAfterAjaxPrompt: '有数据正在异步验证，请稍等...'
+			});
+			//角色名称
+			$('#form_user').on('click', function() {
+				$("#form_user").formValidator({
+					onShow: "请输入角色名",
+					onFocus: "角色名至少2个字符,最多20个字符"
+				}).inputValidator({
+					min: 2,
+					max: 20,
+					onError: "你输入的角色名非法,请确认"
+				})
+			})
+		})
+
+		function editActor(edit_li) {
+			var edit_role_id = $(edit_li).parent().attr("roleId");
+			var otype = "get"
+			var osync = false;
+			var param = {
+				"id": edit_role_id,
+			};
+			var reqResult = httpRequest(user_actor_edit_show, param, otype, osync);
+			if(reqResult.result == 0) {
+				$('#roleId').val(reqResult.data.roleId);
+				$('#form_user').val(reqResult.data.roleName);
+				if(reqResult.data.roleStatus == 0) {
+					$("input[name='roleStatus']")[0].checked = "checked"
+				} else {
+					$("input[name='roleStatus']")[1].checked = "checked"
+				}
+			} else {
+				alert(reqResult.message);
+			}
+		}
+		//保存编辑内容
+		function editUserActorInfo() {
+			var otype = "post"
+			var osync = false;
+			var param = $('#form_edit').serialize();
+			var reqResult = httpRequest(user_actor_edit, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert('编辑成功');
+				window.location.reload();
+			} else {
+				alert(reqResult.message);
+			}
+		}
+	</script>
+
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

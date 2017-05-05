@@ -1,0 +1,597 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<div class="fakeloader"></div>
+	<section class="content-header">
+		<div class="margin-bottom">
+			<h2>
+				<small>体征词</small>
+			</h2>
+		</div>
+		<ol class="breadcrumb">
+			<li>
+				<a href="#">字典维护</a>
+			</li>
+			<li class="active">体征词</li>
+		</ol>
+		<div class="box container-fluid no-margin">
+			<!--box-header -->
+			<div class="box-header">
+				<div class="row margin-bottom">
+					<div class="col-xs-12 col-md-8">
+						<h3 class="box-title">搜索</h3>
+					</div>
+					<div class="col-xs-6 col-md-4">
+						<a href="#add_signWordInfo" id="addConSignDic" data-toggle="modal" class="label label-primary user_mar">添加</a>
+					</div>
+				</div>
+				<div class="row margin-bottom">
+					<form class="container-fluid">
+						<div class="row margin-bottom">
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">检查项</span> 
+									<select name="examItemId" id="search_examItemId" class="ItemName form-control"></select>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">名称</span> <input type="text" class="form-control store_search_form" name="examItemValueName" id="search_examItemValueName" aria-describedby="basic-addon1" maxlength='12'>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">重症级别</span>
+									<input type="text" name="examItemValueServerDegree" class="form-control store_search_form" id="search_examItemValueServerDegree" value="" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">男操作数</span>
+									<input type="text" name="examItemValueOperandMale" class="form-control store_search_form" id="search_examItemValueOperandMale" value="" />
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">女操作数</span>
+									<input type="text" name="examItemValueOperandFemale" class="form-control store_search_form" id="search_examItemValueOperandFemale" value="" />
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+									<input type="button" class="btn btn-primary fa fa-search" id="searchBtn" value="搜索" />
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<!-- /.box-header -->
+		</div>
+	</section>
+	<!-- /Content Header (Page header) -->
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<!--box-header -->
+					<div class="box-header">
+						<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">列表</h3>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+						<table class="table formCss">
+							<thead>
+								<tr>
+									<th>编辑</th>
+									<th>体征词名称</th>
+									<th>检查项名称</th>
+									<th>重症级别</th>
+									<th>男操作数</th>
+									<th>女操作数</th>
+									<th>编码</th>
+									<th>输入码</th>
+									<th>创建时间</th>
+									<th>状态</th>
+								</tr>
+								<tr class="warning no-result">
+									<td colspan="7"><i class="fa fa-warning"></i>没有任何搜索结果!</td>
+								</tr>
+							</thead>
+							<tbody id="tobodysignWordInfo"></tbody>
+						</table>
+						<div class="row">
+							<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--添加-->
+	<div class="modal fade" id="add_signWordInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">体征词--添加</h4>
+				</div>
+				<div class="modal-body">
+					<form class="bs-example bs-example-form" role="form" id="add_signWordForm">
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_100">检查项</span>
+							<select name="examItemId" class="ItemName form-control" id=""></select>
+						</div>
+
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_100">名称</span>
+							<input type="text" id="add_examItemValueName" class="form-control" name="examItemValueName" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">编码</span>
+							<input type="text" id="add_examItemValueCode" class="form-control" name="examItemValueCode" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">输入码</span>
+							<input type="text" name="examItemValueInputCode" class="form-control" id="add_examItemValueInputCode" value="" />
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_30">重症级别</span>
+							<input type="text" name="examItemValueServerDegree" class="form-control" id="add_examItemValueServerDegree" value="" />
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_30">问卷式分数</span>
+							<input type="text" name="examItemValueAskscore" class="form-control" id="add_examItemValueAskscore" value="" />
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_30">操作符</span>
+							<input type="text" name="examItemValueOper" class="form-control" id="add_examItemValueOper" value="" />
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_30">男操作数</span>
+							<input type="text" name="examItemValueOperandMale" class="form-control" id="add_examItemValueOperandMale" value="" />
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_30">女操作数</span>
+							<input type="text" name="examItemValueOperandFemale" class="form-control" id="add_examItemValueOperandFemale" value="" />
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_100">行序</span>
+							<input type="text" name="examItemValueDispOrder" class="form-control" id="add_examItemValueDispOrder" value="" />
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_100">体征词描述</span>
+							<textarea name="examItemValueText" id="add_examItemValueText" class="form-control" rows="3" cols="50"></textarea>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="submit" class="btn btn-primary" data-dismiss="modal" id="addBtn" onclick="addSignWordInfo()">提交</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--/添加-->
+	<!--查看-->
+	<div class="modal fade" id="check_signWordInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">体征词--查看</h4>
+				</div>
+				<div class="modal-body">
+					<form class="bs-example bs-example-form" role="form">
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_100">检查项</span>
+							<select name="examItemId" class="ItemName form-control" id="check_examItemId" disabled="disabled"></select>
+						</div>
+
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_100">名称</span>
+							<input type="text" id="check_examItemValueName" class="form-control" name="examItemValueName" aria-describedby="basic-addon1" disabled="disabled">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">编码</span>
+							<input type="text" id="check_examItemValueCode" class="form-control" name="examItemValueCode" aria-describedby="basic-addon1" disabled="disabled">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">输入码</span>
+							<input type="text" name="examItemValueInputCode" class="form-control" id="check_examItemValueInputCode" value="" disabled="disabled" />
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_30">重症级别</span>
+							<input type="text" name="examItemValueServerDegree" class="form-control" id="check_examItemValueServerDegree" value="" disabled="disabled" />
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_30">问卷式分数</span>
+							<input type="text" name="examItemValueAskscore" class="form-control" id="check_examItemValueAskscore" value="" disabled="disabled" />
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_30">操作符</span>
+							<input type="text" name="examItemValueOper" class="form-control" id="check_examItemValueOper" value="" disabled="disabled" />
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_30">男操作数</span>
+							<input type="text" name="examItemValueOperandMale" class="form-control" id="check_examItemValueOperandMale" value="" disabled="disabled" />
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_30">女操作数</span>
+							<input type="text" name="examItemValueOperandFemale" class="form-control" id="check_examItemValueOperandFemale" value="" disabled="disabled" />
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_100">行序</span>
+							<input type="text" name="examItemValueDispOrder" class="form-control" id="check_examItemValueDispOrder" value="" disabled="disabled" />
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_100">体征词描述</span>
+							<textarea name="examItemValueText" id="check_examItemValueText" class="form-control" rows="3" cols="50" disabled="disabled"></textarea>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_100">创建时间</span>
+							<input type="text" name="examItemValueCreateTime" id="check_examItemValueCreateTime" class="form-control" value="" disabled="disabled" />
+						</div>
+						<div class="input-group" id="check_examItemValueStatus">
+							<span class="input-group-addon letter_spacing_100">状态</span>
+							<input type="radio" name="examItemValueStatus" />启用
+							<input type="radio" name="examItemValueStatus" />禁用
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--/查看-->
+	<!--编辑-->
+	<div class="modal fade" id="edit_signWordInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">体征词--编辑</h4>
+				</div>
+				<div class="modal-body">
+					<form class="bs-example bs-example-form" role="form" id="edit_signWordForm">
+						<input type="hidden" name="examItemValueId" id="edit_examItemValueId" value="" />
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_100">检查项</span>
+							<select name="examItemId" class="ItemName form-control" id="edit_examItemId" ></select>
+						</div>
+
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_100">名称</span>
+							<input type="text" id="edit_examItemValueName" class="form-control" name="examItemValueName" aria-describedby="basic-addon1" >
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">编码</span>
+							<input type="text" id="edit_examItemValueCode" class="form-control" name="examItemValueCode" aria-describedby="basic-addon1" >
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">输入码</span>
+							<input type="text" name="examItemValueInputCode" class="form-control" id="edit_examItemValueInputCode" value=""  />
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_30">重症级别</span>
+							<input type="text" name="examItemValueServerDegree" class="form-control" id="edit_examItemValueServerDegree" value=""  />
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_30">问卷式分数</span>
+							<input type="text" name="examItemValueAskscore" class="form-control" id="edit_examItemValueAskscore" value=""  />
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_30">操作符</span>
+							<input type="text" name="examItemValueOper" class="form-control" id="edit_examItemValueOper" value=""  />
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_30">男操作数</span>
+							<input type="text" name="examItemValueOperandMale" class="form-control" id="edit_examItemValueOperandMale" value=""  />
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_30">女操作数</span>
+							<input type="text" name="examItemValueOperandFemale" class="form-control" id="edit_examItemValueOperandFemale" value=""  />
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_100">行序</span>
+							<input type="text" name="examItemValueDispOrder" class="form-control" id="edit_examItemValueDispOrder" value=""  />
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_100">体征词描述</span>
+							<textarea name="examItemValueText" id="edit_examItemValueText" class="form-control" rows="3" cols="50" ></textarea>
+						</div>
+						<div class="input-group" id="edit_examItemValueStatus">
+							<span class="input-group-addon letter_spacing_100">状态</span>
+							<input type="radio" name="examItemValueStatus" value="0"/>启用
+							<input type="radio" name="examItemValueStatus" value="1"/>禁用
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="submit" class="btn btn-primary" data-dismiss="modal" id="addBtn" onclick="editSignWordInfoSave()">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!--/编辑-->
+	<!-- /Main content -->
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<!-- Bootstrap 3.3.6 -->
+	<script src="/plat/js/plugins/bootstrap.min.js"></script>
+	<script src="/plat/js/create/httpRequest.js"></script>
+	<script src="/plat/js/create/public.js"></script>
+	<script src="/plat/js/create/AjaxAddr.js"></script>
+	<script src="/plat/js/plugins/extendPagination.js"></script>
+	<script src="/plat/js/create/contentPublic.js"></script>
+							<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<script>
+		init_page();
+		
+		function init_page() {
+			$('#tobodysignWordInfo').empty();
+//			检查项
+			getExamItemName();
+			//1.请求后端信息并展示
+			signWordSearch();
+			//2.初始化分页信息
+			init_pager();
+		}
+		// 初始化分页信息
+		function init_pager() {
+			$('#callBackPager').extendPagination({
+				totalCount: total_count,
+				showCount: count_curr,
+				limit: limit,
+				callback: function(curr, limit, totalCount) {
+					page_curr = curr;
+					total_count = totalCount;
+					signWordSearch();
+				}
+			});
+		}
+		//搜索
+		function signWordSearch() {
+			var param = initParam();
+			var otype = "POST";
+			var osync = false;
+			var reqResult = httpRequest(signWord_getConclusionType_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				//4.展示数据
+				total_count = reqResult.data.total;
+				createTable(page_curr, limit, total_count, reqResult);
+				return false;
+			}
+		}
+		//初始化参数信息
+		function initParam() {
+			var examItemId = $("#search_examItemId").val();
+			var examItemValueName = $("#search_examItemValueName").val();
+			var examItemValueServerDegree = $("#search_examItemValueServerDegree").val();
+			var examItemValueOperandMale = $("#search_examItemValueOperandMale").val();
+			var examItemValueOperandFemale = $("#search_examItemValueOperandFemale").val();
+			$('#tobodysignWordInfo').empty();
+			//抓取分页信息
+			var param = {
+				"page": page_curr,
+				"rows": count_curr
+			};
+			if(examItemId) {
+				param.examItemId = examItemId;
+			}
+			if(examItemValueName) {
+				param.examItemValueName = examItemValueName;
+			}
+			if(examItemValueServerDegree) {
+				param.examItemValueServerDegree = examItemValueServerDegree;
+			}
+			if(examItemValueOperandFemale) {
+				param.examItemValueOperandFemale = examItemValueOperandFemale;
+			}
+			if(examItemValueOperandMale) {
+				param.examItemValueOperandMale = examItemValueOperandMale;
+			}
+			return param;
+		}
+		$('#searchBtn').on('click', function() {
+			signWordSearch();
+			init_pager();
+			return false;
+		})
+		$('.store_search_form').on('keydown', function(e) {
+			if(e && e.keyCode == 13) {
+				signWordSearch();
+				init_pager();
+				return false;
+			}
+		})
+
+		function createTable(currPage, limit, total, dataBack) {
+			var showNum = limit;
+			if(total - (currPage * limit) < 0)
+				showNum = total - ((currPage - 1) * limit);
+			var datal = dataBack.data.list;
+			//获取操作类型
+			var operationList = dataBack.operationList;
+			//			判断添加按钮
+			if(operationList.orgExamItemValue_insert == true) {
+				$('#addConSignDic').show();
+			} else {
+				$('#addConSignDic').hide();
+			}
+			var str = '';
+			for(var i = 0; i < showNum; i++) {
+				str += "<tr><td examItemValueId='" + datal[i].examItemValueId + "'>";
+				if(operationList.orgExamItemValue_detail==true){
+				    str += "<a href='#check_signWordInfo' data-toggle='modal' class='padding_4px storeManagement_check_info' onclick='checkSignWordInfo(this)' title='查看体征词'><i class='fa fa-eye'></i></a> ";
+				}
+				if(operationList.orgExamItemValue_update==true){
+				    str += "<a href='#edit_signWordInfo' class='padding_4px storeManagement_edit_info' data-toggle='modal' onclick='editSignWordInfo(this)' title='编辑体征词'><i class='fa fa-pencil'></i></a> ";
+				}
+				if(operationList.orgExamItemValue_delete==true){
+				    str += "<a href='#' title='删除体征词' style='margin-right:5px' class='padding_4px' onclick='delInfo(this)'><i class='fa fa-trash-o'></i></a>";
+				}
+				str += "</td>";
+				str += "<td>" + nullformat(datal[i].examItemValueName) + "</td>";
+				str += "<td>" + nullformat(datal[i].examItemName) + "</td>";
+				str += "<td>" + nullformat(datal[i].examItemValueServerDegree) + "</td>";
+				str += "<td>" + nullformat(datal[i].examItemValueOperandMale) + "</td>";
+				str += "<td>" + nullformat(datal[i].examItemValueOperandFemale) + "</td>";
+				str += "<td>" + nullformat(datal[i].examItemValueCode)+ "</td>";
+				str += "<td>" + nullformat(datal[i].examItemValueInputCode) + "</td>";
+				str += "<td>" + getLocalTime(nullformat(datal[i].examItemValueCreateTime)) + "</td>";
+				if(nullformat(datal[i].examItemValueStatus) == 0) {
+					str += "<td>" + '启用' + "</td>";
+				} else {
+					str += "<td>" + '禁用' + "</td>";
+				}
+				str += '</tr>';
+			}
+			$("#tobodysignWordInfo").append(str);
+			return false;
+		}
+		//		删除结论词
+		function delInfo(del_li) {
+			if(confirm("确认禁用该体征词吗？")) {
+				var examItemValueId = $(del_li).parent().attr("examItemValueId");
+				var param = {
+					"orgExamItemValueId": examItemValueId
+				};
+				var otype = "get";
+				var osync = false;
+				var reqResult = httpRequest(signWord_deleteOrgExamItemValue_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert("禁用成功！");
+					window.location.reload();
+				} else {
+					alert(reqResult.message);
+				}
+			}
+		}
+		//		添加体征词
+		function addSignWordInfo() {
+			var param = $('#add_signWordForm').serialize();
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(signWord_insertOrgExamItemValue_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert("添加体征词成功！");
+				window.location.reload();
+			} else {
+				alert(reqResult.message);
+			}
+		}
+		//查看体征词
+		function checkSignWordInfo(id) {
+			var examItemValueId = $(id).parent().attr("examItemValueId");
+			var param = {
+				'orgExamItemValueId': examItemValueId
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(signWord_getOrgExamItemValueById_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				//				检查项名称
+				getExamItemName();
+				$('#check_examItemId').val(reqResult.data.examItemId);
+				//				体征词名称
+				$('#check_examItemValueName').val(reqResult.data.examItemValueName);
+				//				编码
+				$('#check_examItemValueCode').val(reqResult.data.examItemValueCode);
+				//				输入码
+				$('#check_examItemValueInputCode').val(reqResult.data.examItemValueInputCode);
+				//				重症级别
+				$('#check_examItemValueServerDegree').val(reqResult.data.examItemValueServerDegree);
+				//				问卷式分数
+				$('#check_examItemValueAskscore').val(reqResult.data.examItemValueAskscore);
+				//				操作符
+				$('#check_examItemValueOper').val(reqResult.data.examItemValueOper);
+				//				男操作数
+				$('#check_examItemValueOperandMale').val(reqResult.data.examItemValueOperandMale);
+				//				女操作数
+				$('#check_examItemValueOperandFemale').val(reqResult.data.examItemValueOperandFemale);
+				//行序
+				$('#check_examItemValueDispOrder').val(reqResult.data.examItemValueDispOrder);
+				//体征词描述
+				$('#check_examItemValueText').val(reqResult.data.examItemValueText);
+				//				状态
+				if(reqResult.data.examItemValueStatus == 0) {
+					$($('#check_examItemValueStatus input')[0]).attr('checked', 'checked');
+				} else {
+					$($('#check_examItemValueStatus input')[1]).attr('checked', 'checked');
+				}
+				//				创建时间
+				$('#check_examItemValueCreateTime').val(getLocalTime(reqResult.data.examItemValueCreateTime));
+			} else {
+				alert(reqResult.message);
+			}
+		}
+		//		编辑回显
+		function editSignWordInfo(id) {
+			var examItemValueId = $(id).parent().attr("examItemValueId");
+			var param = {
+				'orgExamItemValueId': examItemValueId
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(signWord_getOrgExamItemValueById_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				//				id
+				$('#edit_examItemValueId').val(reqResult.data.examItemValueId);
+			//				检查项名称
+				getExamItemName();
+				$('#edit_examItemId').val(reqResult.data.examItemId);
+				//				体征词名称
+				$('#edit_examItemValueName').val(reqResult.data.examItemValueName);
+				//				编码
+				$('#edit_examItemValueCode').val(reqResult.data.examItemValueCode);
+				//				输入码
+				$('#edit_examItemValueInputCode').val(reqResult.data.examItemValueInputCode);
+				//				重症级别
+				$('#edit_examItemValueServerDegree').val(reqResult.data.examItemValueServerDegree);
+				//				问卷式分数
+				$('#edit_examItemValueAskscore').val(reqResult.data.examItemValueAskscore);
+				//				操作符
+				$('#edit_examItemValueOper').val(reqResult.data.examItemValueOper);
+				//				男操作数
+				$('#edit_examItemValueOperandMale').val(reqResult.data.examItemValueOperandMale);
+				//				女操作数
+				$('#edit_examItemValueOperandFemale').val(reqResult.data.examItemValueOperandFemale);
+				//行序
+				$('#edit_examItemValueDispOrder').val(reqResult.data.examItemValueDispOrder);
+				//体征词描述
+				$('#edit_examItemValueText').val(reqResult.data.examItemValueText);
+				//				状态
+				if(reqResult.data.examItemValueStatus == 0) {
+					$($('#edit_examItemValueStatus input')[0]).attr('checked', 'checked');
+				} else {
+					$($('#edit_examItemValueStatus input')[1]).attr('checked', 'checked');
+				}
+			} else {
+				alert(reqResult.message);
+			}
+		}
+		//		編輯保存
+		function editSignWordInfoSave() {
+			var param = $('#edit_signWordForm').serialize();
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(signWord_updateOrgExamItemValue_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert("编辑保存体征词成功！");
+				window.location.reload();
+			} else {
+				alert(reqResult.message);
+			}
+		}
+	</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

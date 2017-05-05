@@ -1,0 +1,712 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<div class="fakeloader"></div>
+	<section class="content-header">
+		<div class="margin-bottom">
+			<h2>
+				<small>结论词</small>
+			</h2>
+		</div>
+		<ol class="breadcrumb">
+			<li>
+				<a href="#">字典维护</a>
+			</li>
+			<li class="active">结论词</li>
+		</ol>
+		<div class="box">
+			<div class="box-header">
+				<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">搜索</h3>
+				<div class="col-lg-2 col-md-3 col-sm-3 col-xs-3 txt_r">
+					<a href="#add_conclusionInfo" id="addConWordDic" data-toggle="modal" class="btn btn-default">添加</a>
+					<button type="button" id="comingBack" onclick="storeManagementBack()" class="btn btn-default">返回</button>
+				</div>
+			</div>
+			<!--box-header -->
+			<div class="box-header">
+				<div class="row margin-bottom">
+					<div class="col-xs-12 col-md-8">
+						<h3 class="box-title">搜索</h3>
+					</div>
+					<div class="col-xs-6 col-md-4">
+						<a href="#add_conclusionInfo" id="addConWordDic" data-toggle="modal" class="label label-primary user_mar">添加</a>
+					</div>
+				</div>
+				<div class="row margin-bottom">
+					<form class="container-fluid">
+						<div class="row margin-bottom">
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">名称</span> <input type="text" class="form-control store_search_form" name="conclusionName" id="search_conclusionName" aria-describedby="basic-addon1" maxlength='12'>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">适用性别</span>
+									<select name="sexId" class="form-control selectpicker store_search_form" id="serSex" aria-describedby="basic-addon1" maxlength='12' required>
+										<option value="">---请选择---</option>
+										<option value="0">通用</option>
+										<option value="1">男性</option>
+										<option value="2">女性</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">类型</span>
+									<select name="idConclusionType" id="search_idConclusionType" class="conclusionType form-control selectpicker store_search_form"></select>
+								</div>
+							</div>
+						</div>
+						<div class="row margin-bottom">
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">部门类型</span>
+									<select name="idConclusionDeptType" class="conclusionDeptType form-control selectpicker store_search_form" id="search_idConclusionDeptType" aria-describedby="basic-addon1" maxlength='12' required></select>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">分组</span>
+									<select name="keyconclusiongroupid" class="conclusionGroup form-control selectpicker store_search_form" id="search_keyconclusiongroupid" aria-describedby="basic-addon1" maxlength='12' required></select>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">结果分类</span>
+									<select name="idConclusionresultclass" class="conclusionResult form-control selectpicker store_search_form" id="search_idConclusionresultclass" aria-describedby="basic-addon1" maxlength='12' required></select>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-md-push-11">
+								<div class="input-group">
+									<input type="button" class="btn btn-primary fa fa-search" id="searchBtn" value="搜索" />
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<!-- /.box-header -->
+		</div>
+	</section>
+	<!-- /Content Header (Page header) -->
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<!--box-header -->
+					<div class="box-header">
+						<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">列表</h3>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+						<table class="table formCss">
+							<thead>
+								<tr>
+									<th>编辑</th>
+									<th>名称</th>
+									<th>英文名称</th>
+									<th>类型</th>
+									<th>部门类型</th>
+									<th>分组</th>
+									<th>结果分类</th>
+									<th>适用性别</th>
+									<th>创建时间</th>
+									<th>状态</th>
+								</tr>
+								<tr class="warning no-result">
+									<td colspan="7"><i class="fa fa-warning"></i>没有任何搜索结果!</td>
+								</tr>
+							</thead>
+							<tbody id="tobodyConclusionInfo"></tbody>
+						</table>
+						<div class="row">
+							<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--添加-->
+	<div class="modal fade" id="add_conclusionInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">结论词--添加</h4>
+				</div>
+				<div class="modal-body">
+					<form class="bs-example bs-example-form" role="form" id="add_conclusionTypeForm">
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_100">名称</span>
+							<input type="text" id="add_conclusionName" class="form-control" name="conclusionName" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">英文名称</span>
+							<input type="text" id="add_conclusionNameeng" class="form-control" name="conclusionNameeng" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">类型</span>
+							<select name="idConclusionType" class="form-control conclusionType" id="add_idConclusionType"></select>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_30">部门类型</span>
+							<select name="idConclusionDeptType" class="form-control conclusionDeptType" id="add_idConclusionDeptType"></select>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_30">分组</span>
+							<select name="keyconclusiongroupid" class="form-control conclusionGroup" id="add_keyconclusiongroupid"></select>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_30">结果分类</span>
+							<select name="idConclusionresultclass" class="form-control conclusionResult" id="add_idConclusionresultclass"></select>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_30">疾病解释</span>
+							<textarea name="depiction" class="form-control" rows="3" cols="50"></textarea>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_30">总检建议</span>
+							<textarea name="suggestion" class="form-control" rows="3" cols="50"></textarea>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_100">健康建议</span>
+							<textarea name="advice" class="form-control" rows="3" cols="50"></textarea>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_100">饮食指导</span>
+							<textarea name="dietguide" class="form-control" rows="3" cols="50"></textarea>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_100">运动指导</span>
+							<textarea name="sportguide" class="form-control" rows="3" cols="50"></textarea>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_100">团队建议</span>
+							<textarea name="suggestiongroup" class="form-control" rows="3" cols="50"></textarea>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_100">输入码</span>
+							<input type="text" name="inputCode" class="form-control" id="" value="" />
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_100">行序</span>
+							<input type="text" name="disporder" class="form-control" id="" value="" />
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">适用性别</span>
+							<input type="checkbox" name="fMaledisease" id="add_fMaledisease" value="" />男
+							<input type="checkbox" name="fFemaledisease" id="add_fFemaledisease" value="" />女
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="submit" class="btn btn-primary" data-dismiss="modal" id="addBtn" onclick="addConclusionInfo()">提交</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--/添加-->
+	<!--查看-->
+	<div class="modal fade" id="check_conclusionInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">结论词--查看</h4>
+				</div>
+				<div class="modal-body">
+					<form class="bs-example bs-example-form" role="form">
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_100">名称</span>
+							<input type="text" id="check_conclusionName" class="form-control" name="conclusionName" aria-describedby="basic-addon1" maxlength='12' disabled="disabled">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">英文名称</span>
+							<input type="text" id="check_conclusionNameeng" class="form-control" name="conclusionNameeng" aria-describedby="basic-addon1" maxlength='12' disabled="disabled">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">类型</span>
+							<select name="idConclusionType" class="form-control conclusionType" id="check_idConclusionType" disabled="disabled"></select>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_30">部门类型</span>
+							<select name="idConclusionDeptType" class="form-control conclusionDeptType" id="check_idConclusionDeptType" disabled="disabled"></select>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_30">分组</span>
+							<select name="keyconclusiongroupid" class="form-control conclusionGroup" id="check_keyconclusiongroupid" disabled="disabled"></select>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_30">结果分类</span>
+							<select name="idConclusionresultclass" class="form-control conclusionResult" id="check_idConclusionresultclass" disabled="disabled"></select>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_30">疾病解释</span>
+							<textarea name="depiction" id="check_depiction" class="form-control" rows="3" cols="50" disabled="disabled"></textarea>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_30">总检建议</span>
+							<textarea name="suggestion" id="check_suggestion" class="form-control" rows="3" cols="50" disabled="disabled"></textarea>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_100">健康建议</span>
+							<textarea name="advice" id="check_advice" class="form-control" rows="3" cols="50" disabled="disabled"></textarea>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_100">饮食指导</span>
+							<textarea name="dietguide" id="check_dietguide" class="form-control" rows="3" cols="50" disabled="disabled"></textarea>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_100">运动指导</span>
+							<textarea name="sportguide" id="check_sportguide" class="form-control" rows="3" cols="50" disabled="disabled"></textarea>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_100">团队建议</span>
+							<textarea name="suggestiongroup" id="check_suggestiongroup" class="form-control" rows="3" cols="50" disabled="disabled"></textarea>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_100">输入码</span>
+							<input type="text" name="inputCode" id="check_inputCode" class="form-control" id="" value="" disabled="disabled" />
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_100">行序</span>
+							<input type="text" name="disporder" id="check_disporder" class="form-control" id="" value="" disabled="disabled" />
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">适用性别</span>
+							<select name="sexId" class="form-control selectpicker store_search_form" id="check_sexId" aria-describedby="basic-addon1" maxlength='12' disabled="disabled">
+								<option value="">---请选择---</option>
+								<option value="0">通用</option>
+								<option value="1">男性</option>
+								<option value="2">女性</option>
+							</select>
+						</div>
+						<div class="input-group" id="check_status">
+							<span class="input-group-addon letter_spacing_100 border-right">状态</span>
+							<input type="radio" name="status" id="" value="0" disabled="disabled" />启用
+							<input type="radio" name="status" id="" value="0" disabled="disabled" />禁用
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_100 border-right">创建时间</span>
+							<input type="text" name="createtime" id="check_createtime" value="" disabled="disabled" />
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--/查看-->
+	<!--编辑-->
+	<div class="modal fade" id="edit_conclusionInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">结论词--编辑</h4>
+				</div>
+				<div class="modal-body">
+					<form class="bs-example bs-example-form" role="form" id="edit_conclusionTypeForm">
+						<input type="hidden" name="idConclusion" id="edit_idConclusion" value="" />
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_100">名称</span>
+							<input type="text" id="edit_conclusionName" class="form-control" name="conclusionName" aria-describedby="basic-addon1" maxlength='12'>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">英文名称</span>
+							<input type="text" id="edit_conclusionNameeng" class="form-control" name="conclusionNameeng" aria-describedby="basic-addon1" maxlength='12'>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">类型</span>
+							<select name="idConclusionType" class="form-control conclusionType" id="edit_idConclusionType"></select>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_30">部门类型</span>
+							<select name="idConclusionDeptType" class="form-control conclusionDeptType" id="edit_idConclusionDeptType"></select>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_30">分组</span>
+							<select name="keyconclusiongroupid" class="form-control conclusionGroup" id="edit_keyconclusiongroupid"></select>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_30">结果分类</span>
+							<select name="idConclusionresultclass" class="form-control conclusionResult" id="edit_idConclusionresultclass"></select>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_30">疾病解释</span>
+							<textarea name="depiction" id="edit_depiction" class="form-control" rows="3" cols="50"></textarea>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_30">总检建议</span>
+							<textarea name="suggestion" id="edit_suggestion" class="form-control" rows="3" cols="50"></textarea>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_100">健康建议</span>
+							<textarea name="advice" id="edit_advice" class="form-control" rows="3" cols="50"></textarea>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_100">饮食指导</span>
+							<textarea name="dietguide" id="edit_dietguide" class="form-control" rows="3" cols="50"></textarea>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_100">运动指导</span>
+							<textarea name="sportguide" id="edit_sportguide" class="form-control" rows="3" cols="50"></textarea>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_100">团队建议</span>
+							<textarea name="suggestiongroup" id="edit_suggestiongroup" class="form-control" rows="3" cols="50"></textarea>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_100">输入码</span>
+							<input type="text" name="inputCode" id="edit_inputCode" class="form-control" id="" value="" />
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_100">行序</span>
+							<input type="text" name="disporder" id="edit_disporder" class="form-control" id="" value="" />
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">适用性别</span>
+							<select name="sexId" class="form-control selectpicker store_search_form" id="edit_sexId" aria-describedby="basic-addon1" maxlength='12' required>
+								<option value="">---请选择---</option>
+								<option value="0">通用</option>
+								<option value="1">男性</option>
+								<option value="2">女性</option>
+							</select>
+						</div>
+						<div class="input-group" id="edit_status">
+							<span class="input-group-addon letter_spacing_100 border-right">状态</span>
+							<input type="radio" name="status" id="" value="0" />启用
+							<input type="radio" name="status" id="" value="0" />禁用
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="submit" class="btn btn-primary" data-dismiss="modal" id="addBtn" onclick="editConclusionInfoSave()">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--/编辑-->
+	<!-- /Main content -->
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<!-- Bootstrap 3.3.6 -->
+	<script src="/plat/js/plugins/bootstrap.min.js"></script>
+	<script src="/plat/js/create/httpRequest.js"></script>
+	<script src="/plat/js/create/public.js"></script>
+	<script src="/plat/js/create/AjaxAddr.js"></script>
+	<script src="/plat/js/plugins/extendPagination.js"></script>
+	<script src="/plat/js/create/contentPublic.js"></script>
+	<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<script>
+		init_page();
+
+		function init_page() {
+			$('#tobodyConclusionInfo').empty();
+			//类型
+			conclusionType();
+			//部门类型
+			conclusionDeptType();
+			//分组
+			conclusionGroup();
+			//结果分类
+			conclusionResult();
+			//1.请求后端信息并展示
+			conclusionSearch();
+			//2.初始化分页信息
+			init_pager();
+		}
+		// 初始化分页信息
+		function init_pager() {
+			$('#callBackPager').extendPagination({
+				totalCount: total_count,
+				showCount: count_curr,
+				limit: limit,
+				callback: function(curr, limit, totalCount) {
+					page_curr = curr;
+					total_count = totalCount;
+					conclusionSearch();
+				}
+			});
+		}
+		//搜索
+		function conclusionSearch() {
+			var param = initParam();
+			var otype = "POST";
+			var osync = false;
+			var reqResult = httpRequest(conclusionWordType_getConclusionList_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				//4.展示数据
+				total_count = reqResult.data.total;
+				createTable(page_curr, limit, total_count, reqResult);
+				return false;
+			}
+		}
+		//初始化参数信息
+		function initParam() {
+			var conclusionName = $("#search_conclusionName").val();
+			var fMalediseaseAttr = $("#search_fMaledisease").attr('checked');
+			var fFemalediseaseAttr = $("#search_fFemaledisease").attr('checked');
+			var fMaledisease = $("#search_fMaledisease").val();
+			var fFemaledisease = $("#search_fFemaledisease").val();
+			var idConclusionType = $("#search_idConclusionType").val();
+			var idConclusionDeptType = $("#search_idConclusionDeptType").val();
+			var keyconclusiongroupid = $('#search_keyconclusiongroupid').val();
+			var idConclusionresultclass = $("#search_idConclusionresultclass").val();
+			var sex = $("#serSex").val().trim();
+			$('#tobodyConclusionInfo').empty();
+			//抓取分页信息
+			var param = {
+				"page": page_curr,
+				"rows": count_curr
+			};
+			if(conclusionName) {
+				param.conclusionName = conclusionName;
+			}
+			if(idConclusionType) {
+				param.idConclusionType = idConclusionType;
+			}
+			if(idConclusionDeptType) {
+				param.idConclusionDeptType = idConclusionDeptType;
+			}
+			if(keyconclusiongroupid) {
+				param.keyconclusiongroupid = keyconclusiongroupid;
+			}
+			if(idConclusionresultclass) {
+				param.idConclusionresultclass = idConclusionresultclass;
+			}
+			if(sex != null) {
+				param.sexId = sex;
+			}
+			return param;
+		}
+		$('#searchBtn').on('click', function() {
+			conclusionSearch();
+			init_pager();
+			return false;
+		})
+		$('.store_search_form').on('keydown', function(e) {
+			if(e && e.keyCode == 13) {
+				conclusionSearch();
+				init_pager();
+				return false;
+			}
+		})
+
+		function createTable(currPage, limit, total, dataBack) {
+			var showNum = limit;
+			if(total - (currPage * limit) < 0)
+				showNum = total - ((currPage - 1) * limit);
+			var datal = dataBack.data.list;
+			//获取操作类型
+			var operationList = dataBack.operationList;
+			//			判断添加按钮
+			if(operationList.dictConclusion_insert == true) {
+				$('#addConWordDic').show();
+			} else {
+				$('#addConWordDic').hide();
+			}
+			var str = '';
+			for(var i = 0; i < showNum; i++) {
+				str += "<tr><td idConclusion='" + datal[i].idConclusion + "'>";
+				if(operationList.dictConclusion_detail == true) {
+					str += "<a href='#check_conclusionInfo' data-toggle='modal' class='padding_4px storeManagement_check_info' onclick='checkConclusionInfo(this)' title='查看结论词信息'><i class='fa fa-eye'></i></a> ";
+				}
+				if(operationList.dictConclusion_update == true) {
+					str += "<a href='#edit_conclusionInfo' class='padding_4px storeManagement_edit_info' data-toggle='modal' onclick='editConclusionInfo(this)' title='编辑结论词信息'><i class='fa fa-pencil'></i></a> ";
+				}
+				if(operationList.dictConclusion_delete == true) {
+					str += "<a href='#' title='删除结论词信息' style='margin-right:5px' class='padding_4px' onclick='delInfo(this)'><i class='fa fa-trash-o'></i></a>";
+				}
+				str += "</td>";
+				str += "<td>" + datal[i].conclusionName + "</td>";
+				str += "<td>" + datal[i].conclusionNameeng + "</td>";
+				str += "<td>" + datal[i].conclusionTypeName + "</td>";
+				str += "<td>" + datal[i].conclusionDeptTypeName + "</td>";
+				str += "<td>" + datal[i].conclusionGroupName + "</td>";
+				str += "<td>" + datal[i].conclusionResultName + "</td>";
+				str += "<td>" + datal[i].sexName + "</td>";
+				str += "<td>" + getLocalTime(datal[i].createtime) + "</td>";
+				if(datal[i].status == 0) {
+					str += "<td>" + '启用' + "</td>";
+				} else {
+					str += "<td>" + '禁用' + "</td>";
+				}
+				str += '</tr>';
+			}
+			$("#tobodyConclusionInfo").append(str);
+			return false;
+		}
+		//		删除结论词
+		function delInfo(del_li) {
+			if(confirm("确认禁用该结论词吗？")) {
+				var idConclusion = $(del_li).parent().attr("idConclusion");
+				var param = {
+					"id": idConclusion
+				};
+				var otype = "get";
+				var osync = false;
+				var reqResult = httpRequest(conclusionWordType_deleteConclusion_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert("禁用成功！");
+					window.location.reload();
+				} else {
+					alert(reqResult.message);
+				}
+			}
+		}
+		//		添加结论词
+		function addConclusionInfo() {
+			if($('#add_fMaledisease').is(':checked')) {
+				$("#add_fMaledisease").val("0");
+				$("#add_fFemaledisease").val("1");
+			}
+			if($('#add_fFemaledisease').is(':checked')) {
+				$("#add_fMaledisease").val("1");
+				$("#add_fFemaledisease").val("0");
+			}
+			if($('#add_fFemaledisease').is(':checked') & $('#add_fMaledisease').is(':checked')) {
+				$("#add_fFemaledisease").val("0");
+				$("#add_fMaledisease").val("0");
+			}
+			var param = $('#add_conclusionTypeForm').serialize();
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(conclusionWordType_addConclusion_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert("添加结论词成功！");
+				window.location.reload();
+			} else {
+				alert(reqResult.message);
+			}
+		}
+		//查看结论词
+		function checkConclusionInfo(id) {
+			var idConclusion = $(id).parent().attr("idConclusion");
+			var param = {
+				'id': idConclusion
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(conclusionWordType_getConclusionById_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				//				结论词名称
+				$('#check_conclusionName').val(reqResult.data.conclusionName);
+				//				英文名称
+				$('#check_conclusionNameeng').val(reqResult.data.conclusionNameeng);
+				//				类型
+				$('#check_idConclusionType').val(reqResult.data.idConclusionType);
+				//				科室类型
+				$('#check_idConclusionDeptType').val(reqResult.data.idConclusionDeptType);
+				//				分组
+				$('#check_keyconclusiongroupid').val(reqResult.data.keyconclusiongroupid);
+				//				结论
+				$('#check_idConclusionresultclass').val(reqResult.data.idConclusionresultclass);
+				//				疾病解释
+				$('#check_depiction').val(reqResult.data.depiction);
+				//				总检建议
+				$('#check_suggestion').val(reqResult.data.suggestion);
+				//				健康建议
+				$('#check_advice').val(reqResult.data.advice);
+				//				饮食指导
+				$('#check_dietguide').val(reqResult.data.dietguide);
+				//				运动指导
+				$('#check_sportguide').val(reqResult.data.sportguide);
+				//				团队建议
+				$('#check_suggestiongroup').val(reqResult.data.suggestiongroup);
+				//				输入码
+				$('#check_inputCode').val(reqResult.data.inputCode);
+				//				行序
+				$('#check_disporder').val(reqResult.data.disporder);
+				//				性别
+				$('#check_sexId').val(reqResult.data.sexId);
+				//				状态
+				if(reqResult.data.status == 0) {
+					$($('#check_status input')[0]).attr('checked', 'checked');
+				} else {
+					$($('#check_status input')[1]).attr('checked', 'checked');
+				}
+				//				创建时间
+				$('#check_createtime').val(getLocalTime(reqResult.data.createtime));
+			} else {
+				alert(reqResult.message);
+			}
+		}
+		//		编辑回显
+		function editConclusionInfo(id) {
+			var idConclusion = $(id).parent().attr("idConclusion");
+			var param = {
+				'id': idConclusion
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(conclusionWordType_getConclusionById_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				//				id
+				$('#edit_idConclusion').val(reqResult.data.idConclusion);
+				//				结论词名称
+				$('#edit_conclusionName').val(reqResult.data.conclusionName);
+				//				英文名称
+				$('#edit_conclusionNameeng').val(reqResult.data.conclusionNameeng);
+				//				类型
+				$('#edit_idConclusionType').val(reqResult.data.idConclusionType);
+				//				科室类型
+				$('#edit_idConclusionDeptType').val(reqResult.data.idConclusionDeptType);
+				//				分组
+				$('#edit_keyconclusiongroupid').val(reqResult.data.keyconclusiongroupid);
+				//				结论
+				$('#edit_idConclusionresultclass').val(reqResult.data.idConclusionresultclass);
+				//				疾病解释
+				$('#edit_depiction').val(reqResult.data.depiction);
+				//				总检建议
+				$('#edit_suggestion').val(reqResult.data.suggestion);
+				//				健康建议
+				$('#edit_advice').val(reqResult.data.advice);
+				//				饮食指导
+				$('#edit_dietguide').val(reqResult.data.dietguide);
+				//				运动指导
+				$('#edit_sportguide').val(reqResult.data.sportguide);
+				//				团队建议
+				$('#edit_suggestiongroup').val(reqResult.data.suggestiongroup);
+				//				输入码
+				$('#edit_inputCode').val(reqResult.data.inputCode);
+				//				行序
+				$('#edit_disporder').val(reqResult.data.disporder);
+				//				性别
+				$('#edit_sexId').val(reqResult.data.sexId);
+				//				状态
+				if(reqResult.data.status == 0) {
+					$($('#edit_status input')[0]).attr('checked', 'checked');
+				} else {
+					$($('#edit_status input')[1]).attr('checked', 'checked');
+				}
+			} else {
+				alert(reqResult.message);
+			}
+		}
+		//		編輯保存
+		function editConclusionInfoSave() {
+			var param = $('#edit_conclusionTypeForm').serialize();
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(conclusionWordType_updateConclusion_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert("编辑保存结论词成功！");
+				window.location.reload();
+			} else {
+				alert(reqResult.message);
+			}
+		}
+	</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

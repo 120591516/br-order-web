@@ -1,0 +1,305 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<div class="fakeloader"></div>
+	<!-- Main content -->
+	<section class="content">
+		<!--头部S-->
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box width_70">
+					<div class="box-header">
+						<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">套餐<small>--详情</small></h3>
+						<div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
+							<button class="btn btn-default pull-right" onclick="storeManagementBack()">返回</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--头部E-->
+		<div class="box width_70">
+			<div class="box-body">
+				<!-- form start -->
+				<form class="bs-example-form form-horizontal formCss" role="form" id="addPackInfor">
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>体检机构</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<select name="orgId" id='store_orgName' class="form-control selectpicker store_search_form org" disabled>
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>套餐名称</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" id="examSuiteName" placeholder="套餐名称" name="examSuiteName" disabled>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>套餐英文名称</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" id="examSuiteNameEng" placeholder="套餐英文名称" name="examSuiteNameEng" disabled>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>套餐输入码</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" id="inputCode" placeholder="套餐输入码" name="inputCode" disabled>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>套餐代码</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" id="examSuiteCode" placeholder="套餐代码" name="examSuiteCode" disabled>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>套餐价格</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<div class="input-group">
+								<input type="text" class="form-control" id="examSuitePrice" placeholder="套餐价格" name="examSuitePrice" disabled>
+								<span class="input-group-addon"><a class="fa fa-cny none_cursor"></a></span>
+							</div>
+
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>优惠价</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<div class="input-group">
+								<input type="text" class="form-control" id="examSuiteDiscountPrice" placeholder="优惠价" name="examSuiteDiscountPrice" disabled>
+								<span class="input-group-addon"><a class="fa fa-cny none_cursor"></a></span>
+							</div>
+
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>套餐内价格</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<div class="input-group">
+								<input type="text" class="form-control" id="examSuiteInPrice" placeholder="套餐价格" name="examSuiteInPrice" required>
+								<span class="input-group-addon"><a class="fa fa-cny none_cursor"></a></span>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>适用性别</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="checkbox" id="examSuiteMale" name="examSuiteMale" value="1" disabled /> 适用男
+							<input type="checkbox" id="examSuiteFemale" name="examSuiteFemale" value="1" disabled/> 适用女
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>套餐类型</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<div id="selectTypes"></div>
+							<input type="hidden" id="typeList" name="typeList" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>高发疾病</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<div id="selectHids"></div>
+							<input type="hidden" id="highIncidenceDiseaseList" name="highIncidenceDiseaseList" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>警告人数</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" id="examSuiteWarnPeople" placeholder="警告人数" name="examSuiteWarnPeople" disabled>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>限制人数</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" id="examSuiteLimitPeople" placeholder="限制人数" name="examSuiteLimitPeople" disabled>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>警告金额</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<div class="input-group">
+								<input type="text" class="form-control" id="examSuiteWarnAmount" placeholder="警告金额" name="examSuiteWarnAmount" disabled>
+								<span class="input-group-addon"><a class="fa fa-cny none_cursor"></a></span>
+							</div>
+
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>限制金额</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<div class="input-group">
+								<input type="text" class="form-control" id="examSuiteLimitAmount" placeholder="限制金额" name="examSuiteLimitAmount" disabled>
+								<span class="input-group-addon"><a class="fa fa-cny none_cursor"></a></span>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>套餐图片</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<div class="file-preview img_border">
+								<div id="edit_storeimg"></div>
+								<div class="clear"></div>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>备注</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<textarea class="form-control" name="examSuiteNote" id="examSuiteNote" id="textarea" disabled></textarea>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>简介</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<textarea class="form-control" name="examSuiteSummary" id="examSuiteSummary" id="textarea" disabled></textarea>
+						</div>
+					</div>
+					<!-- /.box-body -->
+				</form>
+				<!-- /.box-footer -->
+			</div>
+			<div class="row">
+				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2 user_power_btn">
+					<a href="#" class="btn btn-default" onclick="storeManagementBack()">返 回</a>
+				</div>
+			</div>
+		</div>
+		<!-- /.row -->
+	</section>
+	<!-- /Main content -->
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->
+<script src="/plat/js/plugins/fileinput.js"></script>
+<script src="/plat/js/plugins/fileinput_locale_zh.js"></script>
+<!--动画js-->
+<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+<script>
+	$(".img_border > #edit_storeimg >.float_left>.position_absolute").each(function() {
+		$(this).hover(function() {
+			$(this).animate({
+				width: 300,
+				height: 300,
+				top: -10,
+				left: 100
+			}, 500);
+			$(this).css("z-index", 999);
+			$(this).parent().removeClass("store_img_borderdiv ");
+		}, function() {
+			$(this).animate({
+				width: 250,
+				height: 250,
+				top: 0,
+				left: 125
+			}, 500);
+			$(this).css("z-index", 0);
+			$(this).parent().addClass("store_img_borderdiv");
+		});
+	});
+	//查看数据回显
+	$(document).ready(function() {
+		$('#typeList').val("");
+		$('#selectTypes').html("");
+		var thisURL = document.URL;
+		var getval = thisURL.split('?')[1];
+		var judgeParam = getval.split("=")[1];
+
+		var otype = "GET"
+		var osync = false;
+		var param = {
+			"idOrgExamSuite": judgeParam
+		};
+		var reqResult = httpRequest(packAge_show, param, otype, osync);
+		if(reqResult.result == 0) {
+			getOrgList('#store_orgName');
+			$("#store_orgName").val(reqResult.data.orgId);
+			$("#examSuiteName").val(reqResult.data.examSuiteName);
+			$("#examSuiteNameEng").val(reqResult.data.examSuiteNameEng);
+			$("#inputCode").val(reqResult.data.examSuiteInputCode);
+			$("#examSuiteCode").val(reqResult.data.examSuiteCode);
+			$("#examSuitePrice").val(reqResult.data.examSuitePrice);
+			$("#examSuiteDiscountPrice").val(reqResult.data.examSuiteDiscountPrice);
+			$("#orgExamSuiteSex").val(reqResult.data.orgExamSuiteSex);
+			$("#typeList").val(reqResult.data.typeList);
+			var orgExamSuiteTypeVo = reqResult.data.orgExamSuiteTypeVo,
+				orgExamSuiteImgVo = reqResult.data.orgExamSuiteImgVo,
+				orgExamSuiteHidVo = reqResult.data.orgExamSuiteHidVo,
+				str = '';
+			if(orgExamSuiteHidVo != null && orgExamSuiteHidVo.length > 0) {
+				var isFrist = true,
+					hids;
+				for(var i = 0; i < orgExamSuiteHidVo.length; i++) {
+					if(!isFrist) {
+						hids = hids + "," + orgExamSuiteHidVo[i].highIncidenceDiseaseId;
+					} else {
+						hids = orgExamSuiteHidVo[i].highIncidenceDiseaseId;
+					}
+					$("#highIncidenceDiseaseList").val(hids);
+					isFrist = false;
+					$('#selectHids').append("<input type='checkbox' checked disabled>" +
+						orgExamSuiteHidVo[i].highIncidenceDiseaseName);
+
+				}
+			}
+			//添加体检套餐类型
+			if(orgExamSuiteTypeVo != null && orgExamSuiteTypeVo.length > 0) {
+				var isFrist = true,
+					types;
+				for(var i = 0; i < orgExamSuiteTypeVo.length; i++) {
+					if(!isFrist) {
+						types = types + "," + orgExamSuiteTypeVo[i].examTypeId;
+					} else {
+						types = orgExamSuiteTypeVo[i].examTypeId;
+					}
+					$("#typeList").val(types);
+					isFrist = false;
+
+					$('#selectTypes').append("<input type='checkbox' checked disabled >" +
+						orgExamSuiteTypeVo[i].examTypeName);
+
+				}
+			}
+			if(orgExamSuiteImgVo != null && orgExamSuiteImgVo.length > 0) {
+				for(var i = 0; i < orgExamSuiteImgVo.length; i++) {
+					str += '<div id="' + orgExamSuiteImgVo[i].dictImgId + '" class="float_left store_img_borderdiv  position_relative"><div class="position_absolute" style="background-image:url(' + platIp + orgExamSuiteImgVo[i].imgLocation + ');"></div></div>';
+				}
+			}
+			$("#edit_storeimg").append(str);
+			if(reqResult.data.examSuiteMale == 0) {
+				document.getElementById("examSuiteMale").checked = true
+			}
+			if(reqResult.data.examSuiteFemale == 0) {
+				document.getElementById("examSuiteFemale").checked = true
+			}
+
+			$("#examSuiteWarnPeople").val(reqResult.data.examSuiteWarnPeople);
+			$("#examSuiteWarnAmount").val(reqResult.data.examSuiteWarnAmount);
+			$("#examSuiteLimitPeople").val(reqResult.data.examSuiteLimitPeople);
+			$("#examSuiteLimitAmount").val(reqResult.data.examSuiteLimitAmount);
+			$("#examSuiteNote").val(reqResult.data.examSuiteNote);
+			$("#examSuiteSummary").val(reqResult.data.examSuiteSummary);
+		} else {
+			alert(reqResult.message);
+		}
+		//				判断是否有图片
+		if($("div#edit_storeimg div.store_img_borderdiv").length != 0) {
+			$('.img_border').show();
+		} else {
+			$('.img_border').hide();
+		}
+	})
+</script>

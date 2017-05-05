@@ -1,0 +1,864 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Main content -->
+	<div class="fakeloader"></div>
+	<section class="content">
+		<!-- 基本信息 -->
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box width_70">
+					<div class="box-header">
+						<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">基本信息</h3>
+						<div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
+							<button class="btn btn-default pull-right" onclick="storeManagementBack()">返回</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--用户信息S-->
+		<div class="box width_70" id="userInfo">
+			<div class="box-header">
+				<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">用户信息</h3>
+			</div>
+			<div class="box-body">
+				<div class="row">
+					<form id="userINfoForm" class="bs-example-form form-horizontal formCss" role="form" method="post" novalidate="novalidate">
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>登录名</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<input type="text" class="form-control" placeholder="登录名" name="userLoginName" id="userLoginName" form="MecaddTJ">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="userLoginNameTip"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>密码</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<input type="password" class="form-control" placeholder="密码" name="userPassword" id="userPassword" form="MecaddTJ">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="userPasswordTip"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>确认密码</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<input type="password" class="form-control" placeholder="确认密码" id="preUserPassword">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="preUserPasswordTip"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>联系人</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<input type="text" class="form-control" id="orgConnName" placeholder="联系人" name="orgConnName" form="MecaddTJ">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="orgConnNameTip"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>联系人手机</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<input type="text" class="form-control" placeholder="联系人手机" name="orgConnPhone" id="orgConnPhone" form="MecaddTJ">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="orgConnPhoneTip"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>联系人邮箱</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<input type="text" class="form-control" placeholder="联系人邮箱" name="orgConnEmail" id="orgConnEmail" form="MecaddTJ">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="orgConnEmailTip"></div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<hr />
+		<!--用户信息E-->
+		<!--机构信息S-->
+		<div class="box width_70">
+			<div class="box-header">
+				<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">机构信息</h3>
+			</div>
+			<div class="box-body">
+				<div class="row">
+					<form class="bs-example-form form-horizontal formCss" role="form" method="post" novalidate="novalidate" id="MecaddTJ">
+						<input type="hidden" name="orgId" id="orgId" value="" />
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>企业全称</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<input type="text" class="form-control" aria-label="..." placeholder="企业全称" name="orgTotalName" id="orgFullname">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="orgFullnameTip"></div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>企业简称</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<input type="text" class="form-control" aria-label="..." placeholder="企业简称" name="orgShortName" id="orgName">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="orgNameTip"></div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>企业地址</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 paddding_left_0px">
+									<select class="form-control selectpicker prov" id="orgAddressS" name="provinceId"></select>
+								</div>
+								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pading_0px">
+									<select class="form-control selectpicker city" id="orgAddressSH" name="cityId"></select>
+								</div>
+								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 paddding_right_0px">
+									<select class="form-control selectpicker dist" name="areaId" id="orgAddressQ" name="areaId"></select>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="orgAddressQTip"></div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>详细地址</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<input type="text" class="form-control" aria-label="..." placeholder="详细地址" name="orgAddress" id="orgAddress">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="orgAddressTip"></div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>营业面积</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<div class="input-group">
+									<input type="text" class="form-control" aria-label="..." placeholder="营业面积" name="orgSize" id="orgArea">
+									<span class="input-group-addon">m&sup2;</span>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="orgAreaTip"></div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>性 质</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<select class="form-control selectpicker" name="orgNature" id="orgNature" onchange="changeorgnature(this)">
+									<option value="2">医院</option>
+									<option value="1">体检机构</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>等级</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<select class="form-control selectpicker" name="orgLevelId" id="orgGrade">
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>企业法人</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<input type="text" class="form-control" id="orgLicensePersonName" placeholder="企业法人" name="orgLicensePersonName">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="orgLicensePersonNameTip"></div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>营业执照号</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<input type="text" class="form-control" id="orgLicenseNo" placeholder="营业执照号" name="orgLicenseNo">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="orgLicenseNoTip"></div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>营业执照</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<div class="file-preview img_border">
+									<div id="check_orgLicenseNoimg"></div>
+									<div class="clear"></div>
+								</div>
+								<input id="file-0a" class="file" type="file" name="file" multiple data-min-file-count="1">
+								<input name="orgLicenseImgId" id="orgLicenseImgId" hidden="hidden" />
+								<input name="orgLicenseImgUrl" id="orgLicenseImgUrl" hidden="hidden" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>开户许可证</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<div class="file-preview img_border">
+									<div id="check_orgLicensePersonNameimg"></div>
+									<div class="clear"></div>
+								</div>
+								<input id="file-1a" class="file" type="file" name="file" multiple data-min-file-count="1">
+								<input name="orgLicenseOpenId" id="orgLicenseOpenId" hidden="hidden" />
+								<input name="orgLicenseOpenUrl" id="orgLicenseOpenUrl" hidden="hidden" />
+							</div>
+						</div>
+					</form>
+				</div>
+				<!--机构信息E-->
+				<div class="row" id="PerInform">
+					<div class="col-xs-12">
+						<div class="box">
+							<div class="box-header">
+								<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">完善信息</h3>
+							</div>
+							<div class="box-body" id="init_edit_perf">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<!--<div class="col-lg-4"></div>-->
+					<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2 user_power_btn">
+						<!--<div class="col-lg-4"></div>-->
+						<button type="button" class="btn btn-default" id="addBtn">提 交 信 息</button>
+						<!--<div class="col-lg-4"></div>-->
+					</div>
+					<!--<div class="col-lg-4"></div>-->
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /Main content -->
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<script src="/plat/js/create/AjaxAddr.js"></script>
+	<script src="/plat/js/create/httpRequest.js"></script>
+	<script src="/plat/js/create/contentPublic.js"></script>
+	<!--图片上传-->
+	<script src="/plat/js/plugins/fileinput.js"></script>
+	<script src="/plat/js/plugins/fileinput_locale_zh.js"></script>
+	<!--表单验证-->
+	<script src="/plat/js/plugins/formValidator-4.0.1.js"></script>
+	<script src="/plat/js/plugins/formValidatorRegex.js"></script>
+	<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			editMecInfo();
+		})
+		$("#file-1a").fileinput({
+			uploadUrl: uploadImagesUrl, // you must set a valid URL here else you will get an error
+			allowedFileExtensions: ['jpg', 'png', 'gif', 'jpeg', 'bmp'],
+			overwriteInitial: false,
+			maxFileSize: 100000,
+			maxFilesNum: 10,
+			//allowedFileTypes: ['image', 'video', 'flash'],
+			slugCallback: function(filename) {
+				return filename.replace('(', '_').replace(']', '_');
+			}
+		})
+		$("#file-1a").on("fileuploaded", function(event, data, previewId, index) {
+			$("#orgLicenseOpenId").val(data.response.imgId);
+			$("#orgLicenseOpenUrl").val(data.response.url);
+
+		});
+		//			图片
+		$("#file-0a").fileinput({
+			uploadUrl: uploadImagesUrl, // you must set a valid URL here else you will get an error
+			allowedFileExtensions: ['jpg', 'png', 'gif', 'jpeg', 'bmp'],
+			overwriteInitial: false,
+			maxFileSize: 100000,
+			maxFilesNum: 10,
+			//allowedFileTypes: ['image', 'video', 'flash'],
+			slugCallback: function(filename) {
+				return filename.replace('(', '_').replace(']', '_');
+			}
+		})
+		$("#file-0a").on("fileuploaded", function(event, data, previewId, index) {
+			$("#orgLicenseImgId").val(data.response.imgId);
+			$("#orgLicenseImgUrl").val(data.response.url);
+		});
+		//		等级和性质
+		function changeorgnature(nature) {
+			if($(nature).val() == 1) {
+				var strNature = "<option value='1000'>体检机构</option>";
+				$("#orgGrade").empty();
+				$("#orgGrade").append(strNature);
+			} else {
+				init_org_info_level_data("#orgGrade");
+			}
+		}
+
+		function editMecInfo() {
+			thisURL = document.URL;
+			getval = thisURL.split('?')[1];
+			judgeParam = getval.split("=")[1];
+			if(judgeParam != "MecAdd") {
+				//编辑时表单验证
+				$.formValidator.initConfig({
+					submitButtonID: "addBtn",
+					debug: true,
+					onSuccess: function() {
+						SubmitEditInform();
+					},
+					onError: function() {
+						alert("添加失败，具体错误，请看网页上的提示！")
+					}
+				});
+
+				//				机构信息
+				//				名称
+				$("#orgName").on('change', function() {
+						$("#orgName").formValidator({
+							onShow: "请输入名称",
+							onFocus: "机构名称4-25个字符",
+							onCorrect: "已输入"
+						}).inputValidator({
+							min: 4,
+							max: 25,
+							onError: "你输入的名称不对"
+						})
+					})
+					//				全称
+				$("#orgFullname").on('change', function() {
+						$("#orgFullname").formValidator({
+							onShow: "请输入全称",
+							onFocus: "全称至少4-30字符",
+							onCorrect: "输入完成"
+						}).inputValidator({
+							min: 4,
+							max: 30,
+							onError: "你输入的全称不对"
+						})
+					})
+					//				区
+				$("#orgAddressQ").on('change', function() {
+					$("#orgAddressQ").formValidator({
+						onShow: "请选择你所在的区",
+						onFocus: "区必须选择",
+						onCorrect: "谢谢你的配合"
+					}).inputValidator({
+						min: 1,
+						onError: "你是不是忘记省市区了!"
+					});
+				})
+
+				//				详细地址
+				$("#orgAddress").on('change', function() {
+					$("#orgAddress").formValidator({
+						onShow: "请输入详细地址",
+						onFocus: "详细地址至少要输入10个或50个字符",
+						onCorrect: "已输入"
+					}).inputValidator({
+						min: 10,
+						onError: "你输入的详细地址长度不正确,请确认"
+					});
+				})
+
+				//				营业面积
+				$("#orgArea").on('change', function() {
+						$("#orgArea").formValidator({
+							autoModify: true,
+							onShow: "请输入营业面积",
+							onFocus: "营业面积为数字哦",
+							onCorrect: "恭喜你,你输对了"
+						}).inputValidator({
+							min: 1,
+							type: "value",
+							onErrorMin: "你输入的值必须大于等于1",
+							onError: "营业面积必须大于等于1，请确认"
+						});
+					})
+					//企业法人
+				$('#orgLicensePersonName').on('change', function() {
+						$("#orgLicensePersonName").formValidator({
+							onShow: "请输入企业法人",
+							onFocus: "企业法人至少2个字符,最多10个字符"
+						}).inputValidator({
+							min: 2,
+							max: 10,
+							onError: "你输入的企业法人非法,请确认"
+						})
+					})
+					//营业执照号
+				$('#orgLicenseNo').on('change', function() {
+					$("#orgLicenseNo").formValidator({
+						onShow: "请输入营业执照号",
+						onCorrect: "输入正确"
+					}).regexValidator({
+						regExp: "intege",
+						dataType: "enum",
+						onError: "营业执照号格式不正确"
+					});
+				})
+				$('#userInfo').hide();
+				$("#PerInform").show();
+				var thisURL = document.URL;
+				var getval = thisURL.split('?')[1];
+				var judgeParam = getval.split("=")[1];
+				var otype = "GET"
+				var osync = false;
+				var param = {
+					"orgId": judgeParam
+				};
+				var reqResult = httpRequest(init_checkorginform_show, param, otype, osync);
+				if(reqResult.result == 0) {
+					//					判断完善信息是否展示
+					var operationList = reqResult.operationList;
+					var str = '';
+					//					合作信息
+					if(operationList.orgDetail_to_cooperation == true) {
+						str += '<div class="col-md-2 margin-bottom"><a href="addCooperation.shtml?orgId=' + judgeParam + '">合作信息</a></div>';
+					}
+					//联系信息
+					if(operationList.orgDetail_to_orgConn == true) {
+						str += '<div class="col-md-2 margin-bottom"><a href="addContact.shtml?orgId=' + judgeParam + '">联系信息</a></div>';
+					}
+					//体检信息
+					if(operationList.orgDetail_to_orgIncome == true) {
+						str += '<div class="col-md-2 margin-bottom"><a href="addExamination.shtml?orgId=' + judgeParam + '">体检信息</a></div>';
+					}
+					//软件信息
+					if(operationList.orgDetail_to_orgSoft == true) {
+						str += '<div class="col-md-2 margin-bottom"><a href="addSoftware.shtml?orgId=' + judgeParam + '">软件信息</a></div>';
+					}
+					//投资信息
+					if(operationList.orgInvest == true) {
+						str += '<div class="col-md-2 margin-bottom"><a href="addInvestment.shtml?orgId=' + judgeParam + '">投资信息</a></div>';
+					}
+					//网络信息
+					if(operationList.orgDetail_to_orgWeb == true) {
+						str += '<div class="col-md-2 margin-bottom"><a href="addWarp.shtml?orgId=' + judgeParam + '">网络信息</a></div>';
+					}
+					//拜访信息
+					if(operationList.orgDetail_to_orgVisit == true) {
+						str += '<div class="col-md-2 margin-bottom"><a href="addVisit.shtml?orgId=' + judgeParam + '">拜访信息</a></div>';
+					}
+					$("#init_edit_perf").append(str);
+					$("#orgId").val(reqResult.data.organizationVo.orgId);
+					$("#userLoginName").val(reqResult.data.organizationVo.userLoginName);
+					$("#userPassWord").val(reqResult.data.organizationVo.userPassWord);
+					$("#orgName").val(reqResult.data.organizationVo.orgShortName);
+					$("#orgFullname").val(reqResult.data.organizationVo.orgTotalName);
+					$("#orgNature").val(reqResult.data.organizationVo.orgNature);
+					$("#orgArea").val(reqResult.data.organizationVo.orgSize);
+					$("#orgAddress").val(reqResult.data.organizationVo.orgAddress);
+					var check_status = $('#orgStatus input');
+					//					初始化等级
+					init_org_info_level_data("#orgGrade");
+					$('#orgGrade').val(reqResult.data.organizationVo.orgLevelId);
+					//					初始化省份
+					prov_init();
+					//					定义省份
+					$("#orgAddressS").val(reqResult.data.organizationVo.provinceId);
+					//					初始化区
+					prov_city(reqResult.data.organizationVo.provinceId);
+					//					定义区
+					$("#orgAddressSH").val(reqResult.data.organizationVo.cityId);
+					//					初始化县
+					city_town(reqResult.data.organizationVo.cityId);
+					//					定义县
+					$("#orgAddressQ").val(reqResult.data.organizationVo.areaId);
+					if(reqResult.data.organizationLicense != '') {
+						//					营业执照号
+						$('#orgLicenseNo').val(reqResult.data.organizationLicense[0].orgLicenseNo);
+						//					企业法人
+						$('#orgLicensePersonName').val(reqResult.data.organizationLicense[0].orgLicensePersonName);
+						//					营业执照
+						if(reqResult.data.organizationLicense[0].orgLicenseOpenUrl != '') {
+							$('#file-0a').attr('disabled', 'disabled');
+							$('#liceImg').append('<small id="span_file0" class="red_col margin-left">***营业执照只需上传一张，删除原有图片后方可操作!</small>');
+							$('#check_storeimg').empty();
+							var LicenseImg = "'" + reqResult.data.organizationLicense[0].orgLicenseImgId + "'";
+							var orgLicenseImgUrl = "'#orgLicenseImgUrl'";
+							var LicenseOpen = "'" + reqResult.data.organizationLicense[0].orgLicenseOpenId + "'";
+							var orgLicenseOpenUrl = "'#orgLicenseOpenUrl'";
+							var LicenseImgId = "'#orgLicenseImgId'";
+							var LicenseOpenId = "'#orgLicenseOpenId'";
+							var str = '';
+							$('#orgLicenseImgId').val(reqResult.data.organizationLicense[0].orgLicenseImgId);
+							$('#orgLicenseImgUrl').val(reqResult.data.organizationLicense[0].orgLicenseImgUrl);
+							str += '<div id="' + reqResult.data.organizationLicense[0].orgLicenseImgId + '" class="float_left store_img_borderdiv position_relative"><div class="position_absolute" style="background-image:url(' + platIp + reqResult.data.organizationLicense[0].orgLicenseImgUrl + ');"><a href="javascript:removeUploadImg(' + LicenseImg + ',' + orgLicenseImgUrl + ',' + LicenseImgId + ')" class="fa fa-close fa_red pull-right"></a></div></div>';
+
+						} else {
+							str = "<span>" + '无图片上传，可在编辑里上传图片！' + "</span>";
+							$('#file-0a').attr('disabled', '');
+						}
+						$("#check_orgLicenseNoimg").append(str);
+						//开户许可证图片
+						if(reqResult.data.organizationLicense[0].orgLicenseOpenUrl != '') {
+							$('#file-1a').attr('disabled', 'disabled');
+							$('#licenseOpenImg').append('<small id="span_file1" class="red_col margin-left">***开户许可证只需上传一张，删除原有图片后方可操作!</small>');
+							$('#check_storeimg').empty();
+							var stringInfo = '';
+							$('#orgLicenseOpenId').val(reqResult.data.organizationLicense[0].orgLicenseOpenId);
+							$('#orgLicenseOpenUrl').val(reqResult.data.organizationLicense[0].orgLicenseOpenUrl);
+							stringInfo += '<div id="' + reqResult.data.organizationLicense[0].orgLicenseOpenId + '" class="float_left store_img_borderdiv position_relative"><div class="position_absolute" style="background-image:url(' + platIp + reqResult.data.organizationLicense[0].orgLicenseOpenUrl + ');"><a href="javascript:removeUploadImg(' + LicenseOpen + ',' + orgLicenseOpenUrl + ',' + LicenseOpenId + ')" class="fa fa-close fa_red pull-right"></a></div></div>';
+						} else {
+							stringInfo = "<span>" + '无图片上传，可在编辑里上传图片！' + "</span>";
+							$('#file-1a').attr('disabled', '');
+						}
+						$("#check_orgLicensePersonNameimg").append(stringInfo);
+					}
+				} else {
+					alert(reqResult.message);
+				}
+			} else {
+				//					添加时验证
+				$.formValidator.initConfig({
+					submitButtonID: "addBtn",
+					debug: true,
+					onSuccess: function() {
+						SubmitAddInform();
+					},
+					onError: function() {
+						alert("添加失败，具体错误，请看网页上的提示！")
+					}
+				});
+				//					个人信息
+				//登录名
+				$("#userLoginName").formValidator({
+					onShow: "请输入登录名",
+					onFocus: "登录名至少4个字符,最多16个字符!",
+					onCorrect: "该登录名可以注册!"
+				}).inputValidator({
+					min: 4,
+					max: 16,
+					onError: "你输入的登录名非法,请确认!"
+				}).regexValidator({
+					regExp: "username",
+					dataType: "enum",
+					onError: "登录名格式不正确!"
+				}).ajaxValidator({
+					dataType: "json",
+					async: false,
+					url: addInformation_getCountByUserName_url,
+					success: function(reqResult) {
+						if(reqResult.data == 0) {
+							return true
+						};
+						if(reqResult.data == 1) {
+							return false
+						};
+						return false;
+					},
+					error: function(jqXHR, textStatus, errorThrown) {
+						alert("服务器没有返回数据，可能服务器忙，请重试" + errorThrown);
+					},
+					onError: "该登录名不可用，请更换用户名",
+					onWait: "正在对登录名进行合法性校验，请稍候..."
+				});
+				//登录密码
+				//				密码
+				$("#userPassword").formValidator({
+						onShow: "请输入密码",
+						onFocus: "密码不能为空,至少6个长度!",
+						onCorrect: "密码合法!"
+					}).inputValidator({
+						min: 6,
+						onError: "密码不能为空,请确认!"
+					})
+					//		确认密码
+					//确认密码
+				$("#preUserPassword").formValidator({
+						onShow: "请输入确认密码",
+						onFocus: "密码不能为空,至少6个长度",
+						onCorrect: "密码一致"
+					}).inputValidator({
+						min: 6,
+						empty: {
+							leftEmpty: false,
+							rightEmpty: false,
+							emptyError: "重复密码两边不能有空符号"
+						},
+						onError: "重复密码不能为空,请确认"
+					}).compareValidator({
+						desID: "userPassword",
+						operateor: "=",
+						onError: "2次密码不一致,请确认"
+					})
+					//联系人
+				$('#orgConnName').formValidator({
+						onShow: "请输入联系人",
+						onFocus: "联系人4-20个字符",
+						onCorrect: "输入完成"
+					}).inputValidator({
+						min: 4,
+						max: 20,
+						onError: "你输入的联系人不对"
+					})
+					//手机号
+				$("#orgConnPhone").formValidator({
+						empty: false,
+						onShow: "请输入联系人的手机或电话",
+						onFocus: "格式例如：0577-88888888或11位手机号码",
+						onCorrect: "输入完成"
+					}).regexValidator({
+						regExp: ['tel', 'mobile'],
+						dataType: "enum",
+						onError: "你输入的手机或电话格式不正确"
+					})
+					//邮箱
+				$("#orgConnEmail").formValidator({
+					onShow: "请输入你的email",
+					onfocus: "请注意你输入的email格式，例如:wzmaodong@126.com",
+					onCorrect: "输入完成"
+				}).regexValidator({
+					regExp: "email",
+					dataType: "enum",
+					onError: "email格式不正确"
+				});
+				//				机构信息
+				//				名称
+				$("#orgName").formValidator({
+						onShow: "请输入名称",
+						onFocus: "机构名称4-25个字符",
+						onCorrect: "输入完成"
+					}).inputValidator({
+						min: 4,
+						max: 25,
+						onError: "你输入的名称不对"
+					})
+					//				全称
+				$("#orgFullname").formValidator({
+						onShow: "请输入全称",
+						onFocus: "全称至少4-30字符",
+						onCorrect: "输入完成"
+					}).inputValidator({
+						min: 4,
+						max: 30,
+						onError: "你输入的全称不对"
+					})
+					//				区
+				$("#orgAddressQ").formValidator({
+					onShow: "请选择你所在的区",
+					onFocus: "区必须选择",
+					onCorrect: "输入完成"
+				}).inputValidator({
+					min: 1,
+					onError: "地址需选择到区!"
+				});
+
+				//				详细地址
+				$("#orgAddress").formValidator({
+					onShow: "请输入详细地址",
+					onFocus: "详细地址至少要输入10个或50个字符",
+					onCorrect: "输入完成"
+				}).inputValidator({
+					min: 10,
+					onError: "你输入的详细地址长度不正确,请确认"
+				});
+
+				//				营业面积
+				$("#orgArea").formValidator({
+					autoModify: true,
+					onShow: "请输入营业面积",
+					onFocus: "营业面积为数字哦",
+					onCorrect: "输入完成"
+				}).inputValidator({
+					min: 1,
+					type: "value",
+					onErrorMin: "你输入的值必须大于等于1",
+					onError: "营业面积必须大于等于1，请确认"
+				});
+				//企业法人
+				$("#orgLicensePersonName").formValidator({
+						onShow: "请输入企业法人",
+						onFocus: "企业法人至少2个字符,最多10个字符"
+					}).inputValidator({
+						min: 2,
+						max: 10,
+						onError: "你输入的企业法人非法,请确认"
+					})
+					//营业执照号
+				$("#orgLicenseNo").formValidator({
+					onShow: "请输入营业执照号",
+					onCorrect: "输入正确"
+				}).regexValidator({
+					regExp: "intege",
+					dataType: "enum",
+					onError: "营业执照号格式不正确"
+				});
+				$('#orgStatus').hide();
+				$("#PerInform").hide();
+				$('#userInfo').show();
+				init_org_info_level_data('#orgGrade');
+				prov_init();
+			}
+		}
+		//删除已上传图片
+		//删除已上传图片
+		function removeUploadImg(imgId, urlInfo, imgInfoId) {
+			if(confirm("确认删除该图片？")) {
+				var imgIds = $(imgInfoId).val().split(",");
+				imgIds.splice($.inArray(imgId.toString(), imgIds), 1);
+				$(imgInfoId).val(imgIds.join(","));
+				var del_img_div = "#" + imgId.toString();
+				$(del_img_div).remove();
+				$(urlInfo).val('');
+				if(imgInfoId == '#orgLicenseImgId') {
+					$('#file-0a').removeAttr('disabled');
+					$('small#span_file0').remove();
+				} else {
+					$('#file-1a').removeAttr('disabled');
+					$('small#span_file1').remove();
+				}
+			}
+		}
+
+		function SubmitEditInform() {
+			var otype = "POST"
+			var osync = false;
+			var param = $('#MecaddTJ').serialize();
+			var reqResult = httpRequest(init_addInformation_SubmitInform_edit, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert('编辑成功');
+				window.location.href = '/plat/pages/examination/examina/mec.shtml';
+			} else {
+				alert(reqResult.message);
+			}
+			return;
+		}
+
+		function SubmitAddInform() {
+			var param = $('#MecaddTJ').serialize();
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(init_addInformation_SubmitInform_add, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert('添加成功');
+				window.location.href = '/plat/pages/examination/examina/mec.shtml';
+			} else {
+				alert(reqResult.message);
+			}
+			return;
+		}
+
+		//		省市区三级联动
+		//		// 省级联动 省
+		function prov_init() {
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(getAllProvince_url, null, otype, osync);
+			if(reqResult.result == 0) {
+				var datal = reqResult.data;
+				var provSelect = $('.prov');
+				var html = "<option selected='selected' value=''>全部</option>";
+				if(datal.id != "") {
+					for(var i = 0; i < datal.length; i++) {
+						html += "<option value= '" + datal[i].id + "'>" + datal[i].provinceName + "</option>";
+					}
+					$(".prov").empty().append(html);
+				}
+
+			} else {
+
+				$(".prov").val('');
+			}
+
+			$(".dist").empty();
+			$(".city").empty();
+		}
+		// 省级联动 市
+		$('.prov').on('change', function() {
+			var prov = $(this).val();
+			prov_city(prov);
+		})
+
+		function prov_city(prov) {
+			var param = {
+				'provinceId': prov
+			}
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(getCityByProvinceId_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				var datal = reqResult.data;
+				var citySelect = $('.city');
+				var html = "<option selected='selected' value=''>全部</option>";
+				if(prov != "") {
+
+					if(datal.id != "") {
+						for(var i = 0; i < datal.length; i++) {
+							html += "<option value= '" + datal[i].id + "'>" + datal[i].cityName + "</option>";
+						}
+					}
+				} else {
+
+					$(".city").empty();
+				}
+				citySelect.empty().append(html);
+			} else {
+				$(".city").empty();
+
+			}
+			$(".dist").empty();
+		}
+		// 省级联动 区
+		$('.city').on('change', function() {
+			var town = $(this).val();
+			city_town(town);
+		})
+
+		function city_town(town) {
+			var param = {
+				'cityId': town
+			}
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(getDistrictByCityId_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				var datal = reqResult.data;
+				var distSelect = $('.dist');
+				var html = "<option selected='selected' value=''>全部</option>";
+				if(datal.id != "") {
+					for(var i = 0; i < datal.length; i++) {
+
+						html += "<option value= '" + datal[i].id + "'>" + datal[i].districtName + "</option>";
+					}
+				}
+				distSelect.empty().append(html);
+
+			} else {
+				$('.dist').empty();
+			}
+		}
+	</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

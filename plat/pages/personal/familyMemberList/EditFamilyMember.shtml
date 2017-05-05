@@ -1,0 +1,250 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<div class="fakeloader"></div>
+	<!-- Main content -->
+	<section class="content">
+		<!--头部S-->
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box width_70">
+					<div class="box-header">
+						<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">家庭关系成员<small>--编辑</small></h3>
+						<div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
+							<button class="btn btn-default pull-right" onclick="storeManagementBack()">返回</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--头部E-->
+		<div class="box width_70">
+			<div class="box-body">
+				<form class="bs-example-form form-horizontal formCss" role="form" method="post" novalidate="novalidate" id='familyMember_addform'>
+					<input type="hidden" name='relationshipId' id="edit_familyinput_hid" value="" />
+					<input type="hidden" name="customerInfoId" id="edit_customerInfoId_hid" value="" />
+					<input type="hidden" id="backCustomerInfoId" value="" />
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>姓名</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="edit_customerInfoName" class="form-control" name="customerInfoName" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="edit_customerInfoNameTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>性别</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<select id="edit_sex" name="customerInfoSex">
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="edit_sexTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>身份证号</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="edit_customerInfoIdentityNumber" class="form-control" name="customerInfoIdentityNumber" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="edit_customerInfoIdentityNumberTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>手机号码</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="edit_customerInfoPhone" class="form-control" name="customerInfoPhone" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="edit_customerInfoPhoneTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>邮 箱</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="email" id="edit_customerInfoEmail" class="form-control" name="customerInfoEmail" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="edit_customerInfoEmailTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>关系</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<select name="dictRelationId" id="edit_relationshipId" class="relationship form-control"></select>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="edit_relationshipIdTip"></div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="row">
+				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2 user_power_btn">
+					<button type="submit" class="btn btn-default" id='edit_family_btn'>保存</button>
+					<a href="#" class="btn btn-default" onclick="storeManagementBack()">返 回</a>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->
+<!--动画js-->
+<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+<script>
+	$(document).ready(function() {
+			edit_familyMember();
+			//			表单验证
+			$.formValidator.initConfig({
+				submitButtonID: "edit_family_btn",
+				debug: true,
+				onSuccess: function() {
+					editFamilyMember();
+				},
+				onError: function() {
+					alert("添加失败，具体错误，请看网页上的提示！")
+				},
+				submitAfterAjaxPrompt: '有数据正在异步验证，请稍等...'
+			});
+			//姓名
+			$('#edit_customerInfoName').on('change', function() {
+					$("#edit_customerInfoName").formValidator({
+						onShow: "请输入姓名",
+						onFocus: "姓名至少2个字符,最多10个字符"
+					}).inputValidator({
+						min: 2,
+						max: 10,
+						onError: "你输入的姓名非法,请确认"
+					})
+				})
+				//性别
+			$('#edit_sex').on('change', function() {
+					$("#edit_sex").formValidator({
+						onShow: "请选择性别",
+						onFocus: "性别必须选择",
+						onCorrect: "已选择"
+					}).inputValidator({
+						min: 1,
+						onError: "还未选择性别!"
+					});
+				})
+				//身份证号
+			$('#edit_customerInfoIdentityNumber').on('change', function() {
+				$("#edit_customerInfoIdentityNumber").formValidator({
+					onShow: "请输入身份证号",
+					onfocus: "请注意你输入的身份证号格式",
+					onCorrect: "输入完成"
+				}).regexValidator({
+					regExp: "idcard",
+					dataType: "enum",
+					onError: "身份证号格式不正确"
+				});
+			})
+
+			//手机号
+			$('#edit_customerInfoPhone').on('change', function() {
+				$("#edit_customerInfoPhone").formValidator({
+					onFocus: "请输入正确格式",
+					onCorrect: "输入格式正确",
+					onEmpty: "你真的不想留手机号码啊？"
+				}).inputValidator({
+					min: 11,
+					max: 11,
+					onError: "手机号码必须是11位的,请确认"
+				}).regexValidator({
+					regExp: "mobile",
+					dataType: "enum",
+					onError: "你输入的手机号码格式不正确"
+				});
+			})
+
+			//邮箱
+			$('#edit_customerInfoEmail', function() {
+				$("#edit_customerInfoEmail").formValidator({
+					onShow: "请输入你的email",
+					onfocus: "请注意你输入的email格式，例如:wzmaodong@126.com",
+					onCorrect: "输入完成"
+				}).regexValidator({
+					regExp: "email",
+					dataType: "enum",
+					onError: "email格式不正确"
+				});
+			})
+
+		})
+		//	家庭成员信息回显
+	function edit_familyMember() {
+		var thisURL = document.URL;
+		if(thisURL.indexOf("?") != -1) {
+			var num = thisURL.indexOf("?");
+			thisURL = thisURL.substr(num + 1);
+			var getval = thisURL.split("&");
+			var result = new Array;
+			for(i in getval) {
+				var showval = getval[i].split("=");
+				if((showval[0] != null && showval[0] != "") && (showval[1] != null && showval[1] != "")) {
+					result.push(showval[1]);
+				}
+			}
+			var org = result.slice(0, 1);
+			orgNew = org.join();
+			var brand = result.slice(1, 2);
+			brandNew = brand.join();
+			$('#edit_customerInfoId_hid').val(brandNew);
+		}
+		var param = {
+			"relationshipId": orgNew
+		};
+		var otype = "get";
+		var osync = false;
+		var reqResult = httpRequest(familyMember_getRelationshipByID_url, param, otype, osync);
+		if(reqResult.result == 0) {
+			$('#backCustomerInfoId').val(reqResult.data.customerInfoId);
+			var edit_customerInfoName = $('#edit_customerInfoName').val(reqResult.data.customerInfoName);
+			var edit_customerInfoIdentityNumber = $('#edit_customerInfoIdentityNumber').val(reqResult.data.customerInfoIdentityNumber);
+			var edit_customerInfoPhone = $('#edit_customerInfoPhone').val(reqResult.data.customerInfoPhone);
+			var edit_customerInfoEmail = $('#edit_customerInfoEmail').val(reqResult.data.customerInfoEmail);
+			$('#edit_familyinput_hid').val(reqResult.data.relationshipId);
+			//初始性别
+			sex('#edit_sex', '1');
+			//定义性别
+			edit_sex = $('#edit_sex').val(reqResult.data.sex);
+			//初始化关系
+			relationship_info();
+			//			定义关系
+			$('#edit_relationshipId').val(reqResult.data.dictRelationId);
+		} else {
+			alert(reqResult.message);
+		}
+		return false;
+	}
+	//		编辑修改保存信息	
+	function editFamilyMember() {
+		var param = $('#familyMember_addform').serialize();
+		var otype = "post";
+		var osync = false;
+		var reqResult = httpRequest(familyMember_updateCustomerInfo_url, param, otype, osync);
+		if(reqResult.result == 0) {
+			alert('编辑成功');
+			var backCustomerInfoId = $('#backCustomerInfoId').val();
+
+			window.location.href = "/plat/pages/personal/familyMemberList.shtml?customerInfoId=" + backCustomerInfoId;
+		} else {
+			alert('编辑失败!');
+		}
+	}
+</script>

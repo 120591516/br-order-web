@@ -1,0 +1,609 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<div class="fakeloader"></div>
+	<!-- /Content Header (Page header) -->
+	<!-- Main content -->
+	<section class="content">
+		<!--头部S-->
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box width_70">
+					<div class="box-header">
+						<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">门店<small>--添加</small></h3>
+						<div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
+							<button class="btn btn-default pull-right" onclick="storeManagementBack()">返回</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--头部E-->
+		<div class="box width_70">
+			<div class="box-body">
+				<form class="bs-example-form form-horizontal formCss" role="form" method="post" novalidate="novalidate" id='storeManagement_addform'>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>体检机构</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<select class="org form-control" id="add_orgId" name="orgId">
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="add_orgIdTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>门店代码</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="add_branchCode" class="form-control" name="branchCode" aria-describedby="basic-addon1" maxlength='20' required>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="add_branchCodeTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>门店名称</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="add_branchName" class="form-control" name="branchName" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="add_branchNameTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>门店地区</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 paddding_left_0px">
+								<select class="prov form-control" name="branchProvinceId">
+								</select>
+							</div>
+							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pading_0px">
+								<select class="city form-control" name="branchCityId">
+								</select>
+							</div>
+							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 paddding_right_0px">
+								<select class="dist form-control" name="branchAreaId" id="branchAreaId">
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="branchAreaIdTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>详细地址</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="add_detailed_branchArea" class="form-control" name="branchAddress" aria-describedby="basic-addon1" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="add_detailed_branchAreaTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>警告人数</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="add_warnPeople" class="form-control" name="warnPeople" aria-describedby="basic-addon1" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="add_warnPeopleTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>警告金额</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<div class="input-group">
+								<input type="text" id="add_warnAmount" class="form-control" name="warnAmount" aria-describedby="basic-addon1" required>
+								<span class="input-group-addon"><a class="fa fa-cny none_cursor"></a></span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="add_warnAmountTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>限制人数</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="add_limitPeople" class="form-control" name="limitPeople" aria-describedby="basic-addon1" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="add_limitPeopleTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>限制金额</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<div class="input-group">
+								<input type="text" id="add_limitAmount" class="form-control" name="limitAmount" aria-describedby="basic-addon1" required>
+								<span class="input-group-addon"><a class="fa fa-cny none_cursor"></a></span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="add_limitAmountTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>体检时间段</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="hidden" name="examStartTime" id='add_examStartTime_hid' />
+							<input type="hidden" name="examEndTime" id='add_exameEndTime_hid' />
+							<div class="form-group">
+								<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>开始时间</label>
+								<div class='col-lg-5 col-md-5 col-sm-5 col-xs-5'>
+									<select id="add_examStartTime_h" class="form-control">
+										<option value="00">00</option>
+										<option value="01">01</option>
+										<option value="02">02</option>
+										<option value="03">03</option>
+										<option value="04">04</option>
+										<option value="05">05</option>
+										<option value="06">06</option>
+										<option value="07">07</option>
+										<option value="08">08</option>
+										<option value="09">09</option>
+										<option value="10">10</option>
+										<option value="11">11</option>
+										<option value="12">12</option>
+										<option value="13">13</option>
+										<option value="14">14</option>
+										<option value="15">15</option>
+										<option value="16">16</option>
+										<option value="17">17</option>
+										<option value="18">18</option>
+										<option value="19">19</option>
+										<option value="20">20</option>
+										<option value="21">21</option>
+										<option value="22">22</option>
+										<option value="23">23</option>
+									</select>
+								</div>
+								<div class='col-lg-5 col-md-5 col-sm-5 col-xs-5'>
+									<select id="add_examStartTime_m" class="form-control">
+										<option value="00">00</option>
+										<option value="05">05</option>
+										<option value="10">10</option>
+										<option value="15">15</option>
+										<option value="20">20</option>
+										<option value="25">25</option>
+										<option value="30">30</option>
+										<option value="35">35</option>
+										<option value="40">40</option>
+										<option value="45">45</option>
+										<option value="50">50</option>
+										<option value="55">55</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+									<div id="add_examStartTime_hTip"></div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>结束时间</label>
+								<div class='col-lg-5 col-md-5 col-sm-5 col-xs-5'>
+									<select id="add_examEndTime_h" class="form-control">
+										<option value="00">00</option>
+										<option value="01">01</option>
+										<option value="02">02</option>
+										<option value="03">03</option>
+										<option value="04">04</option>
+										<option value="05">05</option>
+										<option value="06">06</option>
+										<option value="07">07</option>
+										<option value="08">08</option>
+										<option value="09">09</option>
+										<option value="10">10</option>
+										<option value="11">11</option>
+										<option value="12">12</option>
+										<option value="13">13</option>
+										<option value="14">14</option>
+										<option value="15">15</option>
+										<option value="16">16</option>
+										<option value="17">17</option>
+										<option value="18">18</option>
+										<option value="19">19</option>
+										<option value="20">20</option>
+										<option value="21">21</option>
+										<option value="22">22</option>
+										<option value="23">23</option>
+									</select>
+								</div>
+								<div class='col-lg-5 col-md-5 col-sm-5 col-xs-5'>
+									<select id="add_examEndTime_m" class="form-control">
+										<option value="00">00</option>
+										<option value="05">05</option>
+										<option value="10">10</option>
+										<option value="15">15</option>
+										<option value="20">20</option>
+										<option value="25">25</option>
+										<option value="30">30</option>
+										<option value="35">35</option>
+										<option value="40">40</option>
+										<option value="45">45</option>
+										<option value="50">50</option>
+										<option value="55">55</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+									<div id="add_examEndTime_hTip"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="add_limitAmountTip"></div>
+						</div>
+					</div>-->
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>拆分套餐</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8' id="edit_splitSuite">
+							<input type="radio" id="add_splitSuite_0" name="splitSuite" value="0" aria-describedby="basic-addon1" required checked="checked">是
+							<input type="radio" id="add_splitSuite_1" name="splitSuite" value="1" aria-describedby="basic-addon1" required>否
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>门店说明</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<textarea name="note" class="form-control" id="add_note"></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="add_noteTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>门店介绍</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<textarea name="summary" class="form-control" id="add_summary"></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="add_summaryTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>门店照片</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input id="add_storeManagement_picture" class="file" type="file" name="file" multiple data-min-file-count="1">
+							<input type="hidden" name="imgId" id="add_imgId" />
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="add_imgIdTip"></div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="row">
+				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2 user_power_btn">
+					<button type="submit" class="btn btn-default" id='add_store_btn'>添加</button>
+					<a href="#" class="btn btn-default" onclick="storeManagementBack()">返 回</a>
+				</div>
+			</div>
+		</div>
+	</section>
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<script src="/plat/js/create/AjaxAddr.js"></script>
+	<script src="/plat/js/create/httpRequest.js"></script>
+	<script src="/plat/js/create/contentPublic.js"></script>
+	<!--图片上传-->
+	<script src="/plat/js/plugins/fileinput.js"></script>
+	<script src="/plat/js/plugins/fileinput_locale_zh.js"></script>
+	<!--表单验证-->
+	<script src="/plat/js/plugins/formValidator-4.0.1.js"></script>
+	<script src="/plat/js/plugins/formValidatorRegex.js"></script>
+	<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			//			机构和省市区初始化
+			prov_init();
+			org_info('#add_orgId', '1');
+			if(document.URL.indexOf("?") != -1) {
+				$('#add_orgId').val(getParamValue('orgId'));
+			}
+			//表单验证
+			$.formValidator.initConfig({
+				submitButtonID: "add_store_btn",
+				debug: true,
+				onSuccess: function() {
+					storeInfo();
+				},
+				onError: function() {
+					alert("添加失败，具体错误，请看网页上的提示！")
+				},
+				submitAfterAjaxPrompt: '有数据正在异步验证，请稍等...'
+			});
+			//体检机构
+			$("#add_orgId").formValidator({
+				onShow: "请选择所属机构",
+				onFocus: "所属机构必须选择",
+				onCorrect: "已选择"
+			}).inputValidator({
+				min: 1,
+				onError: "还未选择所属机构!"
+			});
+			//门店代码
+			$("#add_branchCode").formValidator({
+				onShow: "请输入门店代码",
+				onFocus: "请输入门店代码",
+				onCorrect: "输入正确"
+			}).regexValidator({
+				regExp: "username",
+				dataType: "enum",
+				onError: "输入错误"
+			});
+			//门店名称
+			$("#add_branchName").formValidator({
+				onShow: "请输入门店名称",
+				onFocus: "门店名称不少于3个字符",
+				onCorrect: "输入正确"
+			}).inputValidator({
+				min: 3,
+				onError: "输入错误"
+			});
+			//门店地区
+			$("#branchAreaId").formValidator({
+				onShow: "请选择门店所属地区",
+				onFocus: "门店所属地区必须选择",
+				onCorrect: "已选择"
+			}).inputValidator({
+				min: 1,
+				onError: "所属地请选择到区!"
+			});
+
+			//详细地址
+			$("#add_detailed_branchArea").formValidator({
+					onShow: "请输入详细地址",
+					onFocus: "详细地址至少2个字符,最多50个字符"
+				}).inputValidator({
+					min: 2,
+					max: 50,
+					onError: "你输入的详细地址非法,请确认"
+				})
+				//警告人数
+			$("#add_warnPeople").formValidator({
+				onShow: "请输入警告人数",
+				onFocus: "请输入警告人数",
+				onCorrect: "输入正确"
+			}).regexValidator({
+				regExp: "num",
+				dataType: "enum",
+				onError: "输入错误"
+			});
+			//警告金额
+			$("#add_warnAmount").formValidator({
+				onShow: "请输入警告金额",
+				onFocus: "请输入警告金额",
+				onCorrect: "输入正确"
+			}).regexValidator({
+				regExp: "num",
+				dataType: "enum",
+				onError: "输入错误"
+			});
+			//限制人数
+			$("#add_limitPeople").formValidator({
+				onShow: "请输入限制人数",
+				onFocus: "请输入限制人数",
+				onCorrect: "输入正确"
+			}).regexValidator({
+				regExp: "num",
+				dataType: "enum",
+				onError: "输入错误"
+			});
+			//限制金额
+			$("#add_limitAmount").formValidator({
+				onShow: "请输入限制金额",
+				onFocus: "请输入限制金额",
+				onCorrect: "输入正确"
+			}).regexValidator({
+				regExp: "num",
+				dataType: "enum",
+				onError: "输入错误"
+			});
+			//体检时间段
+			//开始时间
+			$("#add_examStartTime_h").formValidator({
+				onShow: "请选择开始时间",
+				onFocus: "开始时间必须选择",
+				onCorrect: "已选择"
+			}).inputValidator({
+				min: 1,
+				onError: "还未选择开始时间!"
+			});
+			//结束时间
+			$("#add_examEndTime_h").formValidator({
+				onShow: "请选择结束时间",
+				onFocus: "结束时间必须选择",
+				onCorrect: "已选择"
+			}).inputValidator({
+				min: 1,
+				onError: "还未选择结束时间!"
+			});
+			//门店说明
+			$("#add_note").formValidator({
+				onShow: "门店说明",
+				onFocus: "门店说明",
+				onCorrect: "已输入"
+			}).inputValidator({
+				min: 2,
+				onError: "门店说明不低于2个字符"
+			});
+			//门店介绍
+			$("#add_summary").formValidator({
+				onShow: "门店介绍",
+				onFocus: "门店介绍",
+				onCorrect: "已输入"
+			}).inputValidator({
+				min: 2,
+				onError: "门店介绍不低于2个字符"
+			});
+			//门店照片
+//			$("#add_imgId").formValidator({
+//				onShow: "请选择门店照片",
+//				relativeID:'add_storeManagement_picture',
+//				tipID:'add_imgIdTip',
+//				onFocus: "门店照片至少上传一张",
+//				onCorrect: "已上传"
+//			}).inputValidator({
+//				min: 1,
+//				onError: "门店照片未上传"
+//			});
+		})
+
+		$("#add_storeManagement_picture").fileinput({
+			uploadUrl: uploadImagesUrl, // you must set a valid URL here else you will get an error
+			allowedFileExtensions: ['jpg', 'png', 'gif', 'jpeg', 'bmp'],
+			overwriteInitial: false,
+			maxFileSize: 100000,
+			maxFilesNum: 10,
+			//allowedFileTypes: ['image', 'video', 'flash'],
+			slugCallback: function(filename) {
+				return filename.replace('(', '_').replace(']', '_');
+			}
+		})
+		$("#add_storeManagement_picture").on("fileuploaded", function(event, data, previewId, index) {
+			var id_length = $('.file-preview-frame').length;
+			var imgInfoLenth = $('#edit_storeimg div[role=imgInfo]').length;
+			var upload_imgs = [];
+			upload_imgs += [(data.response.imgId - id_length + 1) + 'A,']
+			for(var i = 0; i < id_length - 1; i++) {
+				upload_imgs += [(data.response.imgId - i) + ','];
+			}
+			$('#add_imgId').val('');
+			$('#add_imgId').val(upload_imgs);
+		});
+		//			添加门店信息
+		function storeInfo() {
+			var param = $('#storeManagement_addform').serialize();
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(storeManagement_insertOrganizationBranch_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert("添加成功");
+				if(document.URL.indexOf("?") != -1) {
+					window.location.href = "/plat/pages/examination/store/storeManagement.shtml?orgId=" + getParamValue('orgId');
+				} else {
+					window.location.href = '/plat/pages/examination/store/storeManagement.shtml';
+				}
+			} else {
+				alert(reqResult.message);
+			}
+		}
+		//		省市区三级联动
+		// 省级联动 省
+		function prov_init() {
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(getAllProvince_url, null, otype, osync);
+			if(reqResult.result == 0) {
+				var datal = reqResult.data;
+				var provSelect = $('.prov');
+				var html = "<option selected='selected' value=''>全部</option>";
+				if(datal.id != "") {
+					for(var i = 0; i < datal.length; i++) {
+						html += "<option value= '" + datal[i].id + "'>" + datal[i].provinceName + "</option>";
+					}
+					$(".prov").empty().append(html);
+				}
+
+			} else {
+
+				$(".prov").val('');
+			}
+
+			$(".dist").empty();
+			$(".city").empty();
+		}
+		// 省级联动 市
+		$('.prov').on('change', function() {
+			var prov = $(this).val();
+			prov_city(prov);
+		})
+
+		function prov_city(prov) {
+			var param = {
+				'provinceId': prov
+			}
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(getCityByProvinceId_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				var datal = reqResult.data;
+				var citySelect = $('.city');
+				var html = "<option selected='selected' value=''>全部</option>";
+				if(prov != "") {
+
+					if(datal.id != "") {
+						for(var i = 0; i < datal.length; i++) {
+							html += "<option value= '" + datal[i].id + "'>" + datal[i].cityName + "</option>";
+						}
+					}
+				} else {
+
+					$(".city").empty();
+				}
+				citySelect.empty().append(html);
+			} else {
+				$(".city").empty();
+
+			}
+			$(".dist").empty();
+		}
+		// 省级联动 区
+		$('.city').on('change', function() {
+			var town = $(this).val();
+			city_town(town);
+		})
+
+		function city_town(town) {
+			var param = {
+				'cityId': town
+			}
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(getDistrictByCityId_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				var datal = reqResult.data;
+				var distSelect = $('.dist');
+				var html = "<option selected='selected' value=''>全部</option>";
+				if(datal.id != "") {
+					for(var i = 0; i < datal.length; i++) {
+
+						html += "<option value= '" + datal[i].id + "'>" + datal[i].districtName + "</option>";
+					}
+				}
+				distSelect.empty().append(html);
+
+			} else {
+				$('.dist').empty();
+			}
+		}
+	</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

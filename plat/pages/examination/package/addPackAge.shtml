@@ -1,0 +1,997 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<div class="fakeloader"></div>
+	<section class="content">
+		<!--头部S-->
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box width_70">
+					<div class="box-header">
+						<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">套餐<small>--详情</small></h3>
+						<div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
+							<button class="btn btn-default pull-right" onclick="storeManagementBack()">返回</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--头部E-->
+		<div class="box width_70">
+			<div class="box-body">
+				<form class="bs-example-form form-horizontal formCss" role="form" id="addPackInfor">
+					<input id="examSuiteId" name="examSuiteId" type="text" hidden="hidden" />
+					<div class="form-group" id="orgInfo">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>体检机构</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<select name="orgId" form="addPackInfor" id='store_orgName' class="form-control selectpicker store_search_form org">
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="store_orgNameTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>套餐名称</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" id="examSuiteName" placeholder="套餐名称" name="examSuiteName" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="examSuiteNameTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>套餐英文名称</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" id="examSuiteNameEng" placeholder="套餐英文名称" name="examSuiteNameEng" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="examSuiteNameEngTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>套餐输入码</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" id="inputCode" placeholder="套餐输入码" name="examSuiteInputCode" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="inputCodeTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>套餐代码</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" id="examSuiteCode" placeholder="套餐代码" name="examSuiteCode" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="examSuiteCodeTip"></div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>套餐价格</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<div class="input-group">
+								<input type="text" class="form-control" id="examSuitePrice" placeholder="套餐价格" name="examSuitePrice" required>
+							<span class="input-group-addon"><a class="fa fa-cny none_cursor"></a></span>
+							</div>
+							
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="examSuitePriceTip"></div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>优惠价</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<div class="input-group">
+								<input type="text" class="form-control" id="examSuitePrice" placeholder="套餐价格" name="examSuitePrice" required>
+							<span class="input-group-addon"><a class="fa fa-cny none_cursor"></a></span>
+							</div>
+							
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="examSuiteDiscountPriceTip"></div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>套餐内价格</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<div class="input-group">
+								<input type="text" class="form-control" id="examSuiteInPrice" placeholder="套餐价格" name="examSuiteInPrice" required>
+							<span class="input-group-addon"><a class="fa fa-cny none_cursor"></a></span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="examSuiteInPriceTip"></div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>适用性别</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="checkbox" name="sex" value="1" id="examSuiteMale"> 男
+							<input type="hidden" name='examSuiteMale' value="1" id="male">
+							<input type="checkbox" name="sex" value="1" id="examSuiteFemale"> 女
+							<input type="hidden" name='examSuiteFemale' value="1" id="female">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="sexTip"></div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>套餐类型</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<div class="col-md-10" id="selectTypes"></div>
+							<input type="hidden" id="typeList" name="typeList" />
+							<span class="typesError" style="color: rgb(60, 141, 188); font-family: initial; font-size: 0.2em;"></span>
+							<a class="btn btn-default pull-left" data-toggle="modal" href="#typesModal">选 择</a>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="typeListTip"></div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>高发疾病</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<div class="col-md-10" id="selectHids"></div>
+							<input type="hidden" id="highIncidenceDiseaseList" name="highIncidenceDiseaseList" />
+							<span class="hidsError" style="color: rgb(60, 141, 188); font-family: initial; font-size: 0.2em;"></span>
+							<a class="btn btn-default pull-left" data-toggle="modal" href="#HidsModal">选 择</a>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="highIncidenceDiseaseListTip"></div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>警告人数</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" id="examSuiteWarnPeople" placeholder="警告人数请输入数字" name="examSuiteWarnPeople" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="examSuiteWarnPeopleTip"></div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>限制人数</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" id="examSuiteLimitPeople" placeholder="限制人数请输入数字" name="examSuiteLimitPeople" required>
+
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="examSuiteLimitPeopleTip"></div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>警告金额</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<div class="input-group">
+								<input type="text" class="form-control" id="examSuiteWarnAmount" placeholder="警告金额" name="examSuiteWarnAmount" required>
+							<span class="input-group-addon"><a class="fa fa-cny none_cursor"></a></span>
+							</div>
+							
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="examSuiteWarnAmountTip"></div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>限制金额</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<div class="input-group">
+								<input type="text" class="form-control" id="examSuiteLimitAmount" placeholder="限制金额" name="examSuiteLimitAmount" required>
+								<span class="input-group-addon"><a class="fa fa-cny none_cursor"></a></span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="examSuiteLimitAmountTip"></div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>套餐图片</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<div class="file-preview img_border">
+								<div id="edit_storeimg"></div>
+								<div class="clear"></div>
+							</div>
+							<input id="file-0a" class="file" type="file" name="file" multiple data-min-file-count="1">
+							<input name="orgSuiteImgs" id="imgs" hidden="hidden" />
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="imgsTip"></div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>备注</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<textarea class="form-control" name="examSuiteNote" id="examSuiteNote" id="textarea"></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="examSuiteNoteTip"></div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>简介</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<textarea class="form-control" name="examSuiteSummary" id="examSuiteSummary" id="textarea"></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="examSuiteSummaryTip"></div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="row">
+				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2 user_power_btn">
+					<button type="submit" class="btn btn-default" id="AddPackage">提 交</button>
+					<a href="#" class="btn btn-default" onclick="storeManagementBack()">返 回</a>
+				</div>
+			</div>
+			<span class="suiteError" style="color: #ff0808;font-family: initial;font-size: 1.em;float: right;"></span>
+		</div>
+	</section>
+	<!-- /Main content -->
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<script src="/plat/js/create/httpRequest.js"></script>
+	<script src="/plat/js/create/public.js"></script>
+	<script src="/plat/js/create/AjaxAddr.js"></script>
+	<script src="/plat/js/create/contentPublic.js"></script>
+	<script src="/plat/js/plugins/fileinput.js"></script>
+	<script src="/plat/js/plugins/fileinput_locale_zh.js"></script>
+	<!--表单验证-->
+	<script src="/plat/js/plugins/formValidator-4.0.1.js"></script>
+	<script src="/plat/js/plugins/formValidatorRegex.js"></script>
+	<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<script>
+		$(document).ready(function() {
+				$.formValidator.initConfig({
+					submitButtonID: "AddPackage",
+					debug: true,
+					onSuccess: function() {
+						suitPackAgeInfo();
+					},
+					onError: function() {
+						alert("添加失败，具体错误，请看网页上的提示！")
+					},
+					submitAfterAjaxPrompt: '有数据正在异步验证，请稍等...'
+				});
+				//数据回显
+				if(document.URL.indexOf("?") != -1) {
+					//					体检机构下拉框
+					$('#orgInfo').fadeOut();
+					getOrgList('#store_orgName');
+					$('#store_orgName').val(getParamValue('param'));
+
+					//					校验
+					//					体检机构
+					$("#store_orgName").on('change', function() {
+						$("#store_orgName").formValidator({
+							onShow: "请选择所属机构",
+							onFocus: "所属机构必须选择",
+							onCorrect: "已选择"
+						}).inputValidator({
+							min: 1,
+							onError: "还未选择所属机构!"
+						});
+					})
+
+					//套餐名称
+					$("#examSuiteName").on('change', function() {
+						$("#examSuiteName").formValidator({
+							onShow: "请输入套餐名称",
+							onFocus: "套餐名称不少于3个字符",
+							onCorrect: "输入正确"
+						}).inputValidator({
+							min: 3,
+							onError: "输入错误"
+						});
+					})
+
+					//套餐英文名称
+					$("#examSuiteNameEng").on('change', function() {
+						$("#examSuiteNameEng").formValidator({
+							onShow: "请输入套餐英文名称",
+							onFocus: "套餐英文名称仅可用英文表示",
+							onCorrect: "输入正确"
+						}).regexValidator({
+							regExp: "username",
+							dataType: "enum",
+							onError: "输入错误"
+						});
+					})
+
+					//套餐输入码
+					$("#inputCode").on('change', function() {
+						$("#inputCode").formValidator({
+							onShow: "请输入套餐输入码",
+							onFocus: "输入码为数字格式",
+							onCorrect: "输入正确"
+						}).regexValidator({
+							regExp: "num",
+							dataType: "enum",
+							onError: "输入错误"
+						});
+					})
+
+					//套餐代码
+					$("#examSuiteCode").on('change', function() {
+						$("#examSuiteCode").formValidator({
+							onShow: "请输入套餐代码",
+							onFocus: "请输入套餐代码",
+							onCorrect: "输入正确"
+						}).regexValidator({
+							regExp: "username",
+							dataType: "enum",
+							onError: "输入错误"
+						});
+					})
+
+					//套餐价格
+					$("#examSuitePrice").on('change', function() {
+						$("#examSuitePrice").formValidator({
+							onShow: "请输入套餐价格",
+							onFocus: "请输入套餐价格",
+							onCorrect: "输入正确"
+						}).regexValidator({
+							regExp: "num",
+							dataType: "enum",
+							onError: "输入错误"
+						});
+					})
+
+					//优惠价
+					$("#examSuiteDiscountPrice").on('change', function() {
+						$("#examSuiteDiscountPrice").formValidator({
+							onShow: "请输入优惠价",
+							onFocus: "请输入优惠价",
+							onCorrect: "输入正确"
+						}).regexValidator({
+							regExp: "num",
+							dataType: "enum",
+							onError: "输入错误"
+						});
+					})
+
+					//套餐内价格
+					$("#examSuiteInPrice").on('change', function() {
+						$("#examSuiteInPrice").formValidator({
+							onShow: "请输入套餐内价格",
+							onFocus: "请输入套餐内价格",
+							onCorrect: "输入正确"
+						}).regexValidator({
+							regExp: "num",
+							dataType: "enum",
+							onError: "输入错误"
+						});
+					})
+
+					//警告人数
+					$("#examSuiteWarnPeople").on('change', function() {
+						$("#examSuiteWarnPeople").formValidator({
+							onShow: "请输入警告人数",
+							onFocus: "请输入警告人数",
+							onCorrect: "输入正确"
+						}).regexValidator({
+							regExp: "num",
+							dataType: "enum",
+							onError: "输入错误"
+						});
+					})
+
+					//限制人数
+					$("#examSuiteLimitPeople").on('change', function() {
+						$("#examSuiteLimitPeople").formValidator({
+							onShow: "请输入限制人数",
+							onFocus: "请输入限制人数",
+							onCorrect: "输入正确"
+						}).regexValidator({
+							regExp: "num",
+							dataType: "enum",
+							onError: "输入错误"
+						});
+					})
+
+					//警告金额
+					$("#examSuiteWarnAmount").on('change', function() {
+						$("#examSuiteWarnAmount").formValidator({
+							onShow: "请输入警告金额",
+							onFocus: "请输入警告金额",
+							onCorrect: "输入正确"
+						}).regexValidator({
+							regExp: "num",
+							dataType: "enum",
+							onError: "输入错误"
+						});
+					})
+
+					//限制金额
+					$("#examSuiteLimitAmount").on('change', function() {
+						$("#examSuiteLimitAmount").formValidator({
+							onShow: "请输入限制金额",
+							onFocus: "请输入限制金额",
+							onCorrect: "输入正确"
+						}).regexValidator({
+							regExp: "num",
+							dataType: "enum",
+							onError: "输入错误"
+						});
+					})
+
+					//备注
+					$("#examSuiteNote").on('change', function() {
+						$("#examSuiteNote").formValidator({
+							onShow: "请输入套餐备注",
+							onFocus: "请输入套餐备注",
+							onCorrect: "输入正确"
+						}).inputValidator({
+							min: 2,
+							onError: "套餐备注不低于2个字符"
+						});
+					})
+
+					//简介
+					$("#examSuiteSummary").on('change', function() {
+						$("#examSuiteSummary").formValidator({
+							onShow: "请输入套餐简介",
+							onFocus: "请输入套餐简介",
+							onCorrect: "输入正确"
+						}).inputValidator({
+							min: 2,
+							onError: "套餐简介不低于2个字符"
+						});
+					})
+
+					//					适用性别
+					$(":checkbox[name='sex']").on('change', function() {
+						$(":checkbox[name='sex']").formValidator({
+							tipID: "sexTip",
+							onShow: "请选择适用性别（至少选一个）",
+							onFocus: "你至少选择1个",
+							onCorrect: "已选择"
+						}).inputValidator({
+							min: 1,
+							onError: "请至少选择一项"
+						});
+					})
+				} else {
+					//					体检机构下拉框
+					$('#orgInfo').fadeIn();
+					getOrgList('#store_orgName');
+					//					校验
+					//					体检机构
+					$("#store_orgName").formValidator({
+						onShow: "请选择所属机构",
+						onFocus: "所属机构必须选择",
+						onCorrect: "已选择"
+					}).inputValidator({
+						min: 1,
+						onError: "还未选择所属机构!"
+					});
+					//套餐名称
+					$("#examSuiteName").formValidator({
+						onShow: "请输入套餐名称",
+						onFocus: "套餐名称不少于3个字符",
+						onCorrect: "输入正确"
+					}).inputValidator({
+						min: 3,
+						onError: "输入错误"
+					});
+					//套餐英文名称
+					$("#examSuiteNameEng").formValidator({
+						onShow: "请输入套餐英文名称",
+						onFocus: "套餐英文名称仅可用英文表示",
+						onCorrect: "输入正确"
+					}).regexValidator({
+						regExp: "username",
+						dataType: "enum",
+						onError: "输入错误"
+					});
+					//套餐输入码
+					$("#inputCode").formValidator({
+						onShow: "请输入套餐输入码",
+						onFocus: "输入码为数字格式",
+						onCorrect: "输入正确"
+					}).regexValidator({
+						regExp: "num",
+						dataType: "enum",
+						onError: "输入错误"
+					});
+					//套餐代码
+					$("#examSuiteCode").formValidator({
+						onShow: "请输入套餐代码",
+						onFocus: "请输入套餐代码",
+						onCorrect: "输入正确"
+					}).regexValidator({
+						regExp: "username",
+						dataType: "enum",
+						onError: "输入错误"
+					});
+					//套餐价格
+					$("#examSuitePrice").formValidator({
+						onShow: "请输入套餐价格",
+						onFocus: "请输入套餐价格",
+						onCorrect: "输入正确"
+					}).regexValidator({
+						regExp: "num",
+						dataType: "enum",
+						onError: "输入错误"
+					});
+					//优惠价
+					$("#examSuiteDiscountPrice").formValidator({
+						onShow: "请输入优惠价",
+						onFocus: "请输入优惠价",
+						onCorrect: "输入正确"
+					}).regexValidator({
+						regExp: "num",
+						dataType: "enum",
+						onError: "输入错误"
+					});
+					//套餐内价格
+					$("#examSuiteInPrice").formValidator({
+						onShow: "请输入套餐内价格",
+						onFocus: "请输入套餐内价格",
+						onCorrect: "输入正确"
+					}).regexValidator({
+						regExp: "num",
+						dataType: "enum",
+						onError: "输入错误"
+					});
+
+					//警告人数
+					$("#examSuiteWarnPeople").formValidator({
+						onShow: "请输入警告人数",
+						onFocus: "请输入警告人数",
+						onCorrect: "输入正确"
+					}).regexValidator({
+						regExp: "num",
+						dataType: "enum",
+						onError: "输入错误"
+					});
+					//限制人数
+					$("#examSuiteLimitPeople").formValidator({
+						onShow: "请输入限制人数",
+						onFocus: "请输入限制人数",
+						onCorrect: "输入正确"
+					}).regexValidator({
+						regExp: "num",
+						dataType: "enum",
+						onError: "输入错误"
+					});
+					//警告金额
+					$("#examSuiteWarnAmount").formValidator({
+						onShow: "请输入警告金额",
+						onFocus: "请输入警告金额",
+						onCorrect: "输入正确"
+					}).regexValidator({
+						regExp: "num",
+						dataType: "enum",
+						onError: "输入错误"
+					});
+					//限制金额
+					$("#examSuiteLimitAmount").formValidator({
+						onShow: "请输入限制金额",
+						onFocus: "请输入限制金额",
+						onCorrect: "输入正确"
+					}).regexValidator({
+						regExp: "num",
+						dataType: "enum",
+						onError: "输入错误"
+					});
+					//备注
+					$("#examSuiteNote").formValidator({
+						defaultValue: "套餐备注"
+					}).inputValidator({
+						min: 2,
+						onError: "套餐备注不低于2个字符"
+					});
+					//简介
+					$("#examSuiteSummary").formValidator({
+						defaultValue: "套餐简介"
+					}).inputValidator({
+						min: 2,
+						onError: "套餐简介不低于2个字符"
+					});
+					//					适用性别
+					$(":checkbox[name='sex']").formValidator({
+						tipID: "sexTip",
+						onShow: "请选择适用性别（至少选一个）",
+						onFocus: "你至少选择1个",
+						onCorrect: "已选择"
+					}).inputValidator({
+						min: 1,
+						onError: "请至少选择一项"
+					});
+				}
+
+				// 清空列表数据并添加高发疾病添加数据 
+				$('#highIncidenceDiseaseList').val("");
+				$('#selectHids').html("");
+				var reqResultHids = httpRequest(dict_hid_view_all, null, "get", false);
+				if(reqResultHids.result == 0) {
+					if(reqResultHids.data.length > 0) {
+						for(var i = 0; i < reqResultHids.data.length; i++) {
+							$("#hids").append("<label class='radio-inline margin-bottom' style='margin-left: 0;'><input type='checkbox' name='viewHids' value='" + reqResultHids.data[i].highIncidenceDiseaseId + "'>" +
+								"<span name='viewHidNames'>" + reqResultHids.data[i].highIncidenceDiseaseName + "</span></label>");
+						}
+					}
+				}
+				// 清空列表数据并添加套餐类型数据 
+				$('#typeList').val("");
+				$('#selectTypes').html("");
+
+				var reqResultTypes = httpRequest(dict_suite_type_view_all, null, "GET", false);
+				if(reqResultTypes.result == 0) {
+					if(reqResultTypes.data.length > 0) {
+						for(var i = 0; i < reqResultTypes.data.length; i++) {
+							$("#types").append("<label class='radio-inline margin-bottom' style='margin-left: 0;'><input type='checkbox' name='viewTypes' value='" + reqResultTypes.data[i].examTypeId + "'>" +
+								"<span name='viewTypeNames'>" + reqResultTypes.data[i].examTypeName + "</span></label>");
+						}
+					}
+				}
+				//判断是修改页面,并回显数据
+				if(getParamValue('param')) {
+					var otype = "GET"
+					var osync = false;
+					var param = {
+						"idOrgExamSuite": getParamValue('param')
+					};
+					var reqResult = httpRequest(packAge_show, param, otype, osync);
+					if(reqResult.result == 0) {
+						var examSuiteMale = (reqResult.data.examSuiteMale === true) ? 1 : 0,
+							orgExamSuiteTypeVo = reqResult.data.orgExamSuiteTypeVo,
+							orgExamSuiteHidVo = reqResult.data.orgExamSuiteHidVo,
+							orgExamSuiteImgVo = reqResult.data.orgExamSuiteImgVo,
+							str = '';
+						$("#store_orgName").val(reqResult.data.orgId);
+						$("#examSuiteName").val(reqResult.data.examSuiteName);
+						$("#examSuiteNameEng").val(reqResult.data.examSuiteNameEng);
+						$("#inputCode").val(reqResult.data.examSuiteInputCode);
+						$("#examSuiteCode").val(reqResult.data.examSuiteCode);
+						$("#examSuitePrice").val(reqResult.data.examSuitePrice);
+						$("#examSuiteDiscountPrice").val(reqResult.data.examSuiteDiscountPrice);
+						(reqResult.data.examSuiteFemale == 0) ? $("#examSuiteFemale").attr('checked', 'checked'): null;
+						(reqResult.data.examSuiteMale == 0) ? $("#examSuiteMale").attr('checked', 'checked'): null;
+						$("#typeList").val(reqResult.data.typeList);
+						$("#examSuiteWarnPeople").val(reqResult.data.examSuiteWarnPeople);
+						$("#examSuiteWarnAmount").val(reqResult.data.examSuiteWarnAmount);
+						$("#examSuiteLimitPeople").val(reqResult.data.examSuiteLimitPeople);
+						$("#examSuiteLimitAmount").val(reqResult.data.examSuiteLimitAmount);
+						$("#examSuiteNote").val(reqResult.data.examSuiteNote);
+						$("#examSuiteSummary").val(reqResult.data.examSuiteSummary);
+						$("#examSuiteInPrice").val(reqResult.data.examSuiteInPrice);
+						$("#examSuiteId").val(reqResult.data.examSuiteId);
+						if(orgExamSuiteHidVo != null && orgExamSuiteHidVo.length > 0) {
+							var isFrist = true,
+								hids;
+							for(var i = 0; i < orgExamSuiteHidVo.length; i++) {
+								if(!isFrist) {
+									hids = hids + "," + orgExamSuiteHidVo[i].highIncidenceDiseaseId;
+								} else {
+									hids = orgExamSuiteHidVo[i].highIncidenceDiseaseId;
+								}
+								$("#highIncidenceDiseaseList").val(hids);
+								isFrist = false;
+
+								$('#selectHids').append("<label class='radio-inline no-padding'><input type='checkbox' checked>" +
+									orgExamSuiteHidVo[i].highIncidenceDiseaseName + "</label>");
+								//回显到高发疾病列表中
+								var obj = document.getElementsByName("viewHids");
+								for(k in obj) {
+									if(orgExamSuiteHidVo[i].highIncidenceDiseaseId == obj[k].value) {
+										obj[k].checked = "checked";
+									}
+								}
+							}
+						}
+						//添加体检套餐类型
+						if(orgExamSuiteTypeVo != null && orgExamSuiteTypeVo.length > 0) {
+							var isFrist = true,
+								types;
+							for(var i = 0; i < orgExamSuiteTypeVo.length; i++) {
+								if(!isFrist) {
+									types = types + "," + orgExamSuiteTypeVo[i].examTypeId;
+								} else {
+									types = orgExamSuiteTypeVo[i].examTypeId;
+								}
+								$("#typeList").val(types);
+								isFrist = false;
+
+								$('#selectTypes').append("<label class='radio-inline no-padding'><input type='checkbox' checked>" +
+									orgExamSuiteTypeVo[i].examTypeName + "</label>");
+								var obj = document.getElementsByName("viewTypes");
+								for(k in obj) {
+									if(orgExamSuiteTypeVo[i].examTypeId == obj[k].value) {
+										obj[k].checked = "checked";
+									}
+								}
+							}
+						}
+						//图片字段赋值展示
+						if(orgExamSuiteImgVo != null && orgExamSuiteImgVo.length > 0) {
+							for(var i = 0; i < orgExamSuiteImgVo.length; i++) {
+								if(orgExamSuiteImgVo.length == 1) {
+									imgOlds = orgExamSuiteImgVo[i].dictImgId;
+								} else {
+									imgOlds = imgOlds + "," + $imgs.val() + orgExamSuiteImgVo[i].dictImgId;
+								}
+								str += '<div id="' + orgExamSuiteImgVo[i].dictImgId + '" class="float_left store_img_borderdiv position_relative"><div class="position_absolute" style="background-image:url(' + platIp + orgExamSuiteImgVo[i].imgLocation + ');"><a href="javascript:removeUploadImg(' + orgExamSuiteImgVo[i].dictImgId + ')" class="fa fa-close fa_red pull-right"></a></div></div>';
+							}
+						}
+						$("#edit_storeimg").append(str);
+					} else {
+						alert(reqResult.message);
+					}
+				}
+				//				判断是否有图片
+				if($("div#edit_storeimg div.store_img_borderdiv").length != 0) {
+					$('.img_border').show();
+				} else {
+					$('.img_border').hide();
+				}
+			})
+			//图片显示
+		$(".img_border > #edit_storeimg >.float_left>.position_absolute").each(function() {
+			$(this).hover(function() {
+				$(this).animate({
+					width: 300,
+					height: 300,
+					top: -10,
+					left: 100
+				}, 500);
+				$(this).css("z-index", 999);
+				$(this).parent().removeClass("store_img_borderdiv ");
+			}, function() {
+				$(this).animate({
+					width: 250,
+					height: 250,
+					top: 0,
+					left: 125
+				}, 500);
+				$(this).css("z-index", 0);
+				$(this).parent().addClass("store_img_borderdiv");
+			});
+		});
+		$("#file-0a").fileinput({
+			uploadUrl: uploadImagesUrl, // you must set a valid URL here else you will get an error
+			allowedFileExtensions: ['jpg', 'png', 'gif', 'jpeg', 'bmp'],
+			overwriteInitial: false,
+			maxFileSize: 100000,
+			maxFilesNum: 10,
+			//allowedFileTypes: ['image', 'video', 'flash'],
+			slugCallback: function(filename) {
+				console.log(filename)
+				return filename.replace('(', '_').replace(']', '_');
+			}
+		});
+		var $imgs = $('#imgs');
+		imgs;
+		imgOlds = '';
+		$("#file-0a").on("fileuploaded", function(event, data, previewId, index) {
+			if($imgs.val() != undefined) {
+				if($imgs.val().split(",") == '') {
+					$imgs.val(data.response.imgId);
+				} else {
+					$imgs.val($imgs.val() + "," + data.response.imgId);
+				}
+			}
+		});
+
+		function suitPackAgeInfo() {
+			var otype = "post";
+			var osync = false;
+			if($('#examSuiteMale').is(':checked') == true) {
+				$('#male').val(0);
+			}
+			if($('#examSuiteFemale').is(':checked') == true) {
+				$('#female').val(0);
+			}
+			if($('#store_orgName').val() == -1) {
+				$('#store_orgName').val('');
+			}
+			if(imgOlds != '') {
+				$imgs.val(imgOlds + ',' + $imgs.val());
+			}
+			param = $('#addPackInfor').serialize();
+			if(verifyParam()) {
+				return;
+			}
+			//			if(sexInfo()) {
+			//				return;
+			//			}
+			if(document.URL.indexOf("?") != -1) {
+				var reqResult = httpRequest(packAge_edit, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert('编辑成功');
+					window.location.href = "/plat/pages/examination/package/packAge.shtml";
+				} else {
+					alert(reqResult.message);
+				}
+			} else {
+				var reqResult = httpRequest(packAge_Add, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert('添加成功');
+					window.location.href = "/plat/pages/examination/package/packAge.shtml";
+				} else {
+					alert(reqResult.message);
+				}
+			}
+		}
+		//验证
+		function verifyParam() {
+			$('.suiteError').html('');
+			if($('#typeList').val() == null || $('#typeList').val() == '') {
+				$('.suiteError').html('请选择套餐类型');
+				return true;
+			}
+			if($('#highIncidenceDiseaseList').val() == null || $('#highIncidenceDiseaseList').val() == '') {
+				$('.suiteError').html('请选择一种高发疾病');
+				return true;
+			}
+			if($('#imgs').val() == null || $('#imgs').val() == '') {
+				$('.suiteError').html('请选择一张套餐图片！');
+				return true;
+			}
+			return false;
+		}
+		//		校验性别
+		//		$(":checkbox[name='sex']").focus(function(){
+		//			sexInfo();
+		//		})
+		//		function sexInfo() {
+
+		//		}
+
+		//选择高发疾病提交
+		function choiceHids() {
+			$('#highIncidenceDiseaseList').val();
+			$('#selectHids').html("");
+			var obj = document.getElementsByName("viewHids"),
+				obj1 = document.getElementsByName("viewHidNames"),
+				selectHidIds,
+				isFrist = true;
+			for(var k = 0; k < obj.length; k++) {
+				if(obj[k].checked) {
+					$('#selectHids').append("<label class='radio-inline'><input type='checkbox' checked>" +
+						obj1[k].innerHTML + "</label>");
+					if(isFrist) {
+						selectHidIds = obj[k].value;
+					} else {
+						selectHidIds = selectHidIds + "," + obj[k].value;
+					}
+					$('#highIncidenceDiseaseList').val(selectHidIds);
+					isFrist = false;
+				}
+			}
+		}
+		//套餐类型提交
+		function choiceTypes() {
+			$('#typeList').val("");
+			$('#selectTypes').html("");
+			var obj = document.getElementsByName("viewTypes"),
+				obj1 = document.getElementsByName("viewTypeNames"),
+				selectTypeIds,
+				isFrist = true;
+			for(var k = 0; k < obj.length; k++) {
+				if(obj[k].checked) {
+					$('#selectTypes').append("<label class='radio-inline'><input type='checkbox' checked>" +
+						obj1[k].innerHTML + "</label>");
+					if(isFrist) {
+						selectTypeIds = obj[k].value;
+					} else {
+						selectTypeIds = selectTypeIds + "," + obj[k].value;
+					}
+					$('#typeList').val(selectTypeIds);
+					isFrist = false;
+				}
+			}
+		}
+		//删除上传图片
+		function removeUploadImg(imgId) {
+			var imgs = $imgs.val(),
+				imgStr = '';
+			if((imgOlds + "").indexOf(',') > -1) {
+				imgIds = imgOlds.split(",");
+			} else {
+				imgIds = imgOlds;
+			}
+			for(var i = 0; i < imgIds.length; i++) {
+				if(imgIds[i] != imgId) {
+					if(imgStr == '') {
+						imgStr = imgIds[i]
+					} else {
+						imgStr = imgStr + ',' + imgIds[i]
+					}
+				}
+			}
+			imgOlds = imgStr;
+			var imgIdDel = '#' + imgId.toString();
+			$(imgIdDel).remove();
+
+		}
+	</script>
+</div>
+<!--模态框修改-->
+<!--高发疾病选择模态框-->
+<div class="modal fade" id="HidsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">高发疾病</h4>
+			</div>
+			<div class="modal-body" id="hids">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="choiceHids()" id="choiceHids">提交</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--模态框-->
+<!--套餐选择模态框-->
+<div class="modal fade" id="typesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">餐套类型</h4>
+			</div>
+			<div class="modal-body" id="types">
+			</div>
+			<div id="viewTypesTip"></div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="choiceTypes()" id="choiceTypes">提交</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

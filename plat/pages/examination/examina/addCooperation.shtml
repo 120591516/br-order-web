@@ -1,0 +1,109 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Main content -->
+	<div class="fakeloader"></div>
+	<section class="content">
+		<!-- 合作信息 -->
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<!--box-header -->
+					<div class="box-header">
+						<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">合作信息</h3>
+					</div>
+					<div class="box-body">
+						<form class="bs-example bs-example-form" id="MecOrgCooper">
+							<div class="row margin-bottom">
+								<div class="input-group">
+									<!-- 机构id-->
+									<input id="orgId" name="orgId" type="text" hidden="hidden" />
+									<!-- 合作意向id 默认空-->
+									<input id="orgCooperationId" name="orgCooperationId" type="text" hidden="hidden" />
+									<span class="input-group-addon">合作意向</span>
+									<select class="form-control selectpicker" id="orgCooper" name="orgCooperationVal">
+										<option value="1">&hearts;</option>
+										<option value="2">&hearts; &hearts;</option>
+										<option value="3">&hearts; &hearts; &hearts;</option>
+										<option value="4">&hearts; &hearts; &hearts; &hearts;</option>
+										<option value="5">&hearts; &hearts; &hearts; &hearts; &hearts;</option>
+									</select>
+								</div>
+								<!-- /input-group -->
+								<!-- /.col-lg-6 -->
+							</div>
+							<div class="form-group">
+								<textarea class="form-control" name="orgCooperationOpinion" rows="3" id="textarea"></textarea>
+							</div>
+						</form>
+					</div>
+					<!-- /.box-header -->
+				</div>
+			</div>
+		</div>
+
+	</section>
+	<div class="row">
+		<div class="col-lg-4">
+
+		</div>
+		<div class="col-lg-4">
+			<div class="col-lg-4"></div>
+			<div class="col-lg-4">
+				<button type="button" class="btn btn-primary btn-lg btn-block" onclick="SubmitCoop()">提 交 信 息</button>
+			</div>
+			<div class="col-lg-4"><button type="button" class="btn btn-default btn-lg btn-block" onclick='orgParam(this)'><!--<a href='addInformation.shtml?orgId='+orgParam+''>-->返回基本信息</a></button></div>
+		</div>
+		<div class="col-lg-4">
+
+		</div>
+	</div>
+	<!-- /Main content -->
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<script src="/plat/js/create/httpRequest.js"></script>
+	<script src="/plat/js/create/contentPublic.js"></script>
+	<script>
+		function orgParam(orgParam) {
+			var thisURL = document.URL;
+			if(thisURL.indexOf("?") != -1) {
+				var getval = thisURL.split('?')[1];
+				var showval = getval.split("=")[1];
+				window.location.href = 'addInformation.shtml?orgId='+showval+'';
+			}
+		}
+			$(document).ready(function() {
+				var thisURL = document.URL;
+				var getval = thisURL.split('?')[1];
+				var judgeParam = getval.split("=")[1];
+				var otype = "GET"
+				var osync = false;
+				var param = {
+					"orgId": judgeParam
+				};
+				var reqResult = httpRequest(init_addCooperation_show, param, otype, osync);
+				if(reqResult.result == 0) {
+					$("#orgId").val(judgeParam);
+					$("#orgCooperationId").val(reqResult.data[0].orgCooperationId);
+					$("#orgCooper").val(reqResult.data[0].orgCooperationVal);
+					$("#textarea").val(reqResult.data[0].orgCooperationOpinion);
+				} else {
+					alert(reqResult.message);
+				}
+			})
+
+			function SubmitCoop() {
+				var param = $('#MecOrgCooper').serialize();
+				var otype = "post";
+				var osync = false;
+				var reqResult = httpRequest(init_addCooperation_edit, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert('添加成功');
+					window.location.reload();
+				} else {
+					alert(reqResult.message);
+				}
+			}
+	</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->
+				<!--动画js-->
+<script src="/plat/js/plugins/fakeLoader.min.js"></script>

@@ -1,0 +1,447 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<div class="fakeloader"></div>
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="margin-bottom">
+			<h2>
+				<small>门店</small>
+			</h2>
+		</div>
+		<ol class="breadcrumb">
+			<li>
+				<a href="#">体检中心</a>
+			</li>
+			<li class="active">门店</li>
+		</ol>
+		<div class="box">
+			<div class="box-header">
+				<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">搜索</h3>
+				<div class="col-lg-2 col-md-3 col-sm-3 col-xs-3 txt_r">
+					<input type="button" onclick="addStoreInfo()" id="add_store" class="btn btn-default" value="添加">
+					<button type="button" id="comingBack" onclick="storeManagementBack()" class="btn btn-default">返回</button>
+				</div>
+			</div>
+			<div class="box-body">
+				<form class="bs-example-form padding_l42px" role="form">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">体检机构</span>
+									<select name="orgId" id='store_orgName' class="form-control selectpicker store_search_form org" aria-describedby="basic-addon1" maxlength='12' required>
+									</select>
+								</div>
+							</div>
+
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">名称</span> <input type="text" class="form-control store_search_form" name="branchName" id="store_branchName" aria-describedby="basic-addon1" maxlength='12' required>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">代码</span> <input type="text" class="form-control store_search_form" name="branchCode" id="store_branchCode" aria-describedby="basic-addon1" maxlength='12' required>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">地址</span> <input type="text" class="form-control selectpicker store_search_form" name="branchAddress" id="store_branchArea" aria-describedby="basic-addon1" maxlength='10' required>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">拆分套餐</span>
+									<select name="splitSuite" class="form-control selectpicker store_search_form" id="store_splitSuite" aria-describedby="basic-addon1" maxlength='12' required>
+										<option value="-1">全部</option>
+										<option value="0">是</option>
+										<option value="1">否</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">状态</span>
+									<select name="status" class="form-control selectpicker store_search_form" id="store_status" aria-describedby="basic-addon1" maxlength='12' required>
+										<option value="-1">全部</option>
+										<option value="0">启用</option>
+										<option value="1">禁用</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-6 col-md-push-6 txt_r">
+								<div class="input-group float_right">
+									<input type="button" class="btn btn-default fa fa-search" id="search_store_btn" value="搜索" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+
+			<!-- /.box-header -->
+		</div>
+	</section>
+	<!-- /Content Header (Page header) -->
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<!--box-header -->
+					<div class="box-header">
+						<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">列表</h3>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+						<table class="table formCss">
+							<thead>
+								<tr>
+									<th>编辑</th>
+									<th>门店名称</th>
+									<th>体检机构</th>
+									<th>门店代码</th>
+									<th>门店地址</th>
+									<th>拆分套餐</th>
+									<th>体检时间段</th>
+									<th>日检查量</th>
+									<th>日警告量</th>
+									<th>门店状态</th>
+								</tr>
+								<tr class="warning no-result">
+									<td colspan="7"><i class="fa fa-warning"></i>没有任何搜索结果!</td>
+								</tr>
+							</thead>
+							<tbody id="storeManagement_tbody">
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="row">
+							<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--设置阀值模态框-->
+	<div class="modal fade" id="limitPeopleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<input type="hidden" id="type" />
+					<input type="hidden" id="id" />
+					<span class="title"></span>
+					<div>
+						<span>日检查量</span><input type="text" class="form-control" id="limitPeople" placeholder="请输入日检查量">
+					</div>
+					<div>
+						<span>日警告量</span><input type="text" class="form-control" id="warnPeople" placeholder="请输入日警告量">
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="submit" class="btn btn-primary" data-dismiss="modal" id="setLimitPeople">提交</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /Main content -->
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<!-- Bootstrap 3.3.6 -->
+	<script src="/plat/js/plugins/bootstrap.min.js"></script>
+	<script src="/plat/js/create/httpRequest.js"></script>
+	<script src="/plat/js/create/public.js"></script>
+	<script src="/plat/js/create/AjaxAddr.js"></script>
+	<script src="/plat/js/plugins/extendPagination.js"></script>
+	<script src="/plat/js/create/contentPublic.js"></script>
+	<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<script>
+		init_page();
+
+		function init_page() {
+			$('#storeManagement_tbody').children('tbody').empty();
+			org_info();
+			//1.请求后端信息并展示
+			var thisURL = document.URL;
+			if(thisURL.indexOf("?") != -1) {
+				var getval = thisURL.split('?')[1];
+				var showval = getval.split("=")[1];
+				$('#store_orgName').val(showval);
+				$('#comingBack').show();
+			} else {
+				$('#comingBack').hide();
+			}
+			storeSearch();
+			//2.初始化分页信息
+			init_pager();
+		}
+		// 初始化分页信息
+		function init_pager() {
+			$('#callBackPager').extendPagination({
+				totalCount: total_count,
+				showCount: count_curr,
+				limit: limit,
+				callback: function(curr, limit, totalCount) {
+					page_curr = curr;
+					total_count = totalCount;
+					storeSearch();
+				}
+			});
+		}
+
+		function addStoreInfo() {
+			if(document.URL.indexOf("?") != -1) {
+				window.location.href = '/plat/pages/examination/store/AddstoreManagementInfo.shtml?orgId=' + getParamValue('orgId');
+			} else {
+				window.location.href = '/plat/pages/examination/store/AddstoreManagementInfo.shtml';
+			}
+		}
+		//门店搜索
+		function storeSearch() {
+			var param = initParam();
+			var otype = "POST";
+			var osync = false;
+			var reqResult = httpRequest(storeManagement_searchOrganizationBranch_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				//4.展示数据
+				total_count = reqResult.data.total;
+				createTable(page_curr, limit, total_count, reqResult);
+				return false;
+			}
+		}
+		//初始化参数信息
+		function initParam() {
+			var branchCode = $("#store_branchCode").val().trim();
+			var branchName = $("#store_branchName").val().trim();
+			var status = $("#store_status").val().trim();
+			var branchAddress = $("#store_branchArea").val().trim();
+			var orgId = $('#store_orgName').val();
+			var splitSuite = $("#store_splitSuite").val().trim();
+			$('#storeManagement_tbody').empty();
+			//抓取分页信息
+			var param = {
+				"page": page_curr,
+				"rows": count_curr
+			};
+			if(branchCode) {
+				param.branchCode = branchCode;
+			}
+			if(branchName) {
+				param.branchName = branchName;
+			}
+			if(status) {
+				param.status = status;
+			}
+			if(branchAddress) {
+				param.branchAddress = branchAddress;
+			}
+			if(orgId) {
+				param.orgId = orgId;
+			}
+			if(splitSuite) {
+				param.splitSuite = splitSuite;
+			}
+			return param;
+		}
+		$('#search_store_btn').on('click', function() {
+			storeSearch();
+			init_pager();
+			return false;
+		})
+		$('.store_search_form').on('keydown', function(e) {
+			if(e && e.keyCode == 13) {
+				storeSearch();
+				init_pager();
+				return false;
+			}
+		})
+
+		function createTable(currPage, limit, total, dataBack) {
+			var showNum = limit;
+			if(total - (currPage * limit) < 0)
+				showNum = total - ((currPage - 1) * limit);
+			var datal = dataBack.data.list;
+			//获取操作类型
+			var operationList = dataBack.operationList;
+			//						判断添加按钮
+			if(operationList.orgBranch_insert == 1) {
+				$('#add_store').show();
+			} else {
+				$('#add_store').hide();
+			}
+			var str = '';
+			for(var i = 0; i < showNum; i++) {
+				str += "<tr><td storeid='" + datal[i].branchId + "' orgid='" + datal[i].orgId + "' name='" + datal[i].branchName + "' people='" + datal[i].limitPeople + "' wPeople='" + datal[i].warnPeople + "' >";
+				if(operationList.orgBranch_detail == 1) {
+					str += "<a href='/plat/pages/examination/store/CheckstoreManagementInfo.shtml?id=" + datal[i].branchId + "' class='padding_4px storeManagement_check_info' title='查看门店信息'><i class='fa fa-eye'></i></a> ";
+				}
+				if(operationList.orgBranch_update == 1) {
+					str += "<a href='/plat/pages/examination/store/EditstoreManagementInfo.shtml?id=" + datal[i].branchId + "' class='padding_4px storeManagement_edit_info' title='编辑门店信息'><i class='fa fa-pencil'></i></a> ";
+				}
+				if(operationList.orgBranch_delete == 1) {
+					str += "<a href='#' title='删除门店信息' style='margin-right:5px' class='padding_4px' onclick='del_store(this)'><i class='fa fa-trash-o'></i></a>";
+				}
+				if(operationList.orgBranch_to_orgBranchDept == 1) {
+					str += "<a title='科室信息' style='margin-right:5px' href='#' dept_status='" + datal[i].status + "'onclick='deptMsg(this)'><i class='fa fa-share-alt-square'></i></a>";
+				}
+				if(operationList.orgBranch_to_orgSuite == 1) {
+					str += "<a href='StorePackageManagement.shtml?branchId=" + datal[i].branchId + "' title='添加套餐信息' class='padding_4px'><i class='fa fa-plus-square'></i></a>";
+				}
+				if(operationList.orgBranch_to_orgRest == 1) {
+					str += "<a href='storeRestManagement.shtml?branchId=" + datal[i].branchId + "' title='添加休息时间' class='padding_4px'><i class='fa fa-coffee'></i></a>";
+				}
+				if(operationList.orgBranch_to_liminalValue == 1) {
+					str += "<a data-toggle='modal' href='#limitPeopleModal'   onclick='openModel(this,1)' title='设置阀值' class='padding_4px'><i class='fa fa-cog'></i></a>";
+				}
+				str += "</td>";
+				str += "<td>" + datal[i].branchName + "</td>";
+				str += "<td>" + datal[i].orgShortName + "</td>";
+				content: "\f0f4";
+				str += "<td>" + datal[i].branchCode + "</td>";
+				str += "<td>" + nullformat(datal[i].branchAddress) + "</td>";
+				if(datal[i].splitSuite == 0) {
+					str += "<td>" + '是' + "</td>";
+				} else {
+					str += "<td>" + '否' + "</td>";
+				}
+				str += "<td>" + datal[i].examStartTime + '-' + datal[i].examEndTime + "</td>";
+				str += "<td>" + datal[i].limitPeople + "</td>";
+				str += "<td>" + datal[i].warnPeople + "</td>";
+				if(datal[i].status == 0) {
+					str += "<td>" + '启用' + "</td>";
+				} else {
+					str += "<td>" + '禁用' + "</td>";
+				}
+				str += '</tr>';
+			}
+			$("#storeManagement_tbody").append(str);
+			return false;
+		}
+
+		function deptMsg(deptMsg) {
+			var dept_status = $(deptMsg).attr('dept_status');
+			var orgId = $(deptMsg).parent().attr('orgid');
+			var branchId = $(deptMsg).parent().attr('storeid');
+			if(dept_status == 0) {
+				window.location.href = '/plat/pages/examination/department/departments.shtml?orgId=' + orgId + '&branchId=' + branchId + '';
+			} else {
+				confirm('该门店状态未启用！');
+			}
+		}
+
+		function del_store(del_li) {
+			if(confirm("确认删除该门店吗？")) {
+				var del_user_id = $(del_li).parent().attr("storeid");
+				var param = {
+					"id": del_user_id
+				};
+				var otype = "get";
+				var osync = false;
+				var reqResult = httpRequest(storeManagement_deleteOrganizationBranch_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert("删除成功");
+					storeSearch()
+				} else {
+					alert(reqResult.message);
+				}
+			}
+		}
+
+		var $type = $('#type'),
+			$id = $('#id'),
+			$limitPeople = $('#limitPeople'),
+			$warnPeople = $('#warnPeople'),
+			$setLimitPeople = $('#setLimitPeople'),
+			$title = $('.title'),
+			postUrl, id, name, limitPeopleOld, warnPeopleOld;
+		//打开选择框
+		function openModel(idthis, type) {
+			id = $(idthis).parent().attr("storeid");
+			limitPeopleOld = $(idthis).parent().attr("people");
+			warnPeopleOld = $(idthis).parent().attr("wPeople");
+			name = $(idthis).parent().attr("name");
+			$type.val(type);
+			$id.val(id);
+			$title.html(name);
+			$limitPeople.val(limitPeopleOld);
+			$warnPeople.val(warnPeopleOld);
+		}
+		//设置门店限制 保存 
+		$setLimitPeople.on('click', function() {
+			var param = {
+				limitPeople: $limitPeople.val(),
+				warnPeople: $warnPeople.val()
+
+			};
+
+			if($type.val() == 1) {
+				param.branchId = $id.val();
+				postUrl = liminal_value_branch_setting;
+			}
+			if($type.val() == 2) {
+				param.suiteId = $id.val();
+				postUrl = liminal_value_suite_setting;
+			}
+
+			var otype = "POST";
+			var osync = false;
+			if(validationParam(param, type)) {
+				return;
+			}
+			$type.val('');
+			$id.val('');
+			$limitPeople.val('');
+			$warnPeople.val('');
+			$title.html('')
+			var reqResult = httpRequest(postUrl, param, otype, osync);
+			if(reqResult.result == 0 && reqResult.data > 0) {
+				alert("设置成功");
+				storeSearch()
+			}
+		});
+		//验证
+		function validationParam(param, type) {
+			if(type == 1 && (param.branchId == null || param.branchId == '' || param.branchId == "")) {
+				alert("请选择门店");
+				return true;
+			}
+			if(type == 2 && (param.suiteId == null || param.suiteId == '' || param.suiteId == "")) {
+				alert("请选择套餐");
+				return true;
+			}
+			if(param.limitPeople == null || param.limitPeople == '' || param.limitPeople == "") {
+				alert("请输入限制人数");
+				return true;
+			}
+			if(param.warnPeople == null || param.warnPeople == '' || param.warnPeople == "") {
+				alert("请输入警告人数");
+				return true;
+			}
+
+			return false;
+
+		}
+	</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

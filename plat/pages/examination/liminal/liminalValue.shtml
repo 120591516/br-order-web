@@ -1,0 +1,515 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<div class="fakeloader"></div>
+	<section class="content-header">
+		<div class="margin-bottom">
+			<h2><small>阀值</small></h2></div>
+		<ol class="breadcrumb">
+			<li>
+				<a href="#">体检机构</a>
+			</li>
+			<li class="active">阀值</li>
+		</ol>
+		<div class="box">
+			<ul class="nav nav-tabs nav-justified" id='myTab'>
+				<li role="presentation" class="active">
+					<a href="#branch">按门店设置</a>
+				</li>
+				<li role="presentation">
+					<a href="#suite">按套餐设置</a>
+				</li>
+			</ul>
+		</div>
+	</section>
+	<!--tab   -->
+	<div class="tab-content">
+		<div class="tab-pane active" id="branch">
+			<!--branch 代码开始  -->
+			<section class="content-header">
+				<div class="box">
+					<div class="box-header">
+						<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">搜索</h3>
+					</div>
+					<!--box-header -->
+					<div class="box-body">
+						<form class="bs-example-form padding_l42px" role="form">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="col-md-3">
+										<div class="input-group">
+											<span class="input-group-addon">门店名称</span>
+											<input type="text" class="form-control liminal_search_form" id="branchName" placeholder="请输入门店名称" aria-describedby="basic-addon1" maxlength='12' required>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="input-group">
+											<span class="input-group-addon">代码</span>
+											<input type="text" class="form-control liminal_search_form" id="branchCode" placeholder="请输入代码" aria-describedby="basic-addon1" maxlength='12' required>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="input-group">
+											<span class="input-group-addon">日检查量</span>
+											<input type="text" class="form-control" id="limitPeopleStart" placeholder="日检查量最小值">
+											<span class="input-group-btn">
+									        <span class="btn" type="button">-</span>
+											</span>
+											<input type="text" class="form-control" id="limitPeopleEnd" placeholder="日检查量最大值">
+										</div>
+									</div>
+									<div class="col-md-3 txt_r">
+										<a class="btn btn-default" onclick="searchliminal()">搜索</a>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+
+					<!-- /.box-header -->
+				</div>
+			</section>
+			<!-- /Content Header (Page header) -->
+			<!-- Main content -->
+			<section class="content">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="box">
+							<!--box-header -->
+							<div class="box-header">
+								<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">列表</h3>
+							</div>
+							<!-- /.box-header -->
+							<div class="box-body">
+								<table class="table formCss">
+									<thead>
+										<tr>
+											<th>编辑</th>
+											<th>门店名称</th>
+											<th>门店代码</th>
+											<th>日检查量</th>
+											<th>日警告量</th>
+										</tr>
+										<tr class="warning no-result">
+											<td colspan="7"><i class="fa fa-warning"></i>没有任何搜索结果!</td>
+										</tr>
+									</thead>
+									<tbody id="liminalValue_branch_tbody"></tbody>
+								</table>
+								<div class="row">
+									<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- branch 代码结束 -->
+		</div>
+
+		<div class="tab-pane" id="suite">
+			<!--suite 代码开始  -->
+			<section class="content-header">
+				<div class="box">
+					<div class="box-header">
+						<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">搜索</h3>
+					</div>
+					<div class="box-body">
+						<form class="bs-example-form padding_l42px" role="form">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="col-md-3">
+										<div class="input-group">
+											<span class="input-group-addon">套餐名称</span>
+											<input type="text" class="form-control liminal_search_suite_form" id="suiteName" placeholder="请输入套餐名称" aria-describedby="basic-addon1" maxlength='12' required>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="input-group">
+											<span class="input-group-addon">代码</span>
+											<input type="text" class="form-control liminal_search_suite_form" id="suiteCode" placeholder="请输入代码" aria-describedby="basic-addon1" maxlength='12' required>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="input-group">
+											<span class="input-group-addon">日检查量</span>
+											<input type="text" class="form-control" id="suiteLimitPeopleStart" placeholder="日检查量最小值">
+											<span class="input-group-btn">
+									        <span class="btn" type="button">-</span>
+											</span>
+											<input type="text" class="form-control" id="suiteLimitPeopleEnd" placeholder="日检查量最大值">
+										</div>
+									</div>
+									<div class="col-md-3 txt_r">
+										<a class="btn btn-default" onclick="searchliminalSuite()">搜索</a>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+
+					<!-- 		/.box-header -->
+				</div>
+			</section>
+			<!-- /Content Header (Page header)
+	Main content -->
+			<section class="content">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="box">
+							<!-- 	box-header -->
+							<div class="box-header">
+								<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">套餐列表</h3>
+							</div>
+							<!-- 	/.box-header -->
+							<div class="box-body">
+								<table class="table formCss">
+									<thead>
+										<tr>
+											<th>编辑</th>
+											<th>套餐名称</th>
+											<th>套餐代码</th>
+											<th>日检查量</th>
+											<th>日警告量</th>
+										</tr>
+										<tr class="warning no-result">
+											<td colspan="7"><i class="fa fa-warning"></i>没有任何搜索结果!</td>
+										</tr>
+									</thead>
+									<tbody id="liminalValue_suite_tbody"></tbody>
+								</table>
+								<div class="row">
+									<div class="col-xs-12 col-md-8" id="callBackPagerSuite"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!--suite 代码结束  -->
+		</div>
+	</div>
+	<!--设置阀值模态框-->
+	<div class="modal fade" id="limitPeopleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="box">
+					<div class="box-body">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel_edit">阈值信息--<small class="title"></small></h4>
+						</div>
+						<div class="modal-body">
+							<form class="bs-example-form form-horizontal formCss" role="form">
+								<input type="hidden" id="type" />
+								<input type="hidden" id="id" />
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>日检查量</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px'>
+										<input type="text" class="form-control" id="limitPeople" placeholder="请输入日检查量">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>日警告量</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px'>
+										<input type="text" class="form-control" id="warnPeople" placeholder="请输入日警告量">
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-default" data-dismiss="modal" id="setLimitPeople">提交</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /Main content -->
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<script src="/plat/js/create/httpRequest.js"></script>
+	<script src="/plat/js/create/contentPublic.js"></script>
+	<script src="/plat/js/plugins/extendPagination.js"></script>
+	<script src="/plat/js/plugins/jquery.cityselect.js"></script>
+	<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<script>
+		$(function() {
+				//load数据	
+				//			初始化显示哪个tab
+				init_page();
+				$('#myTab a:first').tab('show');
+			})
+			//切换tab页绑定事件
+			//branch
+		$('#myTab a:first').click(function(e) {
+			e.preventDefault();
+			$(this).tab('show');
+			init_page();
+
+		});
+		//suite
+		$('#myTab a:last').click(function(e) {
+			e.preventDefault();
+			$(this).tab('show');
+			liminalValueSuiteSearch();
+			init_pager_suite();
+		});
+		//初始化页面信息
+		function init_page() {
+			liminalValueSearch();
+			init_pager();
+		}
+		//branch 查询
+		function liminalValueSearch() {
+			var param = initBranchParam();
+			var otype = "GET";
+			var osync = false;
+			var reqResult = httpRequest(liminal_value_branch, param, otype, osync);
+			if(reqResult.result == 0) {
+				//4.展示数据
+				total_count = reqResult.data.total;
+				createTable(page_curr, limit, total_count, reqResult);
+				return false;
+			}
+		}
+		//suite查询操作
+		function liminalValueSuiteSearch() {
+			var param = initSuiteParam();
+			var otype = "GET";
+			var osync = false;
+			var reqResult = httpRequest(liminal_value_suite, param, otype, osync);
+			if(reqResult.result == 0) {
+				//4.展示数据
+				total_count = reqResult.data.total;
+				createTableSuite(page_curr, limit, total_count, reqResult);
+				return false;
+			}
+		}
+
+		// branch初始化分页信息
+		function init_pager() {
+			$('#callBackPager').extendPagination({
+				totalCount: total_count,
+				showCount: count_curr,
+				limit: limit,
+				callback: function(curr, limit, totalCount) {
+					page_curr = curr;
+					total_count = totalCount;
+					liminalValueSearch();
+				}
+			});
+		}
+		// suite 初始化分页信息
+		function init_pager_suite() {
+			$('#callBackPagerSuite').extendPagination({
+				totalCount: total_count,
+				showCount: count_curr,
+				limit: limit,
+				callback: function(curr, limit, totalCount) {
+					page_curr = curr;
+					total_count = totalCount;
+					liminalValueSuiteSearch();
+				}
+			});
+		}
+
+		//branch初始化参数信息
+		function initBranchParam() {
+			var branchCode = $('#branchCode').val().trim();
+			var branchName = $('#branchName').val().trim();
+			var limitPeopleStart = $('#limitPeopleStart').val().trim();
+			var limitPeople = $('#limitPeopleEnd').val().trim();
+			//抓取分页信息
+			var param = {
+				"page": page_curr,
+				"rows": count_curr
+			};
+			if(branchCode) {
+				param.branchCode = branchCode;
+			}
+			if(branchName) {
+				param.branchName = branchName;
+			}
+			if(limitPeopleStart) {
+				param.limitPeopleStart = limitPeopleStart;
+			}
+			if(limitPeople) {
+				param.limitPeople = limitPeople;
+			}
+			return param;
+		}
+		//suite初始化参数信息
+		function initSuiteParam() {
+			var examSuiteCode = $('#suiteCode').val().trim();
+			var examSuiteName = $('#suiteName').val().trim();
+			var limitPeopleStart = $('#suiteLimitPeopleStart').val().trim();
+			var limitPeopleEnd = $('#suiteLimitPeopleEnd').val().trim();
+			var param = {
+				"page": page_curr,
+				"rows": count_curr
+			};
+			if(examSuiteCode) {
+				param.examSuiteCode = examSuiteCode;
+			}
+			if(examSuiteName) {
+				param.examSuiteName = examSuiteName;
+			}
+			if(limitPeopleStart) {
+				param.limitPeopleStart = limitPeopleStart;
+			}
+			if(limitPeopleEnd) {
+				param.limitPeopleEnd = limitPeopleEnd;
+			}
+			return param;
+		}
+		//branch 查询
+		function searchliminal() {
+			liminalValueSearch();
+			init_pager();
+		}
+		//suite 查询
+		function searchliminalSuite() {
+			liminalValueSuiteSearch();
+			init_pager_suite();
+		}
+		//branch 数据加载渲染
+		function createTable(currPage, limit, total, dataBack) {
+			var operationList = dataBack.operationList;
+			var showNum = limit;
+			if(total - (currPage * limit) < 0) showNum = total - ((currPage - 1) * limit);
+			var datal = dataBack.data.list;
+			var str = '';
+			for(var i = 0; i < showNum; i++) {
+				str += "<tr><td storeid='" + datal[i].branchId + "' name='" + datal[i].branchName + "' people='" + datal[i].limitPeople + "' wPeople='" + datal[i].warnPeople + "' >";
+				if(operationList.liminalValue_to_suite_update == true) {
+					str += "<a data-toggle='modal' href='#limitPeopleModal'   onclick='openModel(this,1)' class='padding_4px storeManagement_edit_info' title='设置门店阀值'><i class='fa fa-pencil'></i></a> ";
+				}
+				str += "</td>";
+				str += "<td>" + datal[i].branchName + "</td>";
+				str += "<td>" + datal[i].branchCode + "</td>";
+				str += "<td>" + datal[i].limitPeople + "</td>";
+				str += "<td>" + datal[i].warnPeople + "</td>";
+				str += '</tr>';
+			}
+			$("#liminalValue_branch_tbody").empty().append(str);
+			return false;
+		}
+		//suite 数据加载渲染
+		function createTableSuite(currPage, limit, total, dataBack) {
+			var operationList = dataBack.operationList;
+			var showNum = limit;
+			if(total - (currPage * limit) < 0) showNum = total - ((currPage - 1) * limit);
+			var datal = dataBack.data.list;
+			var str = '';
+			for(var i = 0; i < showNum; i++) {
+				str += "<tr><td storeid='" + datal[i].examSuiteId + "' name='" + datal[i].examSuiteName + "' people='" + datal[i].examSuiteLimitPeople + "'  wPeople='" + datal[i].examSuiteWarnPeople + "'>";
+				if(operationList.liminalValue_to_suite_update == true) {
+					str += "<a data-toggle='modal' href='#limitPeopleModal'   onclick='openModel(this,2)' class='padding_4px storeManagement_edit_info' title='设置套餐阀值'><i class='fa fa-pencil'></i></a> ";
+				}
+				str += "</td>";
+				str += "<td>" + datal[i].examSuiteName + "</td>";
+				str += "<td>" + datal[i].examSuiteCode + "</td>";
+				str += "<td>" + datal[i].examSuiteLimitPeople + "</td>";
+				str += "<td>" + datal[i].examSuiteWarnPeople + "</td>";
+				str += '</tr>';
+			}
+			$("#liminalValue_suite_tbody").empty().append(str);
+			return false;
+		}
+
+		var $type = $('#type'),
+			$id = $('#id'),
+			$limitPeople = $('#limitPeople'),
+			$warnPeople = $('#warnPeople'),
+			$setLimitPeople = $('#setLimitPeople'),
+			$title = $('.title'),
+			postUrl,
+			selectType,
+			id,
+			name,
+			limitPeopleOld,
+			warnPeopleOld;
+		//打开选择框
+		function openModel(idthis, type) {
+			id = $(idthis).parent().attr("storeid");
+			limitPeopleOld = $(idthis).parent().attr("people");
+			warnPeopleOld = $(idthis).parent().attr("wPeople");
+			name = $(idthis).parent().attr("name");
+			$type.val(type);
+			$id.val(id);
+			$title.html(name);
+			$limitPeople.val(limitPeopleOld);
+			$warnPeople.val(warnPeopleOld);
+		}
+		//设置门店限制 保存 
+		$setLimitPeople.on('click', function() {
+			var param = {
+				limitPeople: $limitPeople.val(),
+				warnPeople: $warnPeople.val()
+
+			};
+			selectType = $type.val();
+			if($type.val() == 1) {
+				param.branchId = $id.val();
+				postUrl = liminal_value_branch_setting;
+			}
+			if($type.val() == 2) {
+				param.suiteId = $id.val();
+				postUrl = liminal_value_suite_setting;
+			}
+
+			var otype = "POST";
+			var osync = false;
+			if(validationParam(param, type)) {
+				return;
+			}
+			$type.val('');
+			$id.val('');
+			$limitPeople.val('');
+			$warnPeople.val('');
+			$title.html('')
+			var reqResult = httpRequest(postUrl, param, otype, osync);
+			if(reqResult.result == 0 && reqResult.data > 0) {
+				alert("设置成功");
+				if(selectType == 1) {
+					$('#myTab a:first').tab('show');
+					init_page();
+				}
+				if(selectType == 2) {
+					$('#myTab a:last').tab('show');
+					liminalValueSuiteSearch();
+					init_pager_suite();
+				}
+
+			}
+		});
+		//验证
+		function validationParam(param, type) {
+			if(type == 1 && (param.branchId == null || param.branchId == '' || param.branchId == "")) {
+				alert("请选择门店");
+				return true;
+			}
+			if(type == 2 && (param.suiteId == null || param.suiteId == '' || param.suiteId == "")) {
+				alert("请选择套餐");
+				return true;
+			}
+			if(param.limitPeople == null || param.limitPeople == '' || param.limitPeople == "") {
+				alert("请输入限制人数");
+				return true;
+			}
+			if(param.warnPeople == null || param.warnPeople == '' || param.warnPeople == "") {
+				alert("请输入警告人数");
+				return true;
+			}
+			/* 	if(limitPeopleOld==param.limitPeople){
+				alert("与之前人数一致,请重新输入");
+				return true; 
+			} */
+			return false;
+
+		}
+	</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

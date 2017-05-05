@@ -1,0 +1,723 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Main content -->
+	<div class="fakeloader"></div>
+	<section class="content">
+		<!--头部S-->
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box width_70">
+					<div class="box-header">
+						<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">检查项<small>--添加</small></h3>
+						<div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
+							<button class="btn btn-default pull-right" onclick="storeManagementBack()">返回</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--头部E-->
+		<div class="box width_70">
+			<div class="box-body">
+				<form class="bs-example-form form-horizontal formCss" role="form" id="addExamItemForm">
+					<!--<input type="hidden" name="examItemId" id="addExamItemHid" value="" />-->
+					<div class="form-group">
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>检查项名称</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<input type="text" class="form-control" name="examItemName" id="addExamItemName">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="addExamItemNameTip"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>检查项简称</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<input type="text" class="form-control" name="examItemNameAbr" id="addExamItemNameAbr">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="addExamItemNameAbrTip"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>英文名称</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<input type="text" class="form-control" name="examItemNameEng" id="addExamItemNameEng">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="addExamItemNameEngTip"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>英文缩写</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<input type="text" class="form-control" name="examItemNameEngAbr" id="addExamItemNameEngAbr">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="addExamItemNameEngAbrTip"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>打印名称</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<input type="text" class="form-control" name="examItemNamePrn" id="addExamItemNamePrn">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="addExamItemNamePrnTip"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>项目代码</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<input type="text" class="form-control" name="examItemCode" id="addExamItemCode">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="addExamItemCodeTip"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>项目类型</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<select class="form-control getEitemId" id="addexamItemTypeId" name="examItemTypeId">
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="addexamItemTypeIdTip"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>值类型</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<input type="text" class="form-control" name="examItemValueType" id="addExamItemValueType">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="addExamItemValueTypeTip"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>值单位</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<input type="text" class="form-control" name="examItemValueUnit" id="addExamItemValueUnit">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="addExamItemValueUnitTip"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>数值型增量</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<input type="text" class="form-control" name="examItemIncrement" id="addExamItemIncrement">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="addExamItemIncrementTip"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>精度</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<input type="text" class="form-control" name="examItemNumPrecision" id="addExamItemNumPrecision">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="addExamItemNumPrecisionTip"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>应用范围</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<input type="text" class="form-control" name="fUseAppMaxMin" id="addfUseAppMaxMin">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="addfUseAppMaxMinTip"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>含低值</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<input type="text" class="form-control" name="fIncludeMin" id="addfIncludeMin">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="addfIncludeMinTip"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>含高值</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<input type="text" class="form-control" name="fIncludeMax" id="addfIncludeMax">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="addfIncludeMaxTip"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>表达式</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<input type="text" class="form-control" name="examItemExpression" id="addExamItemExpression">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="addExamItemExpressionTip"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>男性缺省值</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<input type="text" class="form-control" name="maleValueDef" id="addMaleValueDef">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="addMaleValueDefTip"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>男性下限</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<input type="text" class="form-control" name="maleValueMin" id="addMaleValueMin">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="addMaleValueMinTip"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>男性上限</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<input type="text" class="form-control" name="maleValueMax" id="addMaleValueMax">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="addMaleValueMaxTip"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>男性生命值下限</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<input type="text" class="form-control" name="maleValueServerDown" id="addMaleValueServerDown">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="addMaleValueServerDownTip"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>男性生命值上限</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<input type="text" class="form-control" name="maleValueSeverUp" id="addMaleValueSeverUp">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="addMaleValueSeverUpTip"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>女性缺省值</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<input type="text" class="form-control" name="femaleValueDef" id="addfemaleValueDef">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="addfemaleValueDefTip"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>女性下限</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<input type="text" class="form-control" name="femaleValueMin" id="addfemaleValueMin">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="addfemaleValueMinTip"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>女性上限</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<input type="text" class="form-control" id="addfemaleValueMax" name="femaleValueMax">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="femaleValueMaxTip"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>女性生命值下限</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<input type="text" class="form-control" name="femaleValueServerDown" id="addfemaleValueServerDown">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="addfemaleValueServerDownTip"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>女性生命值上限</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<input type="text" class="form-control" name="femaleValueServerUp" id="addfemaleValueServerUp">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="addfemaleValueServerUpTip"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>适用性别</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px'>
+								<input type="checkbox" value="1" name="sex" id="addfMale"> 适用男
+								<input type="hidden" name='fMale' value="1" id="addfMaleHidden">
+								<input type="checkbox" value="1" name="sex" id="addfFemale" id="examSuiteFemale"> 适用女
+								<input type="hidden" name='fFemale' value="1" id="addfFemaleHidden">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="checkboxTip"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>小结级别</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<input type="text" class="form-control" name="examItemConclusionLevel" id="addExamItemConclusionLevel">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="addExamItemConclusionLevelTip"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>小结标题</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<input type="text" class="form-control" name="examItemConclusionTitle" id="addExamItemConclusionTitle">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="addExamItemConclusionTitleTip"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>备注</label>
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+								<input type="text" class="form-control" name="examItemNote" id="addExamItemNote">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+								<div id="addExamItemNoteTip"></div>
+							</div>
+						</div>
+				</form>
+				</div>
+				<div class="row">
+					<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2 user_power_btn">
+						<button type="submit" class="btn btn-default" id="add_store_btn">添加</button>
+						<a href="#" class="btn btn-default" onclick="storeManagementBack()">返 回</a>
+					</div>
+				</div>
+			</div>
+
+	</section>
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<script src="/plat/js/create/AjaxAddr.js"></script>
+	<script src="/plat/js/create/httpRequest.js"></script>
+	<script src="/plat/js/create/contentPublic.js"></script>
+	<!--图片上传-->
+	<script src="/plat/js/plugins/fileinput.js"></script>
+	<script src="/plat/js/plugins/fileinput_locale_zh.js"></script>
+	<!--表单验证-->
+	<script src="/plat/js/plugins/formValidator-4.0.1.js"></script>
+	<script src="/plat/js/plugins/formValidatorRegex.js"></script>
+	<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<script <script>
+		$(document).ready(function() {
+				//表单验证
+				$.formValidator.initConfig({
+					submitButtonID: "add_store_btn",
+					debug: true,
+					onSuccess: function() {
+						addExamItemInfo();
+					},
+					onError: function() {
+						alert("添加失败，具体错误，请看网页上的提示！")
+					},
+					submitAfterAjaxPrompt: '有数据正在异步验证，请稍等...'
+				});
+				//检查项名称
+				$("#addExamItemName").formValidator({
+					onShow: "请输入检查项名称",
+					onFocus: "检查项名称不少于3个字符",
+					onCorrect: "输入正确"
+				}).inputValidator({
+					min: 3,
+					onError: "输入错误"
+				});
+				//检查项名称简称
+				$("#addExamItemNameAbr").formValidator({
+					onShow: "请输入检查项简称",
+					onFocus: "检查项简称不少于1个字符",
+					onCorrect: "输入正确"
+				}).inputValidator({
+					min: 1,
+					max: 10,
+					onError: "输入错误"
+				});
+				//英文名称
+				$("#addExamItemNameEng").formValidator({
+					onShow: "请输入英文名称",
+					onFocus: "英文名称仅可用英文表示",
+					onCorrect: "输入正确"
+				}).regexValidator({
+					regExp: "username",
+					dataType: "enum",
+					onError: "输入错误"
+				});
+				//英文简称
+				$("#addExamItemNameEngAbr").formValidator({
+					onShow: "请输入英文简称",
+					onFocus: "英文简称仅可用英文表示",
+					onCorrect: "输入正确"
+				}).regexValidator({
+					regExp: "username",
+					dataType: "enum",
+					onError: "输入错误"
+				});
+				//打印名称
+				$("#addExamItemNamePrn").formValidator({
+					onShow: "请输入打印名称",
+					onFocus: "打印名称不少于1个字符",
+					onCorrect: "输入正确"
+				}).inputValidator({
+					min: 1,
+					max: 10,
+					onError: "输入错误"
+				});
+				//项目代码
+				$("#addExamItemCode").formValidator({
+					onShow: "请输入项目代码",
+					onFocus: "请输入项目代码",
+					onCorrect: "输入正确"
+				}).regexValidator({
+					regExp: "username",
+					dataType: "enum",
+					onError: "输入错误"
+				});
+				//项目类型
+				$("#addexamItemTypeId").formValidator({
+					onShow: "请选择项目类型",
+					onFocus: "请选择项目类型",
+					onCorrect: "已选择"
+				}).inputValidator({
+					min: 1,
+					onError: "还未选择项目类型!"
+				});
+				//值类型
+				$("#addExamItemValueType").formValidator({
+					onShow: "请输入值类型",
+					onFocus: "请输入值类型",
+					onCorrect: "输入正确"
+				}).inputValidator({
+					min: 1,
+					max: 10,
+					onError: "输入错误"
+				});
+				//值单位
+				$("#addExamItemValueUnit").formValidator({
+					onShow: "请输入值单位",
+					onFocus: "请输入值单位",
+					onCorrect: "输入正确"
+				}).inputValidator({
+					min: 1,
+					max: 10,
+					onError: "输入错误"
+				});
+				//小结级别
+				$("#addExamItemConclusionLevel").formValidator({
+					onShow: "请输入小结级别",
+					onFocus: "请输入小结级别",
+					onCorrect: "输入正确"
+				}).inputValidator({
+					min: 1,
+					max: 10,
+					onError: "输入错误"
+				});
+				//小结标题
+				$("#addExamItemConclusionTitle").formValidator({
+					onShow: "请输入小结标题",
+					onFocus: "请输入小结标题",
+					onCorrect: "输入正确"
+				}).inputValidator({
+					min: 1,
+					max: 10,
+					onError: "输入错误"
+				});
+				//数值型增量
+				$("#addExamItemIncrement").formValidator({
+					onShow: "请输入数值型增量",
+					onFocus: "请输入数值型增量",
+					onCorrect: "输入正确"
+				}).regexValidator({
+					regExp: "num",
+					dataType: "enum",
+					onError: "输入错误"
+				});
+				//精度
+				$("#addExamItemNumPrecision").formValidator({
+					onShow: "请输入精度",
+					onFocus: "请输入精度",
+					onCorrect: "输入正确"
+				}).regexValidator({
+					regExp: "num",
+					dataType: "enum",
+					onError: "输入错误"
+				});
+				//应用范围
+				$("#addfUseAppMaxMin").formValidator({
+					onShow: "请输入应用范围",
+					onFocus: "请输入应用范围",
+					onCorrect: "输入正确"
+				}).regexValidator({
+					regExp: "num",
+					dataType: "enum",
+					onError: "输入错误"
+				});
+				//含低值
+				$("#addfIncludeMin").formValidator({
+					onShow: "请输入含低值",
+					onFocus: "请输入含低值",
+					onCorrect: "输入正确"
+				}).regexValidator({
+					regExp: "num",
+					dataType: "enum",
+					onError: "输入错误"
+				});
+				//含高值
+				$("#addfIncludeMax").formValidator({
+					onShow: "请输入含高值",
+					onFocus: "请输入含高值",
+					onCorrect: "输入正确"
+				}).regexValidator({
+					regExp: "num",
+					dataType: "enum",
+					onError: "输入错误"
+				});
+				//表达式
+				$("#addExamItemExpression").formValidator({
+					onShow: "请输入表达式",
+					onFocus: "请输入表达式",
+					onCorrect: "输入正确"
+				}).regexValidator({
+					regExp: "num",
+					dataType: "enum",
+					onError: "输入错误"
+				});
+				//男性缺省值
+				$("#addMaleValueDef").formValidator({
+					onShow: "请输入男性缺省值",
+					onFocus: "请输入男性缺省值",
+					onCorrect: "输入正确"
+				}).regexValidator({
+					regExp: "num",
+					dataType: "enum",
+					onError: "输入错误"
+				});
+				//男性下限
+				$("#addMaleValueMin").formValidator({
+					onShow: "请输入男性下限",
+					onFocus: "请输入男性下限",
+					onCorrect: "输入正确"
+				}).regexValidator({
+					regExp: "num",
+					dataType: "enum",
+					onError: "输入错误"
+				});
+				//男性上限
+				$("#addMaleValueMax").formValidator({
+					onShow: "请输入男性上限",
+					onFocus: "请输入男性上限",
+					onCorrect: "输入正确"
+				}).regexValidator({
+					regExp: "num",
+					dataType: "enum",
+					onError: "输入错误"
+				});
+
+				//男性生命值下限
+				$("#addMaleValueServerDown").formValidator({
+					onShow: "请输入男性生命值下限",
+					onFocus: "请输入男性生命值下限",
+					onCorrect: "输入正确"
+				}).regexValidator({
+					regExp: "num",
+					dataType: "enum",
+					onError: "输入错误"
+				});
+				//男性生命值上限
+				$("#addMaleValueSeverUp").formValidator({
+					onShow: "请输入男性生命值上限",
+					onFocus: "请输入男性生命值上限",
+					onCorrect: "输入正确"
+				}).regexValidator({
+					regExp: "num",
+					dataType: "enum",
+					onError: "输入错误"
+				});
+				//女性缺省值
+				$("#addfemaleValueDef").formValidator({
+					onShow: "请输入女性缺省值",
+					onFocus: "请输入女性缺省值",
+					onCorrect: "输入正确"
+				}).regexValidator({
+					regExp: "num",
+					dataType: "enum",
+					onError: "输入错误"
+				});
+				//女性下限
+				$("#addfemaleValueMin").formValidator({
+					onShow: "请输入女性下限",
+					onFocus: "请输入女性下限",
+					onCorrect: "输入正确"
+				}).regexValidator({
+					regExp: "num",
+					dataType: "enum",
+					onError: "输入错误"
+				});
+				//女性上限
+				$("#addfemaleValueMax").formValidator({
+					onShow: "请输入女性上限",
+					onFocus: "请输入女性上限",
+					onCorrect: "输入正确"
+				}).regexValidator({
+					regExp: "num",
+					dataType: "enum",
+					onError: "输入错误"
+				});
+				//女性生命值下限
+				$("#addfemaleValueServerDown").formValidator({
+					onShow: "请输入女性生命值下限",
+					onFocus: "请输入女性生命值下限",
+					onCorrect: "输入正确"
+				}).regexValidator({
+					regExp: "num",
+					dataType: "enum",
+					onError: "输入错误"
+				});
+				//女性生命值上限
+				$("#addfemaleValueServerUp").formValidator({
+					onShow: "请输入女性生命值上限",
+					onFocus: "请输入女性生命值上限",
+					onCorrect: "输入正确"
+				}).regexValidator({
+					regExp: "num",
+					dataType: "enum",
+					onError: "输入错误"
+				});
+				//备注
+				$("#addExamItemNote").formValidator({
+					onShow: "请输入检查项备注",
+					onFocus: "请输入检查项备注",
+					onCorrect: "输入正确"
+				}).inputValidator({
+					min: 2,
+					onError: "检查项备注不低于2个字符"
+				});
+				//适用性别
+				$(":checkbox[name='sex']").formValidator({
+					tipID: "checkboxTip",
+					onShow: "请选择适用性别(至少选择1个)",
+					onFocus: "你至少选择1个",
+					onCorrect: "已选择"
+				}).inputValidator({
+					min: 1,
+					onError: "适用性别至少选择一项"
+				});
+				if($('#addfMale').is(':checked')) {
+					$("#addfMaleHidden").val("0");
+				}
+				if($('#addfFemale').is(':checked')) {
+					$("#addfFemaleHidden").val("0");
+				}
+				getExamItemType();
+			})
+			//		添加时
+		function addExamItemInfo() {
+			var param = $('#addExamItemForm').serialize();
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(insertOrgExamItemUrl, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert('添加成功!');
+				window.location.href = '/plat/pages/examination/check/examItem.shtml';
+				return false;
+			}
+		}
+	</script>
+	</div>
+	<!--#include file="/plat/pages/system/footer.html"-->

@@ -1,0 +1,197 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<div class="fakeloader"></div>
+	<section class="content-header">
+		<div class="margin-bottom">
+			<h2><small>套餐检查项</small></h2></div>
+		<ol class="breadcrumb">
+			<li>
+				<a href="#">体检中心</a>
+			</li>
+			<li class="active">套餐检查项</li>
+		</ol>
+		<div class="box container-fluid no-margin">
+			<!--box-header -->
+			<div class="box-header">
+				<div class="row margin-bottom">
+					<div class="col-xs-6 col-md-1  text-right">
+						<input type="button" class="btn btn-default" value="返回" onclick="getUserId()">
+					</div>
+					<div class="col-xs-6 col-md-1  text-right">
+						<a class="btn btn-default" id="addUserExamItem">添 加</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- /.box-header -->
+		</div>
+	</section>
+
+	<!-- /Content Header (Page header) -->
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<div class="box-header">
+						<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">列表</h3>
+					</div>
+					<div class="box-body">
+						<table class="table formCss" id="example3">
+							<thead>
+								<tr>
+									<th>操作</th>
+									<th>检查项</th>
+								</tr>
+							</thead>
+							<tbody id="mainContent"></tbody>
+						</table>
+					</div>
+					<div class="row">
+						<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /Main content -->
+	<script src="../../../js/plugins/jQuery-2.2.0.min.js"></script>
+	<script src="../../../js/create/AjaxAddr.js"></script>
+	<script src="../../../js/create/contentPublic.js"></script>
+	<script src="../../../js/create/httpRequest.js"></script>
+	<script src="../../../js/plugins/extendPagination.js"></script>
+				<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<!--模态框修改-->
+	<script>
+	    function getUserId(){
+	    	window.location.href="/plat/pages/examination/employee/userExamItemView.shtml?param="+getParamValue('userId');
+	    }
+		//添加回显所属科室下拉框
+		$('#addDepartInfo').on('click', function() {
+				feeItemDept();
+			})
+			//分页
+		init_page();
+
+		function init_page() {
+			page_curr = 1;
+			$('#mainContent').empty();
+			feeItemDept();
+			//1.请求后端信息并展示
+			suiteSearch();
+			init_pager();
+		}
+		//搜索请求
+		function searchAll() {
+			suiteSearch();
+			init_pager();
+		}
+		//请求后端信息并展示
+		function suiteSearch() {
+			//1.采集参数数据
+			$('#mainContent').empty();
+			var param = {
+				"page": page_curr,
+				"rows": count_curr,
+				"userId": document.URL.split("=")[1]
+			};
+			//2.请求后台
+			var otype = "GET";
+			var osync = false;
+			var reqResult = httpRequest(getOrgExamItemByPageUrl, param, otype, osync);
+			if(reqResult.result == 0) {
+				//4.展示数据
+				total_count = reqResult.data.total;
+				createTable(page_curr, limit, total_count, reqResult);
+			}
+			return false;
+		}
+		// 初始化分页信息
+		function init_pager() {
+			$('#callBackPager').extendPagination({
+				totalCount: total_count,
+				showCount: count_curr,
+				limit: limit,
+				callback: function(curr, limit, totalCount) {
+					page_curr = curr;
+					total_count = totalCount;
+					suiteSearch();
+				}
+			});
+		}
+		//展示数据
+		function createTable(currPage, limit, total, dataBack) {
+			var showNum = limit;
+			if(total - (currPage * limit) < 0) showNum = total - ((currPage - 1) * limit);
+			for(var i = 0; i < showNum; i++) {
+				var statuWord = "";
+				var Tbody = document.getElementById('mainContent');
+				var lRow = Tbody.insertRow(); //创建行	
+
+				//创建列
+				var firstColumn = lRow.insertCell();
+				var secondColumn = lRow.insertCell();
+				firstColumn.setAttribute('checked', dataBack.data.list[i].checked);  //给td添加属性
+				//添加第一列内容
+
+				var aInput = document.createElement("input");
+				aInput.setAttribute("type", "checkbox");
+				if(dataBack.data.list[i].checked==true){
+					aInput.setAttribute("checked", "true");
+					aInput.setAttribute("disabled", "true");
+				}
+				aInput.setAttribute("id", dataBack.data.list[i].examItemId);
+				aInput.className = "suite-check";
+				aInput.style.marginLeft = "5px";
+				firstColumn.appendChild(aInput);
+				//创建查看标签
+				var aCheck = document.createElement("a");
+				var iElement = document.createElement("i");
+				iElement.className = "fa fa-eye";
+				aCheck.appendChild(iElement);
+				aCheck.setAttribute("href", "/plat/pages/examination/charges/checkExamItem.shtml?id=" + dataBack.data.list[i].examItemId);
+				aCheck.setAttribute("title", "查看信息");
+				aCheck.className = "suite-check";
+				aCheck.style.marginLeft = "5px";
+				firstColumn.appendChild(aCheck);
+
+				//添加第二列内容	
+				secondColumn.innerText = dataBack.data.list[i].examItemName;
+			}
+			return false;
+		}
+		//插入操作
+		$('#addUserExamItem').on('click', function() {
+			var examFisIds = '';
+			var items = $("#mainContent tr td:first-child").find("input:checked:not(:disabled)");
+			if(items.length == 0) {
+				alert("请勾选要绑定的检查项");
+				return;
+			} else {
+				if(confirm("确认提交该检查项吗？")) {
+					for(var i = 0; i < items.length; i++) {
+						if(examFisIds == '') {
+							examFisIds = items[i].id;
+						} else {
+							examFisIds = examFisIds + ',' + items[i].id;
+						}
+					}
+					var param = {
+						'itemId': examFisIds,
+						'userId': document.URL.split("=")[1]
+					};
+					var reqResult = httpRequest(org_exam_item_user_save, param, "get", false);
+					if(reqResult.result == 0) {
+						alert("操作成功！");
+						getUserId();
+					} else {
+						alert(reqResult.message);
+					}
+				}
+			}
+		});
+	</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

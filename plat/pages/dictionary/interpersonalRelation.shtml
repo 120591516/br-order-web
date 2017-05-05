@@ -1,0 +1,436 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<div class="fakeloader"></div>
+	<section class="content-header">
+		<div class="margin-bottom">
+			<h2><small>人际关系</small></h2>
+		</div>
+		<ol class="breadcrumb">
+			<li>
+				<a href="#">字典维护</a>
+			</li>
+			<li class="active">人际关系</li>
+		</ol>
+	</section>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<div class="box-header">
+						<div class="row">
+							<div class="col-md-8">
+								<h3 class="box-title margin">列表</h3>
+							</div>
+							<div class="col-md-4">
+								<div class="row">
+									<div class="col-md-8">
+										<form class="bs-example" role="form">
+											<div class="input-group">
+												<input type="text" class="form-control" name="" id="interpersonalRelation_search" placeholder="搜索" value="">
+												<span class="input-group-addon" id="interpersonalRelation_search_btn"><a href="" class="fa fa-search"></a></span>
+											</div>
+										</form>
+									</div>
+									<div class="col-md-4">
+										<a href="#add_interpersonalRelation_modal" data-toggle="modal" class="btn btn-default margin" id="addConTypeDic">添加</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="box-body">
+						<table class="table formCss">
+							<thead>
+								<tr>
+									<th>编辑</th>
+									<th>关系名称</th>
+									<th>关系代码</th>
+									<th>输入码</th>
+									<th>关系备注</th>
+									<th>创建时间</th>
+									<th>状态</th>
+								</tr>
+								<tr class="warning no-result">
+									<td colspan="7"><i class="fa fa-warning"></i>没有任何搜索结果!</td>
+								</tr>
+							</thead>
+							<tbody id="interpersonalRelation_tbody_main">
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="row">
+							<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /Main content -->
+	<!--模态框添加-->
+	<div class="modal fade" id="add_interpersonalRelation_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">人际关系信息</h4>
+				</div>
+				<div class="modal-body">
+					<form class="bs-example bs-example-form" role="form" method="post" novalidate="novalidate" id='add_interpersonalRelationNews'>
+						<div class="input-group">
+							<span class="input-group-addon">关系名称</span>
+							<input type="text" id="add_relationshipName" class="form-control" name="dictRelationName" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">关系代码</span>
+							<input type="text" id="add_relationshipCode" class="form-control" name="dictRelationCode" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">输入码</span>
+							<input type="text" id="add_RinputCode" class="form-control" name="dictRelationInputCode" aria-describedby="basic-addon1" required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">关系备注</span>
+							<input type="text" id="add_Rnote" class="form-control" name="dictRelationNote" aria-describedby="basic-addon1" required>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="submit" class="btn btn-primary" data-dismiss="modal" id="add_relation_bun">提交</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--模态框查看-->
+	<div class="modal fade" id="check_interpersonalRelation_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">关系信息</h4>
+				</div>
+				<div class="modal-body">
+					<form class="bs-example bs-example-form" role="form" method="get" novalidate="novalidate" id='add_interpersonalRelationNews'>
+						<div class="input-group">
+							<span class="input-group-addon">关系名称</span>
+							<input type="text" id="check_relationshipName" class="form-control" name="dictRelationName" aria-describedby="basic-addon1" maxlength='12' required disabled="disabled">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">关系代码</span>
+							<input type="text" id="check_relationshipCode" class="form-control" name="dictRelationCode" aria-describedby="basic-addon1" maxlength='12' required disabled="disabled">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">输入码</span>
+							<input type="text" id="check_RinputCode" class="form-control" name="dictRelationInputCode" aria-describedby="basic-addon1" required disabled="disabled">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">关系备注</span>
+							<input type="text" id="check_Rnote" class="form-control" name="dictRelationNote" aria-describedby="basic-addon1" required disabled="disabled">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">创建时间</span>
+							<input type="text" id="check_relationshipCreatetime" class="form-control" name="dictRelationCreateTime" aria-describedby="basic-addon1" disabled="disabled">
+						</div>
+						<div class="input-group" id='check_relationshipStatus'>
+							<span class="input-group-addon">状 态</span>
+							<input type="radio" name='dictRelationStatus' value="0" class="userlist_statusinput_vertical" disabled="disabled" checked="checked" />启用
+							<input type="radio" name='dictRelationStatus' value="1" class="userlist_statusinput_vertical" disabled="disabled" />禁用
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--模态框编辑-->
+	<div class="modal fade" id="edit_interpersonalRelation_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">关系信息</h4>
+				</div>
+				<div class="modal-body">
+					<form class="bs-example bs-example-form" role="form" method="get" novalidate="novalidate" id='edit_interpersonalRelationNews'>
+						<input type="hidden" name="dictRelationId" id="edit_relation_id" value="" />
+						<div class="input-group">
+							<span class="input-group-addon">关系名称</span>
+							<input type="text" id="edit_relationshipName" class="form-control" name="dictRelationName" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">关系代码</span>
+							<input type="text" id="edit_relationshipCode" class="form-control" name="dictRelationCode" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">输入码</span>
+							<input type="text" id="edit_RinputCode" class="form-control" name="dictRelationInputCode" aria-describedby="basic-addon1" required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">关系备注</span>
+							<input type="text" id="edit_Rnote" class="form-control" name="dictRelationNote" aria-describedby="basic-addon1" required>
+						</div>
+						<div class="input-group" id='edit_relationshipStatus'>
+							<span class="input-group-addon">状 态</span>
+							<input type="radio" name='dictRelationStatus' value="0" class="userlist_statusinput_vertical" checked="checked" />启用
+							<input type="radio" name='dictRelationStatus' value="1" class="userlist_statusinput_vertical" />禁用
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="submit" class="btn btn-primary" data-dismiss="modal" id="edit_relative_btn">提交</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<script src="/plat/js/create/httpRequest.js"></script>
+	<script src="/plat/js/create/contentPublic.js"></script>
+	<script src="/plat/js/plugins/extendPagination.js"></script>
+							<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<script>
+		//  分页
+		init_page();
+		function init_page() {
+			$('#interpersonalRelation_tbody_main').empty();
+			page_curr = 1;
+			init_list();
+			init_pager();
+		}
+		function init_list() {
+			$('#interpersonalRelation_tbody_main').empty();
+			var otype = "post";
+			var osync = false;
+			var param = {
+				"page": page_curr,
+				"rows": count_curr
+			};
+			var reqResult = httpRequest(interpersonalRelation_getDictrelationshipList_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				total_count = reqResult.data.total;
+				createTable(page_curr, limit, total_count, reqResult);
+			}
+			return false;
+		}
+		// 初始化分页信息
+		function init_pager() {
+			$('#callBackPager').extendPagination({
+				totalCount: total_count,
+				showCount: count_curr,
+				limit: limit,
+				callback: function(curr, limit, totalCount) {
+					page_curr = curr;
+					total_count = totalCount;
+					init_list();
+				}
+			});
+		}
+		//  展示列表
+		function createTable(currPage, limit, total, dataBack) {
+			var showNum = limit;
+			if(total - (currPage * limit) < 0) showNum = total - ((currPage - 1) * limit);
+			for(var i = 0; i < showNum; i++) {
+				var Tbody = document.getElementById('interpersonalRelation_tbody_main');
+				var lRow = Tbody.insertRow(); //创建行
+				var dictRelationStatus = (dataBack.data.list[i].dictRelationStatus === 0) ? "启用" : "禁用";
+				var operationByRole = dataBack.operationList; //获取操作类型
+				var operationByRoleAdd = document.getElementById('addConTypeDic'); //获取添加按钮
+				//				判断操作类型
+				(operationByRole.dictrelationship_insert === false) ? operationByRoleAdd.style.display = 'none': operationByRoleAdd.style.display = ''; //1为添加
+				//创建列
+				var firstColumn = lRow.insertCell();
+				var secondColumn = lRow.insertCell();
+				var thirdColumn = lRow.insertCell();
+				var forthColumn = lRow.insertCell();
+				var fifthColumn = lRow.insertCell();
+				var sixthColumn = lRow.insertCell();
+				var sevenColumn = lRow.insertCell();
+				firstColumn.setAttribute('idRelationship', dataBack.data.list[i].dictRelationId); //给td添加属性
+				//添加第一列内容
+				//创建查看标签
+				var aCheck = document.createElement("a");
+				var iElement = document.createElement("i");
+				(operationByRole.dictrelationship_detail === true) ? iElement.className = "fa fa-eye": ''; //4为查看
+				aCheck.appendChild(iElement);
+				aCheck.setAttribute("href", "#check_interpersonalRelation_modal");
+				aCheck.setAttribute("data-toggle", "modal");
+				aCheck.style.marginLeft = "5px";
+				aCheck.onclick = function() {
+					check_relationNews(this)
+				};
+				firstColumn.appendChild(aCheck);
+				//创建编辑标签
+				var aEdit = document.createElement("a");
+				var iElement = document.createElement("i");
+				(operationByRole.dictrelationship_update === true) ? iElement.className = "fa fa-pencil": ''; //3为更新
+				aEdit.appendChild(iElement);
+				aEdit.setAttribute("href", "#edit_interpersonalRelation_modal");
+				aEdit.setAttribute("data-toggle", "modal");
+				aEdit.style.marginLeft = "5px";
+				aEdit.onclick = function() {
+					edit_relationNews(this)
+				};
+				firstColumn.appendChild(aEdit);
+				//创建删除标签
+				var aDelete = document.createElement("a");
+				var iElement = document.createElement("i");
+				(operationByRole.dictrelationship_delete === true) ? iElement.className = "fa fa-trash-o": ''; //2为删除
+				aDelete.appendChild(iElement);
+				aDelete.style.marginLeft = "5px";
+				aDelete.onclick = function() {
+					del_relationNews(this)
+				};
+				firstColumn.appendChild(aDelete);
+				//添加第二列内容	
+				secondColumn.innerText = dataBack.data.list[i].dictRelationName;
+				//添加第三列内容	
+				thirdColumn.innerText = dataBack.data.list[i].dictRelationCode;
+				//添加第四列内容	
+				forthColumn.innerText = dataBack.data.list[i].dictRelationInputCode;
+				//添加第五列内容	
+				fifthColumn.innerText =dataBack.data.list[i].dictRelationNote;
+				//添加第六列内容	
+				sixthColumn.innerText = getLocalTime(dataBack.data.list[i].dictRelationCreateTime);
+				//添加第七列内容	
+				sevenColumn.innerText = dictRelationStatus;
+			}
+			return false;
+		}
+		//	添加人际关系信息
+        $('#add_interpersonalRelation_modal').on('click', function() {
+			var add_relationshipName = $('#add_relationshipName').val();
+			var add_relationshipCode = $('#add_relationshipCode').val();
+			var add_RinputCode = $('#add_RinputCode').val();
+			var add_Rnote = $('#add_Rnote').val();
+			if(add_relationshipName == '' || add_relationshipCode == '' || add_RinputCode == '' || add_Rnote == '') {
+				return false;
+			} else {
+				var param = $('#add_interpersonalRelationNews').serialize();
+				var otype = "post";
+				var osync = false;
+				var reqResult = httpRequest(interpersonalRelation_addDictrelationship_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert('添加成功！');
+					window.location.reload();
+				} else {
+					alert("error");
+				}
+			}
+		})
+		//	删除人际关系信息
+		function del_relationNews(del_li) {
+			if(confirm("确认禁用该关系吗？")) {
+				var del_user_id = $(del_li).parent().attr("idRelationship");
+				var param = {
+					"pid": del_user_id
+				};
+				var otype = "get";
+				var osync = false;
+				var reqResult = httpRequest(interpersonalRelation_deleteDictrelationship_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert("禁用成功");
+					window.location.reload();
+				} else {
+					alert(reqResult.message);
+				}
+			}
+		}
+		//	查看人际关系信息
+		function check_relationNews(check) {
+			var check_relationid = $(check).parent().attr("idRelationship");
+			var param = {
+				"pid": check_relationid
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(interpersonalRelation_getDictrelationshipById_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				var check_relationshipName = $('#check_relationshipName');
+				var check_relationshipCode = $('#check_relationshipCode');
+				var check_RinputCode = $('#check_RinputCode');
+				var check_Rnote = $('#check_Rnote');
+				var check_relationshipCreatetime = $('#check_relationshipCreatetime');
+				var check_relationshipStatus = $('#check_relationshipStatus input');
+				check_relationshipName.val(reqResult.data.dictRelationName);
+				check_relationshipCode.val(reqResult.data.dictRelationCode);
+				check_RinputCode.val(reqResult.data.dictRelationInputCode);
+				check_Rnote.val(reqResult.data.dictRelationNote);
+				check_relationshipCreatetime.val(getLocalTime(reqResult.data.dictRelationCreateTime));
+				if(reqResult.data.dictRelationStatus == 0) {
+					check_relationshipStatus[0].checked = "checked";
+				} else {
+					check_relationshipStatus[1].checked = "checked";
+				}
+			} else {
+				alert(reqResult.message);
+			}
+		}
+		//	编辑回显人际关系信息
+		function edit_relationNews(edit) {
+			var edit_relation_id = $(edit).parent().attr("idRelationship");
+			var param = {
+				"pid": edit_relation_id
+			};
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(interpersonalRelation_getDictrelationshipById_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				$("#edit_relation_id").val(reqResult.data.dictRelationId);
+				var edit_relationshipName = $('#edit_relationshipName');
+				var edit_relationshipCode = $('#edit_relationshipCode');
+				var edit_RinputCode = $('#edit_RinputCode');
+				var edit_Rnote = $('#edit_Rnote');
+				var edit_relationshipCreatetime = $('#edit_relationshipCreatetime');
+				var edit_relationshipStatus = $('#edit_relationshipStatus input');
+				edit_relationshipName.val(reqResult.data.dictRelationName);
+				edit_relationshipCode.val(reqResult.data.dictRelationCode);
+				edit_RinputCode.val(reqResult.data.dictRelationInputCode);
+				edit_Rnote.val(reqResult.data.dictRelationNote);
+				edit_relationshipCreatetime.val(getLocalTime(reqResult.data.dictRelationCreateTime));
+				if(reqResult.data.dictRelationStatus == 0) {
+					edit_relationshipStatus[0].checked = "checked";
+				} else {
+					edit_relationshipStatus[1].checked = "checked";
+				}
+			} else {
+				alert(reqResult.message);
+			}
+		}
+		//  编辑保存人际关系信息
+		$('#edit_relative_btn').on('click', function() {
+			var edit_relationshipName = $('#edit_relationshipName');
+			var edit_relationshipCode = $('#edit_relationshipCode');
+			var edit_RinputCode = $('#edit_RinputCode');
+			var edit_Rnote = $('#edit_Rnote');
+			var edit_relationshipStatus = $('#edit_relationshipStatus input');
+			if(edit_relationshipName == '' || edit_relationshipCode == '' || edit_RinputCode == '' || edit_Rnote == '' || edit_relationshipStatus == '') {
+				return false;
+			} else {
+				var param = $('#edit_interpersonalRelationNews').serialize();
+				var otype = "post";
+				var osync = false;
+				var reqResult = httpRequest(interpersonalRelation_updateDictrelationship_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert('编辑成功');
+					window.location.reload();
+				} else {
+					alert(reqResult.message);
+				}
+			}
+		})
+	</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

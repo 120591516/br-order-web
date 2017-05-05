@@ -1,0 +1,336 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<div class="fakeloader"></div>
+	<section class="content-header">
+		<div class="margin-bottom">
+			<h2><small>员工</small></h2></div>
+		<ol class="breadcrumb">
+			<li>
+				<a href="#">企业</a>
+			</li>
+			<li class="active">员工</li>
+		</ol>
+		<div class="box">
+			<!--box-header -->
+			<div class="box-header">
+				<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">搜索</h3>
+				<div class="col-lg-2 col-md-3 col-sm-3 col-xs-3 txt_r">
+					<a href='/plat/pages/business/employee/AddEmployeeInfo.shtml' id="add_employeeInfo" class="btn btn-default">添加</a>
+					<button type="button" onclick="storeManagementBack()" class="btn btn-default">返回</button>
+				</div>
+			</div>
+			<div class="box-body">
+				<form class="bs-example-form padding_l42px" role="form">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">公司全称</span>
+									<select name="enterpriseId" class="company form-control" id="search_enterpriseId"></select>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">公司代码</span>
+									<input type="text" class="form-control employeeInfo_search_form" name="enterpriseCode" id="search_enterpriseCode" aria-describedby="basic-addon1" maxlength='12' required>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">部门名称</span>
+									<select name="enterpriseDepId" class="division form-control" id="search_enterpriseDepId"></select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">姓 名</span>
+									<input type="email" class="form-control selectpicker employeeInfo_search_form" id='search_customerInfoName' name="customerInfoName" aria-describedby="basic-addon1" maxlength='10' required>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">性 别</span>
+									<select name="customerInfoSex" class="form-control" id='search_customerInfoSex' class="form-control selectpicker" aria-describedby="basic-addon1" maxlength='12' required>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">身份证号</span>
+									<input type="text" class="form-control selectpicker employeeInfo_search_form" id='search_customerInfoIdentityNumber' name="customerInfoIdentityNumber" aria-describedby="basic-addon1" maxlength='10' required>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">联系电话</span>
+									<input type="text" class="form-control selectpicker employeeInfo_search_form" id='search_customerInfoPhone' name="customerInfoPhone" aria-describedby="basic-addon1" maxlength='10' required>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">邮 箱</span>
+									<input type="email" class="form-control selectpicker employeeInfo_search_form" id='search_customerInfoEmail' name="customerInfoEmail" aria-describedby="basic-addon1" maxlength='10' required>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group pull-right">
+									<input type="button" class="btn btn-default fa fa-search" id="search_employeeInfo_btn" value="搜索" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+
+			<!-- /.box-header -->
+		</div>
+	</section>
+	<!-- /Content Header (Page header) -->
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<!--box-header -->
+					<div class="box-header">
+						<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">列表</h3>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+						<table class="table formCss">
+							<thead>
+								<tr>
+									<th>编辑</th>
+									<th>公司名</th>
+									<th>公司代码</th>
+									<th>部门</th>
+									<th>姓名</th>
+									<th>性别</th>
+									<th>身份证号</th>
+									<th>手机号码</th>
+									<th>邮箱</th>
+									<th>状态</th>
+								</tr>
+								<tr class="warning no-result">
+									<td colspan="7"><i class="fa fa-warning"></i>没有任何搜索结果!</td>
+								</tr>
+							</thead>
+							<tbody id="employeeInfo_tbody">
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="row">
+							<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /Main content -->
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<script src="/plat/js/create/httpRequest.js"></script>
+	<script src="/plat/js/create/contentPublic.js"></script>
+	<script src="/plat/js/plugins/extendPagination.js"></script>
+	<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<script>
+		init_page();
+
+		function init_page() {
+			$('#employeeInfo_tbody').empty();
+			company_info();
+			division_info();
+			var thisURL = document.URL;
+			if(thisURL.indexOf("?") != -1) {
+				var num = thisURL.indexOf("?");
+				thisURL = thisURL.substr(num + 1);
+				var getval = thisURL.split("&");
+				var result = new Array;
+				for(i in getval) {
+					var showval = getval[i].split("=");
+					if((showval[0] != null && showval[0] != "") && (showval[1] != null && showval[1] != "")) {
+						result.push(showval[1]);
+					}
+				}
+				var org = result.slice(0, 1);
+				orgNew = parseInt(org.join());
+				var brand = result.slice(1, 2);
+				brandNew = parseInt(brand.join());
+				$('#search_enterpriseId').val(orgNew);
+				$('#search_enterpriseDepId').val(brandNew);
+			}
+			//1.请求后端信息并展示
+			sex('#search_customerInfoSex', '0');
+			employeeInfoSearch();
+			init_pager();
+		}
+
+		function employeeInfoSearch() {
+			var param = initParam();
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(employee_getEnterpriseEmpByPage_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				//4.展示数据
+				total_count = reqResult.data.total;
+				createTable(page_curr, limit, total_count, reqResult);
+			}
+			return false;
+		}
+		// 初始化分页信息
+		function init_pager() {
+			$('#callBackPager').extendPagination({
+				totalCount: total_count,
+				showCount: count_curr,
+				limit: limit,
+				callback: function(curr, limit, totalCount) {
+					page_curr = curr;
+					total_count = totalCount;
+					employeeInfoSearch();
+				}
+			});
+		}
+
+		//初始化参数信息
+		function initParam() {
+			$('#employeeInfo_tbody').empty();
+			var enterpriseId = $("#search_enterpriseId").val();
+			var enterpriseCode = $("#search_enterpriseCode").val();
+			var enterpriseDepId = $("#search_enterpriseDepId").val();
+			var customerInfoName = $('#search_customerInfoName').val();
+			var customerInfoSex = $("#search_customerInfoSex").val();
+			var customerInfoIdentityNumber = $("#search_customerInfoIdentityNumber").val();
+			var customerInfoPhone = $("#search_customerInfoPhone").val();
+			var customerInfoEmail = $("#search_customerInfoEmail").val();
+			//抓取分页信息
+			var param = {
+				"page": page_curr,
+				"rows": count_curr
+			};
+			if(enterpriseId) {
+				param.enterpriseId = enterpriseId;
+			}
+			if(enterpriseCode) {
+				param.enterpriseCode = enterpriseCode;
+			}
+			if(enterpriseDepId) {
+				param.enterpriseDepId = enterpriseDepId;
+			}
+			if(customerInfoName) {
+				param.customerInfoName = customerInfoName;
+			}
+			if(customerInfoSex) {
+				param.customerInfoSex = customerInfoSex;
+			}
+			if(customerInfoIdentityNumber) {
+				param.customerInfoIdentityNumber = customerInfoIdentityNumber;
+			}
+			if(customerInfoPhone) {
+				param.customerInfoPhone = customerInfoPhone;
+			}
+			if(customerInfoEmail) {
+				param.customerInfoEmail = customerInfoEmail;
+			}
+			return param;
+		}
+
+		$('#search_employeeInfo_btn').on('click', function() {
+			employeeInfoSearch();
+			return false;
+		})
+		$('.employeeInfo_search_form').on('keydown', function(e) {
+			if(e && e.keyCode == 13) {
+				employeeInfoSearch();
+				return false;
+			}
+		})
+
+		function createTable(currPage, limit, total, dataBack) {
+			var showNum = limit;
+			if(total - (currPage * limit) < 0) showNum = total - ((currPage - 1) * limit);
+			var datal = dataBack.data.list;
+			//获取操作类型
+			var operationList = dataBack.operationList;
+			//			//			判断添加按钮
+			if(operationList.enterpriseEmp_insert == true) {
+				$('#add_employeeInfo').show();
+			} else {
+				$('#add_employeeInfo').hide();
+			}
+			var str = '';
+			for(var i = 0; i < showNum; i++) {
+				str += "<tr><td enterpriseEmpId='" + datal[i].enterpriseEmpId + "'>";
+				if(operationList.enterpriseEmp_detail == true) {
+					str += "<a href='/plat/pages/business/employee/CheckEmployeeInfo.shtml?id=" + datal[i].enterpriseEmpId + "' class='padding_4px' title='查看员工信息'><i class='fa fa-eye'></i></a> ";
+				}
+				if(operationList.enterpriseEmp_update == true) {
+					str += "<a href='/plat/pages/business/employee/EditEmployeeInfo.shtml?id=" + datal[i].enterpriseEmpId + "' class='padding_4px' title='编辑员工信息'><i class='fa fa-pencil'></i></a> ";
+				}
+				if(operationList.enterpriseEmp_delete == true) {
+					str += "<a href='#' title='删除员工信息' class='padding_4px' onclick='del_employeeInfo(this)'><i class='fa fa-trash-o'></i></a>";
+				}
+				str += "</td>";
+				str += "<td>" + nullformat(datal[i].enterpriseFullName) + "</td>";
+				str += "<td>" + nullformat(datal[i].enterpriseCode) + "</td>";
+				str += "<td>" + nullformat(datal[i].enterpriseDepName) + "</td>";
+				str += "<td>" + nullformat(datal[i].customerInfoName) + "</td>";
+				if(datal[i].customerInfoSex == 0) {
+					str += "<td>" + '男' + "</td>";
+				} else {
+					str += "<td>" + '女' + "</td>";
+				}
+				str += "<td>" + nullformat(datal[i].customerInfoIdentityNumber) + "</td>";
+				str += "<td>" + nullformat(datal[i].customerInfoPhone) + "</td>";
+				str += "<td>" + nullformat(datal[i].customerInfoEmail) + "</td>";
+				if(datal[i].status == 0) {
+					str += "<td>" + '启用' + "</td>";
+				} else {
+					str += "<td>" + '禁用' + "</td>";
+				}
+				str += '</tr>';
+			}
+			$("#employeeInfo_tbody").append(str);
+			return false;
+		}
+
+		function del_employeeInfo(del_li) {
+			if(confirm("确认删除该员工吗？")) {
+				var del_user_id = $(del_li).parent().attr("enterpriseEmpId");
+				var param = {
+					"enterpriseEmpId": del_user_id
+				};
+				var otype = "get";
+				var osync = false;
+				var reqResult = httpRequest(employee_deleteEnterpriseEmp_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert("删除成功");
+					window.location.reload();
+				} else {
+					alert(reqResult.message);
+				}
+			}
+		}
+	</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

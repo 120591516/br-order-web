@@ -1,0 +1,399 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<div class="fakeloader"></div>
+	<section class="content-header">
+		<div class="margin-bottom">
+			<h2><small>教育程度</small></h2>
+		</div>
+		<ol class="breadcrumb">
+			<li>
+				<a href="#">字典维护</a>
+			</li>
+			<li class="active">教育程度</li>
+		</ol>
+	</section>
+	<!-- /Content Header (Page header) -->
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<div class="box-header">
+						<div class="row">
+							<div class="col-md-8">
+								<h3 class="box-title margin">列表</h3>
+							</div>
+							<div class="col-md-4">
+								<div class="row">
+								    <div class="col-md-4 col-md-offset-8">
+								        <a href="#add_edu" data-toggle="modal" class="btn btn-default margin" id="addConTypeDic">添加</a>
+							        </div>							
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="box-body">
+						<table class="table formCss">
+							<thead>
+								<tr>
+									<th>操作</th>
+									<th>教育程度名称</th>
+									<th>教育程度代码</th>
+									<th>输入码</th>
+									<th>创建时间</th>
+									<th>状态</th>
+								</tr>
+								<tr class="warning no-result">
+									<td colspan="7"><i class="fa fa-warning"></i>没有任何搜索结果!</td>
+								</tr>
+							</thead>
+							<tbody id="edu_tbody_main"></tbody>
+						</table>
+						<div class="row">
+							<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /Main content -->
+	<!--模态框添加-->
+	<div class="modal fade" id="add_edu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">教育程度</h4>
+				</div>
+				<div class="modal-body">
+					<form class="bs-example bs-example-form" role="form" id="add_edu_formNews"> 
+						<div class="input-group">
+							<span class="input-group-addon">教育程度名称</span>
+							<input type="text" id="add_edu_name" class="form-control" name="educationName" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">教育程度代码</span>
+							<input type="text" id="add_edu_code" class="form-control check_userloginname_validate" name="educationCode" aria-describedby="basic-addon1" maxlength='10' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_30">输入码</span>
+							<input type="text" id="add_edu_input_code" class="form-control check_userphone_validate" name="inputCode" aria-describedby="basic-addon1" required>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="submit" class="btn btn-primary" data-dismiss="modal" id="add_edu_btn">提交</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--模态框修改-->
+	<div class="modal fade" id="edit_edu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">教育程度</h4>
+				</div>
+				<div class="modal-body">
+					<form class="bs-example bs-example-form" role="form" id="edit_edu_formNews">
+						<input type="hidden" name="idEducation" id="edit_idEducation_hidden" />
+						
+						<div class="input-group">
+							<span class="input-group-addon">教育程度名称</span>
+							<input type="text" id="edit_edu_name" class="form-control" name="educationName" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">教育程度代码</span>
+							<input type="text" id="edit_edu_code" class="form-control check_userloginname_validate" name="educationCode" aria-describedby="basic-addon1" maxlength='10' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">输入码</span>
+							<input type="text" id="edit_edu_input_code" class="form-control check_userphone_validate" name="inputCode" aria-describedby="basic-addon1" required>
+						</div>
+						<div class="input-group" id='edit_edu_educationStatus'>
+							<span class="input-group-addon userlist_educationStatus_right_border">状 态</span>
+							<input type="radio" name='educationStatus' value="0" class="userlist_educationStatusinput_vertical" />启用
+							<input type="radio" name='educationStatus' value="1" class="userlist_educationStatusinput_vertical" />禁用
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" id='edit_edu_save'>保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--模态框查看-->
+	<div class="modal fade" id="check_edu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">教育程度</h4>
+				</div>
+				<div class="modal-body">
+					<form class="bs-example bs-example-form" role="form" id="check_edu_formNews">
+						<div class="input-group">
+							<span class="input-group-addon">教育程度名称</span>
+							<input type="text" id="check_edu_name" class="form-control" name="educationName" aria-describedby="basic-addon1" disabled="disabled">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">教育程度代码</span>
+							<input type="text" id="check_edu_code" class="form-control check_userloginname_validate" name="educationCode" aria-describedby="basic-addon1" disabled="disabled">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">输入码</span>
+							<input type="text" id="check_edu_input_code" class="form-control check_userphone_validate" name="inputCode" aria-describedby="basic-addon1" disabled="disabled">
+						</div>
+						
+						<div class="input-group">
+							<span class="input-group-addon">创建时间</span>
+							<input type="text" id="check_edu_create_time" class="form-control" name="educationCreatetime" aria-describedby="basic-addon1" disabled="disabled">
+						</div>
+						<div class="input-group" id='check_edu_educationStatus'>
+							<span class="input-group-addon userlist_educationStatus_right_border">状 态</span>
+							<input type="radio" name='educationStatus' value="0" class="userlist_educationStatusinput_vertical" disabled="disabled" />启用
+							<input type="radio" name='educationStatus' value="1" class="userlist_educationStatusinput_vertical" disabled="disabled" />禁用
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+<script src="/plat/js/create/httpRequest.js"></script>
+<script src="/plat/js/create/contentPublic.js"></script>
+<script src="/plat/js/plugins/extendPagination.js"></script>
+						<!--动画js-->
+<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+<script>
+    //  分页
+    init_page();
+	function init_page() {
+		$('#edu_tbody_main').empty();
+		page_curr=1;
+		init_list();
+		init_pager();
+	}
+	function init_list(){
+		$('#edu_tbody_main').empty();
+		var otype = "post";
+		var osync = false;
+		var param={
+				"page":page_curr,
+				"rows":count_curr		
+			};	
+		var reqResult = httpRequest(education_getEducationList_url,param,otype, osync);
+		if(reqResult.result == 0) {
+			total_count = reqResult.data.total;
+			createTable(page_curr, limit, total_count, reqResult);			
+		}
+		return false;
+	}
+    //  初始化分页信息
+		function init_pager() {
+			$('#callBackPager').extendPagination({
+				totalCount : total_count,
+				showCount : count_curr,
+				limit : limit,
+				callback : function(curr, limit, totalCount) {
+					page_curr = curr;
+					total_count = totalCount;
+					init_list();
+				}
+			});
+		}
+    //  列表展示
+	function createTable(currPage, limit, total,dataBack) {
+			var showNum = limit;
+    		if (total - (currPage * limit) < 0) showNum = total - ((currPage - 1) * limit);
+	        for(var i = 0; i < showNum; i++){
+	        	var Tbody = document.getElementById('edu_tbody_main');
+				var lRow = Tbody.insertRow(); //创建行
+				var educationStatus = (dataBack.data.list[i].educationStatus === 0) ? "启用" : "禁用";
+				var operationByRole = dataBack.operationList; //获取操作类型
+				var operationByRoleAdd = document.getElementById('addConTypeDic'); //获取添加按钮
+				//				判断操作类型
+				(operationByRole.educationManage_insert === false) ? operationByRoleAdd.style.display = 'none': operationByRoleAdd.style.display = ''; //1为添加
+				//创建列
+				var firstColumn = lRow.insertCell();
+				var secondColumn = lRow.insertCell();
+				var thirdColumn = lRow.insertCell();
+				var forthColumn = lRow.insertCell();
+				var fifthColumn = lRow.insertCell();
+				var sixthColumn = lRow.insertCell();
+				firstColumn.setAttribute('educationid', dataBack.data.list[i].idEducation); //给td添加属性
+	        	//添加第一列内容
+				//创建查看标签
+				var aCheck = document.createElement("a");
+				var iElement = document.createElement("i");
+				(operationByRole.educationManage_detail === true) ? iElement.className = "fa fa-eye": ''; //4为查看
+				aCheck.appendChild(iElement);
+				aCheck.setAttribute("href", "#check_edu");
+				aCheck.setAttribute("data-toggle", "modal");
+				aCheck.style.marginLeft = "5px";
+				aCheck.onclick = function() {
+					check_edu(this)
+				};
+				firstColumn.appendChild(aCheck);
+				//创建编辑标签
+				var aEdit = document.createElement("a");
+				var iElement = document.createElement("i");
+				(operationByRole.educationManage_update === true) ? iElement.className = "fa fa-pencil": ''; //3为更新
+				aEdit.appendChild(iElement);
+				aEdit.setAttribute("href", "#edit_edu");
+				aEdit.setAttribute("data-toggle", "modal");
+				aEdit.style.marginLeft = "5px";
+				aEdit.onclick = function() {
+					edit_edu(this)
+				};
+				firstColumn.appendChild(aEdit);
+				//创建删除标签
+				var aDelete = document.createElement("a");
+				var iElement = document.createElement("i");
+				(operationByRole.educationManage_delete === true) ? iElement.className = "fa fa-trash-o": ''; //2为删除
+				aDelete.appendChild(iElement);
+				aDelete.style.marginLeft = "5px";
+				aDelete.onclick = function() {
+					del_education(this)
+				};
+				firstColumn.appendChild(aDelete);
+				//添加第二列内容	
+				secondColumn.innerText = dataBack.data.list[i].educationName;
+				//添加第三列内容	
+				thirdColumn.innerText = dataBack.data.list[i].educationCode;
+				//添加第四列内容	
+				forthColumn.innerText = dataBack.data.list[i].inputCode;
+				//添加第五列内容	
+				fifthColumn.innerText = getLocalTime(dataBack.data.list[i].educationCreatetime);
+				//添加第六列内容	
+				sixthColumn.innerText = educationStatus;
+	        }
+	        	return false;
+			}
+    //  添加信息
+	$('#add_edu_btn').on('click', function() {
+			var edu_name = $('#add_edu_name').val();
+			var edu_code = $('#add_edu_code').val();
+			var edu_inputcode = $('#add_edu_input_code').val();
+			if(edu_name == '' || edu_code == '' || edu_inputcode == '') {
+				return false;
+			} else {
+				var param = $('#add_edu_formNews').serialize();
+				var otype = "post";
+				var osync = false;
+				var reqResult = httpRequest(education_addEducation_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert("添加成功");
+					window.location.reload();
+				} else {
+					alert(reqResult.message);
+				}
+			}
+			})
+	//	查看回显信息
+	function check_edu(check) {
+		var edit_edu_id = $(check).parent().attr("educationid");
+		var param = {
+			"idEducation": edit_edu_id
+		};
+		var otype = "get";
+		var osync = false;
+		var reqResult = httpRequest(education_getEducationById_url, param, otype, osync);
+		if(reqResult.result == 0) {
+			var educationName = $('#check_edu_name');
+			var educationCode = $('#check_edu_code');
+			var Inputcode = $('#check_edu_input_code');
+			var educationCreatetime = $('#check_edu_create_time');
+			var educationStatus = $('#check_edu_educationStatus input');
+			educationName.val(reqResult.data.educationName);
+			educationCode.val(reqResult.data.educationCode);
+			Inputcode.val(reqResult.data.inputCode);
+			educationCreatetime.val(getLocalTime(reqResult.data.educationCreatetime));
+			if(reqResult.data.educationStatus == 0) {
+				educationStatus[0].checked = "checked";
+			} else {
+				educationStatus[1].checked = "checked";
+			}
+		} else {
+			alert(reqResult.message);
+		}
+	}
+    //  删除
+	function del_education(del_li) {
+		if(confirm("确认禁用该教育程度吗？")) {
+			var del_user_id = $(del_li).parent().attr("educationid");
+			var param = {
+				"idEducation": del_user_id
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(education_deleteEducation_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert("禁用成功！");
+				window.location.reload();
+			} else {
+				alert(reqResult.message);
+			}
+		}
+	}
+	//	編輯回显信息
+	function edit_edu(edit_li) {
+		var edit_edu_id = $(edit_li).parent().attr("educationid");
+		var param = {
+			"idEducation": edit_edu_id
+		};
+		var otype = "get";
+		var osync = false;
+		var reqResult = httpRequest(education_getEducationById_url, param, otype, osync);
+		if(reqResult.result == 0) {
+			$('#edit_idEducation_hidden').val(reqResult.data.idEducation);//回显
+			var educationName = $('#edit_edu_name');
+			var educationCode = $('#edit_edu_code');
+			var educationInputcode = $('#edit_edu_input_code');
+			var educationStatus = $('#edit_edu_educationStatus input');
+			educationName.val(reqResult.data.educationName);
+			educationCode.val(reqResult.data.educationCode);
+			educationInputcode.val(reqResult.data.inputCode);
+			if(reqResult.data.educationStatus == 0) {
+				educationStatus[0].checked = "checked";
+			} else {
+				educationStatus[1].checked = "checked";
+			}
+		} else {
+			alert(reqResult.message);
+		}
+	}
+	//  编辑保存信息
+	$('#edit_edu_save').on('click', function() {
+			var editeducation_name = $('#edit_edu_name').val();
+			var editeducation_code = $('#edit_edu_code').val();
+			var editeducation_inputcode = $('#edit_edu_input_code').val();
+			var editeducation_educationStatus = $('#edit_edu_educationStatus input').val();
+			if(editeducation_name == '' || editeducation_code == '' || editeducation_inputcode == ''||editeducation_educationStatus=='') {
+				alert('请输入完整信息！');
+				return false;
+			} else {
+				var param = $('#edit_edu_formNews').serialize();
+				var otype = "post";
+				var osync = false;
+				var reqResult = httpRequest(education_updateEducation_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert('编辑成功!');
+					window.location.reload();
+				} else {
+					alert(reqResult.message);
+				}
+			}
+		})
+</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

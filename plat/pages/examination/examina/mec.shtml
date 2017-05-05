@@ -1,0 +1,646 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<div class="fakeloader"></div>
+	<section class="content-header">
+		<div class="margin-bottom">
+			<h2>
+				<small>体检机构</small>
+			</h2>
+		</div>
+		<ol class="breadcrumb">
+			<li>
+				<a href="#">体检中心</a>
+			</li>
+			<li class="active">体检机构</li>
+		</ol>
+		<div class="box">
+			<!--box-header -->
+			<div class="box-header">
+				<h3 class="box-title col-lg-9 col-md-9 col-sm-9 col-xs-9">搜索</h3>
+				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 txt_r">
+					<a class="btn btn-default" id='addMecInfo' href="/plat/pages/examination/examina/addInformation.shtml?param=MecAdd">添 加</a>
+				</div>
+			</div>
+			<div class="box-body">
+				<form class="bs-example-form padding_l42px" role="form">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">名称</span> <input type="text" class="form-control" id="orgShortName" placeholder="名称">
+								</div>
+							</div>
+
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">性质</span>
+									<select class="form-control selectpicker" id="orgNature">
+										<option value="please">全部</option>
+										<option value="2">医院</option>
+										<option value="1">体检机构</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">等级</span>
+									<select class="form-control selectpicker" id="orgLevelId">
+										<option value="">全部</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">状态</span>
+									<select class="form-control selectpicker" id="orgStatus">
+										<option value="please">全部</option>
+										<option value="0">正常</option>
+										<option value="1">禁用</option>
+										<option value="2">待审核</option>
+										<option value="3">审核未通过</option>
+									</select>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">省份</span>
+									<select class="form-control selectpicker prov" id="provinceId">
+
+									</select>
+								</div>
+							</div>
+
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">市</span>
+									<select class="form-control selectpicker city" id="cityId">
+
+									</select>
+								</div>
+							</div>
+
+						</div>
+						<div class="col-md-6">
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">区</span>
+									<select class="form-control selectpicker dist" id="areaId">
+
+									</select>
+								</div>
+							</div>
+
+							<div class="col-md-6 txt_r">
+								<div class="input-group float_right">
+									<a class="btn btn-default fa fa-search" onclick="searchAll()">搜 索</a>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+
+				</form>
+			</div>
+
+			<!-- /.box-header -->
+		</div>
+	</section>
+
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<div class="box-header">
+						<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">列表</h3>
+					</div>
+					<div class="box-body">
+						<table class="table formCss" id="example3">
+							<thead>
+								<tr>
+									<th>操作</th>
+									<th>名称</th>
+									<th>全称</th>
+									<th>性质</th>
+									<th>等级</th>
+									<th>地址</th>
+									<th>状态</th>
+								</tr>
+							</thead>
+							<tbody id="mainContent">
+							</tbody>
+						</table>
+						<div class="row">
+							<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!--模态框修改-->
+	<div class="modal fade" id="myModal_check" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="box">
+					<div class="box-body">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel_edit">审核信息</h4>
+						</div>
+						<div class="modal-body">
+							<form class="bs-example-form form-horizontal formCss" role="form" id="form_check">
+								<input id="orgId" name="orgId" type="text" hidden="hidden" />
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>审核状 态</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px' id='orgReviewResult'>
+										<input type="radio" name='orgReviewResult' value="0" class="userlist_fDisabledinput_vertical" checked="checkedtxt_r"/>通过
+										<input type="radio" name='orgReviewResult' value="3" class="userlist_fDisabledinput_vertical" />不通过
+									</div>
+								</div>
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>审核意见</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8' id='orgReviewResult'>
+										<textarea class="form-control" id="textareaInfo" name="orgReviewMessage"></textarea>
+									</div>
+								</div>
+								<ul id="auditInfo"></ul>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal" id='MecCheckTJ'>提交</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+	<!-- jQuery 2.2.0 -->
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<script src="/plat/js/plugins/extendPagination.js"></script>
+	<script src="/plat/js/create/httpRequest.js"></script>
+	<script src="/plat/js/create/contentPublic.js"></script>
+	<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<script>
+		init_page();
+		$('.prov').on('change', function() {
+			var prov = $(this).val();
+			prov_city(prov);
+		})
+
+		function init_page() {
+			page_curr = 1;
+			$('#mainContent').children('tbody').empty();
+			prov_init();
+			//1.请求后端信息并展示 
+			mecSearch();
+			init_pager();
+		}
+
+		//审核回显
+		function MecCheckShow(MecCheckId) {
+			var MecCheckId = $(MecCheckId).parent().attr("orgId");
+			$('#orgId').val(MecCheckId); //回显
+			var param = {
+				"orgId": MecCheckId
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(init_addInformation_judgeParam, param, otype, osync);
+			if(reqResult.result == 0) {
+				$('#auditInfo').empty();
+				var auditInfoStringA = '';
+				var auditInfoStringB = '';
+				var auditInfoStringC = '';
+				var auditInfoInfo = reqResult.data.list;
+				if(reqResult.data != null & reqResult.data.list != '') {
+					switch(reqResult.data.current.orgReviewResult) {
+						case 0:
+							$('#form_check div').hide();
+							for(var k = 0; k < auditInfoInfo.length; k++) {
+								auditInfoStringA += '<li>审核状态:通过</li>';
+								auditInfoStringA += '<li>审核意见:' + auditInfoInfo[k].orgReviewMessage + '</li>';
+								auditInfoStringA += '<li>审核时间:' + getLocalTime(auditInfoInfo[k].orgReviewCreateTime) + '</li>';
+								auditInfoStringA += '<hr/>';
+							}
+							$('#auditInfo').append(auditInfoStringA);
+							$('#MecCheckTJ').attr('disabled', 'disabled');
+							break;
+						case 1:
+							$('#form_check div').show();
+							var orgStatus = $('#orgReviewResult input');
+							$('#textareaInfo').val(reqResult.data.current.orgReviewMessage);
+							orgStatus[2].checked = 'checked';
+							for(var h = 0; h < auditInfoInfo.length; h++) {
+								auditInfoStringB += '<li>审核状态:待审核</li>';
+								auditInfoStringB += '<li>审核意见:' + auditInfoInfo[h].orgReviewMessage + '</li>';
+								auditInfoStringB += '<li>审核时间:' + getLocalTime(auditInfoInfo[h].orgReviewCreateTime) + '</li>';
+								auditInfoStringB += '<hr/>';
+							}
+							$('#auditInfo').append(auditInfoStringB);
+							$('#MecCheckTJ').removeAttr('disabled');
+							break;
+						case 3:
+							$('#form_check div').show();
+							var orgStatus = $('#orgReviewResult input');
+							$('#textareaInfo').val(reqResult.data.current.orgReviewMessage);
+							orgStatus[1].checked = 'checked';
+							for(var l = 0; l < auditInfoInfo.length; l++) {
+								auditInfoStringC += '<li>审核状态:已审核未通过</li>';
+								auditInfoStringC += '<li>审核意见:' + auditInfoInfo[l].orgReviewMessage + '</li>';
+								auditInfoStringC += '<li>审核时间:' + getLocalTime(auditInfoInfo[l].orgReviewCreateTime) + '</li>';
+								auditInfoStringC += '<hr/>';
+							}
+							$('#auditInfo').append(auditInfoStringC);
+							$('#MecCheckTJ').removeAttr('disabled');
+							break;
+
+					}
+				} else {
+					$('#form_check div').show();
+					$('#MecCheckTJ').removeAttr('disabled');
+				}
+
+			}
+		}
+		//等级
+		$('#orgNature').on('change', function() {
+				levelInfo();
+				return false;
+			})
+			//		等级信息
+		function levelInfo() {
+			var orgNature = $('#orgNature').val();
+
+			if(orgNature == 2) {
+				init_org_info_level_data("#orgLevelId");
+			} else if(orgNature == 'please') {
+				$('#orgLevelId').empty().prepend('<option value="">全部</option>');
+			} else {
+				$('#orgLevelId').empty().prepend('<option value="1000">体检机构</option>');
+			}
+		}
+		//审核保存状态内容
+		$('#MecCheckTJ').on('click', function() {
+			var otype = "post"
+			var osync = false;
+			var param = $('#form_check').serialize();
+			var reqResult = httpRequest(mec_check_edit, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert('修改成功');
+				window.location.reload();
+			} else {
+				alert(reqResult.message);
+			}
+		})
+
+		//搜索请求
+		function searchAll() {
+			mecSearch();
+			init_pager();
+		}
+
+		//请求后端信息并展示
+		function mecSearch() {
+			//1.采集参数数据
+			var param = initParam();
+			//2.请求后台
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(mecSearchOul, param, otype, osync);
+			if(reqResult.result == 0) {
+				//4.展示数据
+				total_count = reqResult.data.total;
+				createTable(page_curr, limit, total_count, reqResult);
+			}
+			return false;
+		}
+		// 初始化分页信息
+		function init_pager() {
+			$('#callBackPager').extendPagination({
+				totalCount: total_count,
+				showCount: count_curr,
+				limit: limit,
+				callback: function(curr, limit, totalCount) {
+					page_curr = curr;
+					total_count = totalCount;
+					mecSearch();
+				}
+			});
+		}
+		//初始化参数信息
+		function initParam() {
+			var orgShortName = $('#orgShortName').val().trim();
+			var orgNature = $('#orgNature').val().trim();
+			var orgLevelId = $('#orgLevelId').val().trim();
+			var orgStatus = $('#orgStatus').val().trim();
+			var provinceId = $('#provinceId').val();
+			var cityId = $('#cityId').val();
+			var areaId = $('#areaId').val();
+			$('#mainContent').empty();
+			//抓取分页信息
+			var param = {
+				"page": page_curr,
+				"rows": count_curr
+			};
+			if(orgShortName) {
+				param.orgShortName = orgShortName;
+			}
+			if(orgNature != "please") {
+				param.orgNature = orgNature;
+			}
+			if(orgLevelId != "please") {
+				param.orgLevelId = orgLevelId;
+			}
+			if(orgStatus != "please") {
+				param.orgStatus = orgStatus;
+			}
+			if(provinceId) {
+				param.provinceId = provinceId;
+			}
+			if(cityId) {
+				param.cityId = cityId;
+			}
+			if(areaId) {
+				param.areaId = areaId;
+			}
+			return param;
+		}
+
+		//展示数据
+		function createTable(currPage, limit, total, dataBack) {
+			var showNum = limit;
+			if(total - (currPage * limit) < 0) showNum = total - ((currPage - 1) * limit);
+			for(var i = 0; i < showNum; i++) {
+				var statuWord = "";
+				var operationList = dataBack.operationList; //获取操作类型
+				var operationListAdd = document.getElementById('addMecInfo'); //获取添加按钮
+				//				判断操作类型
+				(operationList.org_insert === false) ? operationListAdd.style.display = 'none': operationListAdd.style.display = ''; //1为添加
+				switch(dataBack.data.list[i].orgStatus) {
+					case 0:
+						statuWord = "启用"
+						break;
+					case 1:
+						statuWord = "禁用"
+						break;
+					case 2:
+						statuWord = "待审核"
+						break;
+					default:
+						statuWord = "已审核未通过"
+				}
+				var natureWord = (dataBack.data.list[i].orgNature === 2) ? "医院" : "体检机构";
+				var LevelNameWord = (dataBack.data.list[i].orgLevelName === null) ? "" : dataBack.data.list[i].orgLevelName;
+				var Tbody = document.getElementById('mainContent');
+				var lRow = Tbody.insertRow(); //创建行		
+				//创建列
+				var firstColumn = lRow.insertCell();
+				var secondColumn = lRow.insertCell();
+				var thirdColumn = lRow.insertCell();
+				var forthColumn = lRow.insertCell();
+				var fifthColumn = lRow.insertCell();
+				var sixthColumn = lRow.insertCell();
+				var seventhColumn = lRow.insertCell();
+				firstColumn.setAttribute('orgId', dataBack.data.list[i].orgId); //给td添加属性
+				//添加第一列内容
+				//创建查看标签
+				var aCheck = document.createElement("a");
+				var iElement = document.createElement("i");
+				(operationList.org_detail ===true) ? iElement.className = "fa fa-eye": ''; //4为查看
+				iElement.className = "fa fa-eye";
+				aCheck.appendChild(iElement);
+				aCheck.setAttribute("href", "checkOrgInform.shtml?orgId=" + dataBack.data.list[i].orgId);
+				aCheck.setAttribute("title", "查看信息");
+				aCheck.style.marginLeft = "5px";
+				firstColumn.appendChild(aCheck);
+
+				//创建编辑标签
+				if(dataBack.data.list[i].orgStatus!= 2) {
+					var aEdit = document.createElement("a");
+					var iElement = document.createElement("i");
+					(operationList.org_update === true) ? iElement.className = "fa fa-pencil": ''; //3为更新
+					aEdit.appendChild(iElement);
+					aEdit.setAttribute("href", "addInformation.shtml?param=" + dataBack.data.list[i].orgId);
+					aEdit.setAttribute("title", "编辑信息");
+					aEdit.style.marginLeft = "5px";
+					//				    aEdit.onclick=function(){Judge(this)};
+					firstColumn.appendChild(aEdit);
+				}
+
+				//创建删除标签
+				var aDelete = document.createElement("a");
+				var iElement = document.createElement("i");
+				(operationList.org_delete === true) ? iElement.className = "fa fa-trash-o": ''; //2为删除
+				aDelete.appendChild(iElement);
+				aDelete.setAttribute("title", "删除信息");
+				aDelete.style.marginLeft = "5px";
+				aDelete.onclick = function() {
+					del_hospital(this)
+				};
+				firstColumn.appendChild(aDelete);
+
+				//创建审核标签
+				if(dataBack.data.list[i].orgStatus != 0) {
+					var aReview = document.createElement("a");
+					var iElement = document.createElement("i");
+					(operationList.org_review === true) ? iElement.className = "fa fa-gavel": '';
+					aReview.appendChild(iElement);
+					aReview.setAttribute("title", "审核信息");
+					aReview.setAttribute("href", "#myModal_check");
+					aReview.setAttribute("data-toggle", "modal");
+					aReview.style.marginLeft = "5px";
+					aReview.onclick = function() {
+						MecCheckShow(this)
+					};
+					firstColumn.appendChild(aReview);
+				}
+
+				//创建门店标签
+				var aStore = document.createElement("a");
+				var iElement = document.createElement("i");
+				(operationList.org_to_orgBranch === true) ? iElement.className = "fa fa-share-alt-square": '';
+				aStore.appendChild(iElement);
+				aStore.setAttribute("title", "门店信息");
+				aStore.setAttribute("org_status", dataBack.data.list[i].orgStatus);
+				aStore.style.marginLeft = "5px";
+				aStore.onclick = function() {
+					org_judge(this, "/plat/pages/examination/store/storeManagement.shtml?orgId=")
+				};
+				firstColumn.appendChild(aStore);
+
+				//创建查看套餐标签
+				var aPackage = document.createElement("a");
+				var iElement = document.createElement("i");
+				(operationList.org_to_orgSuite === true) ? iElement.className = "fa fa-link": '';
+				aPackage.appendChild(iElement);
+				aPackage.setAttribute("title", "查看套餐信息");
+				aPackage.setAttribute("org_status", dataBack.data.list[i].orgStatus);
+				aPackage.onclick = function() {
+					org_judge(this, "/plat/pages/examination/package/packAge.shtml?orgId=")
+				};
+				aPackage.style.marginLeft = "5px";
+				firstColumn.appendChild(aPackage);
+
+				//添加第二列内容	
+				secondColumn.innerText = dataBack.data.list[i].orgShortName.substring(0, 9);
+
+				//添加第三列内容	
+				thirdColumn.innerText = dataBack.data.list[i].orgTotalName.substring(0, 9);
+
+				//添加第四列内容	
+				forthColumn.innerText = natureWord.substring(0, 9);
+
+				//添加第五列内容	
+				fifthColumn.innerText = LevelNameWord.substring(0, 9);
+
+				//添加第六列内容	
+				sixthColumn.innerText = dataBack.data.list[i].orgAddress.substring(0, 9);
+
+				//添加第七列内容	
+				seventhColumn.innerText = statuWord.substring(0, 9);
+
+			}
+
+			return false;
+		}
+
+		function org_judge(org_param, org_url) {
+			var org_status = $(org_param).attr('org_status');
+			var orgId = $(org_param).parent().attr('orgId');
+			if(org_status == 0) {
+				window.location.href = org_url + orgId;
+			} else {
+				confirm('该机构状态未通过审核！');
+			}
+		}
+
+		function del_hospital(del_li) {
+			if(confirm("确认禁用该体检机构吗？")) {
+				var delHospitalId = $(del_li).parent().attr("orgId");
+				var param = {
+					"orgId": delHospitalId
+				};
+				var otype = "post";
+				var osync = false;
+				var reqResult = httpRequest(init_mec_dele, param, otype, osync);
+				if(reqResult.result == 0) {
+					if(reqResult.data == 0) {
+						alert("禁用成功！");
+						window.location.reload();
+					} else {
+						alert('该体检机构不符合禁用条件，请核实后操作！');
+						window.location.reload();
+					}
+				} else {
+					alert(reqResult.message);
+				}
+			}
+		}
+
+		//		省市区三级联动
+		// 省级联动 省
+		function prov_init() {
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(getAllProvince_url, null, otype, osync);
+			if(reqResult.result == 0) {
+				var datal = reqResult.data;
+				var provSelect = $('.prov');
+				var html = "<option selected='selected' value=''>全部</option>";
+				if(datal.id != "") {
+					for(var i = 0; i < datal.length; i++) {
+						html += "<option value= '" + datal[i].id + "'>" + datal[i].provinceName + "</option>";
+					}
+					$(".prov").empty().append(html);
+				}
+
+			} else {
+
+				$(".prov").val('');
+			}
+
+			$(".dist").empty();
+			$(".city").empty();
+		}
+		// 省级联动 市
+		$('.prov').on('change', function() {
+			var prov = $(this).val();
+			prov_city(prov);
+		})
+
+		function prov_city(prov) {
+			var param = {
+				'provinceId': prov
+			}
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(getCityByProvinceId_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				var datal = reqResult.data;
+				var citySelect = $('.city');
+				var html = "<option selected='selected' value=''>全部</option>";
+				if(prov != "") {
+
+					if(datal.id != "") {
+						for(var i = 0; i < datal.length; i++) {
+							html += "<option value= '" + datal[i].id + "'>" + datal[i].cityName + "</option>";
+						}
+					}
+				} else {
+
+					$(".city").empty();
+				}
+				citySelect.empty().append(html);
+			} else {
+				$(".city").empty();
+
+			}
+			$(".dist").empty();
+		}
+		// 省级联动 区
+		$('.city').on('change', function() {
+			var town = $(this).val();
+			city_town(town);
+		})
+
+		function city_town(town) {
+			var param = {
+				'cityId': town
+			}
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(getDistrictByCityId_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				var datal = reqResult.data;
+				var distSelect = $('.dist');
+				var html = "<option selected='selected' value=''>全部</option>";
+				if(datal.id != "") {
+					for(var i = 0; i < datal.length; i++) {
+
+						html += "<option value= '" + datal[i].id + "'>" + datal[i].districtName + "</option>";
+					}
+				}
+				distSelect.empty().append(html);
+
+			} else {
+				$('.dist').empty();
+			}
+		}
+	</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

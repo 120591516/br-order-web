@@ -1,0 +1,142 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<div class="fakeloader"></div>
+	<section class="content-header">
+		<div class="margin-bottom">
+			<h2><small>系统设置</small></h2>
+		</div>
+		<ol class="breadcrumb">
+			<li>
+				<a href="#">系统设置</a>
+			</li>
+			<li class="active">系统设置</li>
+		</ol>
+	</section>
+
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<div class="box-header">
+						<div class="row">
+							<div class="col-xs-12 col-md-8">
+								<h3 class="box-title">列表</h3>
+							</div>
+						</div>
+
+					</div>
+					<div class="box-body">
+						<table class="table formCss">
+							<thead>
+								<tr>
+									<th>名称</th>
+									<th>状态</th>
+								</tr>
+							</thead>
+							<tbody id="mainContent"></tbody>
+						</table>
+					</div>
+					<div class="row">
+						<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /Main content -->
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<!-- Bootstrap 3.3.6 -->
+	<script src="/plat/js/plugins/bootstrap.min.js"></script>
+	<script src="/plat/js/create/httpRequest.js"></script>
+	<script src="/plat/js/create/public.js"></script>
+	<script src="/plat/js/create/AjaxAddr.js"></script>
+	<script src="/plat/js/plugins/extendPagination.js"></script>
+	<script src="/plat/js/create/contentPublic.js"></script>
+	<script src="/plat/js/plugins/jquery.validate.js"></script>
+	<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			createTable();
+		})
+		function createTable() {
+			$("#mainContent").empty();
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(getSystemUrl, null, otype, osync);
+			if(reqResult.result == 0) {
+				var str = '';
+				var datal = reqResult.data;
+				str += "<tr><td>缓存</td>";
+				if(datal.Redis == 1) {
+					str += "<td><div class='div-outside' onclick='redisStatus(this)'><div class='div-inner'><span class='span-on'>ON</span><span class='span-blank'>&nbsp;</span><span class='span-off'>OFF</span></div></div></td></tr>";
+				} else {
+					str += "<td><div class='div-outside' onclick='redisStatus(this)'><div class='div-inner margin-left'><span class='span-on'>ON</span><span class='span-blank'>&nbsp;</span><span class='span-off'>OFF</span></div></div></td></tr>";
+				}
+				str += "<tr><td>搜索引擎</td>";
+				if(datal.search == 1) {
+					str += "<td><div class='div-outside' onclick='searchStatus(this)'><div class='div-inner'><span class='span-on'>ON</span><span class='span-blank'>&nbsp;</span><span class='span-off'>OFF</span></div></div></td></tr>";
+				} else {
+					str += "<td><div class='div-outside' onclick='searchStatus(this)'><div class='div-inner margin-left'><span class='span-on'>ON</span><span class='span-blank'>&nbsp;</span><span class='span-off'>OFF</span></div></div></td></tr>";
+				}
+				$("#mainContent").append(str);
+				return false;
+			}
+		}
+
+		function redisStatus(redisStatus) {
+			var Redis;
+			if($(redisStatus).children().hasClass('margin-left')) {
+				Redis = 1;
+			} else {
+				Redis = 0;
+			}
+			var otype = "get";
+			var osync = false;
+			var param = {
+				'configRedis': Redis
+			}
+			var reqResult = httpRequest(editRedisSystemUrl, param, otype, osync);
+			if(reqResult.result == 0) {
+				if(Redis == 1) {
+					$(redisStatus).children().removeClass('margin-left');
+					alert('缓存状态启用成功！');
+				} else {
+					$(redisStatus).children().addClass('margin-left');
+					alert('缓存状态禁用成功！');
+				}
+			} else {
+				alert('缓存状态编辑失败！');
+			}
+		}
+
+		function searchStatus(searchStatus) {
+			var search;
+			if($(searchStatus).children().hasClass('margin-left')) {
+				search = 1;
+			} else {
+				search = 0;
+			}
+			var otype = "get";
+			var osync = false;
+			var param = {
+				'configSearch': search
+			}
+			var reqResult = httpRequest(editSearchSystemUrl, param, otype, osync);
+			if(reqResult.result == 0) {
+				if(search == 1) {
+					$(searchStatus).children().removeClass('margin-left');
+					alert('搜索引擎状态启用成功！');
+				} else {
+					$(searchStatus).children().addClass('margin-left');
+					alert('搜索引擎状态禁用成功！');
+				}
+			} else {
+				alert('搜索引擎状态编辑失败！');
+			}
+		}
+	</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

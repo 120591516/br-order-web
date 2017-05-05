@@ -1,0 +1,263 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Main content -->
+	<div class="fakeloader"></div>
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<div class="box-header">
+						<div class="row">
+							<div class="col-xs-12 col-md-8">
+								<h3 class="box-title">联系人信息</h3></div>
+							<div class="col-xs-6 col-md-4  text-right">
+								<a href="#myModal" class="btn btn-default" data-toggle="modal">添 加</a>
+							</div>
+						</div>
+
+					</div>
+					<!-- /.box-header -->
+					<!-- /.box-header -->
+					<div class="box-body">
+						<table class="table table-bordered table-striped" id="actor">
+							<thead>
+								<tr>
+									<th>操 作</th>
+									<th>联系人</th>
+									<th>职 务</th>
+									<th>邮 箱</th>
+									<th>座 机</th>
+									<th>手 机</th>
+								</tr>
+							</thead>
+							<tbody id="mainContent">
+
+							</tbody>
+						</table>
+					</div>
+					<!-- /.box-body -->
+				</div>
+				<!-- /.box -->
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- /.row -->
+	</section>
+	<div class="row">
+		<div class="col-lg-4">
+
+		</div>
+		<div class="col-lg-4">
+			<div class="col-lg-4"></div>
+			<div class="col-lg-4">
+				<button type="button" class="btn btn-default btn-lg btn-block" onclick='orgParam(this)'><!--<a href="addInformation.shtml">-->返回基本信息</a></button>
+			</div>
+			<div class="col-lg-4"></div>
+		</div>
+		<div class="col-lg-4">
+
+		</div>
+	</div>
+	<!-- /Main content -->
+</div>
+<!--模态框-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">联系人信息</h4>
+			</div>
+			<div class="modal-body">
+				<form class="bs-example bs-example-form form_usera" role="form" method="post" novalidate="novalidate" id='user_aform'>
+					<input id="orgId" name="orgId" type="text" hidden="hidden" />
+					<div class="input-group">
+						<span class="input-group-addon">联系人</span>
+						<input type="text" id="orgConnName" class="form-control" name="orgConnName" aria-describedby="basic-addon1" required>
+						<span id='spanName'></span>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">职 务</span>
+						<input type="text" id="orgConnPost" class="form-control" name="orgConnPost" aria-describedby="basic-addon1" required>
+						<span></span>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">邮 箱</span>
+						<input type="text" id="orgConnEmail" class="form-control" name="orgConnEmail" aria-describedby="basic-addon1" required>
+						<span></span>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">座 机</span>
+						<input type="text" id="orgConnCall" class="form-control" name="orgConnCall" aria-describedby="basic-addon1">
+						<span class='mobile'></span>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">手 机</span>
+						<input type="email" id="orgConnPhone" class="form-control" name="orgConnPhone" aria-describedby="basic-addon1" required>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="submit" class="btn btn-primary" data-dismiss="modal" id="postTJ">提交</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal -->
+</div>
+
+<!--模态框修改-->
+<div class="modal fade" id="myModal_edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel_edit">联系人信息</h4>
+			</div>
+			<div class="modal-body">
+				<form class="bs-example bs-example-form form_usera" role="form" method="post" novalidate="novalidate" id='edit_aform'>
+					<input id="orgConnId" name="orgConnId" type="text" hidden="hidden" />
+					<div class="input-group">
+						<span class="input-group-addon">联系人</span>
+						<input type="text" id="EditorgConnName" class="form-control" name="orgConnName" aria-describedby="basic-addon1" maxlength='12' required>
+						<span id='spanName'></span>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">职 务</span>
+						<input type="text" id="EditorgConnPost" class="form-control" name="orgConnPost" aria-describedby="basic-addon1" maxlength='10' required>
+						<span></span>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">邮 箱</span>
+						<input type="text" id="EditorgConnEmail" class="form-control" name="orgConnEmail" aria-describedby="basic-addon1" required>
+						<span></span>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">座 机</span>
+						<input type="text" id="EditorgConnCall" class="form-control" name="orgConnCall" aria-describedby="basic-addon1" required>
+						<span class='mobile'></span>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">手 机</span>
+						<input type="email" id="EditorgConnPhone" class="form-control" name="orgConnPhone" aria-describedby="basic-addon1" required>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" id='contact_save'>保存</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal -->
+</div>
+
+<!--#include file="/plat/pages/system/footer.html"-->
+			<!--动画js-->
+<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+<script>
+	function orgParam(orgParam) {
+		var thisURL = document.URL;
+		if(thisURL.indexOf("?") != -1) {
+			var getval = thisURL.split('?')[1];
+			var showval = getval.split("=")[1];
+			window.location.href = 'addInformation.shtml?orgId=' + showval + '';
+		}
+	}
+	window.onload = function() {
+		var thisURL = document.URL;
+		var getval = thisURL.split('?')[1];
+		var JParam = getval.split("=")[1];
+		var judgeParam = JParam.split("#")[0];
+		var otype = "GET"
+		var osync = false;
+		var param = {
+			"orgId": judgeParam
+		};
+		var reqResult = httpRequest(init_addContact_judgeParam, param, otype, osync);
+		if(reqResult.result == 0) {
+			$("#orgId").val(judgeParam);
+			$("#mainContent").empty();
+			var str = '';
+			for(var i = 0; i < reqResult.data.length; i++) {
+				str += "<tr>";
+				str += "<td orgConnId='" + reqResult.data[i].orgConnId + "'><a href='#myModal_edit' data-toggle='modal' onclick='edit_Contact(this)'><i class='fa fa-pencil'></i></a> <a href='#' onclick='del_Contact(this)'><i class='fa fa-trash-o'></i></a></td>";
+				str += "<td>" + reqResult.data[i].orgConnName + "</td>";
+				str += "<td>" + reqResult.data[i].orgConnPost + "</td>";
+				str += "<td>" + reqResult.data[i].orgConnEmail + "</td>";
+				str += "<td>" + reqResult.data[i].orgConnCall + "</td>";
+				str += "<td>" + reqResult.data[i].orgConnPhone + "</td>";
+				str += '</tr>';
+			}
+			$("#mainContent").append(str);
+		} else {
+			alert(reqResult.message);
+		}
+	}
+
+	$('#postTJ').on('click', function() {
+		var otype = "post"
+		var osync = false;
+		var param = $('#user_aform').serialize();
+		var reqResult = httpRequest(init_addContact_postTJ_add, param, otype, osync);
+		if(reqResult.result == 0) {
+			alert('添加成功');
+			window.location.reload();
+		} else {
+			alert(reqResult.message);
+		}
+	})
+
+	function del_Contact(del_li) {
+		if(confirm("确认删除该联系人吗？")) {
+			var del_contact_id = $(del_li).parent().attr("orgConnId");
+			var otype = "get"
+			var osync = false;
+			var param = {
+				"orgConnId": del_contact_id
+			};
+			var reqResult = httpRequest(init_addContact_delete, param, otype, osync);
+			if(reqResult.result == 0) {
+				window.location.reload();
+			} else {
+				alert(reqResult.message);
+			}
+
+		}
+	}
+
+	function edit_Contact(edit_li) {
+		var del_contact_id = $(edit_li).parent().attr("orgConnId");
+		var otype = "get"
+		var osync = false;
+		var param = {
+			"orgConnId": del_contact_id
+		};
+		var reqResult = httpRequest(init_addContact_edit_show, param, otype, osync);
+		if(reqResult.result == 0) {
+			$("#orgConnId").val(reqResult.data.orgConnId)
+			$("#EditorgConnName").val(reqResult.data.orgConnName);
+			$("#EditorgConnPost").val(reqResult.data.orgConnPost);
+			$("#EditorgConnEmail").val(reqResult.data.orgConnEmail);
+			$("#EditorgConnCall").val(reqResult.data.orgConnCall);
+			$("#EditorgConnPhone").val(reqResult.data.orgConnPhone);
+		} else {
+			alert(reqResult.message);
+		}
+	}
+
+	$('#contact_save').on('click', function() {
+		var otype = "post"
+		var osync = false;
+		var param = $('#edit_aform').serialize();
+		var reqResult = httpRequest(init_addContact_edit, param, otype, osync);
+		if(reqResult.result == 0) {
+			alert('编辑成功');
+			window.location.reload();
+		} else {
+			alert(reqResult.message);
+		}
+	})
+</script>

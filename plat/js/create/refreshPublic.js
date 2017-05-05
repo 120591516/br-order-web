@@ -1,0 +1,1 @@
+window.location.href = '/plat/pages/system/index.shtml';

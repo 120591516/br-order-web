@@ -1,0 +1,373 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<div class="fakeloader"></div>
+	<section class="content-header">
+		<div class="margin-bottom">
+			<h2><small>语言维护</small></h2>
+		</div>
+		<ol class="breadcrumb">
+			<li>
+				<a href="#">字典维护</a>
+			</li>
+			<li class="active">语言维护</li>
+		</ol>
+		<a href="#" data-toggle="modal" class="label label-success user_mar">添加</a>
+	</section>
+	<!-- /Content Header (Page header) -->
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<!--box-header -->
+					<div class="box-header">
+						<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">列表</h3>
+						<form action="" class="bs-example col-lg-2 col-md-3 col-sm-3 col-xs-3" role="form">
+							<div class="input-group">
+								<input type="text" class="form-control" id="" placeholder="搜索">
+								<span class="input-group-addon" id=""><a href="" class="fa fa-search"></a></span>
+							</div>
+						</form>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+						<table class="table formCss">
+							<thead>
+								<tr>
+									<th>编辑</th>
+									<th>键值</th>
+									<th>语言名称</th>
+									<th>语言名称（英文）</th>
+									<th>语言名称（当地）</th>
+									<th>输入码</th>
+									<th>行序</th>
+									<th>创建时间</th>
+								</tr>
+								<tr class="warning no-result">
+									<td colspan="7"><i class="fa fa-warning"></i>没有任何搜索结果!</td>
+								</tr>
+							</thead>
+							<tbody id="">
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="row">
+							<div class="col-xs-12 col-md-8" id=""></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /Main content -->
+	<!--模态框添加-->
+	<div class="modal fade" id="" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">语言信息</h4>
+				</div>
+				<div class="modal-body">
+					<form class="bs-example bs-example-form" role="form" method="post" novalidate="novalidate" id='user_aform'>
+						<div class="input-group">
+							<span class="input-group-addon">键值</span>
+							<input type="text" id="userLoginName" class="form-control" name="userLoginName" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">语言名称</span>
+							<input type="text" id="userLoginName" class="form-control" name="userLoginName" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+						<span class='userlist_checkloginname'></span>
+						<div class="input-group">
+							<span class="input-group-addon">语言名称（英文）</span>
+							<input type="text" id="userName" class="form-control check_userloginname_validate" name="userName" aria-describedby="basic-addon1" maxlength='10' required>
+						</div>
+						<span class='userlist_checkname'></span>
+						<div class="input-group">
+							<span class="input-group-addon">语言名称（当地）</span>
+							<input type="text" id="userPhone" class="form-control check_userphone_validate" name="userPhone" aria-describedby="basic-addon1" required>
+						</div>
+						<span class='userlist_checkphone'></span>
+						<div class="input-group">
+							<span class="input-group-addon">输入码</span>
+							<input type="text" id="userEmail" class="form-control check_usermail_validate" name="userEmail" aria-describedby="basic-addon1" required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">行序</span>
+							<input type="text" id="userLoginName" class="form-control" name="userLoginName" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">创建时间</span>
+							<input type="text" id="userLoginName" class="form-control" name="userLoginName" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+						<span class=""></span>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="submit" class="btn btn-primary" data-dismiss="modal" id="user_button">提交</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--模态框修改-->
+	<div class="modal fade" id="" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="">语言信息</h4>
+				</div>
+				<div class="modal-body">
+					<form class="bs-example bs-example-form" role="form" id="">
+						<input type="hidden" name="userId" id="" />
+						<div class="input-group">
+							<span class="input-group-addon">键值</span>
+							<input type="text" id="userLoginName" class="form-control" name="userLoginName" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">语言名称</span>
+							<input type="text" id="userLoginName" class="form-control" name="userLoginName" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+						<span class='userlist_checkloginname'></span>
+						<div class="input-group">
+							<span class="input-group-addon">语言名称（英文）</span>
+							<input type="text" id="userName" class="form-control check_userloginname_validate" name="userName" aria-describedby="basic-addon1" maxlength='10' required>
+						</div>
+						<span class='userlist_checkname'></span>
+						<div class="input-group">
+							<span class="input-group-addon">语言名称（当地）</span>
+							<input type="text" id="userPhone" class="form-control check_userphone_validate" name="userPhone" aria-describedby="basic-addon1" required>
+						</div>
+						<span class='userlist_checkphone'></span>
+						<div class="input-group">
+							<span class="input-group-addon">输入码</span>
+							<input type="text" id="userEmail" class="form-control check_usermail_validate" name="userEmail" aria-describedby="basic-addon1" required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">行序</span>
+							<input type="text" id="userLoginName" class="form-control" name="userLoginName" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">创建时间</span>
+							<input type="text" id="userLoginName" class="form-control" name="userLoginName" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+						<span class=""></span>
+						<div class="input-group" id="">
+							<span class="input-group-addon userlist_status_right_border">状 态</span>
+							<input type="radio" name='userStatus' value="0" class="userlist_statusinput_vertical" />启用
+							<input type="radio" name='userStatus' value="1" class="userlist_statusinput_vertical" />禁用
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" id=''>保存</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+
+	<!--模态框查看-->
+	<div class="modal fade" id="" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="">语言信息</h4>
+				</div>
+				<div class="modal-body">
+					<form class="bs-example bs-example-form" role="form" id="">
+						<div class="input-group">
+							<span class="input-group-addon">键值</span>
+							<input type="text" id="userLoginName" class="form-control" name="userLoginName" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">语言名称</span>
+							<input type="text" id="userLoginName" class="form-control" name="userLoginName" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+						<span class='userlist_checkloginname'></span>
+						<div class="input-group">
+							<span class="input-group-addon">语言名称（英文）</span>
+							<input type="text" id="userName" class="form-control check_userloginname_validate" name="userName" aria-describedby="basic-addon1" maxlength='10' required>
+						</div>
+						<span class='userlist_checkname'></span>
+						<div class="input-group">
+							<span class="input-group-addon">语言名称（当地）</span>
+							<input type="text" id="userPhone" class="form-control check_userphone_validate" name="userPhone" aria-describedby="basic-addon1" required>
+						</div>
+						<span class='userlist_checkphone'></span>
+						<div class="input-group">
+							<span class="input-group-addon">输入码</span>
+							<input type="text" id="userEmail" class="form-control check_usermail_validate" name="userEmail" aria-describedby="basic-addon1" required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">行序</span>
+							<input type="text" id="userLoginName" class="form-control" name="userLoginName" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">创建时间</span>
+							<input type="text" id="userLoginName" class="form-control" name="userLoginName" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->
+<!--动画js-->
+<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+<script src="../js/plugins/userPagination.js"></script>
+<!--表单校验-->
+<script src="../js/formValidate.js"></script>
+<!--<script>
+	$(document).ready(function() {
+//			添加用戶信息
+		var flag = false;
+		$("#userLoginName").blur(function() {
+			var username = $(this).val().trim();
+			if(username.length < 6 || username.length > 20) {
+				$(".userlist_checkloginname").html("注册名长度6~20");
+				flag = false;
+				return;
+			} else {
+				$(".userlist_checkloginname").html("<span class='fa  fa-check' ></span>");
+			}
+			var param = {
+				'userName': username
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(userAdmin_getCountByUserName_url, param, otype, osync);
+			if(reqResult.data == 0) {
+				$(".userlist_checkloginname").html("");
+			} else {
+				$(".userlist_checkloginname").html("用户名已存在");
+				flag = false;
+				return;
+			}
+			flag = true;
+
+		});
+		$('#user_button').on('click', function() {
+			var param = $('#user_aform').serialize();
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(userAdmin_insertBrUser_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert("添加成功");
+				window.location.reload();
+			} else {
+				alert(reqResult.message);
+			}
+		});
+	})
+//	查看用户信息
+	function userlist_check(check) {
+		var check_all_userinput_info =$('#see_state input');
+		var check_present_userlist_tr_info =$(check).parent().parent();
+		check_userloginname_info_text =check_present_userlist_tr_info.find('td').eq(1).text();
+		check_userloginname_info_text =check_present_userlist_tr_info.find('td').eq(2).text();
+		check_userphone_info_text = check_present_userlist_tr_info.find('td').eq(3).text();
+		check_usermail_info_text =check_present_userlist_tr_info.find('td').eq(4).text();
+		check_userstate_info_text =check_present_userlist_tr_info.find('td').eq(6).val();
+		$('#check_userloginname').val(check_userloginname_info_text);
+		$('#check_username').val(check_userloginname_info_text);
+		$('#check_userphone').val(check_userphone_info_text);
+		$('#check_usermail').val(check_usermail_info_text);
+		if(check_userstate_info_text  == 0) {
+	
+			check_all_userinput_info[0].checked = "checked";
+	
+		} else {
+			check_all_userinput_info[1].checked = "checked";
+		}
+	}
+	function del_user(del_li) {
+		if(confirm("确认删除该用户吗？")) {
+			var del_user_id = $(del_li).parent().attr("rowid");
+			var param = {
+				"userId": del_user_id
+			};
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(userAdmin_deleteBrUser_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert("删除成功");
+				window.location.reload();
+			} else {
+				alert(reqResult.message);
+			}
+		}
+	}
+	//	//		編輯修改保存信息
+	function editRole(edit_li) {
+		var edit_user_id = $(edit_li).parent().attr("rowId");
+		var param = {
+			"userId": edit_user_id
+		};
+		var otype = "post";
+		var osync = false;
+		var reqResult = httpRequest(userAdmin_getBrUser_url, param, otype, osync);
+		if(reqResult.result == 0) {
+			$("#userLoginName_id").val(reqResult.data.userId);
+			var userName = $('#userLoginName');
+			var formName = $('#form_name');
+			var formPhone = $('#form_phone');
+			var formMail = $('#form_mail');
+			var statu = $('#form_state');
+			var StatuC = $('#form_state input');
+			userName.val(reqResult.data.userLoginName);
+			formName.val(reqResult.data.userName);
+			formPhone.val(reqResult.data.userPhone);
+			formMail.val(reqResult.data.userEmail);
+			if(reqResult.data.userStatus == 0) {
+				StatuC[0].checked = "checked";
+			} else {
+				StatuC[1].checked = "checked";
+			}
+		} else {
+			alert(reqResult.message);
+		}
+	}
+	$('#user_form_save').on('click', function() {
+			var param =$('#form_edit').serialize();
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(userAdmin_updateBrUser_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert('编辑成功');
+				window.location.reload();
+			} else {
+				alert(reqResult.message);
+			}
+		})
+//	表单验证
+	$("#userPhone").blur(function(){
+		checkphone();
+	})
+	$('#userEmail').blur(function(){
+		checkmail();
+	})
+		
+</script>-->

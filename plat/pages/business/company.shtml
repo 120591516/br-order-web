@@ -1,0 +1,279 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<div class="fakeloader"></div>
+	<section class="content-header">
+		<h2><small>公司</small></h2>
+		<ol class="breadcrumb">
+			<li>
+				<a href="#">企业</a>
+			</li>
+			<li class="active">公司</li>
+		</ol>
+		<div class="box">
+			<!--box-headerS -->
+			<div class="box-header">
+				<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">搜索</h3>
+				<div class="col-lg-2 col-md-3 col-sm-3 col-xs-3 txt_r">
+					<a href="/plat/pages/business/company/AddCompanyInfo.shtml" class="btn btn-default" id="add_companyInfo">添加</a>
+					<button type="button" id="comingBack" onclick="storeManagementBack()" class="btn btn-default">返回</button>
+				</div>
+			</div>
+			<!--box-headerE -->
+			<!--box-bodyS -->
+			<div class="box-body">
+				<form class="bs-example-form padding_l42px" role="form">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon">代码</span>
+									<input type="text" class="form-control companyInfo_search_form" name="enterpriseCode" id="search_enterpriseCode" aria-describedby="basic-addon1" maxlength='12' required>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon">营业执照注册号</span>
+									<input type="text" class="form-control companyInfo_search_form" name="enterpriceLicenseNo" id="search_enterpriceLicenseNo" aria-describedby="basic-addon1" maxlength='12' required>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon">联 系 人</span>
+									<input type="text" class="form-control selectpicker companyInfo_search_form" id='search_customerInfoName' name="enterpriceLicensePerson" aria-describedby="basic-addon1" maxlength='10' required>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon">联系电话</span>
+									<input type="text" class="form-control selectpicker companyInfo_search_form" id='search_enterpriseConnEmpPhone' name="enterpriseConnEmpPhone" aria-describedby="basic-addon1" maxlength='10' required>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-12 txt_r">
+								<div class="input-group float_right">
+									<input type="button" class="btn btn-default fa fa-search" id="search_companyInfo_btn" value="搜索" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</section>
+	<!-- /Content Header (Page header) -->
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<!--box-header -->
+					<div class="box-header">
+						<h3 class="box-title col-lg-9 col-md-9 col-sm-9 col-xs-9">列表</h3>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+						<table class="table formCss">
+							<thead>
+								<tr>
+									<th>编辑</th>
+									<th>公司简称</th>
+									<th>公司全称</th>
+									<th>公司代码</th>
+									<th>营业执照</th>
+									<th>企业法人</th>
+									<th>详细地址</th>
+									<th>联系人</th>
+									<th>联系电话</th>
+									<th>创建时间</th>
+									<th>状态</th>
+								</tr>
+								<tr class="warning no-result">
+									<td colspan="7"><i class="fa fa-warning"></i>没有任何搜索结果!</td>
+								</tr>
+							</thead>
+							<tbody id="companyInfo_tbody">
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="row">
+							<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /Main content -->
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<script src="/plat/js/create/httpRequest.js"></script>
+	<script src="/plat/js/create/contentPublic.js"></script>
+	<script src="/plat/js/plugins/extendPagination.js"></script>
+	<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<script>
+		init_page();
+
+		function init_page() {
+			$('#companyInfo_tbody').empty();
+			//1.请求后端信息并展示
+			companyInfoSearch();
+			init_pager();
+		}
+
+		//	初始化页面搜索全部信息
+		function companyInfoSearch() {
+			var param = initParam();
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(company_getEnterprise_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				//4.展示数据
+				total_count = reqResult.data.total;
+				createTable(page_curr, limit, total_count, reqResult);
+			}
+			return false;
+		}
+
+		// 初始化分页信息
+		function init_pager() {
+			$('#callBackPager').extendPagination({
+				totalCount: total_count,
+				showCount: count_curr,
+				limit: limit,
+				callback: function(curr, limit, totalCount) {
+					page_curr = curr;
+					total_count = totalCount;
+					companyInfoSearch();
+				}
+			});
+		}
+
+		//初始化参数信息
+		function initParam() {
+			$('#companyInfo_tbody').empty();
+			var enterpriseFullName = $.trim($("#search_enterpriseFullName").val());
+			var enterpriseCode = $.trim($("#search_enterpriseCode").val());
+			var enterpriceLicenseNo = $.trim($("#search_enterpriceLicenseNo").val());
+			var enterpriseConnEmpPhone = $.trim($('#search_enterpriseConnEmpPhone').val());
+			var customerInfoName = $.trim($('#search_customerInfoName').val());
+			//抓取分页信息
+			var param = {
+				"page": page_curr,
+				"rows": count_curr
+			};
+			if(enterpriseFullName) {
+				param.enterpriseFullName = enterpriseFullName;
+			}
+			if(enterpriseCode) {
+				param.enterpriseCode = enterpriseCode;
+			}
+			if(enterpriceLicenseNo) {
+				param.enterpriceLicenseNo = enterpriceLicenseNo;
+			}
+			if(enterpriseConnEmpPhone) {
+				param.enterpriseConnEmpPhone = enterpriseConnEmpPhone;
+			}
+			if(customerInfoName) {
+				param.customerInfoName = customerInfoName;
+			}
+			return param;
+		}
+
+		//	表格内容展示
+		function createTable(currPage, limit, total, dataBack) {
+			var showNum = limit;
+			if(total - (currPage * limit) < 0) showNum = total - ((currPage - 1) * limit);
+			var datal = dataBack.data.list;
+			//获取操作类型
+			var operationList = dataBack.operationList;
+			//			判断添加按钮
+			if(operationList.enterprise_insert == true) {
+				$('#add_companyInfo').show();
+			} else {
+				$('#add_companyInfo').hide();
+			}
+			var str = '';
+			for(var i = 0; i < showNum; i++) {
+				str += "<tr><td enterpriseId='" + datal[i].enterpriseId + "'>";
+				if(operationList.enterprise_detail == true) {
+					str += "<a href='/plat/pages/business/company/CheckCompanyInfo.shtml?id=" + datal[i].enterpriseId + "' class='padding_4px' title='查看公司信息'><i class='fa fa-eye'></i></a> ";
+				}
+				if(operationList.enterprise_update == true) {
+					str += "<a href='/plat/pages/business/company/EditCompanyInfo.shtml?enterpriseId=" + datal[i].enterpriseId + "&&enterpriceConnEmpId=" + datal[i].enterpriceConnEmpId + "' class='padding_4px' title='编辑公司信息'><i class='fa fa-pencil'></i></a> ";
+				}
+				if(operationList.enterprise_delete == true) {
+					str += "<a href='#' title='删除公司信息' class='padding_4px' onclick='del_company(this)'><i class='fa fa-trash-o'></i></a>";
+				}
+				if(operationList.enterprise_to_enterpriseDept == true) {
+					str += "<a href='/plat/pages/business/division.shtml?id=" + datal[i].enterpriseId + "' title='查看部门信息' class='padding_4px'><i class='fa fa-building'></i></a>";
+				}
+				str += "</td>";
+				str += "<td>" + datal[i].enterpriseSimpleName + "</td>";
+				str += "<td>" + datal[i].enterpriseFullName + "</td>";
+				str += "<td>" + nullformat(datal[i].enterpriseCode) + "</td>";
+				str += "<td>" + datal[i].enterpriceLicenseNo + "</td>";
+				str += "<td>" + nullformat(datal[i].enterpriceLicensePerson) + "</td>";
+				str += "<td>" + nullformat(datal[i].enterpriseAddress) + "</td>";
+				str += "<td>" + nullformat(datal[i].customerInfoName) + "</td>";
+				str += "<td>" + nullformat(datal[i].customerInfoPhone) + "</td>";
+				str += "<td>" + getLocalTime(datal[i].enterpriseCreateTime) + "</td>";
+				if(datal[i].enterpriseStatus == 0) {
+					str += "<td>" + '启用' + "</td>";
+				} else {
+					str += "<td>" + '禁用' + "</td>";
+				}
+				str += '</tr>';
+			}
+			$("#companyInfo_tbody").append(str);
+			return false;
+		}
+		//	点击搜索,按条件搜索
+		$('#search_companyInfo_btn').on('click', function() {
+			companyInfoSearch();
+			return false;
+		})
+
+		//	回车搜索
+		$('.companyInfo_search_form').on('keydown', function(e) {
+			if(e && e.keyCode == 13) {
+				companyInfoSearch();
+				return false;
+			}
+		})
+
+		//	删除公司列表信息
+		function del_company(del_li) {
+			if(confirm("确认删除该公司吗？")) {
+				var del_user_id = $(del_li).parent().attr("enterpriseId");
+				var param = {
+					"enterpriseId": del_user_id
+				};
+				var otype = "get";
+				var osync = false;
+				var reqResult = httpRequest(company_deleteEnterprise_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert("删除成功");
+					window.location.reload();
+				} else {
+					alert(reqResult.message);
+				}
+			}
+		}
+	</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

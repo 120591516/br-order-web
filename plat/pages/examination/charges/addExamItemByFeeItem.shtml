@@ -1,0 +1,271 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<div class="fakeloader"></div>
+	<section class="content-header">
+		<div class="margin-bottom">
+			<h2>
+				<small>检查项</small>
+			</h2>
+		</div>
+		<ol class="breadcrumb">
+			<li>
+				<a href="#">体检中心</a>
+			</li>
+			<li class="active">检查项</li>
+		</ol>
+		<div class="box">
+			<div class="box-header">
+				<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">添加</h3>
+				<div class="col-lg-2 col-md-3 col-sm-3 col-xs-3 txt_r">
+					<a id="addExamItemInfo" class="btn btn-default">提交</a>
+					<button type="button" onclick="storeManagementBack()" class="btn btn-default">返回</button>
+				</div>
+			</div>
+			<div class="box-body">
+				<form class="bs-example-form padding_l42px" role="form">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon">机构名称</span>
+									<select class="form-control selectpicker" id="orgId" name="orgId">
+									</select>
+								</div>
+							</div>
+
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon">门店名称</span>
+									<select class="form-control selectpicker" id="branchId" name="branchId">
+									</select>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon">科室名称</span>
+									<select class="form-control selectpicker" id="deptId" name="deptId">
+									</select>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon">医生姓名</span>
+									<select class="form-control selectpicker" id="userId" name="userId">
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-6 col-md-push-6 txt_r">
+								<div class="input-group float_right">
+									<input type="button" class="btn btn-default" id="searDept" value="搜索" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
+	</section>
+	<!-- Main content -->
+	<section class="content">
+		<div class="box">
+			<div class="box-header">
+				<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">列表</h3>
+			</div>
+			<div class="box-body">
+				<table class="table formCss">
+					<thead>
+						<tr>
+							<th>操作</th>
+							<th>检查项</th>
+							<th>适用性别</th>
+							<th>检测医生</th>
+							<th>科室</th>
+							<th>门店</th>
+							<th>所属机构</th>
+						</tr>
+						<tr class="warning no-result">
+							<td colspan="7"><i class="fa fa-warning"></i>没有任何搜索结果!</td>
+						</tr>
+					</thead>
+					<tbody id="examItemTboody">
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<th></th>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="row">
+					<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<!-- Bootstrap 3.3.6 -->
+	<script src="/plat/js/plugins/bootstrap.min.js"></script>
+	<script src="/plat/js/create/httpRequest.js"></script>
+	<script src="/plat/js/create/public.js"></script>
+	<script src="/plat/js/create/AjaxAddr.js"></script>
+	<script src="/plat/js/plugins/extendPagination.js"></script>
+	<script src="/plat/js/create/contentPublic.js"></script>
+	<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<script>
+		getExamItemType(); //  负责人下拉框回显
+		getOrgList('#orgId');
+		$('#orgId').change(function() {
+			feeItemGetBranch('#orgId', '#branchId', '#deptId', '#userId');
+		})
+		$('#branchId').change(function() {
+			feeItemGetDept('#branchId', '#deptId', '#userId');
+		})
+		$('#deptId').change(function() {
+				feeItemGetUser('#deptId', '#userId');
+			})
+			//  分页
+		init_page();
+		//  页面加载回显级联下拉框 && 根据门店页面的科室ID跳转到科室页面
+		function init_page() {
+			$('#orgId').val(getParamValue("orgId"));
+			page_curr = 1;
+			$('#examItemTboody').empty();
+			//1.请求后端信息并展示
+			EitemSearch();
+			//2.初始化分页信息
+			init_pager();
+		}
+		$('#searDept').on('click', function() {
+				EitemSearch();
+				init_pager();
+			})
+			//  搜索
+		function EitemSearch() {
+			//1.采集参数数据
+			var param = initParam();
+			//2.请求后台
+			var otype = "GET";
+			var osync = false;
+			var reqResult = httpRequest(org_exam_item_user_view, param, otype, osync);
+			if(reqResult.result == 0) {
+				//4.展示数据
+				total_count = reqResult.data.total;
+				createTable(page_curr, limit, total_count, reqResult);
+			}
+			return false;
+		}
+		// 初始化分页信息
+		function init_pager() {
+			$('#callBackPager').extendPagination({
+				totalCount: total_count,
+				showCount: count_curr,
+				limit: limit,
+				callback: function(curr, limit, totalCount) {
+					page_curr = curr;
+					total_count = totalCount;
+					EitemSearch();
+				}
+			});
+		}
+		//初始化参数信息
+		function initParam() {
+			var orgId = $("#orgId").val();
+			var branchId = $("#branchId").val();
+			var deptId = $("#deptId").val();
+			var userId = $("#userId").val();
+			$('#examItemTboody').empty();
+			var param = {
+				"page": page_curr,
+				"rows": count_curr,
+				"feeItemId": getParamValue('id')
+			};
+			if(orgId != null) {
+				param.orgId = orgId;
+			}
+			if(branchId != null) {
+				param.branchId = branchId;
+			}
+			if(deptId != null) {
+				param.deptId = deptId;
+			}
+			if(userId != null) {
+				param.userId = userId;
+			}
+			return param;
+		}
+		//根据收费项id展示检查项展示列表
+		function createTable(currPage, limit, total, dataBack) {
+			var showNum = limit;
+			if(total - (currPage * limit) < 0) showNum = total - ((currPage - 1) * limit);
+			var datal = dataBack.data.list;
+			var str = '';
+			for(var i = 0; i < showNum; i++) {
+				if(datal[i].checked == true) {
+					str += "<tr><td><input type='checkbox' id='" + datal[i].organizationExamItemUserId + "' checked='checked' value='1' disabled='disabled'></td>";
+				} else {
+					str += "<tr><td><input type='checkbox' id='" + datal[i].organizationExamItemUserId + "' value='0'></td>";
+				}
+				str += "<td>" + datal[i].examItemName + "</td>";
+				if(datal[i].fMale == 0 && datal[i].fFemale == 0) {
+					str += "<td>" + '通用' + "</td>";
+				} else if(datal[i].fMale == 0 && datal[i].fFemale == 1) {
+					str += "<td>" + '男性' + "</td>";
+				} else if(datal[i].fMale == 1 && datal[i].fFemale == 1) {
+					str += "<td>" + '无' + "</td>";
+				} else if(datal[i].fMale == 1 && datal[i].fFemale == 0) {
+					str += "<td>" + '女性' + "</td>";
+				}
+				str += "<td>" + datal[i].userName + "</td>";
+				str += "<td>" + datal[i].deptName + "</td>";
+				str += "<td>" + datal[i].branchName + "</td>";
+				str += "<td>" + datal[i].orgName + "</td>";
+				str += '</tr>';
+			}
+			$("#examItemTboody").append(str);
+			return false;
+		}
+		//添加检查项信息
+		$('#addExamItemInfo').on('click', function() {
+			var examItemIds = '';
+			var items = $('#examItemTboody tr td:first-child input:checked');
+			if(items.length == 0) {
+				alert("请勾选要绑定的收费项");
+				return;
+			}
+			for(var i = 0; i < items.length; i++) {
+				if(items[i].value == "0") {
+					if(items.length == 1) {
+						examItemIds = items[i].id;
+					} else {
+						examItemIds = examItemIds + items[i].id + ',';
+					}
+				}
+			}
+			if(examItemIds == '') {
+				alert('请确认后操作！');
+			} else {
+				var param = {
+					"examFeeItemId": getParamValue('id'),
+					"examItemId": examItemIds
+				};
+				var otype = "post";
+				var osync = false;
+				var reqResult = httpRequest(insertOrgExamFeeItemDetailUrl, param, otype, osync);
+				if(reqResult.result == 0 && reqResult.data > 0) {
+					alert("添加成功");
+					window.location.href = 'examItemByFeeItem.shtml?id=' + getParamValue('id') + '';
+					return false;
+				}
+			}
+		})
+	</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

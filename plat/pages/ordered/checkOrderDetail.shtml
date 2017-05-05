@@ -1,0 +1,189 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<div class="fakeloader"></div>
+	<section class="content">
+		<!--头部S-->
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box width_70">
+					<div class="box-header">
+						<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">订单<small>--详情</small></h3>
+						<div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
+							<button class="btn btn-default pull-right" onclick="storeManagementBack()">返回</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--头部E-->
+		<div class="box width_70">
+			<div class="box-body">
+				<form class="bs-example-form form-horizontal formCss" role="form">
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>订单号</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="orderNo" id="checkOrderNo" disabled="true">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>购买人</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="customerName" id="checkCustomerName" disabled="true">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>机构名称</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="orgName" id="checkOrgName" disabled="true">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>门店名称</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="branchName" id="checkBranchName" disabled="true">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>套餐名称</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="examSuiteName" id="checkExamSuiteName" disabled="true">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>体检类型</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="examType" id="checkExamType" disabled="true">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>单价</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="singlePrice" id="checkSinglePrice" disabled="true">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>体检者姓名</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="customerPatientName" id="checkCustomerPatientName" disabled="true">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>体检人电话</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="customerPatientPhone" id="checkCustomerPatientPhone" disabled="true">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>体检人证件号</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="customerPatientIdCard" id="checkCustomerPatientIdCard" disabled="true">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>体检时间</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="examTime" id="checkExamTime" disabled="true">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>创建时间</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="customerOrderCreateTime" id="checkCustomerOrderCreateTime" disabled="true">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>订单状态</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="customerOrderStatusName" id="checkCustomerOrderStatusName" disabled="true">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>抬头名称</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="patientReceiptName" id="checkPatientReceiptName" disabled="true">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>抬头内容</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="patientReceiptContent" id="checkPatientReceiptContent" disabled="true">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>发票类型</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" name="receiptTypeName" id="checkReceiptTypeName" disabled="true">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>是否开发票</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8' id="checkReceiptStatus">
+							<input type="checkbox" name='receiptStatus' aria-describedby="basic-addon1" disabled="disabled" />否
+							<input type="checkbox" name='receiptStatus' aria-describedby="basic-addon1" disabled="disabled" />是
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>抬头类型</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8' id="checkPatientReceiptType">
+							<input type="checkbox" name='patientReceiptType' aria-describedby="basic-addon1" disabled="disabled" />个人
+							<input type="checkbox" name='patientReceiptType' aria-describedby="basic-addon1" disabled="disabled" />企业
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="row">
+				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2 user_power_btn">
+					<a href="#" class="btn btn-default" onclick="storeManagementBack()">返 回</a>
+				</div>
+			</div>
+		</div>
+	</section>
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<script src="/plat/js/create/AjaxAddr.js"></script>
+	<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			var param = {
+				"customerPatientName": getParamValue("customerPatientName"),
+				"examSuiteId": getParamValue("examSuiteId"),
+				"examTime": getParamValue("examTime")
+			};
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(getCustomerOrderUrl, param, otype, osync);
+			if(reqResult.result == 0) {
+				$('#checkOrderNo').val(reqResult.data.orderNo);
+				$('#checkCustomerName').val(reqResult.data.customerName);
+				$('#checkOrgName').val(reqResult.data.orgName);
+				$('#checkBranchName').val(reqResult.data.branchName);
+				$('#checkExamSuiteName').val(reqResult.data.examSuiteName);
+				$('#checkExamType').val(reqResult.data.examType);
+				$('#checkSinglePrice').val(reqResult.data.singlePrice);
+				$('#checkCustomerPatientName').val(reqResult.data.customerPatientName);
+				$('#checkCustomerPatientPhone').val(reqResult.data.customerPatientPhone);
+				$('#checkCustomerPatientIdCard').val(reqResult.data.customerPatientIdCard);
+				$('#checkExamTime').val(getLocalTime(reqResult.data.examTime));
+				$('#checkCustomerOrderCreateTime').val(getLocalTime(reqResult.data.customerOrderCreateTime));
+				$('#checkCustomerOrderStatusName').val(reqResult.data.customerOrderStatusName);
+				$('#checkPatientReceiptName').val(reqResult.data.patientReceiptName);
+				$('#checkPatientReceiptContent').val(reqResult.data.patientReceiptContent);
+				$('#checkReceiptTypeName').val(reqResult.data.receiptTypeName);
+				if(reqResult.data.receiptStatus == 0) {
+					$('#checkReceiptStatus input')[0].checked = "checked";
+				} else {
+					$('#checkReceiptStatus input')[1].checked = "checked";
+				}
+				if(reqResult.data.patientReceiptType == 1) {
+					$('#checkPatientReceiptType input')[0].checked = "checked";
+				} else {
+					$('#checkPatientReceiptType input')[1].checked = "checked";
+				}
+			} else {
+				alert(reqResult.message);
+			}
+			return false;
+		})
+	</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

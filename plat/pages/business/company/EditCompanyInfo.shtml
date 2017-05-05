@@ -1,0 +1,690 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<div class="fakeloader"></div>
+	<!-- /Content Header (Page header) -->
+	<!-- Main content -->
+	<section class="content">
+		<!--头部S-->
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box width_70">
+					<div class="box-header">
+						<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">公司<small>--编辑</small></h3>
+						<div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
+							<button class="btn btn-default pull-right" onclick="storeManagementBack()">返回</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--头部E-->
+		<div class="box width_70">
+			<!-- /.box-header -->
+			<div class="box-body">
+				<form class="bs-example-form form-horizontal formCss" role="form" id='companyInfo_editform'>
+					<input type="hidden" name='enterpriceConnEmpId' value="" id='enterpriceConnEmpId' />
+					<input type="hidden" name="enterpriseId" id="enterpriseId" value="" />
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label' for="">公司全称</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="edit_enterpriseFullName" class="form-control" name="enterpriseFullName" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="edit_enterpriseFullNameTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label' for="">公司简称</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="edit_enterpriseSimpleName" class="form-control" name="enterpriseSimpleName" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="edit_enterpriseSimpleNameTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label' for="">公司代码</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="edit_enterpriseCode" class="form-control" name="enterpriseCode" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="edit_enterpriseCodeTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label' for="">公司地址</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 paddding_left_0px">
+								<select class="prov form-control" id="edit_prov" name="provinceId" disabled="disabled">
+								</select>
+							</div>
+							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pading_0px">
+								<select class="city form-control" id="edit_city" name="cityId" disabled="disabled">
+								</select>
+							</div>
+							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 paddding_right_0px">
+								<select class="dist form-control" id="edit_dist" name="areaId" id="areaIdInfo" disabled="disabled">
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="edit_distTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label' for="">详细地址</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="edit_enterpriseAddress" class="form-control" name="enterpriseAddress" aria-describedby="basic-addon1" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="edit_enterpriseAddressTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label' for="">企业法人</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="edit_enterpriceLicensePerson" class="form-control" name="enterpriceLicensePerson" aria-describedby="basic-addon1" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="edit_enterpriceLicensePersonTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label' for="">营业执照注册号</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="edit_enterpriceLicenseNo" class="form-control" name="enterpriceLicenseNo" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="edit_enterpriceLicenseNoTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label' for="">联系人</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="edit_enterpriseConnEmpName" name='customerInfoName' class="form-control" aria-describedby="basic-addon1" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="edit_enterpriseConnEmpNameTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label' for="">联系电话</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="edit_enterpriseConnEmpPhone" name='customerInfoPhone' class="form-control" aria-describedby="basic-addon1" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="edit_enterpriseConnEmpPhoneTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label' for="">联系邮箱</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="edit_enterpriseConnEmpEmail" name='customerInfoEmail' class="form-control" aria-describedby="basic-addon1" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="edit_enterpriseConnEmpEmailTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label' for="">身份证号</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="edit_enterpriseConnEmpIdCard" name='customerInfoIdentityNumber' class="form-control" aria-describedby="basic-addon1" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="edit_enterpriseConnEmpIdCardTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label' for="">营业执照图片</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<div class="file-preview img_border">
+								<div id="edit_Licenceimg"></div>
+								<div class="clear"></div>
+							</div>
+							<input id="edit_Licence_picture" class="file" type="file" name="file" data-min-file-count="1">
+							<input type="hidden" name="enterpriceLicenseImgId" id="edit_LicenceimgId" value="" />
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="edit_LicenceimgIdTip"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label' for="">开户许可证图片</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<div class="file-preview img_border">
+								<div id="edit_openingimg"></div>
+								<div class="clear"></div>
+							</div>
+							<input id="edit_opening_picture" class="file" type="file" name="file" multiple data-min-file-count="1">
+							<input type="hidden" name="enterpriceLicenseOpenImgId" id="edit_openingimgId" value="" />
+						</div>
+					</div>
+					<div class="form-group">
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2'>
+							<div id="edit_openingimgIdTip"></div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="row">
+				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2 user_power_btn">
+					<button type="button" class="btn btn-default" id='edit_company_btn'>保存</button>
+					<a href="#" class="btn btn-default" onclick="storeManagementBack()">返 回</a>
+				</div>
+			</div>
+		</div>
+	</section>
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<script src="/plat/js/create/httpRequest.js"></script>
+	<script src="/plat/js/create/contentPublic.js"></script>
+	<script src="/plat/js/plugins/fileinput.js"></script>
+	<script src="/plat/js/plugins/fileinput_locale_zh.js"></script>
+	<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<script>
+		$(document).ready(function() {
+				edit_companyInfo();
+				$.formValidator.initConfig({
+					submitButtonID: "edit_company_btn",
+					debug: true,
+					onSuccess: function() {
+						editCompanyInfo();
+					},
+					onError: function() {
+						alert("添加失败，具体错误，请看网页上的提示！")
+					}
+				});
+				//				公司信息表单验证
+				//公司全称
+				$('#edit_enterpriseFullName').on('change', function() {
+					$('#edit_enterpriseFullName').formValidator({
+						onShow: "请输入至少3字符的公司全称!",
+						onFocus: "请输入至少3字符的公司全称!",
+						onCorrect: "输入正确!"
+					}).inputValidator({
+						min: 3,
+						max: 20,
+						onError: "输入有误,请确认!"
+					})
+				})
+
+				//公司简称
+				$('#edit_enterpriseSimpleName').on('change', function() {
+					$('#edit_enterpriseSimpleName').formValidator({
+						onShow: "请输入至少2字符的公司简称!",
+						onFocus: "请输入至少2字符的公司简称!",
+						onCorrect: "输入正确!"
+					}).inputValidator({
+						min: 2,
+						max: 10,
+						onError: "输入有误,请确认!"
+					})
+				})
+
+				//公司代码
+				$('#edit_enterpriseCode').on('change', function() {
+					$("#edit_enterpriseCode").formValidator({
+						onShow: "请输入至少2字符的公司代码",
+						onFocus: "请输入至少2字符的公司代码",
+						onCorrect: "输入正确"
+					}).regexValidator({
+						regExp: "username",
+						dataType: "enum",
+						onError: "输入有误,请确认"
+					});
+				})
+
+				//公司地址
+				$('#edit_dist').on('change', function() {
+					$("#edit_dist").formValidator({
+						onShow: "请选择公司地址",
+						onFocus: "公司地址需详细到所在县区",
+						onCorrect: "输入正确"
+					}).inputValidator({
+						min: 1,
+						onError: "公司地址选择不全，请核实后重新选择！"
+					});
+				})
+
+				//详细地址
+				$('#edit_enterpriseAddress').on('change', function() {
+					$("#edit_enterpriseAddress").formValidator({
+						onShow: "请输入详细地址",
+						onFocus: "详细地址至少2个字符,最多50个字符"
+					}).inputValidator({
+						min: 2,
+						max: 50,
+						onError: "你输入的详细地址非法,请确认"
+					})
+				})
+
+				//企业法人
+				$('#edit_enterpriceLicensePerson').on('change', function() {
+					$("#edit_enterpriceLicensePerson").formValidator({
+						onShow: "请输入企业法人",
+						onFocus: "企业法人至少2个字符,最多10个字符"
+					}).inputValidator({
+						min: 2,
+						max: 10,
+						onError: "你输入的企业法人非法,请确认"
+					})
+				})
+
+				//营业执照号
+				$('#edit_enterpriceLicenseNo').on('change', function() {
+					$("#edit_enterpriceLicenseNo").formValidator({
+						onShow: "请输入营业执照号",
+						onFocus: "营业执照号至少1个字符,最多15个字符"
+					}).inputValidator({
+						min: 1,
+						max: 15,
+						onError: "你输入的营业执照号非法,请确认"
+					})
+				})
+
+				//联系人
+				$('#edit_enterpriseConnEmpName').on('change', function() {
+					$("#edit_enterpriseConnEmpName").formValidator({
+						onShow: "请输入联系人",
+						onFocus: "联系人至少2个字符,最多20个字符"
+					}).inputValidator({
+						min: 2,
+						max: 20,
+						onError: "你输入的联系人非法,请确认"
+					})
+				})
+
+				//联系电话
+				$('#edit_enterpriseConnEmpPhone').on('change', function() {
+					$("#edit_enterpriseConnEmpPhone").formValidator({
+						onFocus: "请输入联系电话",
+						onCorrect: "输入正确"
+					}).inputValidator({
+						min: 11,
+						max: 11,
+						onError: "手机号码必须是11位的,请确认"
+					}).regexValidator({
+						regExp: "mobile",
+						dataType: "enum",
+						onError: "你输入的手机号码格式不正确"
+					});
+				})
+
+				//邮箱
+				$('#edit_enterpriseConnEmpEmail').on('change', function() {
+					$("#edit_enterpriseConnEmpEmail").formValidator({
+						onShow: "请输入你的email",
+						onfocus: "请注意你输入的email格式，例如:wzmaodong@126.com",
+						onCorrect: "输入完成"
+					}).regexValidator({
+						regExp: "email",
+						dataType: "enum",
+						onError: "email格式不正确"
+					});
+				})
+
+				//身份证号
+				$('#edit_enterpriseConnEmpIdCard').on('change', function() {
+					$("#edit_enterpriseConnEmpIdCard").formValidator({
+						onShow: "请输入你的身份证号",
+						onfocus: "请注意你输入的身份证号格式",
+						onCorrect: "输入完成"
+					}).regexValidator({
+						regExp: "idcard",
+						dataType: "enum",
+						onError: "身份证号格式不正确"
+					});
+				})
+
+				//门店照片
+				//				$('#edit_LicenceimgId').on('change', function() {
+				//					$("#edit_LicenceimgId").formValidator({
+				//						onShow: "请选择门店照片",
+				//						onFocus: "门店照片至少上传一张",
+				//						onCorrect: "已上传"
+				//					}).inputValidator({
+				//						min: 1,
+				//						onError: "门店照片未上传"
+				//					});
+				//				})
+
+				//开户许可证
+				//				$('#edit_openingimgId').on('change', function() {
+				//					$("#edit_openingimgId").formValidator({
+				//						onShow: "请选择开户许可证",
+				//						onFocus: "开户许可证至少上传一张",
+				//						onCorrect: "已上传"
+				//					}).inputValidator({
+				//						min: 1,
+				//						onError: "开户许可证未上传"
+				//					});
+				//				})
+			})
+			//				开户许可证
+		$("#edit_opening_picture").fileinput({
+			uploadUrl: uploadImagesUrl, // you must set a valid URL here else you will get an error
+			allowedFileExtensions: ['jpg', 'png', 'gif', 'jpeg', 'bmp'],
+			overwriteInitial: false,
+			maxFileSize: 100000,
+			maxFilesNum: 10,
+			//allowedFileTypes: ['image', 'video', 'flash'],
+			slugCallback: function(filename) {
+				return filename.replace('(', '_').replace(']', '_');
+			}
+		})
+		$("#edit_opening_picture").on("fileuploaded", function(event, data, previewId, index) {
+			if($('#edit_openingimg div').length != 0) {
+				alert('已有开户许可证图片，无需上传！');
+			} else {
+				$('#edit_openingimgId').val(data.response.imgId);
+			}
+		});
+		//		图片上传
+		$("#edit_Licence_picture").fileinput({
+			uploadUrl: uploadImagesUrl, // you must set a valid URL here else you will get an error
+			allowedFileExtensions: ['jpg', 'png', 'gif', 'jpeg', 'bmp'],
+			overwriteInitial: false,
+			maxFileSize: 100000,
+			maxFilesNum: 10,
+			//allowedFileTypes: ['image', 'video', 'flash'],
+			slugCallback: function(filename) {
+				return filename.replace('(', '_').replace(']', '_');
+			}
+		})
+		$("#edit_Licence_picture").on("fileuploaded", function(event, data, previewId, index) {
+			if($('#edit_Licenceimg div').length != 0) {
+				alert('已有营业执照图片，无需上传！');
+			} else {
+				$('#edit_LicenceimgId').val(data.response.imgId);
+			}
+		});
+		$("#edit_Licenceimg>.float_left>.position_absolute").each(function() {
+			$(this).hover(function() {
+				$(this).animate({
+					width: 300,
+					height: 300,
+					top: -10,
+					left: 100
+				}, 500);
+				$(this).css("z-index", 999);
+				$(this).parent().removeClass("store_img_borderdiv");
+			}, function() {
+				$(this).animate({
+					width: 250,
+					height: 250,
+					top: 0,
+					left: 125
+				}, 500);
+				$(this).css("z-index", 0);
+				$(this).parent().addClass("store_img_borderdiv");
+			});
+		});
+		$("#edit_openingimg>.float_left>.position_absolute").each(function() {
+			$(this).hover(function() {
+				$(this).animate({
+					width: 300,
+					height: 300,
+					top: -10,
+					left: 100
+				}, 500);
+				$(this).css("z-index", 999);
+				$(this).parent().removeClass("store_img_borderdiv");
+			}, function() {
+				$(this).animate({
+					width: 250,
+					height: 250,
+					top: 0,
+					left: 125
+				}, 500);
+				$(this).css("z-index", 0);
+				$(this).parent().addClass("store_img_borderdiv");
+			});
+		});
+		//	公司信息回显
+		function edit_companyInfo() {
+			$('#enterpriceConnEmpId').val(getParamValue('enterpriceConnEmpId'));
+			$('#enterpriseId').val(getParamValue('enterpriseId'));
+			var param = {
+				"enterpriseId": getParamValue('enterpriseId')
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(company_getEnterpriseById_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				var edit_enterpriseFullName = $('#edit_enterpriseFullName').val(reqResult.data.enterpriseFullName);
+				var edit_enterpriseSimpleName = $('#edit_enterpriseSimpleName').val(reqResult.data.enterpriseSimpleName);
+				var edit_enterpriseCode = $('#edit_enterpriseCode').val(reqResult.data.enterpriseCode);
+				var edit_enterpriceLicenseNo = $('#edit_enterpriceLicenseNo').val(reqResult.data.enterpriceLicenseNo);
+				var edit_enterpriceLicensePerson = $('#edit_enterpriceLicensePerson').val(reqResult.data.enterpriceLicensePerson);
+				var edit_enterpriseAddress = $('#edit_enterpriseAddress').val(reqResult.data.enterpriseAddress);
+				var edit_enterpriseConnEmpName = $('#edit_enterpriseConnEmpName').val(reqResult.data.customerInfoName);
+				var edit_enterpriseConnEmpPhone = $('#edit_enterpriseConnEmpPhone').val(reqResult.data.customerInfoPhone);
+				var edit_enterpriseConnEmpEmail = $('#edit_enterpriseConnEmpEmail').val(reqResult.data.customerInfoEmail);
+				var edit_enterpriseConnEmpIdCard = $('#edit_enterpriseConnEmpIdCard').val(reqResult.data.customerInfoIdentityNumber);
+				//初始化省份
+				prov_init();
+				//定义省份
+				$('#edit_prov').val(reqResult.data.provinceId);
+				//初始化城市
+				prov_city(reqResult.data.provinceId);
+				//定义城市
+				$('#edit_city').val(reqResult.data.cityId);
+				//初始化区县
+				city_town(reqResult.data.cityId);
+				//定义区县
+				$('#edit_dist').val(reqResult.data.AreaId);
+				if(reqResult.data.enterpriceLicenseImgId != '') {
+					$('#edit_Licenceimg').empty();
+					var str_Licence = '';
+					str_Licence = '<div id="' + reqResult.data.enterpriceLicenseImgId + '" class="float_left store_img_borderdiv position_relative"><div class="position_absolute" style="background-image:url(' + platIp + reqResult.data.enterpriseLicenseImgUrl + ');"><a href="javascript:removeLicenceImg(' + reqResult.data.enterpriceLicenseImgId + ')" class="fa fa-close fa_red pull-right"></a></div></div>';
+				}
+				$("#edit_Licenceimg").append(str_Licence);
+				$('#edit_LicenceimgId').val(reqResult.data.enterpriceLicenseImgId);
+				if(reqResult.data.enterpriceLicenseOpenImgId != '') {
+					$('#edit_openingimg').empty();
+					var str_opening = '';
+					str_opening = '<div id="' + reqResult.data.enterpriceLicenseOpenImgId + '" class="float_left store_img_borderdiv position_relative"><div class="position_absolute" style="background-image:url(' + platIp + reqResult.data.enterpriseLicenseOpenImgUrl + ');"><a href="javascript:removeLicenseOpenImg(' + reqResult.data.enterpriceLicenseOpenImgId + ')" class="fa fa-close fa_red pull-right"></a></div></div>';
+				}
+				$('#edit_openingimgId').val(reqResult.data.enterpriceLicenseOpenImgId);
+				$("#edit_openingimg").append(str_opening);
+				var img_borderLicence_toggle = $('#edit_Licenceimg').length;
+				var img_borderopening_toggle = $('#edit_openingimg').length;
+				if(img_borderLicence_toggle == 0) {
+					$('.img_border').css('border-color', "#FFFFFF");
+				}
+				if(img_borderopening_toggle == 0) {
+					$('.img_border').css('border-color', "#FFFFFF");
+				}
+
+			} else {
+				alert(reqResult.message);
+			}
+			return false;
+		}
+		//		编辑修改保存信息	
+		$('#edit_company_btn').on('click', function() {
+			var edit_enterpriseFullName = $('#edit_enterpriseFullName').val();
+			var edit_enterpriseSimpleName = $('#edit_enterpriseSimpleName').val();
+			var edit_enterpriseCode = $('#edit_enterpriseCode').val();
+			var edit_enterpriceLicenseNo = $('#edit_enterpriceLicenseNo').val();
+			var edit_enterpriceLicensePerson = $('#edit_enterpriceLicensePerson').val();
+			var edit_enterpriseAddress = $('#edit_enterpriseAddress').val();
+			//				var edit_LicenceimgId = $('#edit_LicenceimgId').val();
+			//				var edit_openingimgId = $('#edit_openingimgId').val();
+			if(edit_enterpriseFullName == '') {
+				alert('公司全称不能为空');
+				return false;
+			} else if(edit_enterpriseSimpleName == '') {
+				alert('公司简称不能为空');
+				return false;
+			} else if(edit_enterpriseCode == '') {
+				alert('公司代码不能为空');
+				return false;
+			} else if(edit_enterpriceLicenseNo == '') {
+				alert('营业执照号不能为空');
+				return false;
+			} else if(edit_enterpriceLicensePerson == '') {
+				alert('企业法人不能为空');
+				return false;
+			} else if(edit_enterpriseAddress == '') {
+				alert('企业地址不能为空');
+				return false;
+			} else {
+				var param = $('#companyInfo_editform').serialize();
+				var otype = "post";
+				var osync = false;
+				var reqResult = httpRequest(company_updateEnterprise_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert('编辑成功');
+					window.location.href = '/plat/pages/business/company.shtml';
+				} else {
+					alert('编辑失败!');
+				}
+			}
+		})
+
+		//				}
+		//			})
+		//删除已上传营业执照图片
+		function removeLicenceImg(imgId) {
+			if(confirm("确定要删除该图片吗？")) {
+				var imgIds = $("#edit_LicenceimgId").val().split(",");
+				imgIds.splice($.inArray(imgId.toString(), imgIds), 1);
+				$("#edit_LicenceimgId").val(imgIds.join(","));
+				var del_img_div = "#" + imgId.toString();
+				$(del_img_div).remove();
+			}
+		}
+		//删除已上传开户许可证图片
+		function removeLicenseOpenImg(imgId) {
+			if(confirm("确定要删除该图片吗？")) {
+				var imgIds = $("#edit_openingimgId").val().split(",");
+				imgIds.splice($.inArray(imgId.toString(), imgIds), 1);
+				$("#edit_openingimgId").val(imgIds.join(","));
+				var del_img_div = "#" + imgId.toString();
+				$(del_img_div).remove();
+			}
+		}
+		//	返回上一頁
+		$('#companyEdit_backbtn').on('click', function() {
+			storeManagementBack();
+			return false;
+		})
+
+		//		省市区三级联动
+		// 省级联动 省
+		function prov_init() {
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(getAllProvince_url, null, otype, osync);
+			if(reqResult.result == 0) {
+				var datal = reqResult.data;
+				var provSelect = $('.prov');
+				var html = "<option selected='selected' value=''>全部</option>";
+				if(datal.id != "") {
+					for(var i = 0; i < datal.length; i++) {
+						html += "<option value= '" + datal[i].id + "'>" + datal[i].provinceName + "</option>";
+					}
+					$(".prov").empty().append(html);
+				}
+
+			} else {
+
+				$(".prov").val('');
+			}
+
+			$(".dist").empty();
+			$(".city").empty();
+		}
+		// 省级联动 市
+		$('.prov').on('change', function() {
+			var prov = $(this).val();
+			prov_city(prov);
+		})
+
+		function prov_city(prov) {
+			var param = {
+				'provinceId': prov
+			}
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(getCityByProvinceId_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				var datal = reqResult.data;
+				var citySelect = $('.city');
+				var html = "<option selected='selected' value=''>全部</option>";
+				if(prov != "") {
+
+					if(datal.id != "") {
+						for(var i = 0; i < datal.length; i++) {
+							html += "<option value= '" + datal[i].id + "'>" + datal[i].cityName + "</option>";
+						}
+					}
+				} else {
+
+					$(".city").empty();
+				}
+				citySelect.empty().append(html);
+			} else {
+				$(".city").empty();
+
+			}
+			$(".dist").empty();
+		}
+		// 省级联动 区
+		$('.city').on('change', function() {
+			var town = $(this).val();
+			city_town(town);
+		})
+
+		function city_town(town) {
+			var param = {
+				'cityId': town
+			}
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(getDistrictByCityId_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				var datal = reqResult.data;
+				var distSelect = $('.dist');
+				var html = "<option selected='selected' value=''>全部</option>";
+				if(datal.id != "") {
+					for(var i = 0; i < datal.length; i++) {
+
+						html += "<option value= '" + datal[i].id + "'>" + datal[i].districtName + "</option>";
+					}
+				}
+				distSelect.empty().append(html);
+
+			} else {
+				$('.dist').empty();
+			}
+		}
+	</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

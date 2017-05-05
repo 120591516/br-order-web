@@ -1,0 +1,92 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<div class="fakeloader"></div>
+	<section class="content-header">
+		<div class="margin-bottom">
+			<h2><small>个人信息</small></h2>
+		</div>
+		<ol class="breadcrumb">
+			<li>
+				<a href="#">个人设置</a>
+			</li>
+			<li class="active">个人信息</li>
+		</ol>
+	</section>
+	<!-- /Content Header (Page header) -->
+	<!-- Main content -->
+	<section class="content">
+		<div class="box">
+			<h4>
+				<i class="fa fa-paperclip"></i>
+				个人信息设置
+			</h4>
+			<div class="box-body width_70">
+				<form class="bs-example-form form-horizontal formCss" role="form" id='personal_form' method="post" novalidate="novalidate">
+					<input type="hidden" id="empId" name="empId" />
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>登录名</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" id='checkUserLoginName' name="userLoginName" aria-describedby="basic-addon1" minlength='6' maxlength="10" required disabled="disabled">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>姓名</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" id='checkUserName' name="userName" aria-describedby="basic-addon1" minlength='6' maxlength="10" required disabled="disabled">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>手机号</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" id='checkUserPhone' name="userPhone" aria-describedby="basic-addon1" required disabled="disabled">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>邮箱</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id='checkUserEmail' class="form-control" name="userEmail" aria-describedby="basic-addon1" required disabled="disabled">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>创建时间</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" class="form-control" id='checkUserLoginTime' name="userLoginTime" aria-describedby="basic-addon1" required disabled="disabled">
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="row">
+				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2 user_power_btn">
+					<a href="#" class="btn btn-default" onclick="storeManagementBack()">返 回</a>
+				</div>
+			</div>
+		</div>
+	</section>
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<!-- Bootstrap 3.3.6 -->
+	<script src="/plat/js/plugins/bootstrap.min.js"></script>
+	<script src="/plat/js/create/httpRequest.js"></script>
+	<script src="/plat/js/create/public.js"></script>
+	<script src="/plat/js/create/AjaxAddr.js"></script>
+	<script src="/plat/js/create/contentPublic.js"></script>
+	<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(personalInforUrl, null, otype, osync)
+			if(reqResult.result == 0 && reqResult.data) {
+				var datal = reqResult.data;
+				$('#checkUserLoginName').val(datal.userLoginName);
+				$('#checkUserName').val(datal.userName);
+				$('#checkUserPhone').val(datal.userPhone);
+				$('#checkUserEmail').val(datal.userEmail);
+				$('#checkUserLoginTime').val(getLocalTime(datal.userLoginTime));
+			}
+			return false;
+		})
+	</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

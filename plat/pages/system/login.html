@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>登录</title>
+		<!-- CSS -->
+		<!--logo图标-->
+		<link rel="shortcut icon" href="/plat/img/logo.ico">
+		<link rel="stylesheet" href="css/plugins/bootstrap.min.css">
+		<link rel="stylesheet" href="css/plugins/font-awesome.css">
+		<link rel="stylesheet" href="css/plugins/form-elements.css">
+		<link rel="stylesheet" href="/plat/css/styleLogin.css">
+	</head>
+
+	<body onkeydown="keyLogin(event)">
+		<!-- Top content -->
+		<div class="top-content">
+
+			<div class="inner-bg">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-8 col-sm-offset-2 text">
+							<h1>
+							    <strong>管理平台</strong> 登录页面
+						    </h1>
+							<div class="description">
+								<p>体检系统--管理平台登录页面</p>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6 col-sm-offset-3 form-box">
+							<div class="form-top">
+								<div class="form-top-left">
+									<h3>登录体检系统管理平台</h3>
+
+								</div>
+								<div class="form-top-right">
+									<i class="fa fa-key"></i>
+								</div>
+							</div>
+
+							<div class="form-bottom" id="login_con" onkeydown="keyDown(event)">
+								<div class="form-group">
+									<label class="sr-only" for="form-username">用户名/手机号/邮箱...</label>
+									<input type="text" name="form-username" placeholder="用户名/手机号/邮箱..." class="form-username form-control" id="form-username">
+								</div>
+								<div class="form-group">
+									<label class="sr-only" for="form-password">密码</label>
+									<input type="password" name="form-password" placeholder="密码..." class="form-password form-control" id="form-password">
+								</div>
+								<div class="form-group input-group">
+									<div>
+										<input type="text" class="form-control" placeholder="验证码" aria-describedby="basic-addon2" id="yzm">
+										<span class="input-group-addon" id="basic-addon2">
+											<img id="imgId" onclick="getCode(this)" />
+										</span>
+									</div>
+								</div>
+								<button type="submit" class="btn" id="login" onclick="logg()">登&nbsp;&nbsp;录</button>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="/plat/js/create/httpRequest.js"></script>
+		<script>
+			window.onload = function() {
+				$('#imgId').attr('src', platIp + login_verifyCode_url);
+			}
+
+			function getCode(imgs) {
+				$(imgs).attr('src', platIp + login_verifyCode_url + '?' + Math.random());
+			}
+			var formName;
+			var formPass;
+			var yzm;
+			var yzming;
+			var oo;
+			var login;
+			var bo = false;
+			formName = document.getElementById('form-username');
+			formPass = document.getElementById('form-password');
+			yzm = document.getElementById('yzm');
+			yzming = document.getElementById('basic-addon2');
+			oo = document.getElementsByTagName('span');
+			login = document.getElementById('login');
+
+			formName.onfocus = function() {
+				delError(this, 'user');
+			}
+			formName.onblur = function() {
+				var reg = /[\u4e00-\u9fa5]/g;
+				if(!this.value) {
+					insertError(this, '用户名不能为空！', 'user');
+					bo = true;
+
+					return;
+				}
+				if(reg.test(this.value)) {
+					insertError(this, '用户名不能是中文！', 'user');
+					bo = true;
+					return;
+				}
+
+				bo = false;
+			}
+
+			formPass.onfocus = function() {
+				delError(this, 'pass');
+			}
+			formPass.onblur = function() {
+				if(!this.value) {
+					insertError(this, '密码不能为空！', 'pass');
+					bo = true;
+					return;
+				}
+				if(this.value.length < 8 || this.value.length > 20) {
+					insertError(this, '密码长度为8-20位之间!', 'pass');
+					bo = true;
+					return;
+				}
+				bo = false;
+			}
+			yzm.onfocus = function() {
+
+				if(document.getElementById('yzmadd')) {
+					this.parentNode.parentNode.removeChild(document.getElementById('yzmadd'));
+				}
+			}
+			yzm.onblur = function() {
+				if(!this.value) {
+					var oS = document.createElement('span');
+					oS.innerHTML = '验证码不能为空！';
+					oS.style.fontSize = "13px";
+					oS.style.color = "#ff0000";
+					oS.id = 'yzmadd';
+					this.parentNode.parentNode.appendChild(oS);
+					bo = true;
+					return;
+				}
+				bo = false;
+			}
+
+			function logg() {
+				$("#yzmadd").remove();
+				if(bo) {
+					var oS = document.createElement('span');
+					oS.innerHTML = '请输入必填项';
+					oS.style.fontSize = "13px";
+					oS.style.color = "#ff0000";
+					oS.id = 'yzmadd';
+					$("#yzmadd").remove();
+					$("#login").parent().append(oS);
+					return false;
+				}
+
+				subCheck(formName, '用户名不能为空！', 'user');
+				subCheck(formPass, '密码不能为空！', 'pass');
+				var oSpan = document.getElementsByTagName('span');
+				if(oSpan.length = 1) {
+					$.ajax({
+						url: login_url,
+						type: 'get',
+						async: true,
+						data: {
+							"username": formName.value,
+							"password": formPass.value,
+							"validCode": yzm.value
+						},
+						contentType: "application/json; charset=utf-8",
+						dataType: 'json',
+						success: function(data) {
+							if(data.result == 0) {
+								window.location.href = 'pages/system/index.shtml';
+							} else {
+								alert(data.message);
+								window.location.href = '/plat/';
+							}
+						},
+						error: function(data) {
+							alert('网络错误');
+							window.location.href = '/plat/';
+						}
+					})
+
+				}
+			}
+			//回车提交事件
+			function keyLogin(event) {
+				e = event ? event : (window.event ? window.event : null);
+				if(e.keyCode == 13) { //回车键的键值为13
+					logg(); //调用登录按钮的登录事件
+				}
+			}
+			//上下键获焦
+			var inputs = document.getElementById("login_con").getElementsByTagName("input");
+
+			function keyDown(event) {
+				var focus = document.activeElement;
+				if(!document.getElementById("login_con").contains(focus)) {
+
+					return;
+				}
+				var event = window.event || event;
+				var key = event.keyCode;
+				for(var i = 0; i < inputs.length; i++) {
+					if(inputs[i] === focus) break;
+				}
+				switch(key) {
+					case 38:
+						if(i > 0) {
+							inputs[i - 1].focus();
+						}
+						break;
+					case 40:
+						if(i < inputs.length - 1) {
+							inputs[i + 1].focus();
+						}
+						break;
+				}
+			}
+
+			function subCheck(obj, errorText, id) {
+				if(!obj.value) {
+					if(document.getElementById(id)) {
+						obj.parentNode.removeChild(document.getElementById(id));
+					}
+					insertError(obj, errorText, id);
+					bo = false;
+				} else if(document.getElementById(id)) {
+					bo = false;
+				}
+			}
+
+			function insertError(obj, errorStr, id) {
+				var oS = document.createElement('span');
+				oS.innerHTML = errorStr;
+				oS.style.fontSize = "13px";
+				oS.style.color = "#ff0000";
+				oS.id = id;
+				obj.parentNode.appendChild(oS);
+			}
+
+			function delError(obj, id) {
+				if(document.getElementById(id)) {
+					obj.parentNode.removeChild(document.getElementById(id));
+				}
+			}
+		</script>
+
+		<script src="js/plugins/jquery-3.1.0.min.js"></script>
+		<script src="js/plugins/jquery.backstretch.min.js"></script>
+		<script src="js/plugins/scripts.js"></script>
+	</body>
+
+</html>

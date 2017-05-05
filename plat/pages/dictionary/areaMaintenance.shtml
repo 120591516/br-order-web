@@ -1,0 +1,159 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<div class="fakeloader"></div>
+	<section class="content-header">
+		<div class="margin-bottom">
+			<h2><small>地区维护</small></h2>
+		</div>
+		<ol class="breadcrumb">
+			<li>
+				<a href="#">字典维护</a>
+			</li>
+			<li class="active">地区维护</li>
+		</ol>
+	</section>
+	<!-- /Content Header (Page header) -->
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<div class="box-header">
+						<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">列表</h3>
+						<form action="" class="bs-example col-lg-2 col-md-3 col-sm-3 col-xs-3" role="form">
+							<div class="input-group">
+								<input type="text" class="form-control" name="areaName" id="area_search" placeholder="搜索" value="">
+								<span class="input-group-addon" id="area_search_btn"><a href="" class="fa fa-search"></a></span>
+							</div>
+						</form>
+					</div>
+					<div class="box-body">
+						<table class="table formCss">
+							<thead>
+								<tr>
+									<th>省</th>
+									<th>市（区）</th>
+									<th>县（区）</th>
+									<th>地区等级</th>
+									<th>创建时间</th>
+									<th>状态</th>
+								</tr>
+								<tr class="warning no-result">
+									<td colspan="7"><i class="fa fa-warning"></i>没有任何搜索结果!</td>
+								</tr>
+							</thead>
+							<tbody id="area_tbody_main">
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="row">
+							<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /Main content -->	
+<!--表单校验-->
+<script src="../js/formValidate.js"></script>
+<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+<script src="/plat/js/create/httpRequest.js"></script>
+<script src="/plat/js/create/contentPublic.js"></script>
+<script src="/plat/js/plugins/extendPagination.js"></script>
+						<!--动画js-->
+<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+<script>	
+	//  分页
+    init_page();
+	function init_page() {
+		page_curr=1;
+		$('#area_tbody_main').empty();
+		//1.请求后端信息并展示
+		areaSearch();
+		init_pager();
+	}
+	//  初始化分页信息
+	function init_pager() {
+		$('#callBackPager').extendPagination({
+			totalCount : total_count,
+			showCount : count_curr,
+			limit : limit,
+			callback : function(curr, limit, totalCount) {
+				page_curr = curr;
+				total_count = totalCount;
+				areaSearch();
+			}
+		});
+	}
+	//  搜索城市
+	function areaSearch(){		
+		var areaSearchValue=$('#area_search').val().trim();
+		$('#area_tbody_main').empty();
+		var param={
+			"page":page_curr,
+			"rows":count_curr,
+			"areaName":areaSearchValue
+		};
+		var otype = "get";
+		var osync = false;
+		var reqResult = httpRequest(areaMaintenance_getAreaByPage_url, param, otype, osync);
+		if (reqResult.result == 0) {
+			//4.展示数据
+			total_count = reqResult.data.total;
+			createTable(page_curr, limit, total_count, reqResult);
+			}
+		return false;
+	}
+	$('#area_search').on('keydown',function(e){
+		if(e && e.keyCode==13){
+			init_page();
+			return false;
+	    }
+	})
+	$('#area_search_btn').on('click',function(){
+		init_page();
+		return false;
+	})
+	//  展示列表信息
+	function createTable(currPage, limit, total,dataBack) {
+				var showNum = limit;
+	    		if (total - (currPage * limit) < 0) showNum = total - ((currPage - 1) * limit);
+		        for(var i = 0; i < showNum; i++){
+		        	var Tbody = document.getElementById('area_tbody_main');
+				var lRow = Tbody.insertRow(); //创建行
+				var status = (dataBack.data.list[i].status === 0) ? "启用" : "禁用";
+				//创建列
+				var firstColumn = lRow.insertCell();
+				var secondColumn = lRow.insertCell();
+				var thirdColumn = lRow.insertCell();
+				var forthColumn = lRow.insertCell();
+				var fifthColumn = lRow.insertCell();
+				var sixthColumn = lRow.insertCell();
+				firstColumn.setAttribute('rowsId', dataBack.data.list[i].provinceName); //给td添加属性
+				//添加第一列内容
+				firstColumn.innerText = dataBack.data.list[i].provinceName;
+				//添加第二列内容	
+				secondColumn.innerText = dataBack.data.list[i].cityName;
+				//添加第三列内容	
+				thirdColumn.innerText = dataBack.data.list[i].districtName;
+				//添加第四列内容	
+				forthColumn.innerText = dataBack.data.list[i].areaLevel;
+				//添加第五列内容	
+				fifthColumn.innerText = getLocalTime(dataBack.data.list[i].createTime);
+				//添加第六列内容	
+				sixthColumn.innerText = status;
+		        }
+		        return false;
+			}
+</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

@@ -1,0 +1,130 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<div class="fakeloader"></div>
+	<!-- Main content -->
+	<section class="content">
+		<!--头部S-->
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box width_70">
+					<div class="box-header">
+						<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">员工<small>--详情</small></h3>
+						<div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
+							<button class="btn btn-default pull-right" onclick="storeManagementBack()">返回</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--头部E-->
+		<div class="box width_70">
+			<div class="box-body">
+				<form class="bs-example-form form-horizontal formCss" role='form' method="post" novalidate="novalidate" id='employeeInfo_addform'>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>公司全称</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<select name="enterpriseId" class="company form-control" id="check_enterpriseId" disabled="disabled"></select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>公司代码</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="check_enterpriseCode" class="form-control" name="enterpriseCode" aria-describedby="basic-addon1" maxlength='12' required disabled="disabled">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>部门名称</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<select name="enterpriseDepId" class="division form-control" disabled="disabled" id="check_enterpriseDepId"></select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>姓名</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="check_customerInfoName" class="form-control" name="customerInfoName" aria-describedby="basic-addon1" maxlength='12' required disabled="disabled">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>性别</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<select name="customerInfoSex" class="form-control" id="check_customerInfoSex" disabled="disabled"></select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>身份证号</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="check_customerInfoIdentityNumber" class="form-control" name="customerInfoIdentityNumber" aria-describedby="basic-addon1" maxlength='12' required disabled="disabled">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>手机号</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="text" id="add_customerInfoPhone" class="form-control" name="customerInfoPhone" aria-describedby="basic-addon1" maxlength='12' required disabled="disabled">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class='col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label'>邮箱</label>
+						<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+							<input type="email" id="check_customerInfoEmail" class="form-control" name="customerInfoEmail" aria-describedby="basic-addon1" maxlength='12' required disabled="disabled">
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="row">
+				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2 user_power_btn">
+					<a href="#" class="btn btn-default" onclick="storeManagementBack()">返 回</a>
+				</div>
+			</div>
+		</div>
+	</section>
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<script src="/plat/js/create/httpRequest.js"></script>
+	<script src="/plat/js/create/contentPublic.js"></script>
+	<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<script>
+		$(document).ready(function() {
+				check_employeeInfo();
+				return false;
+			})
+			//	员工信息回显
+		function check_employeeInfo() {
+			var thisURL = document.URL;
+			var getval = thisURL.split('?')[1];
+			var judgeParam = getval.split("=")[1];
+			$('#check_employeeinput_hid').val(judgeParam);
+			var param = {
+				"enterpriseEmpId": judgeParam
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(employee_getEnterpriseEmpById_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				//			初始化公司
+				company_info();
+				//			定义公司
+				var check_enterpriseId = $('#check_enterpriseId').val(reqResult.data.enterpriseId);
+
+				var check_enterpriseCode = $('#check_enterpriseCode').val(reqResult.data.enterpriseCode);
+				//			初始化部门
+				division_info();
+				//			定义部门
+				var check_enterpriseDepId = $('#check_enterpriseDepId').val(reqResult.data.enterpriseDepId);
+				var check_customerInfoName = $('#check_customerInfoName').val(reqResult.data.customerInfoName);
+				//初始性别
+				sex('#check_customerInfoSex', '1');
+				//			定义性别
+				var check_customerInfoSex = $('#check_customerInfoSex').val(reqResult.data.customerInfoSex);
+				var check_customerInfoIdentityNumber = $('#check_customerInfoIdentityNumber').val(reqResult.data.customerInfoIdentityNumber);
+				var add_customerInfoPhone = $('#add_customerInfoPhone').val(reqResult.data.customerInfoPhone);
+				var check_customerInfoEmail = $('#check_customerInfoEmail').val(reqResult.data.customerInfoEmail);
+				return false;
+			}
+		}
+		$('#employeeCheck_backbtn').on('click', function() {
+			storeManagementBack();
+		})
+	</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

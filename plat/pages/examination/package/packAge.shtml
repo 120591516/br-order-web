@@ -1,0 +1,499 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<div class="fakeloader"></div>
+	<section class="content-header">
+		<div class="margin-bottom">
+			<h2>
+				<small>套餐列表</small>
+			</h2>
+		</div>
+		<ol class="breadcrumb">
+			<li>
+				<a href="#">体检中心</a>
+			</li>
+			<li class="active">套餐</li>
+		</ol>
+		<div class="box">
+			<!--box-header -->
+			<div class="box-header">
+				<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">搜索</h3>
+				<div class="col-lg-2 col-md-3 col-sm-3 col-xs-3 txt_r">
+					<input type="button" onclick="addSuite()" id="addPakageInfo" class="btn btn-default" value="添加">
+					<button type="button" id="comingBack" onclick="storeManagementBack()" class="btn btn-default">返回</button>
+				</div>
+			</div>
+			<div class="box-body">
+				<form class="bs-example-form padding_l42px" role="form">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon">体检机构</span>
+									<select name="orgId" id='store_orgName' class="form-control selectpicker store_search_form org" aria-describedby="basic-addon1" maxlength='12' required>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon">名称</span>
+									<input type="text" class="form-control" id="examSuiteName" placeholder="名称">
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon">代码</span>
+									<input type="text" class="form-control" id="examSuiteCode" placeholder="代码">
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon">性别</span>
+									<select class="form-control selectpicker" id="examSuiteSex">
+										<option value="please">请选择</option>
+										<option value="0">通用</option>
+										<option value="1">男</option>
+										<option value="2">女</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon">价格区间</span>
+									<input type="text" class="form-control" id="priceStart" placeholder="￥">
+									<span class="input-group-btn">
+									        <span class="btn" type="button">-</span>
+									</span>
+									<input type="text" class="form-control" id="priceEnd" placeholder="￥">
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon">类型</span>
+									<select class="form-control selectpicker" id="suiteTypeId">
+									</select>
+								</div>
+							</div>
+
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon">输入码</span>
+									<input type="text" class="form-control" id="inputCode" placeholder="名称">
+								</div>
+							</div>
+							<div class="col-md-3 txt_r">
+								<div class="input-group float_right">
+									<a class="btn btn-default fa fa-search" onclick="searchAll()">搜 索</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+
+			<!-- /.box-header -->
+		</div>
+	</section>
+
+	<!-- /Content Header (Page header) -->
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<div class="box-header">
+						<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">列表</h3>
+					</div>
+					<div class="box-body">
+						<table class="table formCss" id="example3">
+							<thead>
+								<tr>
+									<th>操作</th>
+									<th>套餐名称</th>
+									<th>体检机构</th>
+									<th>代码</th>
+									<th>英文名称</th>
+									<th>价格</th>
+									<th>输入码</th>
+									<th>日检查量</th>
+									<th>日警告量</th>
+									<th>适用性别</th>
+									<th>套餐类型</th>
+								</tr>
+							</thead>
+							<tbody id="mainContent">
+							</tbody>
+						</table>
+						<div class="row">
+							<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /Main content -->
+	<!--设置阀值模态框-->
+	<div class="modal fade" id="limitPeopleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="box">
+					<div class="box-body">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4><i class="fa fa-paperclip"></i>套餐<small class="title"></small></h4>
+						</div>
+						<div class="modal-body">
+							<form class="bs-example-form form-horizontal formCss" role="form">
+								<input type="hidden" id="type" />
+								<input type="hidden" id="id" />
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>日检查量</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+										<input type="text" class="form-control" id="limitPeople" placeholder="请输入日检查量">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>日警告量</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+										<input type="text" class="form-control" id="warnPeople" placeholder="请输入日警告量">
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+							<button type="submit" class="btn btn-default" data-dismiss="modal" id="setLimitPeople">提交</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<script src="/plat/js/create/httpRequest.js"></script>
+	<script src="/plat/js/create/contentPublic.js"></script>
+	<script src="/plat/js/plugins/extendPagination.js"></script>
+	<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<script>
+		init_page();
+
+		function init_page() {
+			page_curr = 1;
+			$('#mainContent').children('tbody').empty();
+			//prov_init();
+			init_suite_type_info_data("#suiteTypeId");
+			org_info("#store_orgName");
+			//1.请求后端信息并展示
+			suiteSearch();
+			init_pager();
+		}
+		//搜索请求
+		function searchAll() {
+			suiteSearch();
+			init_pager();
+		}
+		if(document.URL.indexOf("?") != -1) {
+			$('#store_orgName').val(getParamValue('orgId'));
+			$('#comingBack').fadeIn();
+			suiteSearch();
+			init_pager();
+		} else {
+			$('#comingBack').fadeOut();
+		}
+
+		//请求后端信息并展示
+		function suiteSearch() {
+			//1.采集参数数据
+			var param = initParam();
+			//2.请求后台
+			var otype = "GET";
+			var osync = false;
+			var reqResult = httpRequest(packAgeSearchOul, param, otype, osync);
+			if(reqResult.result == 0) {
+				//4.展示数据
+				total_count = reqResult.data.total;
+				createTable(page_curr, limit, total_count, reqResult);
+			}
+			return false;
+		}
+		// 初始化分页信息
+		function init_pager() {
+			$('#callBackPager').extendPagination({
+				totalCount: total_count,
+				showCount: count_curr,
+				limit: limit,
+				callback: function(curr, limit, totalCount) {
+					page_curr = curr;
+					total_count = totalCount;
+					suiteSearch();
+				}
+			});
+		}
+		//初始化参数信息
+		function initParam() {
+			$('#mainContent').empty();
+			var examSuiteName = $('#examSuiteName').val().trim();
+			var examSuiteCode = $('#examSuiteCode').val().trim();
+			var examSuiteSex = $('#examSuiteSex').val().trim();
+			var inputCode = $('#inputCode').val().trim();
+			var priceStart = $('#priceStart').val().trim();
+			var priceEnd = $('#priceEnd').val().trim();
+			var orgId = $('#store_orgName').val();
+			var suiteTypeId = $('#suiteTypeId').val();
+			var param = {
+				"page": page_curr,
+				"rows": count_curr
+			};
+			if(orgId != -1 && orgId != "" && orgId != '' && orgId != null) {
+				param.orgId = orgId;
+			}
+			if(examSuiteName) {
+				param.examSuiteName = examSuiteName;
+			}
+			if(examSuiteCode) {
+				param.examSuiteCode = examSuiteCode;
+			}
+			if(inputCode) {
+				param.inputCode = inputCode;
+			}
+			if(priceStart) {
+				param.priceStart = priceStart;
+			}
+			if(priceEnd) {
+				param.priceEnd = priceEnd;
+			}
+			if(examSuiteSex != 'please' && examSuiteSex != null) {
+				param.examSuiteSex = examSuiteSex;
+			}
+			if(suiteTypeId != 'please' && suiteTypeId != null) {
+				param.suiteTypeId = suiteTypeId;
+			}
+			return param;
+		}
+		//展示数据
+		function createTable(currPage, limit, total, dataBack) {
+			var showNum = limit;
+			if(total - (currPage * limit) < 0) showNum = total - ((currPage - 1) * limit);
+			for(var i = 0; i < showNum; i++) {
+				var statuWord = "";
+				var Tbody = document.getElementById('mainContent');
+				var lRow = Tbody.insertRow(); //创建行		
+				var operationList = dataBack.operationList; //获取操作类型
+				var operationListAdd = document.getElementById('addPakageInfo'); //获取添加按钮
+				//				判断操作类型
+				(operationList.orgSuite_insert === false) ? operationListAdd.style.display = 'none': operationListAdd.style.display = ''; //1为添加
+				//创建列
+				var firstColumn = lRow.insertCell();
+				var thirdColumn = lRow.insertCell();
+				var secondColumn = lRow.insertCell();
+				var forthColumn = lRow.insertCell();
+				var fifthColumn = lRow.insertCell();
+				var sixthColumn = lRow.insertCell();
+				var seventhColumn = lRow.insertCell();
+				var limitPeople = lRow.insertCell();
+				var warnPeople = lRow.insertCell();
+				var eightColumn = lRow.insertCell();
+				var nineColumn = lRow.insertCell();
+				var id = dataBack.data.list[i].examSuiteId;
+				firstColumn.setAttribute('examSuiteId', dataBack.data.list[i].examSuiteId); //给td添加属性
+				firstColumn.setAttribute('name', dataBack.data.list[i].examSuiteName);
+				firstColumn.setAttribute('people', dataBack.data.list[i].examSuiteLimitPeople);
+				firstColumn.setAttribute('wPeople', dataBack.data.list[i].examSuiteWarnPeople);
+				//添加第一列内容
+				//创建查看标签
+				var aCheck = document.createElement("a");
+				var iElement = document.createElement("i");
+				(operationList.orgSuite_detail === true) ? iElement.className = "fa fa-eye": ''; //4为查看
+				aCheck.appendChild(iElement);
+				aCheck.setAttribute("href", "viewOrgExamSuite.shtml?param=" + dataBack.data.list[i].examSuiteId);
+				aCheck.setAttribute("title", "查看信息");
+				aCheck.className = "suite-check";
+				aCheck.style.marginLeft = "5px";
+				firstColumn.appendChild(aCheck);
+
+				//创建编辑标签
+				var aEdit = document.createElement("a");
+				var iElement = document.createElement("i");
+				(operationList.orgSuite_update === true) ? iElement.className = "fa fa-pencil": ''; //3为更新
+				aEdit.appendChild(iElement);
+				aEdit.setAttribute("href", "addPackAge.shtml?param=" + dataBack.data.list[i].examSuiteId);
+				aEdit.setAttribute("title", "编辑信息");
+				aEdit.style.marginLeft = "5px";
+				firstColumn.appendChild(aEdit);
+
+				//创建删除标签
+				var aDelete = document.createElement("a");
+				var iElement = document.createElement("i");
+				(operationList.orgSuite_delete === true) ? iElement.className = "fa fa-trash-o": ''; //2为删除
+				aDelete.appendChild(iElement);
+				aDelete.setAttribute("title", "删除信息");
+				aDelete.style.marginLeft = "5px";
+				aDelete.setAttribute("onclick", "del_packAge(this)");
+				firstColumn.appendChild(aDelete);
+
+				//收费信息
+				var aCheck = document.createElement("a");
+				var iElement = document.createElement("i");
+				(operationList.orgSuite_to_feeItem === true) ? iElement.className = "fa fa-jpy": ''; //orgSuite_to_feeItem为收费项信息
+				aCheck.appendChild(iElement);
+				aCheck.setAttribute("href", "packAgeFeeItemView.shtml?orgExamSuiteId=" + dataBack.data.list[i].examSuiteId);
+				aCheck.setAttribute("title", "查看收费项信息");
+				aCheck.className = "suite-check";
+				aCheck.style.marginLeft = "5px";
+				firstColumn.appendChild(aCheck);
+
+				//设置阈值
+				var asetting = document.createElement("a");
+				var iElement = document.createElement("i");
+				(operationList.orgSuite_to_liminalValue === true) ? iElement.className = "fa fa-cog": ''; //orgSuite_to_liminalValue设置阈值
+				asetting.appendChild(iElement);
+				asetting.setAttribute("data-toggle", "modal")
+				asetting.setAttribute("href", "#limitPeopleModal");
+				asetting.setAttribute("onclick", "openModel(this,2)");
+				asetting.setAttribute("title", "设置阈值");
+				asetting.className = "suite-check";
+				asetting.style.marginLeft = "5px";
+				firstColumn.appendChild(asetting);
+
+				//添加第二列内容	
+				dataBack.data.list[i].orgName == null ? '' : secondColumn.innerText = dataBack.data.list[i].orgName;
+				//添加第三列内容	
+				dataBack.data.list[i].examSuiteName == null ? '' : thirdColumn.innerText = dataBack.data.list[i].examSuiteName;
+				//添加第四列内容	
+				dataBack.data.list[i].examSuiteCode == null ? '' : forthColumn.innerText = dataBack.data.list[i].examSuiteCode;
+				//添加第五列内容	
+				dataBack.data.list[i].examSuiteNameEng == null ? '' : fifthColumn.innerText = dataBack.data.list[i].examSuiteNameEng;
+				//添加第六列内容	
+				dataBack.data.list[i].examSuitePrice == null ? '' : sixthColumn.innerText = dataBack.data.list[i].examSuitePrice;
+				//添加第七列内容	
+				dataBack.data.list[i].examSuiteInputCode == null ? '' : seventhColumn.innerText = dataBack.data.list[i].examSuiteInputCode;
+
+				dataBack.data.list[i].examSuiteLimitPeople == null ? '' : limitPeople.innerText = dataBack.data.list[i].examSuiteLimitPeople;
+
+				dataBack.data.list[i].examSuiteWarnPeople == null ? '' : warnPeople.innerText = dataBack.data.list[i].examSuiteWarnPeople;
+				//添加第七列内容	
+				dataBack.data.list[i].orgExamSuiteSex == null ? '' : eightColumn.innerText = dataBack.data.list[i].orgExamSuiteSex;
+				//添加第七列内容	
+				dataBack.data.list[i].typeNameList == null ? '' : nineColumn.innerText = dataBack.data.list[i].typeNameList.substring(0, 9) + "...";
+			}
+			return false;
+		}
+		//删除操作
+		function del_packAge(del_li) {
+			if(confirm("确认删除该套餐吗？")) {
+				var param = {
+					"idOrgExamSuite": $(del_li).parent().attr("examSuiteId")
+				};
+				var otype = "get";
+				var osync = false;
+				var reqResult = httpRequest(packAge_Dele, param, otype, osync);
+				if(reqResult.data > 0) {
+					alert("删除成功");
+					suiteSearch();
+					init_pager();
+				} else {
+					alert(reqResult.data);
+				}
+			}
+		}
+		//状态传递参数
+		function MecCheckShow(MecCheckId) {
+			var MecCheckId = $(MecCheckId).parent().attr("orgId");
+			$('#orgId').val(MecCheckId)
+		}
+
+		//跳转添加页面操作
+		function addSuite() {
+			if(document.URL.indexOf("?") != -1) {
+				window.location.href = '/plat/pages/examination/package/addPackAge.shtml?orgId=' + getParamValue('orgId');
+			} else {
+				window.location.href = '/plat/pages/examination/package/addPackAge.shtml';
+			}
+		}
+		var $type = $('#type'),
+			$id = $('#id'),
+			$limitPeople = $('#limitPeople'),
+			$warnPeople = $('#warnPeople'),
+			$setLimitPeople = $('#setLimitPeople'),
+			$title = $('.title'),
+			postUrl,
+			id,
+			name,
+			limitPeopleOld,
+			warnPeopleOld;
+		//打开选择框
+		function openModel(idthis, type) {
+			id = $(idthis).parent().attr("examSuiteId");
+			limitPeopleOld = $(idthis).parent().attr("people");
+			warnPeopleOld = $(idthis).parent().attr("wPeople");
+			name = $(idthis).parent().attr("name");
+			$type.val(type);
+			$setLimitPeople.val(limitPeopleOld);
+			$id.val(id);
+			$title.html(name);
+			$limitPeople.val(limitPeopleOld);
+			$warnPeople.val(warnPeopleOld);
+		}
+		//设置门店限制 保存 
+		$setLimitPeople.on('click', function() {
+			var param = {
+				limitPeople: $limitPeople.val(),
+				warnPeople: $warnPeople.val()
+			};
+
+			if($type.val() == 1) {
+				param.branchId = $id.val();
+				postUrl = liminal_value_branch_setting;
+			}
+			if($type.val() == 2) {
+				param.suiteId = $id.val();
+				postUrl = liminal_value_suite_setting;
+			}
+
+			var otype = "POST";
+			var osync = false;
+			if(validationParam(param, type)) {
+				return;
+			}
+			$type.val('');
+			$id.val('');
+			$limitPeople.val('');
+			$warnPeople.val('');
+			$title.html('')
+			var reqResult = httpRequest(postUrl, param, otype, osync);
+			if(reqResult.result == 0 && reqResult.data > 0) {
+				alert("设置成功");
+				suiteSearch();
+			}
+		});
+		//验证
+		function validationParam(param, type) {
+			if(type == 1 && (param.branchId == null || param.branchId == '' || param.branchId == "")) {
+				alert("请选择门店");
+				return true;
+			}
+			if(type == 2 && (param.suiteId == null || param.suiteId == '' || param.suiteId == "")) {
+				alert("请选择套餐");
+				return true;
+			}
+			if(param.limitPeople == null || param.limitPeople == '' || param.limitPeople == "") {
+				alert("请输入限制人数");
+				return true;
+			}
+			if(param.warnPeople == null || param.warnPeople == '' || param.warnPeople == "") {
+				alert("请输入警告人数");
+				return true;
+			}
+
+			return false;
+
+		}
+	</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->

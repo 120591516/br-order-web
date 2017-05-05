@@ -1,0 +1,124 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Main content -->
+	<div class="fakeloader"></div>
+	<section class="content">
+		<!-- 基本信息 -->
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<!--box-header -->
+					<div class="box-header">
+						<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">网络信息</h3>
+
+					</div>
+					<div class="box-body">
+						<form class="bs-example bs-example-form" id="MecOrgWarp">
+							<input id="orgId" name="orgId" type="text" hidden="hidden" />
+							<div class="row margin-bottom">
+								<div class="col-lg-6">
+									<div class="input-group">
+										<span class="input-group-addon">APP</span>
+										<select class="form-control selectpicker" id="APP" name="orgWebApp">
+											<option value="0">无</option>
+											<option value="1">有</option>
+										</select>
+									</div>
+									<!-- /input-group -->
+								</div>
+								<!-- /.col-lg-6 -->
+								<div class="col-lg-6">
+									<div class="input-group">
+										<span class="input-group-addon">微 信</span>
+										<select class="form-control selectpicker" id="wechat" name="orgWebWechat">
+											<option value="0">无</option>
+											<option value="1">有</option>
+										</select>
+									</div>
+									<!-- /input-group -->
+								</div>
+								<!-- /.col-lg-6 -->
+							</div>
+							<div class="row margin-bottom">
+								<div class="col-lg-6">
+									<div class="input-group">
+										<span class="input-group-addon">网站</span>
+										<select class="form-control selectpicker" id="orgWebWebsite" name="orgWebWebsite">
+											<option value="0">无</option>
+											<option value="1">有</option>
+										</select>
+									</div>
+									<!-- /input-group -->
+								</div>
+
+								<!-- /.col-lg-6 -->
+							</div>
+						</form>
+					</div>
+					<!-- /.box-header -->
+				</div>
+			</div>
+		</div>
+
+	</section>
+	<div class="row">
+		<div class="col-lg-4"></div>
+		<div class="col-lg-4">
+			<div class="col-lg-4"></div>
+			<div class="col-lg-4">
+				<button type="button" class="btn btn-primary btn-lg btn-block" onclick="SubmitWarp()">提交信息</button>
+			</div>
+			<div class="col-lg-4">
+				<button type="button" class="btn btn-default btn-lg btn-block" onclick='orgParam(this)'><!--<a href="addInformation.shtml">-->返回基本信息</a></button>
+			</div>
+		</div>
+		<div class="col-lg-4"></div>
+	</div>
+	<!-- /Main content -->
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->
+	<!--动画js-->
+<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+<script>
+	function orgParam(orgParam) {
+		var thisURL = document.URL;
+		if(thisURL.indexOf("?") != -1) {
+			var getval = thisURL.split('?')[1];
+			var showval = getval.split("=")[1];
+			window.location.href = 'addInformation.shtml?orgId=' + showval + '';
+		}
+	}
+	window.onload = function() {
+		var thisURL = document.URL;
+		var getval = thisURL.split('?')[1];
+		var JParam = getval.split("=")[1];
+		var judgeParam = JParam.split("#")[0];
+		var otype = "GET"
+		var osync = false;
+		var param = {
+			"orgId": judgeParam
+		};
+		var reqResult = httpRequest(init_addWarp_show, param, otype, osync);
+		if(reqResult.result == 0) {
+			$("#orgId").val(judgeParam)
+			$("#APP").val(reqResult.data[0].orgWebApp);
+			$("#wechat").val(reqResult.data[0].orgWebWechat);
+			$("#orgWebWebsite").val(reqResult.data[0].orgWebWebsite);
+		} else {
+			alert(reqResult.message);
+		}
+	}
+
+	function SubmitWarp() {
+		var param = $('#MecOrgWarp').serialize();
+		var otype = "post";
+		var osync = false;
+		var reqResult = httpRequest(init_addCooperation_save, param, otype, osync);
+		if(reqResult.result == 0) {
+			alert('添加成功');
+			window.location.reload();
+		} else {
+			alert(reqResult.message);
+		}
+	}
+</script>

@@ -1,0 +1,601 @@
+<!--#include file="/plat/pages/system/header.html"-->
+<div class="content-wrapper" id="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<!-- Content Header (Page header) -->
+	<div class="fakeloader"></div>
+	<section class="content-header">
+		<h2>
+		<small>检查项</small>
+	</h2>
+		<ol class="breadcrumb">
+			<li>
+				<a href="#">字典维护</a>
+			</li>
+			<li class="active">检查项</li>
+		</ol>
+	</section>
+	<!-- /Content Header (Page header) -->
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<!--box-header -->
+					<div class="box-header">
+						<h3 class="box-title col-lg-9 col-md-8 col-sm-8 col-xs-8">列表</h3>
+						<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 pull-right">
+							<a href="#addItemType" id="addItemDic" data-toggle="modal" class="btn btn-default">添加</a>
+						</div>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+						<table class="table formCss">
+							<thead>
+								<tr>
+									<th>编辑</th>
+									<th>检查项类型名称</th>
+									<th>检查项类型英文名称</th>
+									<th>检查项类型代码</th>
+									<th>检查项类型部门名称</th>
+									<th>检查项类型备注</th>
+									<th>检查项创建时间</th>
+									<th>检查项状态</th>
+								</tr>
+							</thead>
+							<tbody id="increaseTbody">
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--模态框添加-->
+	<div class="modal fade" id="addItemType" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="box">
+					<div class="box-body">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title">检查项目类型<small>--添加</small></h4>
+						</div>
+						<div class="modal-body">
+							<form class="bs-example-form form-horizontal formCss" role="form" id="addCheckItemType">
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>类型名称</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px'>
+										<input type="text" id="addExamItemTypeName" class="form-control" name="examItemTypeName" aria-describedby="basic-addon1" required>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3'>
+										<div id="addExamItemTypeNameTip"></div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>英文名称</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px'>
+										<input type="text" id="addExamItemTypeNameEng" class="form-control" name="examItemTypeNameEng" aria-describedby="basic-addon1" required>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3'>
+										<div id="addExamItemTypeNameEngTip"></div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>类型代码</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px'>
+										<input type="text" id="addExamItemTypeCode" class="form-control" name="examItemTypeCode" aria-describedby="basic-addon1" required>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3'>
+										<div id="addExamItemTypeCodeTip"></div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>部门名称</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px'>
+										<input type="text" id="addDeptName" class="form-control" name="deptName" aria-describedby="basic-addon1" required>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3'>
+										<div id="addDeptNameTip"></div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>类型备注</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px'>
+										<textarea id="addExamItemTypeNote" class="form-control" name="examItemTypeNote"></textarea>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3'>
+										<div id="addExamItemTypeNoteTip"></div>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-defalut" data-dismiss="modal" id="addItemTypeInfo">提交</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--模态框查看-->
+	<div class="modal fade" id="checkItemType" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="box">
+					<div class="box-body">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title">检查项目类型<small>--查看</small></h4>
+						</div>
+						<div class="modal-body">
+							<form class="bs-example-form form-horizontal formCss" role="form" id="checkItemType">
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>类型名称</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px'>
+										<input type="text" id="checkExamItemTypeName" class="form-control" name="examItemTypeName" aria-describedby="basic-addon1" disabled="disabled">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>英文名称</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px'>
+										<input type="text" id="checkExamItemTypeNameEng" class="form-control" name="examItemTypeNameEng" aria-describedby="basic-addon1" disabled="disabled">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>类型代码</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px'>
+										<input type="text" id="checkExamItemTypeCode" class="form-control" name="examItemTypeCode" aria-describedby="basic-addon1" disabled="disabled">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>部门名称</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px'>
+										<input type="text" id="checkDeptName" class="form-control" name="deptName" aria-describedby="basic-addon1" disabled="disabled">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>类型备注</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px'>
+										<textarea id="checkExamItemTypeNote" class="form-control" name="examItemTypeNote"></textarea>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>创建时间</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px'>
+										<input type="text" id="checkExamItemTypeCreateTime" class="form-control" name="examItemTypeNote" aria-describedby="basic-addon1" disabled="disabled">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>类型状态</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px' id="checkExamItemTypeStatus">
+										<input type="radio" name="examItemTypeStatus" value="0" disabled="disabled" />启用
+										<input type="radio" name="examItemTypeStatus" value="1" disabled="disabled" />禁用
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--模态框编辑-->
+	<div class="modal fade" id="editItemType" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="box">
+					<div class="box-body">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title">检查项目类型<small>--编辑</small></h4>
+						</div>
+						<div class="modal-body">
+							<form class="bs-example-form form-horizontal formCss" role="form" id="editItemTypeForm">
+								<input type="hidden" name="examItemTypeId" id="examItemTypeId" value="" />
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>类型名称</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px'>
+										<input type="text" id="editExamItemTypeName" class="form-control" name="examItemTypeName" aria-describedby="basic-addon1">
+									</div>
+								</div>
+								<div class="form-group">
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3'>
+										<div id="editExamItemTypeNameTip"></div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>英文名称</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px'>
+										<input type="text" id="editExamItemTypeNameEng" class="form-control" name="examItemTypeNameEng" aria-describedby="basic-addon1">
+									</div>
+								</div>
+								<div class="form-group">
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3'>
+										<div id="editExamItemTypeNameEngTip"></div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>类型代码</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px'>
+										<input type="text" id="editExamItemTypeCode" class="form-control" name="examItemTypeCode" aria-describedby="basic-addon1">
+									</div>
+								</div>
+								<div class="form-group">
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3'>
+										<div id="editExamItemTypeCodeTip"></div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>部门名称</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px'>
+										<input type="text" id="editDeptName" class="form-control" name="deptName" aria-describedby="basic-addon1">
+									</div>
+								</div>
+								<div class="form-group">
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3'>
+										<div id="editDeptNameTip"></div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>类型备注</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px'>
+										<textarea id="editExamItemTypeNote" class="form-control" name="examItemTypeNote"></textarea>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3'>
+										<div id="editExamItemTypeNoteTip"></div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>类型备注</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px'>
+										<textarea id="editExamItemTypeNote" class="form-control" name="examItemTypeNote"></textarea>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3'>
+										<div id="editExamItemTypeNoteTip"></div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class='col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label'>类型状态</label>
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 margin_top_7px' id="editExamItemTypeStatus">
+										<input type="radio" name="examItemTypeStatus" value="0" />启用
+										<input type="radio" name="examItemTypeStatus" value="1" />禁用
+									</div>
+								</div>
+								<div class="form-group">
+									<div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3'>
+										<div id="editExamItemTypeNoteTip"></div>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-defalut" data-dismiss="modal" id="editdItemTypeInfo">提交</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /Main content -->
+	<script src="/plat/js/plugins/jQuery-2.2.0.min.js"></script>
+	<script src="/plat/js/create/httpRequest.js"></script>
+	<script src="/plat/js/create/contentPublic.js"></script>
+	<!--表单验证-->
+	<script src="/plat/js/plugins/formValidator-4.0.1.js"></script>
+	<script src="/plat/js/plugins/formValidatorRegex.js"></script>
+	<!--动画js-->
+	<script src="/plat/js/plugins/fakeLoader.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			initUserPagination();
+		})
+
+		function initUserPagination() {
+			$('#increaseTbody').empty();
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(checkItemType_getAllOrgExamItemType_url, null, otype, osync);
+			if(reqResult.result == 0) {
+				callBackPagination(reqResult);
+			}
+		}
+		//检查项列表
+		function createTable(curr, limit, totalCount, dataBack) {
+			var datal = dataBack.data;
+			//获取操作类型
+			var operationList = dataBack.operationList;
+			//			判断添加按钮
+			if(operationList.orgExamItemType_detail == false) {
+				$('#addItemDic').show();
+			} else {
+				$('#addItemDic').hide();
+			}
+			var str = '';
+			for(var i = 0; i < datal.length; i++) {
+				str += "<tr><td examItemTypeId='" + datal[i].examItemTypeId + "'>";
+				if(operationList.orgExamItemType_detail == true) {
+					str += "<a href='#checkItemType' title='查看检查项' class='padding_4px' data-toggle='modal' onclick='checkItemType(this)'><i class='fa fa-eye'></i></a> ";
+				}
+				if(operationList.orgExamItemType_update == true) {
+					str += "<a href='#editItemType' title='编辑检查项' class='padding_4px' data-toggle='modal' onclick='editItemType(this)'><i class='fa fa-pencil'></i></a> ";
+				}
+				if(operationList.orgExamItemType_delete == true) {
+					str += "<a href='#' class='padding_4px' title='删除检查项' onclick='delItemType(this)'><i class='fa fa-trash-o'></i></a>";
+				}
+				str += "</td>";
+				str += "<td>" + nullformat(datal[i].examItemTypeName) + "</td>";
+				str += "<td>" + nullformat(datal[i].examItemTypeNameEng) + "</td>";
+				str += "<td>" + nullformat(datal[i].examItemTypeCode) + "</td>";
+				str += "<td>" + nullformat(datal[i].deptName) + "</td>";
+				str += "<td>" + nullformat(datal[i].examItemTypeNote) + "</td>";
+				str += "<td>" + getLocalTime(nullformat(datal[i].examItemTypeCreateTime)) + "</td>";
+				if(nullformat(datal[i].examItemTypeStatus) == 0) {
+					str += "<td>" + '启用' + "</td>";
+				} else {
+					str += "<td>" + '禁用' + "</td>";
+				}
+				str += '</tr>';
+			}
+			$('#increaseTbody').append(str);
+			return false;
+		}
+		//	添加检查项类型
+		//		表单验证
+		$('#addExamItemTypeName').on('click', function() {
+			$.formValidator.initConfig({
+				submitButtonID: "addItemTypeInfo",
+				debug: true,
+				onSuccess: function() {
+					addItemTypeInfo();
+				},
+				onError: function() {
+					alert("添加失败，具体错误，请看网页上的提示！")
+				},
+				submitAfterAjaxPrompt: '有数据正在异步验证，请稍等...'
+			});
+			//检查项类型名称
+			$("#addExamItemTypeName").formValidator({
+				onShow: "请输入检查项类型名称",
+				onFocus: "检查项类型名称不少于3个字符",
+				onCorrect: "输入正确"
+			}).inputValidator({
+				min: 3,
+				onError: "输入错误"
+			});
+			//英文名称
+			$("#addExamItemTypeNameEng").formValidator({
+				onShow: "请输入英文名称",
+				onFocus: "英文名称仅可用英文表示",
+				onCorrect: "输入正确"
+			}).regexValidator({
+				regExp: "username",
+				dataType: "enum",
+				onError: "输入错误"
+			});
+			//类型代码
+			$("#addExamItemTypeCode").formValidator({
+				onShow: "请输入类型代码",
+				onFocus: "请输入类型代码",
+				onCorrect: "输入正确"
+			}).regexValidator({
+				regExp: "username",
+				dataType: "enum",
+				onError: "输入错误"
+			});
+			//部门名称
+			$("#addDeptName").formValidator({
+				onShow: "请输入部门名称",
+				onFocus: "部门名称不少于3个字符",
+				onCorrect: "输入正确"
+			}).inputValidator({
+				min: 3,
+				onError: "输入错误"
+			});
+			//类型备注
+			$("#addExamItemTypeNote").formValidator({
+				onShow: "请输入类型备注",
+				onFocus: "请输入类型备注",
+				onCorrect: "输入正确"
+			}).inputValidator({
+				min: 2,
+				onError: "类型备注不低于2个字符"
+			});
+		})
+
+		function addItemTypeInfo() {
+			var otype = "post";
+			var osync = false;
+			var param = $('#addCheckItemType').serialize();
+			var reqResult = httpRequest(checkItemType_insertOrgExamItemType_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert('添加成功！');
+				window.location.reload();
+			} else {
+				alert(reqResult.message);
+			}
+		}
+		//	查看检查项类型
+		function checkItemType(id) {
+			var orgExamItemTypeId = $(id).parent().attr('examItemTypeId');
+			var otype = "post";
+			var osync = false;
+			var param = {
+				'orgExamItemTypeId': orgExamItemTypeId
+			};
+			var reqResult = httpRequest(checkItemType_getOrgExamItemTypeById_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				$('#checkExamItemTypeName').val(reqResult.data.examItemTypeName);
+				$('#checkExamItemTypeNameEng').val(reqResult.data.examItemTypeNameEng);
+				$('#checkExamItemTypeCode').val(reqResult.data.examItemTypeCode);
+				$('#checkDeptName').val(reqResult.data.deptName);
+				$('#checkExamItemTypeNote').val(reqResult.data.examItemTypeNote);
+				$('#checkExamItemTypeCreateTime').val(getLocalTime(reqResult.data.examItemTypeCreateTime));
+				if(reqResult.data.examItemTypeStatus == 0) {
+					$('#checkExamItemTypeStatus input')[0].checked = 'checked';
+				} else {
+					$('#checkExamItemTypeStatus input')[1].checked = 'checked';
+				}
+			} else {
+				alert(reqResult.message);
+			}
+		}
+		//	编辑回显检查项
+		//		编辑时表单验证
+		$('a[href="#editItemType"]').on('click', function() {
+			$.formValidator.initConfig({
+				submitButtonID: "editdItemTypeInfo",
+				debug: true,
+				onSuccess: function() {
+					editItemTypeInfo();
+				},
+				onError: function() {
+					alert("添加失败，具体错误，请看网页上的提示！")
+				},
+				submitAfterAjaxPrompt: '有数据正在异步验证，请稍等...'
+			});
+			//检查项类型名称
+			$("#editExamItemTypeName").on('change', function() {
+					$("#editExamItemTypeName").formValidator({
+						onShow: "请输入检查项类型名称",
+						onFocus: "检查项类型名称不少于3个字符",
+						onCorrect: "输入正确"
+					}).inputValidator({
+						min: 3,
+						onError: "输入错误"
+					});
+				})
+				//英文名称
+			$("#editExamItemTypeNameEng").on('change', function() {
+					$("#editExamItemTypeNameEng").formValidator({
+						onShow: "请输入英文名称",
+						onFocus: "英文名称仅可用英文表示",
+						onCorrect: "输入正确"
+					}).regexValidator({
+						regExp: "username",
+						dataType: "enum",
+						onError: "输入错误"
+					});
+				})
+				//类型代码
+			$("#editExamItemTypeCode").on('change', function() {
+					$("#editExamItemTypeCode").formValidator({
+						onShow: "请输入类型代码",
+						onFocus: "请输入类型代码",
+						onCorrect: "输入正确"
+					}).regexValidator({
+						regExp: "username",
+						dataType: "enum",
+						onError: "输入错误"
+					});
+				})
+				//部门名称
+			$("#editDeptName").on('change', function() {
+					$("#editDeptName").formValidator({
+						onShow: "请输入部门名称",
+						onFocus: "部门名称不少于3个字符",
+						onCorrect: "输入正确"
+					}).inputValidator({
+						min: 3,
+						onError: "输入错误"
+					});
+				})
+				//类型备注
+			$("#editExamItemTypeNote").on('change', function() {
+				$("#editExamItemTypeNote").formValidator({
+					onShow: "请输入类型备注",
+					onFocus: "请输入类型备注",
+					onCorrect: "输入正确"
+				}).inputValidator({
+					min: 2,
+					onError: "类型备注不低于2个字符"
+				});
+			})
+		})
+
+		function editItemType(id) {
+			var orgExamItemTypeId = $(id).parent().attr('examItemTypeId');
+			var otype = "post";
+			var osync = false;
+			var param = {
+				'orgExamItemTypeId': orgExamItemTypeId
+			};
+			var reqResult = httpRequest(checkItemType_getOrgExamItemTypeById_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				$('#examItemTypeId').val(reqResult.data.examItemTypeId);
+				$('#editExamItemTypeName').val(reqResult.data.examItemTypeName);
+				$('#editExamItemTypeNameEng').val(reqResult.data.examItemTypeNameEng);
+				$('#editExamItemTypeCode').val(reqResult.data.examItemTypeCode);
+				$('#editDeptName').val(reqResult.data.deptName);
+				$('#editExamItemTypeNote').val(reqResult.data.examItemTypeNote);
+				if(reqResult.data.examItemTypeStatus == 0) {
+					$('#editExamItemTypeStatus input')[0].checked = 'checked';
+				} else {
+					$('#editExamItemTypeStatus input')[1].checked = 'checked';
+				}
+			} else {
+				alert(reqResult.message);
+			}
+		}
+		//保存检查项编辑内容
+		$('#editdItemTypeInfo').on('click', function() {
+				var otype = "post";
+				var osync = false;
+				var param = $('#editItemTypeForm').serialize();
+				var reqResult = httpRequest(checkItemType_updateOrgExamItemType_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert('编辑成功！');
+					window.location.reload();
+				} else {
+					alert(reqResult.message);
+				}
+			})
+			//	删除检查项类型
+		function delItemType(id) {
+			if(confirm("确认删除该检查项吗？")) {
+				var orgExamItemTypeId = $(id).parent().attr('examItemTypeId');
+				var param = {
+					"orgExamItemTypeId": orgExamItemTypeId
+				};
+				var otype = "post";
+				var osync = false;
+				var reqResult = httpRequest(checkItemType_deleteOrgExamItemType_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert("删除成功！");
+					window.location.reload();
+				} else {
+					alert(reqResult.message);
+				}
+			}
+		}
+	</script>
+</div>
+<!--#include file="/plat/pages/system/footer.html"-->
